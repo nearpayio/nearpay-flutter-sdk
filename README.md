@@ -45,31 +45,18 @@ Authentication Types
  AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
 ```
 
-Example as JWT
+### loggedin user information
 
 ```dart
-var authType = AuthenticationType.jwt.value
-var authValue = "a89sd0fu9aiosudfhjkna"
-```
-
-Language use the Locale parameter
-
-```dart
-"locale" : Locale.localeDefault.value,
-```
-
-Environment should be either Production Or Sandbox mode
-
-```dart
-"environment" : Environments.sandbox.value
-"environment" : Environments.production.value
+var authType = AuthenticationType.email.values
+var authValue = "name@email.com"
 ```
 
 # 3. Initialize SDK
 
 ```dart
 var reqData = {
-      "authtype" : AuthenticationType.jwt.value,
+      "authtype" : authType,
       "authvalue" : authValue,
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
@@ -81,8 +68,8 @@ var jsonResponse = nearpaySDK.initialize(reqData);
 
 ```dart
 var reqData = {
-    "authtype" : authType, //Same as above reference
-    "authvalue" : authValue //Only for JWT token
+    "authtype" : authType,
+    "authvalue" : authValue
 };
 var jsonResponse = await nearpaySDK.setup(reqData);
 ```
@@ -100,7 +87,7 @@ var reqData = {
       "finishTimeout" : 2  //Add the number of seconds
     };
 
-var jsonResponse = await nearpaySDK.purchase(reqData);
+var purchaseReceipt = await nearpaySDK.purchase(reqData);
 ```
 
 # 6. Refund
@@ -108,7 +95,7 @@ var jsonResponse = await nearpaySDK.purchase(reqData);
 ```dart
 var reqData = {
       "amount": 0001,
-      "transaction_udid" :uuid, //add Transaction Reference Retrieval Number UUID
+      "transaction_uuid" :  purchaseReceipt.uuid,// we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
       "customer_reference_number": "uuid()", // Any string as a reference number
       "isEnableUI" : true, //true will enable the ui and false will disable
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
@@ -116,10 +103,9 @@ var reqData = {
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, //Only for JWT token
       "finishTimeout" : 2,//Add the number of seconds
-      "transaction_udid" :  // we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
     };
 
-var jsonResponse = await nearpaySDK.refund(reqData);
+var refundReceipt = await nearpaySDK.refund(reqData);
 ```
 
 # 7. Reconcile
@@ -132,7 +118,7 @@ var reqData = {
       "finishTimeout" : 2 //Add the number of seconds
     };
 
-var jsonResponse = await nearpaySDK.reconcile(reqData);
+var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
 ```
 
 # 8. Reverse
@@ -140,20 +126,19 @@ var jsonResponse = await nearpaySDK.reconcile(reqData);
 ```dart
 var reqData = {
       "isEnableUI" : true, //true will enable the ui and false will disable
-      "transaction_udid" :uuid, //add Transaction Reference Retrieval Number
+      "transaction_uuid" :purchaseReceipt.uuid, //add Transaction Reference Retrieval Number
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, //Only for JWT token
-      "finishTimeout" : 2, //Add the number of seconds
-      "transaction_udid" :  //we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
+      "finishTimeout" : 2 //Add the number of seconds
     };
 
-var jsonResponse = await nearpaySDK.reverse(reqData);
+var reversalReceipt = await nearpaySDK.reverse(reqData);
 ```
 
 # 9. Logout
 
 ```dart
-var jsonResponse = await nearpaySDK.logout();
+await nearpaySDK.logout();
 ```
 
 ## Nearpay plugin response will be be in below formats

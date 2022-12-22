@@ -145,7 +145,7 @@ class _MyAppState extends State<MyApp> {
   refundAction(String uuid) async {
     var reqData = {
       "amount": 0001, 
-      "transaction_udid" :uuid,
+      "transaction_uuid" :uuid,
       "customer_reference_number": "rerretest123333333",
       "isEnableUI" : true,
       "isEnableReversal" : true,
@@ -174,7 +174,7 @@ class _MyAppState extends State<MyApp> {
 
   reverseAction(String uuid) async {
     var reqData = {
-      "transaction_udid" :uuid,
+      "transaction_uuid" :uuid,
       "isEnableUI" : true,
       "authtype" : authType, 
       "authvalue" : tokenKey,

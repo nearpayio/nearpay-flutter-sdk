@@ -93,7 +93,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     else if (call.method.equals("refund")) {
         String amountStr = call.argument("amount").toString();
         Long amount =  Long.valueOf(amountStr); 
-        String reference_retrieval_number = call.argument("transaction_udid").toString();
+        String reference_retrieval_number = call.argument("transaction_uuid").toString();
         String customer_reference_number = call.argument("customer_reference_number").toString();
         Boolean isEnableUI = call.argument("isEnableUI");
         String authvalue = call.argument("authvalue").toString();
@@ -113,7 +113,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         doReconcileAction(isEnableUI,authType,authvalue,timeout);
     }
     else if (call.method.equals("reverse")) {
-        String transactionUuid = call.argument("transaction_udid").toString();
+        String transactionUuid = call.argument("transaction_uuid").toString();
         Boolean isEnableUI = call.argument("isEnableUI");
         String authvalue = call.argument("authvalue").toString();
         String authType = call.argument("authtype").toString();
