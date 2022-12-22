@@ -20,7 +20,7 @@ Plugin will support minimum supported ANDROID SDK version 26 and above only.
 # Usage
 
 ```dart
-import 'package:nearpay/nearpay.dart';
+import 'package:nearpay_flutter_sdk/nearpay.dart';
 ```
 
 # 1. Create plugin object
