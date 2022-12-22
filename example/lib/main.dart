@@ -30,19 +30,19 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    sdkInitialise();
+    sdkInitialize();
   }
 
-  sdkInitialise()  {
+  sdkInitialize()  {
     var reqData = {
       "authtype" : authType,
       "authvalue" : tokenKey,
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-    print("...sdk Initialise...-5555-----$reqData.");
-    var jsonResponse = nearpayPlugin..initialise(reqData) ;
-    print("...sdk Initialise...------$jsonResponse.");
+    print("...sdk Initialize...-5555-----$reqData.");
+    var jsonResponse = nearpayPlugin..initialize(reqData) ;
+    print("...sdk Initialize...------$jsonResponse.");
     
   }
 

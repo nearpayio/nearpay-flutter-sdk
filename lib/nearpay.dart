@@ -2,8 +2,8 @@
 import 'nearpay_platform_interface.dart';
 
 class Nearpay {
-  Future<dynamic> initialise(Map<String, dynamic> data) {
-    return NearpayPlatform.instance.initialise(data);
+  Future<dynamic> initialize(Map<String, dynamic> data) {
+    return NearpayPlatform.instance.initialize(data);
   }
 
   Future<dynamic> purchase(Map<String, dynamic> data) {
@@ -33,7 +33,6 @@ class Nearpay {
 
 enum Environments {
     sandbox("sandbox"),
-    testing("testing"),
     production("production");
 
     const Environments(this.value);

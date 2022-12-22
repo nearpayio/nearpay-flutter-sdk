@@ -10,8 +10,8 @@ class MethodChannelNearpay extends NearpayPlatform {
   final methodChannel = const MethodChannel('nearpay');
 
   @override
-  Future<dynamic> initialise(Map<String, dynamic> data) async {
-    final response = await methodChannel.invokeMethod<dynamic>('initialise',data);
+  Future<dynamic> initialize(Map<String, dynamic> data) async {
+    final response = await methodChannel.invokeMethod<dynamic>('initialize',data);
     return response;
   }
 

@@ -23,8 +23,8 @@ abstract class NearpayPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<dynamic> initialise(Map<String, dynamic> data ) {
-    throw UnimplementedError('initialise() has not been implemented.');
+  Future<dynamic> initialize(Map<String, dynamic> data ) {
+    throw UnimplementedError('initialize() has not been implemented.');
   }
 
   Future<dynamic> purchase(Map<String, dynamic> data ) {
