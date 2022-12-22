@@ -7,7 +7,7 @@ Minimum SDK version 26. This plugin will work based on
 # Install plugin
 
 ```bash
-flutter pub add
+flutter pub add nearpay_flutter_sdk --git-url=https://github.com/nearpayio/nearpay-flutter-sdk.git
 ```
 
 Please integrate plugin to a flutter project either url or project, that will
