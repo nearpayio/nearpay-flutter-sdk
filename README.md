@@ -61,7 +61,7 @@ var reqData = {
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-var jsonResponse = nearpaySDK.initialise(reqData);
+var jsonResponse = nearpaySDK.initialize(reqData);
 ```
 
 # 4. Setup
