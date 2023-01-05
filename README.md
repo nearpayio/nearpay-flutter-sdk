@@ -141,6 +141,38 @@ var reversalReceipt = await nearpaySDK.reverse(reqData);
 await nearpaySDK.logout();
 ```
 
+### Response Status
+
+```
+General Response
+
+200 :  Success
+401 :  Authentication
+402:  General Failure
+403:  Failure Message
+404: Invalid Status
+
+Purchase Response
+
+405:  Purchase Declined
+406 : Purchase Rejected
+
+Refund Response
+
+407 : Refund Declined
+408: Refund Rejected
+
+Logout Response
+
+409: User Already logout
+
+Setup Response
+
+410:  Already Installed
+411 :  Not Installed
+
+```
+
 ## Nearpay plugin response will be be in below formats
 
 [Model Response](https://docs.nearpay.io/sdk/sdk-models)
