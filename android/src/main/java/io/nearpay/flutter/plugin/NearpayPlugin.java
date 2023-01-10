@@ -275,7 +275,6 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     private static Map<String, Object> getTransactionGetResponse(TransactionReceipt transactionReceipt,String message){
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("uuid",transactionReceipt.getTransaction_uuid());
-        paramMap.put("transaction_uuid",transactionReceipt.getTransaction_uuid());
         paramMap.put("start_date",transactionReceipt.getStart_date());
         paramMap.put("start_time",transactionReceipt.getStart_time());
         //paramMap.put("bank_id",transactionReceipt.getBank_id());

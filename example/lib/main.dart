@@ -69,9 +69,9 @@ class _MyAppState extends State<MyApp> {
         // Your code
           print("...response list...------$purchaseList.");
           if(purchaseList.isNotEmpty){
-            String transaction_uuid = purchaseList[0]['transaction_uuid'];
-            print("...response list...udid------$transaction_uuid.");
-            refundAction(transaction_uuid);
+            String uuid = purchaseList[0]['uuid'];
+            print("...response list...udid------$uuid.");
+            refundAction(uuid);
           }
           
         });
@@ -108,9 +108,9 @@ class _MyAppState extends State<MyApp> {
       // Your code
         print("...response list...------$purchaseList.");
         if(purchaseList.isNotEmpty){
-          String transaction_uuid = purchaseList[0]['transaction_uuid'];
-          print("...response list...uuid------$transaction_uuid.");
-          reverseAction(transaction_uuid);
+          String uuid = purchaseList[0]['uuid'];
+          print("...response list...uuid------$uuid.");
+          reverseAction(uuid);
         }
         
       });
