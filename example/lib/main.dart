@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       "environment" : Environments.sandbox.value
       };
     print("...sdk Initialize...-5555-----$reqData.");
-    var jsonResponse = nearpayPlugin..initialize(reqData) ;
+    var jsonResponse = nearpayPlugin.initialize(reqData) ;
     print("...sdk Initialize...------$jsonResponse.");
     
   }
@@ -69,9 +69,9 @@ class _MyAppState extends State<MyApp> {
         // Your code
           print("...response list...------$purchaseList.");
           if(purchaseList.isNotEmpty){
-            String udid = purchaseList[0]['udid'];
-            print("...response list...udid------$udid.");
-            refundAction(udid);
+            String transaction_uuid = purchaseList[0]['transaction_uuid'];
+            print("...response list...udid------$transaction_uuid.");
+            refundAction(transaction_uuid);
           }
           
         });
@@ -108,9 +108,9 @@ class _MyAppState extends State<MyApp> {
       // Your code
         print("...response list...------$purchaseList.");
         if(purchaseList.isNotEmpty){
-          String udid = purchaseList[0]['udid'];
-          print("...response list...uuid------$udid.");
-          reverseAction(udid);
+          String transaction_uuid = purchaseList[0]['transaction_uuid'];
+          print("...response list...uuid------$transaction_uuid.");
+          reverseAction(transaction_uuid);
         }
         
       });

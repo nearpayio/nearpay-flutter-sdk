@@ -129,7 +129,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         String authType = call.argument("authtype").toString();        
         doSetup(authType,authvalue);
     }
-    else if (call.method.equals("initialise")) {
+    else if (call.method.equals("initialize")) {
       String authvalue = call.argument("authvalue").toString();
       String authType = call.argument("authtype").toString();           
       String localeStr = call.argument("locale").toString();
@@ -274,7 +274,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     private static Map<String, Object> getTransactionGetResponse(TransactionReceipt transactionReceipt,String message){
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("udid",transactionReceipt.getTransaction_uuid());
+        paramMap.put("uuid",transactionReceipt.getTransaction_uuid());
+        paramMap.put("transaction_uuid",transactionReceipt.getTransaction_uuid());
         paramMap.put("start_date",transactionReceipt.getStart_date());
         paramMap.put("start_time",transactionReceipt.getStart_time());
         //paramMap.put("bank_id",transactionReceipt.getBank_id());

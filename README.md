@@ -95,7 +95,7 @@ var purchaseReceipt = await nearpaySDK.purchase(reqData);
 ```dart
 var reqData = {
       "amount": 0001,
-      "transaction_uuid" :  purchaseReceipt.uuid,// we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
+      "transaction_uuid" :  purchaseReceipt.transaction_uuid,// we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
       "customer_reference_number": "uuid()", // Any string as a reference number
       "isEnableUI" : true, //true will enable the ui and false will disable
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
@@ -126,7 +126,7 @@ var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
 ```dart
 var reqData = {
       "isEnableUI" : true, //true will enable the ui and false will disable
-      "transaction_uuid" :purchaseReceipt.uuid, //add Transaction Reference Retrieval Number
+      "transaction_uuid" :purchaseReceipt.transaction_uuid, //add Transaction Reference Retrieval Number
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, //Only for JWT token
       "finishTimeout" : 2 //Add the number of seconds
