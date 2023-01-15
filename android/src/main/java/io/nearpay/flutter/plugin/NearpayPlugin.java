@@ -129,7 +129,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         String authType = call.argument("authtype").toString();        
         doSetup(authType,authvalue);
     }
-    else if (call.method.equals("initialise")) {
+    else if (call.method.equals("initialize")) {
       String authvalue = call.argument("authvalue").toString();
       String authType = call.argument("authtype").toString();           
       String localeStr = call.argument("locale").toString();
