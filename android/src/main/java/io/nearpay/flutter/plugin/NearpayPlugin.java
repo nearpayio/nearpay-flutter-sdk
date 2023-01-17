@@ -58,6 +58,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
   private static Result flutterResult;
   private Context context;
   private String jwtKey = "jwt"; 
+  private String timeOutDefault = "10";
 
 
   @Override
@@ -72,75 +73,133 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             authType.equals("email") ? new AuthenticationData.Email(inputValue) :
                     authType.equals("mobile") ? new AuthenticationData.Mobile(inputValue) :
                             authType.equals(jwtKey) ? new AuthenticationData.Jwt(inputValue) :  AuthenticationData.UserEnter.INSTANCE;
-  return authentication;
+    return authentication;
+  }
+
+  public boolean isAuthInputValidation(String authType, String  inputValue){
+    boolean isAuthValidate= authType.equals("userenter")  ? true : inputValue == "" ? false : true;
+    return isAuthValidate;
   }
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     flutterResult = result;
     if (call.method.equals("purchase")) {
-        String amountStr = call.argument("amount").toString();
-        Long amount =  Long.valueOf(amountStr); 
-        String customer_reference_number = call.argument("customer_reference_number").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
+        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
+        String customer_reference_number = call.argument("customer_reference_number") != null ? call.argument("customer_reference_number").toString() : "";
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
         Boolean isEnableReverse = call.argument("isEnableReversal");
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout); 
-        doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout);
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+        Long timeout =  Long.valueOf(finishTimeout);
+        if(amountStr == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Purchase amount parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            Long amount =  Long.valueOf(amountStr); 
+            doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout);
+
+        }
     }
     else if (call.method.equals("refund")) {
-        String amountStr = call.argument("amount").toString();
-        Long amount =  Long.valueOf(amountStr); 
-        String reference_retrieval_number = call.argument("transaction_uuid").toString();
+        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
+        String reference_retrieval_number = call.argument("transaction_uuid") != null ? call.argument("transaction_uuid").toString() : "";
         String customer_reference_number = call.argument("customer_reference_number").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
         Boolean isEnableReverse = call.argument("isEnableReversal");
-        Boolean isEditableReversalUI = call.argument("isEditableReversalUI");
-        String finishTimeout = call.argument("finishTimeout").toString();
+        Boolean isEditableReversalUI = call.argument("isEditableReversalUI") == null ? true : call.argument("isEditableReversalUI");
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
         Long timeout =  Long.valueOf(finishTimeout); 
-        doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout );
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+
+        if(amountStr == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Purchase amount parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(reference_retrieval_number == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Transaction UUID parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            Long amount =  Long.valueOf(amountStr); 
+            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout );
+        }
     }
     else if (call.method.equals("reconcile")) {
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        String finishTimeout = call.argument("finishTimeout").toString();
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
         Long timeout =  Long.valueOf(finishTimeout); 
-        doReconcileAction(isEnableUI,authType,authvalue,timeout);
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+
+        if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            doReconcileAction(isEnableUI,authType,authvalue,timeout);
+        }
     }
     else if (call.method.equals("reverse")) {
-        String transactionUuid = call.argument("transaction_uuid").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout);  
-        doReverseAction(transactionUuid,isEnableUI,authType,authvalue,timeout);
+        String transactionUuid = call.argument("transaction_uuid") != null ? call.argument("transaction_uuid").toString() : "";
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+        Long timeout =  Long.valueOf(finishTimeout); 
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+
+        if(transactionUuid == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Transaction UUID parameter missing");
+            sendResponse(paramMap);
+        }else if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            doReverseAction(transactionUuid,isEnableUI,authType,authvalue,timeout);
+        }
     }
     else if (call.method.equals("logout")) {
         doLogoutAction();
     }
     else if (call.method.equals("setup")) {
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();        
-        doSetup(authType,authvalue);
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            doSetup(authType,authvalue);
+        }
     }
     else if (call.method.equals("initialize")) {
-      String authvalue = call.argument("authvalue").toString();
-      String authType = call.argument("authtype").toString();           
-      String localeStr = call.argument("locale").toString();
-      String environmentStr = call.argument("environment").toString();
-      Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
-      Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
-      //Locale geek1 = new Locale("English", "US");
-
-      nearPay = new NearPay(this.context,getAuthType(authType, authvalue), locale, env);
-      Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,"NearPay initialized");
-      sendResponse(paramMap);
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        String localeStr = call.argument("locale")  != null ? call.argument("locale").toString() : "default";
+        Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
+        String environmentStr = call.argument("environment") == null ? "sandbox" :call.argument("environment").toString();
+        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
+        if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            nearPay = new NearPay(this.context,getAuthType(authType, authvalue), locale, env);
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,"NearPay initialized");
+            sendResponse(paramMap);
+        }
     } else {
       result.notImplemented();
     }

@@ -56,10 +56,10 @@ var authValue = "name@email.com"
 
 ```dart
 var reqData = {
-      "authtype" : authType,
-      "authvalue" : authValue,
-      "locale" : Locale.localeDefault.value,
-      "environment" : Environments.sandbox.value
+      "authtype" : authType, //Same as above reference
+      "authvalue" : authValue, // Give auth type value
+      "locale" : Locale.localeDefault.value, // locale reference
+      "environment" : Environments.sandbox.value // environment reference
       };
 var jsonResponse = nearpaySDK.initialize(reqData);
 ```
@@ -68,8 +68,8 @@ var jsonResponse = nearpaySDK.initialize(reqData);
 
 ```dart
 var reqData = {
-    "authtype" : authType,
-    "authvalue" : authValue
+    "authtype" : authType, //Same as above reference
+    "authvalue" : authValue // Give auth type value
 };
 var jsonResponse = await nearpaySDK.setup(reqData);
 ```
@@ -78,13 +78,13 @@ var jsonResponse = await nearpaySDK.setup(reqData);
 
 ```dart
 var reqData = {
-      "amount": 0001,
-      "customer_reference_number": "uuid()", // Any string as a reference number
-      "isEnableUI" : true, //true will enable the ui and false will disable
-      "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
+      "amount": 0001, // [Required] ammount you want to set . 
+      "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
+      "isEnableUI" : true, // [optional] true will enable the ui and false will disable
+      "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, //Only for JWT token
-      "finishTimeout" : 2  //Add the number of seconds
+      "authvalue" : authValue, // Give auth type value
+      "finishTimeout" : 2  //[optional] Add the number of seconds
     };
 
 var purchaseReceipt = await nearpaySDK.purchase(reqData);
@@ -94,15 +94,15 @@ var purchaseReceipt = await nearpaySDK.purchase(reqData);
 
 ```dart
 var reqData = {
-      "amount": 0001,
-      "transaction_uuid" :  purchaseReceipt.uuid,// we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
-      "customer_reference_number": "uuid()", // Any string as a reference number
-      "isEnableUI" : true, //true will enable the ui and false will disable
-      "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "isEditableReversalUI" : true, // true will enable the ui and false will disable
+      "amount": 0001, // [Required] ammount you want to set . 
+      "transaction_uuid" :  purchaseReceipt.uuid,// [Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
+      "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
+      "isEnableUI" : true,  // [optional] true will enable the ui and false will disable
+      "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
+      "isEditableReversalUI" : true, // [optional] true will enable the ui and false will disable
       "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, //Only for JWT token
-      "finishTimeout" : 2,//Add the number of seconds
+      "authvalue" : authValue, // Give auth type value
+      "finishTimeout" : 2,//[optional] Add the number of seconds
     };
 
 var refundReceipt = await nearpaySDK.refund(reqData);
@@ -112,10 +112,10 @@ var refundReceipt = await nearpaySDK.refund(reqData);
 
 ```dart
 var reqData = {
-      "isEnableUI" : true, //true will enable the ui and false will disable
+      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
       "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, //Only for JWT token
-      "finishTimeout" : 2 //Add the number of seconds
+      "authvalue" : authValue, // Give auth type value
+      "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
 var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
@@ -125,11 +125,11 @@ var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
 
 ```dart
 var reqData = {
-      "isEnableUI" : true, //true will enable the ui and false will disable
-      "transaction_uuid" :purchaseReceipt.uuid, //add Transaction Reference Retrieval Number
+      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
+      "transaction_uuid" :purchaseReceipt.uuid, //[Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
       "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, //Only for JWT token
-      "finishTimeout" : 2 //Add the number of seconds
+      "authvalue" : authValue, // Give auth type value
+      "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
 var reversalReceipt = await nearpaySDK.reverse(reqData);
@@ -147,6 +147,7 @@ await nearpaySDK.logout();
 General Response
 
 200 :  Success
+400 : Invalid arguments
 401 :  Authentication
 402:  General Failure
 403:  Failure Message

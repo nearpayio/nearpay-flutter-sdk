@@ -130,12 +130,12 @@ class _MyAppState extends State<MyApp> {
   purchaseAction() async {
     var reqData = {
       "amount": 0001, 
-      "customer_reference_number": "uuyuyuyuy65565675",
-      "isEnableUI" : true,
-      "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "authtype" : authType, 
-      "authvalue" : tokenKey,
-      "finishTimeout" : timeout     
+      "customer_reference_number": "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
+      "isEnableUI" : true, // [optional] true will enable the ui and false will disable 
+      "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
+      "authtype" : authType, // Refer Authentications definision in point 2 readme
+      "authvalue" : tokenKey, // Refer Authentications definision in point 2 readme
+      "finishTimeout" : timeout // [optional] Add the number of seconds      
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
     print("...purchaseAction...------$jsonResponse.");
