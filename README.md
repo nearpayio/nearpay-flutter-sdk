@@ -62,6 +62,19 @@ var reqData = {
       "environment" : Environments.sandbox.value // [Required] environment reference
       };
 var jsonResponse = nearpaySDK.initialize(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+}else if(status == 400){
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Auth type and Auth value missing
+}
+
 ```
 
 # 4. Setup
@@ -72,6 +85,19 @@ var reqData = {
     "authvalue" : authValue // Give auth type value
 };
 var jsonResponse = await nearpaySDK.setup(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+}else if(status == 400){
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Auth type and Auth value missing
+}
+
 ```
 
 # 5. Purchase
@@ -86,6 +112,18 @@ var reqData = {
     };
 
 var purchaseReceipt = await nearpaySDK.purchase(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+}else if(status == 400){
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Auth type and Auth value missing
+  //Amount parameter null
+}
 ```
 
 # 6. Refund
@@ -102,6 +140,19 @@ var reqData = {
     };
 
 var refundReceipt = await nearpaySDK.refund(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+}else if(status == 400){
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Auth type and Auth value missing
+  // Amount parameter null
+  // Transaction UUID null
+}
 ```
 
 # 7. Reconcile
@@ -113,6 +164,14 @@ var reqData = {
     };
 
 var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+} 
 ```
 
 # 8. Reverse
@@ -125,6 +184,18 @@ var reqData = {
     };
 
 var reversalReceipt = await nearpaySDK.reverse(reqData);
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
+
+if(status == 200){
+  // Initialize Success with 200
+}else if(status == 204){
+  // Initialize Failed with 204, Plugin iniyialize failed with null 
+}else if(status == 400){
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Auth type and Auth value missing
+  // Transaction UUID null
+}
 ```
 
 # 9. Logout

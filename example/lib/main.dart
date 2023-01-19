@@ -40,9 +40,7 @@ class _MyAppState extends State<MyApp> {
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-    print("...sdk Initialize...-5555-----$reqData.");
     var jsonResponse = nearpayPlugin..initialize(reqData) ;
-    print("...sdk Initialize...------$jsonResponse.");
     
   }
 
@@ -50,25 +48,21 @@ class _MyAppState extends State<MyApp> {
     var reqData = {
       "amount": 0001, 
       "customer_reference_number": "", // Any string as a reference number
-      "isEnableUI" : true,
-      "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "finishTimeout" : timeout
+      "isEnableUI" : true, // Optional
+      "isEnableReversal" : true, // Optional it will allow you to enable or disable the reverse button
+      "finishTimeout" : timeout //Optional 
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
-    print("...paymentresponse...------$jsonData.");
     var status = jsonData['status'];
     var message = jsonData['message'];
     if(status == 200){
 
         List<dynamic> purchaseList = jsonData["list"];
-        print("...paymentresponse...------$jsonData.");
         Future.delayed(const Duration(milliseconds: 5000), () {
         // Your code
-          print("...response list...------$purchaseList.");
           if(purchaseList.isNotEmpty){
             String udid = purchaseList[0]['udid'];
-            print("...response list...udid------$udid.");
             refundAction(udid);
           }
           
@@ -86,26 +80,22 @@ class _MyAppState extends State<MyApp> {
 
   purchaseWithReverse() async {
     var reqData = {
-      "amount": 0001, 
-      "customer_reference_number": "uuyuyuyuy65565675",
-      "isEnableUI" : true,
+      "amount": 0001, // Required
+      "customer_reference_number": "uuyuyuyuy65565675", // Optional
+      "isEnableUI" : true, //Optional
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "finishTimeout" : timeout
+      "finishTimeout" : timeout //Optional
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
-    print("...paymentresponse...------$jsonData.");
     var status = jsonData['status'];
     var message = jsonData['message'];
     if(status == 200){
       List<dynamic> purchaseList = jsonData["list"];
-      print("...paymentresponse...------$jsonData.");
       Future.delayed(const Duration(milliseconds: 5000), () {
       // Your code
-        print("...response list...------$purchaseList.");
         if(purchaseList.isNotEmpty){
           String udid = purchaseList[0]['udid'];
-          print("...response list...uuid------$udid.");
           reverseAction(udid);
         }
         
@@ -125,26 +115,25 @@ class _MyAppState extends State<MyApp> {
 
   purchaseAction() async {
     var reqData = {
-      "amount": 0001, 
+      "amount": 0001, // Required
       "customer_reference_number": "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
       "isEnableUI" : true, // [optional] true will enable the ui and false will disable 
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout // [optional] Add the number of seconds      
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
-    print("...purchaseAction...------$jsonResponse.");
     
   }
 
   refundAction(String uuid) async {
     var reqData = {
-      "amount": 0001, 
-      "transaction_uuid" :uuid,
-      "customer_reference_number": "rerretest123333333",
-      "isEnableUI" : true,
-      "isEnableReversal" : true,
-      "isEditableReversalUI" : true,
-      "finishTimeout" : timeout
+      "amount": 0001, // Required
+      "transaction_uuid" :uuid, // Required
+      "customer_reference_number": "rerretest123333333", //Optional
+      "isEnableUI" : true, // Optional
+      "isEnableReversal" : true,// Optional
+      "isEditableReversalUI" : true,// Optional
+      "finishTimeout" : timeout // Optional
 
     };
     var jsonResponse = await nearpayPlugin.refund(reqData) ;
@@ -154,8 +143,8 @@ class _MyAppState extends State<MyApp> {
 
   reconcileAction() async {
     var reqData = {
-      "isEnableUI" : true,
-      "finishTimeout" : timeout    
+      "isEnableUI" : true,// Optional
+      "finishTimeout" : timeout    // Optional
     };
     var jsonResponse = await nearpayPlugin.reconcile(reqData) ;
     print("...reconcileAction response...------$jsonResponse.");
@@ -164,9 +153,9 @@ class _MyAppState extends State<MyApp> {
 
   reverseAction(String uuid) async {
     var reqData = {
-      "transaction_uuid" :uuid,
-      "isEnableUI" : true,
-      "finishTimeout" : timeout   
+      "transaction_uuid" :uuid, // Required
+      "isEnableUI" : true, // Optional
+      "finishTimeout" : timeout   // Optional
     };
     var jsonResponse = await nearpayPlugin.reverse(reqData) ;
     print("...reverseAction response...------$jsonResponse.");
