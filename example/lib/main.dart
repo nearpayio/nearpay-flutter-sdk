@@ -52,8 +52,6 @@ class _MyAppState extends State<MyApp> {
       "customer_reference_number": "", // Any string as a reference number
       "isEnableUI" : true,
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "authtype" : authType, 
-      "authvalue" : tokenKey, //Only for JWT token
       "finishTimeout" : timeout
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
@@ -92,8 +90,6 @@ class _MyAppState extends State<MyApp> {
       "customer_reference_number": "uuyuyuyuy65565675",
       "isEnableUI" : true,
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
-      "authtype" : authType, 
-      "authvalue" : tokenKey, 
       "finishTimeout" : timeout
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
@@ -133,8 +129,6 @@ class _MyAppState extends State<MyApp> {
       "customer_reference_number": "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
       "isEnableUI" : true, // [optional] true will enable the ui and false will disable 
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
-      "authtype" : authType, // Refer Authentications definision in point 2 readme
-      "authvalue" : tokenKey, // Refer Authentications definision in point 2 readme
       "finishTimeout" : timeout // [optional] Add the number of seconds      
     };
     var jsonResponse = await nearpayPlugin.purchase(reqData);
@@ -150,8 +144,6 @@ class _MyAppState extends State<MyApp> {
       "isEnableUI" : true,
       "isEnableReversal" : true,
       "isEditableReversalUI" : true,
-      "authtype" : authType, 
-      "authvalue" : tokenKey,
       "finishTimeout" : timeout
 
     };
@@ -163,8 +155,6 @@ class _MyAppState extends State<MyApp> {
   reconcileAction() async {
     var reqData = {
       "isEnableUI" : true,
-      "authtype" : authType, 
-      "authvalue" : tokenKey,
       "finishTimeout" : timeout    
     };
     var jsonResponse = await nearpayPlugin.reconcile(reqData) ;
@@ -176,8 +166,6 @@ class _MyAppState extends State<MyApp> {
     var reqData = {
       "transaction_uuid" :uuid,
       "isEnableUI" : true,
-      "authtype" : authType, 
-      "authvalue" : tokenKey,
       "finishTimeout" : timeout   
     };
     var jsonResponse = await nearpayPlugin.reverse(reqData) ;
@@ -193,8 +181,8 @@ class _MyAppState extends State<MyApp> {
 
   setupAction(String tokenKey) async {
       var reqData = {
-        "authtype" : authType, 
-        "authvalue" : tokenKey,
+        "authtype" : authType, // [optional] Auth type we will pass here
+        "authvalue" : tokenKey, // [optional] Auth value we will pass here
       };
     var jsonResponse = await nearpayPlugin.setup(reqData) ;
     print("...setupAction response...------$jsonResponse.");

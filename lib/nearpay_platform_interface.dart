@@ -23,23 +23,23 @@ abstract class NearpayPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<dynamic> initialize(Map<String, dynamic> data ) {
+  Future<dynamic> initialize(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('initialize() has not been implemented.');
   }
 
-  Future<dynamic> purchase(Map<String, dynamic> data ) {
+  Future<dynamic> purchase(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('purchase() has not been implemented.');
   }
 
-  Future<dynamic> refund(Map<String, dynamic> data ) {
+  Future<dynamic> refund(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('refund() has not been implemented.');
   }
 
-  Future<dynamic> reconcile(Map<String, dynamic> data ) {
+  Future<dynamic> reconcile(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('reconcile() has not been implemented.');
   }
 
-  Future<dynamic> reverse(Map<String, dynamic> data ) {
+  Future<dynamic> reverse(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('reverse() has not been implemented.');
   }
 
@@ -47,7 +47,7 @@ abstract class NearpayPlatform extends PlatformInterface {
     throw UnimplementedError('logout() has not been implemented.');
   }
 
-  Future<dynamic> setup(Map<String, dynamic> data ) {
+  Future<dynamic> setup(Map<dynamic, dynamic> data ) {
     throw UnimplementedError('setup() has not been implemented.');
   }
 } 

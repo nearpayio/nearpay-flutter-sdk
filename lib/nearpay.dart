@@ -2,23 +2,23 @@
 import 'nearpay_platform_interface.dart';
 
 class Nearpay {
-  Future<dynamic> initialize(Map<String, dynamic> data) {
+  Future<dynamic> initialize(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.initialize(data);
   }
 
-  Future<dynamic> purchase(Map<String, dynamic> data) {
+  Future<dynamic> purchase(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.purchase(data);
   }
 
-  Future<dynamic> refund(Map<String, dynamic> data) {
+  Future<dynamic> refund(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.refund(data);
   }
 
-  Future<dynamic> reconcile(Map<String, dynamic> data) {
+  Future<dynamic> reconcile(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.reconcile(data);
   }
 
-  Future<dynamic> reverse(Map<String, dynamic> data) {
+  Future<dynamic> reverse(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.reverse(data);
   }
 
@@ -26,7 +26,7 @@ class Nearpay {
     return NearpayPlatform.instance.logout();
   }
 
-  Future<dynamic> setup(Map<String, dynamic> data) {
+  Future<dynamic> setup(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.setup(data);
   }
 }
