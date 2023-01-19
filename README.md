@@ -58,8 +58,8 @@ var authValue = "name@email.com"
 var reqData = {
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, // Give auth type value
-      "locale" : Locale.localeDefault.value, // locale reference
-      "environment" : Environments.sandbox.value // environment reference
+      "locale" : Locale.localeDefault.value, // [optional] locale reference
+      "environment" : Environments.sandbox.value // [Required] environment reference
       };
 var jsonResponse = nearpaySDK.initialize(reqData);
 ```
@@ -82,8 +82,6 @@ var reqData = {
       "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
       "isEnableUI" : true, // [optional] true will enable the ui and false will disable
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
-      "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, // Give auth type value
       "finishTimeout" : 2  //[optional] Add the number of seconds
     };
 
@@ -100,8 +98,6 @@ var reqData = {
       "isEnableUI" : true,  // [optional] true will enable the ui and false will disable
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "isEditableReversalUI" : true, // [optional] true will enable the ui and false will disable
-      "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, // Give auth type value
       "finishTimeout" : 2,//[optional] Add the number of seconds
     };
 
@@ -113,8 +109,6 @@ var refundReceipt = await nearpaySDK.refund(reqData);
 ```dart
 var reqData = {
       "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
-      "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, // Give auth type value
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
@@ -127,8 +121,6 @@ var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
 var reqData = {
       "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
       "transaction_uuid" :purchaseReceipt.uuid, //[Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
-      "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, // Give auth type value
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
@@ -147,6 +139,7 @@ await nearpaySDK.logout();
 General Response
 
 200 :  Success
+204 : Initiase Missing
 400 : Invalid arguments
 401 :  Authentication
 402:  General Failure
