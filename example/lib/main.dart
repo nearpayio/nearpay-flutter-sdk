@@ -22,9 +22,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final nearpayPlugin = Nearpay();
+  final nearpay = Nearpay();
   final tokenKey = "test+youremail@gmail.com";
-  final authType = AuthenticationType.email.value;
+  final authType = nearpay.AuthenticationType.email.value;
   final timeout = 60;
   
   @override
@@ -37,10 +37,10 @@ class _MyAppState extends State<MyApp> {
     var reqData = {
       "authtype" : authType,
       "authvalue" : tokenKey,
-      "locale" : Locale.localeDefault.value,
-      "environment" : Environments.sandbox.value
+      "locale" : nearpay.Locale.localeDefault.value,
+      "environment" : nearpay.Environments.sandbox.value
       };
-    var jsonResponse = nearpayPlugin..initialize(reqData) ;
+    var jsonResponse = nearpay.initialize(reqData) ;
     
   }
 
@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, // Optional it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout //Optional 
     };
-    var jsonResponse = await nearpayPlugin.purchase(reqData);
+    var jsonResponse = await nearpay.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
     var status = jsonData['status'];
     var message = jsonData['message'];
@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout //Optional
     };
-    var jsonResponse = await nearpayPlugin.purchase(reqData);
+    var jsonResponse = await nearpay.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
     var status = jsonData['status'];
     var message = jsonData['message'];
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout // [optional] Add the number of seconds      
     };
-    var jsonResponse = await nearpayPlugin.purchase(reqData);
+    var jsonResponse = await nearpay.purchase(reqData);
     
   }
 
@@ -134,9 +134,8 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true,// Optional
       "isEditableReversalUI" : true,// Optional
       "finishTimeout" : timeout // Optional
-
     };
-    var jsonResponse = await nearpayPlugin.refund(reqData) ;
+    var jsonResponse = await nearpay.refund(reqData) ;
     print("...refund response...------$jsonResponse.");
     
   }
@@ -146,7 +145,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableUI" : true,// Optional
       "finishTimeout" : timeout    // Optional
     };
-    var jsonResponse = await nearpayPlugin.reconcile(reqData) ;
+    var jsonResponse = await nearpay.reconcile(reqData) ;
     print("...reconcileAction response...------$jsonResponse.");
     
   }
@@ -157,13 +156,13 @@ class _MyAppState extends State<MyApp> {
       "isEnableUI" : true, // Optional
       "finishTimeout" : timeout   // Optional
     };
-    var jsonResponse = await nearpayPlugin.reverse(reqData) ;
+    var jsonResponse = await nearpay.reverse(reqData) ;
     print("...reverseAction response...------$jsonResponse.");
     
   }
 
   logoutAction() async {
-    var jsonResponse = await nearpayPlugin.logout() ;
+    var jsonResponse = await nearpay.logout() ;
     print("...logoutAction response...------$jsonResponse.");
     
   }
@@ -173,7 +172,7 @@ class _MyAppState extends State<MyApp> {
         "authtype" : authType, // [optional] Auth type we will pass here
         "authvalue" : tokenKey, // [optional] Auth value we will pass here
       };
-    var jsonResponse = await nearpayPlugin.setup(reqData) ;
+    var jsonResponse = await nearpay.setup(reqData) ;
     print("...setupAction response...------$jsonResponse.");
   }
 

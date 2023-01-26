@@ -2,6 +2,32 @@
 import 'nearpay_platform_interface.dart';
 
 class Nearpay {
+
+  enum Environments {
+    sandbox("sandbox"),
+    production("production");
+
+    const Environments(this.value);
+    final String value;
+  }
+
+  enum AuthenticationType{
+    login("userenter"),
+    email("email"),
+    mobile("mobile"),
+    jwt("jwt");
+
+    const AuthenticationType(this.value);
+    final String value;
+  }
+
+  enum Locale{
+    localeDefault("default");
+
+    const Locale(this.value);
+    final String value;
+  }
+
   Future<dynamic> initialize(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.initialize(data);
   }
@@ -31,27 +57,4 @@ class Nearpay {
   }
 }
 
-enum Environments {
-    sandbox("sandbox"),
-    production("production");
 
-    const Environments(this.value);
-    final String value;
-}
-
-enum AuthenticationType{
-  login("userenter"),
-  email("email"),
-  mobile("mobile"),
-  jwt("jwt");
-
-  const AuthenticationType(this.value);
-  final String value;
-}
-
-enum Locale{
-  localeDefault("default");
-
-  const Locale(this.value);
-  final String value;
-}

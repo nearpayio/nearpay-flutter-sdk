@@ -174,6 +174,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
          }else{
             Log.i("purchase....", "initialise nil");
             Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
         }      
     }
     else if (call.method.equals("initialize")) {

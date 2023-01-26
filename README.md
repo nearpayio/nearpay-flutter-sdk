@@ -26,7 +26,7 @@ import 'package:nearpay_flutter_sdk/nearpay.dart';
 # 1. Create plugin object
 
 ```dart
-final nearpaySDK = Nearpay();
+final nearpay = Nearpay();
 ```
 
 # 2. Authentications
@@ -39,17 +39,17 @@ Authentication Types
 - JWT
 
 ```dart
- AuthenticationType.login.values // If you want user to decide what will use to login email or mobile
- AuthenticationType.email.values // if you want restrict only email and you need to provide it to the auth value
- AuthenticationType.mobile.values // if you want restrict only mobile and you need to provide it to the auth value
- AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
+ nearpay.AuthenticationType.login.values // If you want user to decide what will use to login email or mobile
+ nearpay.AuthenticationType.email.values // if you want restrict only email and you need to provide it to the auth value
+ nearpay.AuthenticationType.mobile.values // if you want restrict only mobile and you need to provide it to the auth value
+ nearpay.AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
 ```
 
 ### loggedin user information
 
 ```dart
-var authType = AuthenticationType.email.values
-var authValue = "name@email.com"
+var authType = nearpay.AuthenticationType.email.values
+var authValue = "youremail@email.com"
 ```
 
 # 3. Initialize SDK
@@ -58,10 +58,10 @@ var authValue = "name@email.com"
 var reqData = {
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, // Give auth type value
-      "locale" : Locale.localeDefault.value, // [optional] locale reference
-      "environment" : Environments.sandbox.value // [Required] environment reference
+      "locale" : nearpay.Locale.localeDefault.value, // [optional] locale reference
+      "environment" : nearpay.Environments.sandbox.value // [Required] environment reference
       };
-var jsonResponse = nearpaySDK.initialize(reqData);
+var jsonResponse = nearpay.initialize(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -84,13 +84,12 @@ var reqData = {
     "authtype" : authType, //Same as above reference
     "authvalue" : authValue // Give auth type value
 };
-var jsonResponse = await nearpaySDK.setup(reqData);
+var jsonResponse = await nearpay.setup(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
 if(status == 200){
   // Initialize Success with 200
-
 }else if(status == 204){
   // Initialize Failed with 204, Plugin iniyialize failed with null 
 }else if(status == 400){
@@ -111,7 +110,7 @@ var reqData = {
       "finishTimeout" : 2  //[optional] Add the number of seconds
     };
 
-var purchaseReceipt = await nearpaySDK.purchase(reqData);
+var purchaseReceipt = await nearpay.purchase(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -139,7 +138,7 @@ var reqData = {
       "finishTimeout" : 2,//[optional] Add the number of seconds
     };
 
-var refundReceipt = await nearpaySDK.refund(reqData);
+var refundReceipt = await nearpay.refund(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -163,7 +162,7 @@ var reqData = {
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
-var reconciliationReceipt = await nearpaySDK.reconcile(reqData);
+var reconciliationReceipt = await nearpay.reconcile(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -183,7 +182,7 @@ var reqData = {
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
-var reversalReceipt = await nearpaySDK.reverse(reqData);
+var reversalReceipt = await nearpay.reverse(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -201,7 +200,7 @@ if(status == 200){
 # 9. Logout
 
 ```dart
-await nearpaySDK.logout();
+await nearpay.logout();
 ```
 
 ### Response Status
