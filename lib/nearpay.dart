@@ -1,8 +1,6 @@
 
 import 'nearpay_platform_interface.dart';
 
-class Nearpay {
-
   enum Environments {
     sandbox("sandbox"),
     production("production");
@@ -21,12 +19,21 @@ class Nearpay {
     final String value;
   }
 
+
+
   enum Locale{
     localeDefault("default");
 
     const Locale(this.value);
     final String value;
   }
+
+
+
+
+class Nearpay {
+
+
 
   Future<dynamic> initialize(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.initialize(data);
@@ -55,6 +62,8 @@ class Nearpay {
   Future<dynamic> setup(Map<dynamic, dynamic> data) {
     return NearpayPlatform.instance.setup(data);
   }
+
+
 }
 
 

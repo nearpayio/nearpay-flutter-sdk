@@ -24,7 +24,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
   final tokenKey = "test+youremail@gmail.com";
-  final authType = nearpay.AuthenticationType.email.value;
+  final authType = AuthenticationType.email.value;
   final timeout = 60;
   
   @override
@@ -37,8 +37,8 @@ class _MyAppState extends State<MyApp> {
     var reqData = {
       "authtype" : authType,
       "authvalue" : tokenKey,
-      "locale" : nearpay.Locale.localeDefault.value,
-      "environment" : nearpay.Environments.sandbox.value
+      "locale" : Locale.localeDefault.value,
+      "environment" : Environments.sandbox.value
       };
     var jsonResponse = nearpay.initialize(reqData) ;
     

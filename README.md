@@ -39,16 +39,16 @@ Authentication Types
 - JWT
 
 ```dart
- nearpay.AuthenticationType.login.values // If you want user to decide what will use to login email or mobile
- nearpay.AuthenticationType.email.values // if you want restrict only email and you need to provide it to the auth value
- nearpay.AuthenticationType.mobile.values // if you want restrict only mobile and you need to provide it to the auth value
- nearpay.AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
+ AuthenticationType.login.values // If you want user to decide what will use to login email or mobile
+ AuthenticationType.email.values // if you want restrict only email and you need to provide it to the auth value
+ AuthenticationType.mobile.values // if you want restrict only mobile and you need to provide it to the auth value
+ AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
 ```
 
 ### loggedin user information
 
 ```dart
-var authType = nearpay.AuthenticationType.email.values
+var authType = AuthenticationType.email.values
 var authValue = "youremail@email.com"
 ```
 
@@ -58,8 +58,8 @@ var authValue = "youremail@email.com"
 var reqData = {
       "authtype" : authType, //Same as above reference
       "authvalue" : authValue, // Give auth type value
-      "locale" : nearpay.Locale.localeDefault.value, // [optional] locale reference
-      "environment" : nearpay.Environments.sandbox.value // [Required] environment reference
+      "locale" : Locale.localeDefault.value, // [optional] locale reference
+      "environment" : Environments.sandbox.value // [Required] environment reference
       };
 var jsonResponse = nearpay.initialize(reqData);
 var jsonData = json.decode(jsonResponse);
