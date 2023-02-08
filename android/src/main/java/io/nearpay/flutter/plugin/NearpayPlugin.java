@@ -110,6 +110,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
             String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
             String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+            String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
+
             Long timeout =  Long.valueOf(finishTimeout); 
             boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
 
@@ -117,7 +119,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
                 sendResponse(paramMap);
             }else{
-                doReconcileAction(isEnableUI,authType,authvalue,timeout);
+                doReconcileAction(isEnableUI,authType,authvalue,timeout,adminPin);
             }
 
         }else{
@@ -135,6 +137,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
             Long timeout =  Long.valueOf(finishTimeout); 
             boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+            
 
             if(transactionUuid == ""){
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Transaction UUID parameter missing");
@@ -294,6 +297,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
         Long timeout =  Long.valueOf(finishTimeout); 
         boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
+
 
         if(amountStr == ""){
             Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Purchase amount parameter missing");
@@ -308,12 +313,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             sendResponse(paramMap);
         }else{
             Long amount =  Long.valueOf(amountStr); 
-            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout );
+            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout,adminPin );
         }
     }
 
-    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut) {
-        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut, new RefundListener() {
+    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut,String adminPin) {
+        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut,adminPin, new RefundListener() {
             @Override
             public void onRefundFailed(@NonNull RefundFailure refundFailure) {
 
@@ -536,9 +541,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
 
 
-    private void doReconcileAction(Boolean enableReceiptUi, String authType,String inputValue, long finishTimeOut){
+    private void doReconcileAction(Boolean enableReceiptUi, String authType,String inputValue, long finishTimeOut, String adminPin){
         Log.i("doReconcile....", "doReconcile.......first....");
-        nearPay.reconcile(enableReceiptUi,finishTimeOut, new ReconcileListener() {
+        nearPay.reconcile(enableReceiptUi,adminPin,finishTimeOut, new ReconcileListener() {
             @Override
             public void onReconcileFinished(@Nullable ReconciliationReceipt reconciliationReceipt) {
                 // you can use the object to get the reconciliationReceipt data .

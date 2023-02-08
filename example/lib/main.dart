@@ -40,9 +40,7 @@ class _MyAppState extends State<MyApp> {
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-    var jsonResponse = await nearpay.initialize(reqData) ;
-    print("......sdkInitialize.....$jsonResponse....");
-    
+    var jsonResponse = await nearpay.initialize(reqData) ;    
   }
 
   purchaseWithRefund() async {
@@ -134,7 +132,8 @@ class _MyAppState extends State<MyApp> {
       "isEnableUI" : true, // Optional
       "isEnableReversal" : true,// Optional
       "isEditableReversalUI" : true,// Optional
-      "finishTimeout" : timeout // Optional
+      "finishTimeout" : timeout, // Optional
+      //"adminPin" : "0000", // Optional
     };
     var jsonResponse = await nearpay.refund(reqData) ;
     print("...refund response...------$jsonResponse.");
@@ -144,7 +143,8 @@ class _MyAppState extends State<MyApp> {
   reconcileAction() async {
     var reqData = {
       "isEnableUI" : true,// Optional
-      "finishTimeout" : timeout    // Optional
+      "finishTimeout" : timeout,    // Optional
+      //"adminPin" : "0000" // Optional
     };
     var jsonResponse = await nearpay.reconcile(reqData) ;
     print("...reconcileAction response...------$jsonResponse.");
