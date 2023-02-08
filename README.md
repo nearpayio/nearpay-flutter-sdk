@@ -61,7 +61,7 @@ var reqData = {
       "locale" : Locale.localeDefault.value, // [optional] locale reference
       "environment" : Environments.sandbox.value // [Required] environment reference
       };
-var jsonResponse = nearpay.initialize(reqData);
+var jsonResponse = await nearpay.initialize(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
