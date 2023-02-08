@@ -136,6 +136,7 @@ var reqData = {
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "isEditableReversalUI" : true, // [optional] true will enable the ui and false will disable
       "finishTimeout" : 2,//[optional] Add the number of seconds
+      "adminPin" : "0000" // Optional
     };
 
 var refundReceipt = await nearpay.refund(reqData);
@@ -159,7 +160,8 @@ if(status == 200){
 ```dart
 var reqData = {
       "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
-      "finishTimeout" : 2 // [optional] Add the number of seconds
+      "finishTimeout" : 2, // [optional] Add the number of seconds
+      "adminPin" : "0000" // Optional
     };
 
 var reconciliationReceipt = await nearpay.reconcile(reqData);
