@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "test+youremail@gmail.com";
+  final tokenKey = "rajeshpillai23@gmail.com";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
   
@@ -33,14 +33,15 @@ class _MyAppState extends State<MyApp> {
     sdkInitialize();
   }
 
-  sdkInitialize()  {
+  sdkInitialize()  async{
     var reqData = {
       "authtype" : authType,
       "authvalue" : tokenKey,
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-    var jsonResponse = nearpay.initialize(reqData) ;
+    var jsonResponse = await nearpay.initialize(reqData) ;
+    print("......sdkInitialize.....$jsonResponse....");
     
   }
 
