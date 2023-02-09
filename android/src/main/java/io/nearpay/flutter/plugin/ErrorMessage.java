@@ -3,10 +3,13 @@ package io.nearpay.flutter.plugin;
 //General Response
 class ErrorStatus{
 static final int success_code= 200;
+static final int initialise_failed_code= 204;
+static final int invalid_argument_code= 400;
 static final int auth_failed_code= 401;
 static final  int general_failure_code= 402;
 static final  int failure_code= 403;
 static final  int invalid_code= 404;
+static final String invalid_argument="Invalid argument parameter";
 static final String general_messsage="Something went wrong !";
 static final String failure_messsage="Failure message !";
 static final String authentication_failed_message="Authentication failed invalid signature";

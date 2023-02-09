@@ -58,6 +58,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
   private static Result flutterResult;
   private Context context;
   private String jwtKey = "jwt"; 
+  private String timeOutDefault = "10";
+  private String authTypeShared = "";
+  private String authValueShared = "";
 
 
   @Override
@@ -72,79 +75,158 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             authType.equals("email") ? new AuthenticationData.Email(inputValue) :
                     authType.equals("mobile") ? new AuthenticationData.Mobile(inputValue) :
                             authType.equals(jwtKey) ? new AuthenticationData.Jwt(inputValue) :  AuthenticationData.UserEnter.INSTANCE;
-  return authentication;
+    return authentication;
+  }
+
+  public boolean isAuthInputValidation(String authType, String  inputValue){
+    boolean isAuthValidate= authType.equals("userenter")  ? true : inputValue == "" ? false : true;
+    return isAuthValidate;
   }
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     flutterResult = result;
     if (call.method.equals("purchase")) {
-        String amountStr = call.argument("amount").toString();
-        Long amount =  Long.valueOf(amountStr); 
-        String customer_reference_number = call.argument("customer_reference_number").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        Boolean isEnableReverse = call.argument("isEnableReversal");
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout); 
-        doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout);
+        if(nearPay != null){
+            paymentValidation(call);
+        }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+        }
     }
     else if (call.method.equals("refund")) {
-        String amountStr = call.argument("amount").toString();
-        Long amount =  Long.valueOf(amountStr); 
-        String reference_retrieval_number = call.argument("transaction_uuid").toString();
-        String customer_reference_number = call.argument("customer_reference_number").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        Boolean isEnableReverse = call.argument("isEnableReversal");
-        Boolean isEditableReversalUI = call.argument("isEditableReversalUI");
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout); 
-        doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout );
+        if(nearPay != null){
+            refundValidation(call);
+        }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+        }
     }
     else if (call.method.equals("reconcile")) {
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout); 
-        doReconcileAction(isEnableUI,authType,authvalue,timeout);
+        if(nearPay != null){
+            Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+            String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
+            String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+            String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+            String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
+
+            Long timeout =  Long.valueOf(finishTimeout); 
+            boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+
+            if(!isAuthValidated) {
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+                sendResponse(paramMap);
+            }else{
+                doReconcileAction(isEnableUI,authType,authvalue,timeout,adminPin);
+            }
+
+        }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+        }
     }
     else if (call.method.equals("reverse")) {
-        String transactionUuid = call.argument("transaction_uuid").toString();
-        Boolean isEnableUI = call.argument("isEnableUI");
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();
-        String finishTimeout = call.argument("finishTimeout").toString();
-        Long timeout =  Long.valueOf(finishTimeout);  
-        doReverseAction(transactionUuid,isEnableUI,authType,authvalue,timeout);
+        if(nearPay != null){
+            String transactionUuid = call.argument("transaction_uuid") != null ? call.argument("transaction_uuid").toString() : "";
+            Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+            String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
+            String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+            String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+            Long timeout =  Long.valueOf(finishTimeout); 
+            boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+            
+
+            if(transactionUuid == ""){
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Transaction UUID parameter missing");
+                sendResponse(paramMap);
+            }else if(!isAuthValidated) {
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+                sendResponse(paramMap);
+            }else{
+                doReverseAction(transactionUuid,isEnableUI,authType,authvalue,timeout);
+            }
+
+        }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+        }
     }
     else if (call.method.equals("logout")) {
-        doLogoutAction();
+        if(nearPay != null){    
+            doLogoutAction();
+        }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+        }  
     }
     else if (call.method.equals("setup")) {
-        String authvalue = call.argument("authvalue").toString();
-        String authType = call.argument("authtype").toString();        
-        doSetup(authType,authvalue);
+        if(nearPay != null){
+            String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
+            String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+            boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+            if(!isAuthValidated) {
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+                sendResponse(paramMap);
+            }else{
+                doSetup(authType,authvalue);
+            }
+         }else{
+            Log.i("purchase....", "initialise nil");
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,"Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+        }      
     }
     else if (call.method.equals("initialize")) {
-      String authvalue = call.argument("authvalue").toString();
-      String authType = call.argument("authtype").toString();           
-      String localeStr = call.argument("locale").toString();
-      String environmentStr = call.argument("environment").toString();
-      Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
-      Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
-      //Locale geek1 = new Locale("English", "US");
-
-      nearPay = new NearPay(this.context,getAuthType(authType, authvalue), locale, env);
-      Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,"NearPay initialized");
-      sendResponse(paramMap);
+        String authvalue = call.argument("authvalue") == null ? ""  : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        this.authTypeShared = authType;
+        this.authValueShared = authvalue;
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        String localeStr = call.argument("locale")  != null ? call.argument("locale").toString() : "default";
+        Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
+        String environmentStr = call.argument("environment") == null ? "sandbox" :call.argument("environment").toString();
+        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
+        if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            nearPay = new NearPay(this.context,getAuthType(authType, authvalue), locale, env);
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,"NearPay initialized");
+            sendResponse(paramMap);
+        }
     } else {
       result.notImplemented();
     }
   }
+
+    private void paymentValidation(@NonNull MethodCall call){
+        Log.i("purchase....", nearPay.toString());
+        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
+        String customer_reference_number = call.argument("customer_reference_number") != null ? call.argument("customer_reference_number").toString() : "";
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        Boolean isEnableReverse = call.argument("isEnableReversal");
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+        Long timeout =  Long.valueOf(finishTimeout);
+        if(amountStr == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Purchase amount parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            Long amount =  Long.valueOf(amountStr); 
+            doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout);
+
+        }
+    }
 
 
     private void doPaymentAction(Long amount, String customerReferenceNumber,Boolean enableReceiptUi,Boolean enableReversal, String authType,String inputValue, long finishTimeOut ) {
@@ -203,8 +285,40 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     }
 
-    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut) {
-        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut, new RefundListener() {
+    private void refundValidation(@NonNull MethodCall call){
+        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
+        String reference_retrieval_number = call.argument("transaction_uuid") != null ? call.argument("transaction_uuid").toString() : "";
+        String customer_reference_number = call.argument("customer_reference_number").toString();
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+        Boolean isEnableReverse = call.argument("isEnableReversal");
+        Boolean isEditableReversalUI = call.argument("isEditableReversalUI") == null ? true : call.argument("isEditableReversalUI");
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+        Long timeout =  Long.valueOf(finishTimeout); 
+        boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
+        String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
+
+
+        if(amountStr == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Purchase amount parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(reference_retrieval_number == ""){
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Transaction UUID parameter missing");
+            sendResponse(paramMap);
+        }
+        else if(!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
+            sendResponse(paramMap);
+        }else{
+            Long amount =  Long.valueOf(amountStr); 
+            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout,adminPin );
+        }
+    }
+
+    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut,String adminPin) {
+        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut,adminPin, new RefundListener() {
             @Override
             public void onRefundFailed(@NonNull RefundFailure refundFailure) {
 
@@ -427,9 +541,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
 
 
-    private void doReconcileAction(Boolean enableReceiptUi, String authType,String inputValue, long finishTimeOut){
+    private void doReconcileAction(Boolean enableReceiptUi, String authType,String inputValue, long finishTimeOut, String adminPin){
         Log.i("doReconcile....", "doReconcile.......first....");
-        nearPay.reconcile(enableReceiptUi,finishTimeOut, new ReconcileListener() {
+        nearPay.reconcile(enableReceiptUi,adminPin,finishTimeOut, new ReconcileListener() {
             @Override
             public void onReconcileFinished(@Nullable ReconciliationReceipt reconciliationReceipt) {
                 // you can use the object to get the reconciliationReceipt data .
