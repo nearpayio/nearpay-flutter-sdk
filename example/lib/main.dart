@@ -40,7 +40,8 @@ class _MyAppState extends State<MyApp> {
       "locale" : Locale.localeDefault.value,
       "environment" : Environments.sandbox.value
       };
-    var jsonResponse = await nearpay.initialize(reqData) ;    
+    var jsonResponse = await Nearpay.initialize(reqData) ;
+    print("...sdkInitialize....$jsonResponse....");    
   }
 
   purchaseWithRefund() async {
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, // Optional it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout //Optional 
     };
-    var jsonResponse = await nearpay.purchase(reqData);
+    var jsonResponse = await Nearpay.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
     var status = jsonData['status'];
     var message = jsonData['message'];
@@ -85,7 +86,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, //it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout //Optional
     };
-    var jsonResponse = await nearpay.purchase(reqData);
+    var jsonResponse = await Nearpay.purchase(reqData);
     var jsonData = json.decode(jsonResponse);
     var status = jsonData['status'];
     var message = jsonData['message'];
@@ -120,7 +121,7 @@ class _MyAppState extends State<MyApp> {
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "finishTimeout" : timeout // [optional] Add the number of seconds      
     };
-    var jsonResponse = await nearpay.purchase(reqData);
+    var jsonResponse = await Nearpay.purchase(reqData);
     
   }
 
@@ -135,7 +136,7 @@ class _MyAppState extends State<MyApp> {
       "finishTimeout" : timeout, // Optional
       //"adminPin" : "0000", // Optional
     };
-    var jsonResponse = await nearpay.refund(reqData) ;
+    var jsonResponse = await Nearpay.refund(reqData) ;
     print("...refund response...------$jsonResponse.");
     
   }
@@ -146,7 +147,7 @@ class _MyAppState extends State<MyApp> {
       "finishTimeout" : timeout,    // Optional
       //"adminPin" : "0000" // Optional
     };
-    var jsonResponse = await nearpay.reconcile(reqData) ;
+    var jsonResponse = await Nearpay.reconcile(reqData) ;
     print("...reconcileAction response...------$jsonResponse.");
     
   }
@@ -157,23 +158,19 @@ class _MyAppState extends State<MyApp> {
       "isEnableUI" : true, // Optional
       "finishTimeout" : timeout   // Optional
     };
-    var jsonResponse = await nearpay.reverse(reqData) ;
+    var jsonResponse = await Nearpay.reverse(reqData) ;
     print("...reverseAction response...------$jsonResponse.");
     
   }
 
   logoutAction() async {
-    var jsonResponse = await nearpay.logout() ;
+    var jsonResponse = await Nearpay.logout() ;
     print("...logoutAction response...------$jsonResponse.");
     
   }
 
-  setupAction(String tokenKey) async {
-      var reqData = {
-        "authtype" : authType, // [optional] Auth type we will pass here
-        "authvalue" : tokenKey, // [optional] Auth value we will pass here
-      };
-    var jsonResponse = await nearpay.setup(reqData) ;
+  setupAction() async {
+    var jsonResponse = await Nearpay.setup() ;
     print("...setupAction response...------$jsonResponse.");
   }
 
@@ -253,7 +250,7 @@ class _MyAppState extends State<MyApp> {
           TextButton(
             onPressed: () async {
               // Respond to button press
-              setupAction(tokenKey);
+              setupAction();
             },
             child: const Text("Setup"),
           ),

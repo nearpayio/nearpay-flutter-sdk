@@ -165,8 +165,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     }
     else if (call.method.equals("setup")) {
         if(nearPay != null){
-            String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
-            String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+            String authvalue = this.authValueShared ;
+            String authType = this.authTypeShared ;
             boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
             if(!isAuthValidated) {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");

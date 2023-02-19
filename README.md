@@ -23,13 +23,7 @@ Plugin will support minimum supported ANDROID SDK version 26 and above only.
 import 'package:nearpay_flutter_sdk/nearpay.dart';
 ```
 
-# 1. Create plugin object
-
-```dart
-final nearpay = Nearpay();
-```
-
-# 2. Authentications
+# 1 Authentications
 
 Authentication Types
 
@@ -52,7 +46,7 @@ var authType = AuthenticationType.email.values
 var authValue = "youremail@email.com"
 ```
 
-# 3. Initialize SDK
+# 2. Initialize SDK
 
 ```dart
 var reqData = {
@@ -61,7 +55,7 @@ var reqData = {
       "locale" : Locale.localeDefault.value, // [optional] locale reference
       "environment" : Environments.sandbox.value // [Required] environment reference
       };
-var jsonResponse = await nearpay.initialize(reqData);
+var jsonResponse = await Nearpay.initialize(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -77,14 +71,11 @@ if(status == 200){
 
 ```
 
-# 4. Setup
+# 3. Setup
 
-```dart
-var reqData = {
-    "authtype" : authType, //Same as above reference
-    "authvalue" : authValue // Give auth type value
-};
-var jsonResponse = await nearpay.setup(reqData);
+``` dart
+
+var jsonResponse = await Nearpay.setup();
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -99,7 +90,7 @@ if(status == 200){
 
 ```
 
-# 5. Purchase
+# 4. Purchase
 
 ```dart
 var reqData = {
@@ -110,8 +101,8 @@ var reqData = {
       "finishTimeout" : 2  //[optional] Add the number of seconds
     };
 
-var purchaseReceipt = await nearpay.purchase(reqData);
-var jsonData = json.decode(jsonResponse);
+var purchaseReceipt = await Nearpay.purchase(reqData);
+var jsonData = json.decode(purchaseReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
@@ -125,7 +116,7 @@ if(status == 200){
 }
 ```
 
-# 6. Refund
+# 5. Refund
 
 ```dart
 var reqData = {
@@ -139,8 +130,8 @@ var reqData = {
       "adminPin" : "0000" // Optional
     };
 
-var refundReceipt = await nearpay.refund(reqData);
-var jsonData = json.decode(jsonResponse);
+var refundReceipt = await Nearpay.refund(reqData);
+var jsonData = json.decode(refundReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
@@ -155,7 +146,7 @@ if(status == 200){
 }
 ```
 
-# 7. Reconcile
+# 6. Reconcile
 
 ```dart
 var reqData = {
@@ -164,8 +155,8 @@ var reqData = {
       "adminPin" : "0000" // Optional
     };
 
-var reconciliationReceipt = await nearpay.reconcile(reqData);
-var jsonData = json.decode(jsonResponse);
+var reconciliationReceipt = await Nearpay.reconcile(reqData);
+var jsonData = json.decode(reconciliationReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
@@ -175,7 +166,7 @@ if(status == 200){
 } 
 ```
 
-# 8. Reverse
+# 7. Reverse
 
 ```dart
 var reqData = {
@@ -184,7 +175,7 @@ var reqData = {
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
 
-var reversalReceipt = await nearpay.reverse(reqData);
+var jsonResponse = await Nearpay.reverse(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -199,10 +190,12 @@ if(status == 200){
 }
 ```
 
-# 9. Logout
+# 8. Logout
 
 ```dart
-await nearpay.logout();
+var jsonResponse = await Nearpay.logout();
+var jsonData = json.decode(jsonResponse);
+var status = jsonData['status'];
 ```
 
 ### Response Status
