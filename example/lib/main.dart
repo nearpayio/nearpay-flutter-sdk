@@ -174,6 +174,17 @@ class _MyAppState extends State<MyApp> {
     print("...setupAction response...------$jsonResponse.");
   }
 
+  sessionAction() async {
+    var reqData = {
+      "sessionID" :"ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
+      //"isEnableUI" : true, //Optional
+      //"isEnableReversal" : true, 
+      //"finishTimeout" : timeout  // Optional
+    };
+    var jsonResponse = await Nearpay.session(reqData) ;
+    print("...sessionAction response...------$jsonResponse.");
+  }
+
   showToast(String message, bool isError){
     print("..$isError....showtoast.....4.....$message....");
     Fluttertoast.showToast(
@@ -263,6 +274,16 @@ class _MyAppState extends State<MyApp> {
               logoutAction();
             },
             child: const Text("Logout"),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextButton(
+            onPressed: () async {
+              // Respond to button press
+              sessionAction();
+            },
+            child: const Text("Session"),
           )
         ]),
       ),

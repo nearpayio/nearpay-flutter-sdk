@@ -190,7 +190,20 @@ if(status == 200){
 }
 ```
 
-# 8. Logout
+# 8. Session
+
+```dart
+    var reqData = {
+      "sessionID" :"ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
+      "isEnableUI" : true, //Optional
+      "isEnableReversal" : true, 
+      "finishTimeout" : timeout  // Optional
+    };
+    var jsonResponse = await Nearpay.session(reqData) ;
+    print("...setupAction response...------$jsonResponse.");
+```
+
+# 9. Logout
 
 ```dart
 var jsonResponse = await Nearpay.logout();
