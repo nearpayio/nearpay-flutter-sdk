@@ -71,6 +71,16 @@ class Nearpay {
     return response;
   }
 
+  static Future<dynamic> session(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('session',data);    
+    return response;
+  }
+
+  static Future<dynamic> receiptToImage(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('receiptToImage',data);    
+    return response;
+  }
+
 
 }
 
