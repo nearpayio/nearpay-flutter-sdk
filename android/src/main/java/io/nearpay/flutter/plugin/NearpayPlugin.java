@@ -19,11 +19,15 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
+import io.nearpay.sdk.data.models.Session;
 import io.nearpay.sdk.data.models.TransactionReceipt;
+import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.RefundFailure;
+import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.StatusCheckError;
+import io.nearpay.sdk.utils.listeners.BitmapListener;
 import io.nearpay.sdk.utils.listeners.PurchaseListener;
 import io.nearpay.sdk.utils.listeners.RefundListener;
 import io.nearpay.sdk.utils.enums.ReconcileFailure;
@@ -42,6 +46,8 @@ import io.nearpay.sdk.utils.listeners.LogoutListener;
 import io.nearpay.sdk.utils.listeners.ReversalListener;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+
+import io.nearpay.sdk.utils.listeners.SessionListener;
 import io.nearpay.sdk.utils.listeners.SetupListener;
 import io.nearpay.sdk.utils.enums.SetupFailure;
 
@@ -165,8 +171,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     }
     else if (call.method.equals("setup")) {
         if(nearPay != null){
-            String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
-            String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+            String authvalue = this.authValueShared ;
+            String authType = this.authTypeShared ;
             boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
             if(!isAuthValidated) {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"Authentication parameter missing");
@@ -198,7 +204,26 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,"NearPay initialized");
             sendResponse(paramMap);
         }
-    } else {
+    } 
+    else if (call.method.equals("session")) {
+        String sessionID = call.argument("sessionID") == null ? ""  : call.argument("sessionID").toString();
+        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
+        Long timeout =  Long.valueOf(finishTimeout); 
+        Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
+        Boolean isEnableReverse = call.argument("isEnableReversal") == null ? true  : call.argument("isEnableReversal");
+
+        if(sessionID == "") {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,"SessionID parameter missing");
+            sendResponse(paramMap);
+        }else{
+            setSession(sessionID,isEnableUI,isEnableReverse,timeout);
+        }
+    }
+    else if (call.method.equals("receiptToImage")) {
+        
+    }
+    
+    else {
       result.notImplemented();
     }
   }
@@ -855,6 +880,149 @@ private void doSetup(String authType,String inputValue){
     });
 }
 
+private void setSession(String sessionID,Boolean enableReceiptUi,Boolean enableReversal, Long finishTimeOut){
+    nearPay.session(sessionID, enableReceiptUi, enableReversal, finishTimeOut, new SessionListener() {
+    @Override
+    public void onSessionClosed(@Nullable Session session) {
+        // when the session is closed 
+        Map<String, Object> responseDict  =  sessionResponse(session,"Session Closed");
+        sendResponse(responseDict);
+    }
+    @Override
+    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
+        // when the session is open , you can get the receipt by using TransactionReceipt
+        List<Map<String, Object>> transactionList = new ArrayList<>();
+        for (TransactionReceipt transRecipt : list){
+            Map<String, Object> responseDict = getTransactionGetResponse(transRecipt, "Session Successfull" );
+            transactionList.add(responseDict);
+        }
+        Map<String, Object> responseDict  =  commonResponse(ErrorStatus.success_code,"Session Success");
+        responseDict.put("list",transactionList );
+        sendResponse(responseDict);
+    }
+    @Override
+    public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
+        if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
+            // when the authentication is failed
+            String messageResp = ((SessionFailure.AuthenticationFailed) sessionFailure).toString();
+            String message = messageResp != "" && messageResp.length() > 0 ? messageResp : ErrorStatus.authentication_failed_message;
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code,message);
+            sendResponse(paramMap);
+            if(authTypeShared.equalsIgnoreCase(jwtKey)){
+                nearPay.updateAuthentication(getAuthType(authTypeShared, authTypeShared));
+            }
+
+        }
+        else if (sessionFailure instanceof SessionFailure.GeneralFailure) {
+            // when there is general error .
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,ErrorStatus.general_messsage);
+            sendResponse(paramMap);
+        }
+        else if (sessionFailure instanceof SessionFailure.FailureMessage) {
+            // when there is FailureMessage
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.failure_code,ErrorStatus.failure_messsage);
+            sendResponse(paramMap);
+        }
+        else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
+            // you can get the status using the following code
+            String messageResp = ((SessionFailure.InvalidStatus) sessionFailure).toString();
+            String message = messageResp != "" && messageResp.length() > 0 ? messageResp : ErrorStatus.invalid_status_messsage;
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code,message);
+            sendResponse(paramMap);
+        }
+    }
+});
+}
+
+    private static Map<String, Object> sessionResponse(Session session,String message) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id",session.getId() );
+        paramMap.put("status",session.getStatus() );
+        paramMap.put("type",session.getType() );
+        paramMap.put("client_id",session.getClient_id() );
+        paramMap.put("amount",session.getAmount() );
+        paramMap.put("expired_at",session.getExpired_at() );
+        paramMap.put("reference_id",session.getReference_id() );
+        paramMap.put("created_at",session.getCreated_at() );
+        paramMap.put("updated_at",session.getUpdated_at() );
+        
+
+        //Transaction response
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("id",session.getTransaction().getId() );
+        transaction.put("uuid",session.getTransaction().getUuid() );
+        transaction.put("amount_authorized",session.getTransaction().getAmount_authorized() );
+        transaction.put("currentcy_code",session.getTransaction().getTransaction_currency_code() );
+        transaction.put("cardholder_verification_result",session.getTransaction().getCardholder_verification_result() );
+        transaction.put("lat",session.getTransaction().getLat() );
+        transaction.put("lon",session.getTransaction().getLon() );
+        transaction.put("device_id",session.getTransaction().getDevice_id() );
+        transaction.put("merchant_id",session.getTransaction().getMerchant_id() );
+        transaction.put("transaction_type",session.getTransaction().getTransaction_type() );
+        transaction.put("card_scheme_id",session.getTransaction().getCard_scheme_id() );
+        transaction.put("system_trace_audit_number",session.getTransaction().getSystem_trace_audit_number() );
+        transaction.put("is_approve",session.getTransaction().is_approved() );
+        transaction.put("is_reconcilied",session.getTransaction().is_reconcilied() );
+        transaction.put("is_reversed",session.getTransaction().is_reversed() );
+        transaction.put("user_id",session.getTransaction().getUser_id() );
+        transaction.put("customer_reference_number",session.getTransaction().getCustomer_reference_number() );
+        transaction.put("pos_confirm",session.getTransaction().getPos_confirmed() );
+        transaction.put("created_at",session.getTransaction().getCreated_at() );
+        transaction.put("updated_at",session.getTransaction().getUpdated_at() );
+        
+        //get transaction details
+        List<Map<String, Object>> transactionList = new ArrayList<>();
+        for (TransactionReceipt transRecipt : session.getTransaction().getReceipts()){
+            Map<String, Object> responseDict = getTransactionGetResponse(transRecipt, "Refund Successfull" );
+            transactionList.add(responseDict);
+        }
+
+        transaction.put("receipts",transactionList);
+
+        // Card Scheme
+        LocalizationField cardSchemeTrans = session.getTransaction().getCard_scheme();
+        Map<String, Object> cardSchemObject = new HashMap<>();
+        cardSchemObject.put("arabic",cardSchemeTrans.getArabic() );
+        cardSchemObject.put("english",cardSchemeTrans.getEnglish() );
+        transaction.put("card_scheme",cardSchemObject);
+
+        // Card Scheme
+        LocalizationField typeTrans = session.getTransaction().getType();
+        Map<String, Object> typeTransObject = new HashMap<>();
+        typeTransObject.put("arabic",typeTrans.getArabic() );
+        typeTransObject.put("english",typeTrans.getEnglish() );
+        transaction.put("type",typeTransObject);
+
+        // Card Scheme
+        LocalizationField versificatioType = session.getTransaction().getVerification_method();
+        Map<String, Object> versificationObject = new HashMap<>();
+        versificationObject.put("arabic",versificatioType.getArabic() );
+        versificationObject.put("english",versificatioType.getEnglish() );
+        transaction.put("verification_method",versificationObject);
+
+        paramMap.put("transaction",transaction);
+
+        paramMap.put("status", ErrorStatus.success_code);
+        paramMap.put("message", message);
+
+        return paramMap;
+    }
+
+
+    private void getRecieptImageTrans(TransactionReceipt recipt,int imgwidth, int fontSize){
+        ReceiptUtilsKt.toImage(recipt,this.context,imgwidth, fontSize, (BitmapListener) bitmap -> {
+            //bitmap
+            Log.i("getTransimg..", bitmap.toString());
+
+        });
+    }
+
+    private void getRecieptImageReconcile(ReconciliationReceipt recipt,int imgwidth, int fontSize){
+        ReceiptUtilsKt.toImage(recipt,this.context,imgwidth, fontSize, (BitmapListener) bitmap -> {
+            //bitmap
+            Log.i("getRecimg..", bitmap.toString());
+        });
+    }
 }
 
 

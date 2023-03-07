@@ -1,5 +1,6 @@
-
-import 'nearpay_platform_interface.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
   enum Environments {
     sandbox("sandbox"),
@@ -33,34 +34,51 @@ import 'nearpay_platform_interface.dart';
 
 class Nearpay {
 
+  static const MethodChannel methodChannel = const MethodChannel('nearpay');
 
-
-  Future<dynamic> initialize(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.initialize(data);
+  static Future<dynamic> initialize(Map<dynamic, dynamic> data) async {
+    final response = await methodChannel.invokeMethod<dynamic>('initialize',data);    
+    return response;
   }
 
-  Future<dynamic> purchase(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.purchase(data);
+  static Future<dynamic> purchase(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('purchase',data);    
+    return response;
   }
 
-  Future<dynamic> refund(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.refund(data);
+  static Future<dynamic> refund(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('refund',data);    
+    return response;
   }
 
-  Future<dynamic> reconcile(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.reconcile(data);
+  static Future<dynamic> reconcile(Map<dynamic, dynamic> data) async {
+    final response = await methodChannel.invokeMethod<dynamic>('reconcile',data);    
+    return response;
   }
 
-  Future<dynamic> reverse(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.reverse(data);
+  static Future<dynamic> reverse(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('reverse',data);    
+    return response;
   }
 
-  Future<dynamic> logout() {
-    return NearpayPlatform.instance.logout();
+  static Future<dynamic> logout()  async {
+    final response = await methodChannel.invokeMethod<dynamic>('logout');    
+    return response;
   }
 
-  Future<dynamic> setup(Map<dynamic, dynamic> data) {
-    return NearpayPlatform.instance.setup(data);
+  static Future<dynamic> setup()  async{
+    final response = await methodChannel.invokeMethod<dynamic>('setup');    
+    return response;
+  }
+
+  static Future<dynamic> session(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('session',data);    
+    return response;
+  }
+
+  static Future<dynamic> receiptToImage(Map<dynamic, dynamic> data)  async {
+    final response = await methodChannel.invokeMethod<dynamic>('receiptToImage',data);    
+    return response;
   }
 
 

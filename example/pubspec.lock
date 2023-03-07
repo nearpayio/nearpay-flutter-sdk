@@ -114,7 +114,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  nearpay:
+  nearpay_flutter_sdk:
     dependency: "direct main"
     description:
       path: ".."
