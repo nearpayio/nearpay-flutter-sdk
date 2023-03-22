@@ -18,10 +18,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final nearpay = Nearpay();
-  final authvalue = "<your auth vaue>";
+  final authvalue = "f.alhajeri@nearpay.io";
   final authType = AuthenticationType.email;
   final timeout = 60;
+  final List<dynamic> responsesList = [];
 
   @override
   void initState() {
@@ -29,12 +29,19 @@ class _MyAppState extends State<MyApp> {
     sdkInitialize();
   }
 
+  addResponse(dynamic response) {
+    setState(() {
+      responsesList.add(response);
+    });
+  }
+
   sdkInitialize() async {
     var jsonResponse = await Nearpay.initialize(
-      authType: authType,
-      authValue: authvalue,
-      env: Environments.sandbox,
-    );
+        authType: authType,
+        authValue: authvalue,
+        env: Environments.sandbox,
+        locale: Locale.localeDefault //optional
+        );
 
     print("...sdkInitialize....$jsonResponse....");
   }
@@ -42,20 +49,24 @@ class _MyAppState extends State<MyApp> {
   purchaseWithRefund() async {
     var jsonResponse = await Nearpay.purchase(
       amount: 0001,
-      enableReceiptUi: true,
+      customerReferenceNumber: "123", // optional
+      enableReceiptUi: true, // optional
+      enableReversal: true, // optional
+      finishTimeout: 60, // optional
     );
 
     var jsonData = json.decode(jsonResponse);
     var status = jsonData['status'];
     var message = jsonData['message'];
+
     if (status == 200) {
       List<dynamic> purchaseList = jsonData["list"];
 
       Future.delayed(const Duration(milliseconds: 5000), () {
         // Your code
         if (purchaseList.isNotEmpty) {
-          String udid = purchaseList[0]['udid'];
-          refundAction(udid);
+          String uuid = purchaseList[0]['uuid'];
+          refundAction(uuid);
         }
       });
     } else if (status == 401) {
@@ -79,8 +90,8 @@ class _MyAppState extends State<MyApp> {
       Future.delayed(const Duration(milliseconds: 5000), () {
         // Your code
         if (purchaseList.isNotEmpty) {
-          String udid = purchaseList[0]['udid'];
-          reverseAction(udid);
+          String uuid = purchaseList[0]['uuid'];
+          reverseAction(uuid);
         }
       });
     } else if (status == 401) {
@@ -94,12 +105,22 @@ class _MyAppState extends State<MyApp> {
     var jsonResponse = await Nearpay.purchase(
       amount: 0001,
     );
+
+    jsonResponse = json.decode(jsonResponse);
+
+    print("... purchase response...------$jsonResponse");
   }
 
   refundAction(String uuid) async {
     var jsonResponse = await Nearpay.refund(
       amount: 0001,
       transactionUUID: uuid,
+      customerReferenceNumber: "123",
+      adminPin: '0000',
+      editableRefundUI: true,
+      enableReceiptUi: true,
+      enableReversal: true,
+      finishTimeout: 60,
     );
 
     print("...refund response...------$jsonResponse.");
@@ -108,6 +129,8 @@ class _MyAppState extends State<MyApp> {
   reconcileAction() async {
     var jsonResponse = await Nearpay.reconcile(
       enableReceiptUi: true,
+      adminPin: '0000',
+      finishTimeout: 60,
     );
 
     print("...reconcileAction response...------$jsonResponse.");
@@ -117,6 +140,7 @@ class _MyAppState extends State<MyApp> {
     var jsonResponse = await Nearpay.reverse(
       transactionUUID: uuid,
       enableReceiptUi: true,
+      finishTimeout: 60,
     );
 
     print("...reverseAction response...------$jsonResponse.");
@@ -137,6 +161,9 @@ class _MyAppState extends State<MyApp> {
   sessionAction() async {
     var jsonResponse = await Nearpay.session(
       sessionID: "ea5e30d4-54c7-4ad9-8372-f798259ff589",
+      enableReceiptUi: true,
+      enableReversal: true,
+      finishTimeout: 60,
     );
 
     print("...sessionAction response...------$jsonResponse.");

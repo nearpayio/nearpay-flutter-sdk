@@ -49,13 +49,14 @@ var authValue = "youremail@email.com"
 # 2. Initialize SDK
 
 ```dart
-var reqData = {
-      "authtype" : authType, //Same as above reference
-      "authvalue" : authValue, // Give auth type value
-      "locale" : Locale.localeDefault.value, // [optional] locale reference
-      "environment" : Environments.sandbox.value // [Required] environment reference
-      };
-var jsonResponse = await Nearpay.initialize(reqData);
+
+var jsonResponse = await Nearpay.initialize(
+    authType: authType, // [Required] Same as above reference
+    authValue: authvalue, // [Required] Give auth type value
+    env: Environments.sandbox, // [Required] environment reference
+    locale: Locale.localeDefault // [Optional] locale reference
+);
+
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
@@ -63,9 +64,9 @@ if(status == 200){
   // Initialize Success with 200
 
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
 }
 
@@ -73,7 +74,7 @@ if(status == 200){
 
 # 3. Setup
 
-``` dart
+```dart
 
 var jsonResponse = await Nearpay.setup();
 var jsonData = json.decode(jsonResponse);
@@ -82,9 +83,9 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
 }
 
@@ -93,24 +94,23 @@ if(status == 200){
 # 4. Purchase
 
 ```dart
-var reqData = {
-      "amount": 0001, // [Required] ammount you want to set . 
-      "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
-      "isEnableUI" : true, // [optional] true will enable the ui and false will disable
-      "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
-      "finishTimeout" : 2  //[optional] Add the number of seconds
-    };
+var purchaseReceipt = await Nearpay.purchase(
+  amount: 0001, // [Required] ammount you want to set .
+  customerReferenceNumber: "123", // [Optional] any number you want to add as a refrence Any string as a reference number
+  enableReceiptUi: true, // [Optional] true will enable the ui and false will disable
+  enableReversal: true, // [Optional] it will allow you to enable or disable the reverse button
+  finishTimeout: 60 // [Optional] Add the number of seconds
+);
 
-var purchaseReceipt = await Nearpay.purchase(reqData);
 var jsonData = json.decode(purchaseReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   //Amount parameter null
 }
@@ -119,27 +119,26 @@ if(status == 200){
 # 5. Refund
 
 ```dart
-var reqData = {
-      "amount": 0001, // [Required] ammount you want to set . 
-      "transaction_uuid" :  purchaseReceipt.uuid,// [Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
-      "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
-      "isEnableUI" : true,  // [optional] true will enable the ui and false will disable
-      "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
-      "isEditableReversalUI" : true, // [optional] true will enable the ui and false will disable
-      "finishTimeout" : 2,//[optional] Add the number of seconds
-      "adminPin" : "0000" // Optional
-    };
+var refundReceipt = await Nearpay.refund(
+  amount: 0001,// [Required] ammount you want to set .
+  transactionUUID: uuid,// [Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "uuid",  pass that value here.
+  customerReferenceNumber: "123",// [Optional] any number you want to add as a refrence Any string as a reference number
+  enableReceiptUi: true, // [Optional] true will enable the ui and false will disable
+  enableReversal: true,// [Optional] it will allow you to enable or disable the reverse button
+  editableRefundUI: true,// [Optional] true will enable editing the refund amount by ui and false will disable
+  finishTimeout: 60,//[Optional] Add the number of seconds
+  adminPin: '0000',// Optional
+);
 
-var refundReceipt = await Nearpay.refund(reqData);
 var jsonData = json.decode(refundReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   // Amount parameter null
   // Transaction UUID null
@@ -149,42 +148,40 @@ if(status == 200){
 # 6. Reconcile
 
 ```dart
-var reqData = {
-      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
-      "finishTimeout" : 2, // [optional] Add the number of seconds
-      "adminPin" : "0000" // Optional
-    };
+var reconciliationReceipt = await Nearpay.reconcile(
+  enableReceiptUi: true,//[Optional] true will enable the ui and false will disable
+  finishTimeout: 60,// [Optional] Add the number of seconds
+  adminPin: '0000',// Optional
+);
 
-var reconciliationReceipt = await Nearpay.reconcile(reqData);
 var jsonData = json.decode(reconciliationReceipt);
 var status = jsonData['status'];
 
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
-} 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
+}
 ```
 
 # 7. Reverse
 
 ```dart
-var reqData = {
-      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
-      "transaction_uuid" :purchaseReceipt.uuid, //[Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
-      "finishTimeout" : 2 // [optional] Add the number of seconds
-    };
+var jsonResponse = await Nearpay.reverse(
+  transactionUUID: uuid, //[Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "uuid",  pass that value here.
+  enableReceiptUi: true, //[Optional] true will enable the ui and false will disable
+  finishTimeout: 60 // [Optional] Add the number of seconds
+);
 
-var jsonResponse = await Nearpay.reverse(reqData);
 var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   // Transaction UUID null
 }
@@ -193,13 +190,13 @@ if(status == 200){
 # 8. Session
 
 ```dart
-    var reqData = {
-      "sessionID" :"ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
-      "isEnableUI" : true, //Optional
-      "isEnableReversal" : true, 
-      "finishTimeout" : timeout  // Optional
-    };
-    var jsonResponse = await Nearpay.session(reqData) ;
+var jsonResponse = await Nearpay.session(
+  sessionID: "ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
+  enableReceiptUi: true, //Optional
+  enableReversal: true, //Optional
+  finishTimeout: 60, // Optional
+) ;
+
     print("...setupAction response...------$jsonResponse.");
 ```
 

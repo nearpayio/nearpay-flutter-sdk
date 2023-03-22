@@ -59,8 +59,8 @@ class Nearpay {
     final data = {
       "amount": amount,
       "customer_reference_number": customerReferenceNumber,
-      "isEnableUI": enableReceiptUi,
-      "isEnableReversal": enableReversal,
+      "enableReceiptUi": enableReceiptUi,
+      "enableReversal": enableReversal,
       "finishTimeout": finishTimeout,
     };
 
@@ -83,9 +83,10 @@ class Nearpay {
       "amount": amount, // Required
       "transaction_uuid": transactionUUID, // Required
       "customer_reference_number": customerReferenceNumber, //Optional
-      "isEnableUI": enableReceiptUi, // Optional
-      "isEnableReversal": enableReversal, // Optional
-      "isEditableReversalUI": editableRefundUI, // Optional
+      "enableReceiptUi": enableReceiptUi, // Optional
+      "enableReversal": enableReversal, // Optional
+      "enableEditableRefundAmountUiableReversalUI":
+          editableRefundUI, // Optional
       "finishTimeout": finishTimeout, // Optional
     };
 
@@ -103,7 +104,7 @@ class Nearpay {
     String? adminPin,
   }) async {
     final data = {
-      "isEnableUI": enableReceiptUi, // Optional
+      "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
       //"adminPin" : "0000" // Optional
     };
@@ -124,7 +125,7 @@ class Nearpay {
   }) async {
     var data = {
       "transaction_uuid": transactionUUID, // Required
-      "isEnableUI": enableReceiptUi, // Optional
+      "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout // Optional
     };
 
@@ -150,8 +151,8 @@ class Nearpay {
   }) async {
     var data = {
       "sessionID": sessionID, // Required
-      "isEnableUI": enableReceiptUi, //Optional
-      "isEnableReversal": enableReversal,
+      "enableReceiptUi": enableReceiptUi, //Optional
+      "enableReversal": enableReversal,
       "finishTimeout": finishTimeout // Optional
     };
     final response = await methodChannel.invokeMethod<dynamic>('session', data);
