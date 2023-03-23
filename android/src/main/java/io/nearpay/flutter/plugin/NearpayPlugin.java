@@ -17,6 +17,9 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
+import io.nearpay.flutter.plugin.operations.BaseOperation;
+import io.nearpay.flutter.plugin.operations.OperationENUM;
+import io.nearpay.flutter.plugin.operations.OperatorFactory;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 import io.nearpay.sdk.data.models.Session;
@@ -59,14 +62,18 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     /// This local reference serves to register the plugin with the Flutter Engine
     /// and unregister it
     /// when the Flutter Engine is detached from the Activity
-    private MethodChannel channel;
-    private NearPay nearPay;
-    private static Result flutterResult;
-    private Context context;
-    private String jwtKey = "jwt";
-    private String timeOutDefault = "10";
-    private String authTypeShared = "";
-    private String authValueShared = "";
+    public MethodChannel channel;
+    public NearPay nearPay;
+    public static Result flutterResult;
+    public Context context;
+    public String jwtKey = "jwt";
+    public String timeOutDefault = "10";
+    public String authTypeShared = "";
+    public String authValueShared = "";
+
+    public OperatorFactory operatorFactory = new OperatorFactory(this);
+
+    PluginProvider provider = new PluginProvider();
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -97,163 +104,180 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         flutterResult = result;
-        if (call.method.equals("purchase")) {
-            if (nearPay != null) {
-                paymentValidation(call);
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("refund")) {
-            if (nearPay != null) {
-                refundValidation(call);
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("reconcile")) {
-            if (nearPay != null) {
-                Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
-                        : call.argument("enableReceiptUi");
-                String authvalue = call.argument("authvalue") == null ? this.authValueShared
-                        : call.argument("authvalue").toString();
-                String authType = call.argument("authtype") == null ? this.authTypeShared
-                        : call.argument("authtype").toString();
-                String finishTimeout = call.argument("finishTimeout") != null
-                        ? call.argument("finishTimeout").toString()
-                        : timeOutDefault;
-                String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
 
-                Long timeout = Long.valueOf(finishTimeout);
-                boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-
-                if (!isAuthValidated) {
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                            "Authentication parameter missing");
-                    sendResponse(paramMap);
-                } else {
-                    doReconcileAction(enableReceiptUi, authType, authvalue, timeout, adminPin);
-                }
-
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("reverse")) {
-            if (nearPay != null) {
-                String transactionUuid = call.argument("transaction_uuid") != null
-                        ? call.argument("transaction_uuid").toString()
-                        : "";
-                Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
-                        : call.argument("enableReceiptUi");
-                String authvalue = call.argument("authvalue") == null ? this.authValueShared
-                        : call.argument("authvalue").toString();
-                String authType = call.argument("authtype") == null ? this.authTypeShared
-                        : call.argument("authtype").toString();
-                String finishTimeout = call.argument("finishTimeout") != null
-                        ? call.argument("finishTimeout").toString()
-                        : timeOutDefault;
-                Long timeout = Long.valueOf(finishTimeout);
-                boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-
-                if (transactionUuid == "") {
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                            "Transaction UUID parameter missing");
-                    sendResponse(paramMap);
-                } else if (!isAuthValidated) {
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                            "Authentication parameter missing");
-                    sendResponse(paramMap);
-                } else {
-                    doReverseAction(transactionUuid, enableReceiptUi, authType, authvalue, timeout);
-                }
-
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("logout")) {
-            if (nearPay != null) {
-                doLogoutAction();
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-            }
-        } else if (call.method.equals("setup")) {
-            if (nearPay != null) {
-                String authvalue = this.authValueShared;
-                String authType = this.authTypeShared;
-                boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-                if (!isAuthValidated) {
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                            "Authentication parameter missing");
-                    sendResponse(paramMap);
-                } else {
-                    doSetup(authType, authvalue);
-                }
-            } else {
-                Log.i("purchase....", "initialise nil");
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("initialize")) {
-            String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
-            String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
-            this.authTypeShared = authType;
-            this.authValueShared = authvalue;
-            boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-            String localeStr = call.argument("locale") != null ? call.argument("locale").toString() : "default";
-            Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
-            String environmentStr = call.argument("environment") == null ? "sandbox"
-                    : call.argument("environment").toString();
-            Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
-                    : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
-            if (!isAuthValidated) {
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                        "Authentication parameter missing");
-                sendResponse(paramMap);
-            } else {
-                nearPay = new NearPay(this.context, getAuthType(authType, authvalue), locale, env);
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code, "NearPay initialized");
-                sendResponse(paramMap);
-            }
-        } else if (call.method.equals("session")) {
-            String sessionID = call.argument("sessionID") == null ? "" : call.argument("sessionID").toString();
-            String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString()
-                    : timeOutDefault;
-            Long timeout = Long.valueOf(finishTimeout);
-            Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
-                    : call.argument("enableReceiptUi");
-            Boolean enableReversal = call.argument("enableReversal") == null ? true
-                    : call.argument("enableReversal");
-
-            if (sessionID == "") {
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                        "SessionID parameter missing");
-                sendResponse(paramMap);
-            } else {
-                setSession(sessionID, enableReceiptUi, enableReversal, timeout);
-            }
-        } else if (call.method.equals("receiptToImage")) {
-
+        // nearpay object isn't initialized
+        // return a general error
+        if (nearPay == null && !(call.method.equals("initialize") || call.method.equals("setup"))) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
+                    "Plugin Initialise missing, please initialise");
+            sendResponse(paramMap);
+            return;
         }
+        System.out.println("====================== op is ===================");
 
-        else {
-            result.notImplemented();
-        }
+        BaseOperation op = operatorFactory.getOperation(call.method)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
+
+        System.out.println("====================== op is ===================");
+        System.out.println(op);
+        op.run(call);
+        // if (call.method.equals("purchase")) {
+        // paymentValidation(call);
+        // } else if (call.method.equals("refund")) {
+        // refundValidation(call);
+        // } else if (call.method.equals("reconcile")) {
+        // Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
+        // : call.argument("enableReceiptUi");
+        // String authvalue = call.argument("authvalue") == null ? this.authValueShared
+        // : call.argument("authvalue").toString();
+        // String authType = call.argument("authtype") == null ? this.authTypeShared
+        // : call.argument("authtype").toString();
+        // String finishTimeout = call.argument("finishTimeout") != null
+        // ? call.argument("finishTimeout").toString()
+        // : timeOutDefault;
+        // String adminPin = call.argument("adminPin") == null ? null :
+        // call.argument("adminPin");
+        //
+        // Long timeout = Long.valueOf(finishTimeout);
+        // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+        //
+        // if (!isAuthValidated) {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "Authentication parameter missing");
+        // sendResponse(paramMap);
+        // } else {
+        // doReconcileAction(enableReceiptUi, authType, authvalue, timeout, adminPin);
+        // }
+        //
+        // } else if (call.method.equals("reverse")) {
+        // String transactionUuid = call.argument("transaction_uuid") != null
+        // ? call.argument("transaction_uuid").toString()
+        // : "";
+        // Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
+        // : call.argument("enableReceiptUi");
+        // String authvalue = call.argument("authvalue") == null ? this.authValueShared
+        // : call.argument("authvalue").toString();
+        // String authType = call.argument("authtype") == null ? this.authTypeShared
+        // : call.argument("authtype").toString();
+        // String finishTimeout = call.argument("finishTimeout") != null
+        // ? call.argument("finishTimeout").toString()
+        // : timeOutDefault;
+        // Long timeout = Long.valueOf(finishTimeout);
+        // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+        //
+        // if (transactionUuid == "") {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "Transaction UUID parameter missing");
+        // sendResponse(paramMap);
+        // } else if (!isAuthValidated) {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "Authentication parameter missing");
+        // sendResponse(paramMap);
+        // } else {
+        // doReverseAction(transactionUuid, enableReceiptUi, authType, authvalue,
+        // timeout);
+        // }
+        //
+        // } else if (call.method.equals("logout")) {
+        // doLogoutAction();
+        // } else if (call.method.equals("setup")) {
+        // String authvalue = this.authValueShared;
+        // String authType = this.authTypeShared;
+        // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+        // if (!isAuthValidated) {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "Authentication parameter missing");
+        // sendResponse(paramMap);
+        // } else {
+        // doSetup(authType, authvalue);
+        // }
+        // } else if (call.method.equals("initialize")) {
+        // String authvalue = call.argument("authvalue") == null ? "" :
+        // call.argument("authvalue").toString();
+        // String authType = call.argument("authtype") == null ? "" :
+        // call.argument("authtype").toString();
+        // this.authTypeShared = authType;
+        // this.authValueShared = authvalue;
+        // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+        // String localeStr = call.argument("locale") != null ?
+        // call.argument("locale").toString() : "default";
+        // Locale locale = localeStr.equals("default") ? Locale.getDefault() :
+        // Locale.getDefault();
+        // String environmentStr = call.argument("environment") == null ? "sandbox"
+        // : call.argument("environment").toString();
+        // Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
+        // : environmentStr.equals("production") ? Environments.PRODUCTION :
+        // Environments.TESTING;
+        // if (!isAuthValidated) {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "Authentication parameter missing");
+        // sendResponse(paramMap);
+        // } else {
+        // nearPay = new NearPay(this.context, getAuthType(authType, authvalue), locale,
+        // env);
+        // Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,
+        // "NearPay initialized");
+        // sendResponse(paramMap);
+        // }
+        // } else if (call.method.equals("session")) {
+        // String sessionID = call.argument("sessionID") == null ? "" :
+        // call.argument("sessionID").toString();
+        // String finishTimeout = call.argument("finishTimeout") != null ?
+        // call.argument("finishTimeout").toString()
+        // : timeOutDefault;
+        // Long timeout = Long.valueOf(finishTimeout);
+        // Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true
+        // : call.argument("enableReceiptUi");
+        // Boolean enableReversal = call.argument("enableReversal") == null ? true
+        // : call.argument("enableReversal");
+        //
+        // if (sessionID == "") {
+        // Map<String, Object> paramMap =
+        // commonResponse(ErrorStatus.invalid_argument_code,
+        // "SessionID parameter missing");
+        // sendResponse(paramMap);
+        // } else {
+        // setSession(sessionID, enableReceiptUi, enableReversal, timeout);
+        // }
+        // } else if (call.method.equals("receiptToImage")) {
+        //
+        // } else {
+        // result.notImplemented();
+        // }
     }
 
-    private void paymentValidation(@NonNull MethodCall call) {
+    public void doInitialization(@NonNull MethodCall call) {
+        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
+        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
+        System.out.println(authType + " ---- " + authvalue);
+        this.authTypeShared = authType;
+        this.authValueShared = authvalue;
+        boolean isAuthValidated = this.isAuthInputValidation(authType, authvalue);
+        String localeStr = call.argument("locale") != null ? call.argument("locale").toString() : "default";
+        Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
+        String environmentStr = call.argument("environment") == null ? "sandbox"
+                : call.argument("environment").toString();
+        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
+                : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
+        if (!isAuthValidated) {
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
+                    "Authentication parameter missing");
+            sendResponse(paramMap);
+        } else {
+            nearpay.nearPay = new NearPay(nearpay.context, nearpay.getAuthType(authType, authvalue), locale, env);
+            Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,
+                    "NearPay initialized");
+            sendResponse(paramMap);
+        }
+
+    }
+
+    public void paymentValidation(@NonNull MethodCall call) {
 
         Log.i("purchase....", nearPay.toString());
         String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
@@ -789,7 +813,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         });
     }
 
-    private static void sendResponse(Map<String, Object> paramMap) {
+    public static void sendResponse(Map<String, Object> paramMap) {
         Gson gson = new Gson();
         flutterResult.success(gson.toJson(paramMap));
     }
@@ -799,7 +823,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         return data;
     }
 
-    private static Map<String, Object> commonResponse(int responseCode, String message) {
+    public static Map<String, Object> commonResponse(int responseCode, String message) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("status", responseCode);
         paramMap.put("message", message);

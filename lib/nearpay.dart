@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -29,14 +30,19 @@ enum Locale {
 }
 
 class Nearpay {
-  static const MethodChannel methodChannel = const MethodChannel('nearpay');
+  final AuthenticationType authType;
+  final String authValue;
+  final Environments env;
+  final Locale locale;
 
-  static Future<dynamic> initialize({
-    required AuthenticationType authType,
-    required String authValue,
-    required Environments env,
-    Locale locale = Locale.localeDefault,
-  }) async {
+  final MethodChannel methodChannel = const MethodChannel('nearpay');
+
+  Nearpay({
+    required this.authType,
+    required this.authValue,
+    required this.env,
+    this.locale = Locale.localeDefault,
+  }) {
     final data = {
       "authtype": authType.value,
       "authvalue": authValue,
@@ -44,12 +50,23 @@ class Nearpay {
       "environment": env.value,
     };
 
-    final response =
-        await methodChannel.invokeMethod<dynamic>('initialize', data);
-    return response;
+    final response = methodChannel.invokeMethod<dynamic>('initialize', data);
   }
 
-  static Future<dynamic> purchase({
+  /// calls a native method using a name of the method and a data
+  /// also handles the error cases of the transaction
+  Future<dynamic> _callAndCheckStatus(String methodName, dynamic data) async {
+    final response =
+        await methodChannel.invokeMethod<dynamic>(methodName, data);
+
+    final jsonResponse = jsonDecode(response);
+
+    if (jsonResponse['status'] != 200) throw jsonResponse;
+
+    return jsonResponse;
+  }
+
+  Future<dynamic> purchase({
     required int amount,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
@@ -64,12 +81,10 @@ class Nearpay {
       "finishTimeout": finishTimeout,
     };
 
-    final response =
-        await methodChannel.invokeMethod<dynamic>('purchase', data);
-    return response;
+    return _callAndCheckStatus('purchase', data);
   }
 
-  static Future<dynamic> refund({
+  Future<dynamic> refund({
     required int amount,
     required String transactionUUID,
     String customerReferenceNumber = "",
@@ -88,17 +103,15 @@ class Nearpay {
       "enableEditableRefundAmountUiableReversalUI":
           editableRefundUI, // Optional
       "finishTimeout": finishTimeout, // Optional
+      "adminPin": adminPin,
     };
+    return _callAndCheckStatus('refund', data);
 
-    if (adminPin != null) {
-      data["adminPin"] = adminPin;
-    }
-
-    final response = await methodChannel.invokeMethod<dynamic>('refund', data);
-    return response;
+    // final response = await methodChannel.invokeMethod<dynamic>('refund', data);
+    // return response;
   }
 
-  static Future<dynamic> reconcile({
+  Future<dynamic> reconcile({
     bool enableReceiptUi = true,
     int finishTimeout = 60,
     String? adminPin,
@@ -106,19 +119,16 @@ class Nearpay {
     final data = {
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
-      //"adminPin" : "0000" // Optional
+      "adminPin": adminPin // Optional
     };
 
-    if (adminPin != null) {
-      data["adminPin"] = adminPin;
-    }
-
-    final response =
-        await methodChannel.invokeMethod<dynamic>('reconcile', data);
-    return response;
+    return _callAndCheckStatus('reconcile', data);
+    // final response =
+    //     await methodChannel.invokeMethod<dynamic>('reconcile', data);
+    //     return response;
   }
 
-  static Future<dynamic> reverse({
+  Future<dynamic> reverse({
     required String transactionUUID,
     bool enableReceiptUi = true,
     int finishTimeout = 60,
@@ -128,22 +138,23 @@ class Nearpay {
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout // Optional
     };
-
-    final response = await methodChannel.invokeMethod<dynamic>('reverse', data);
-    return response;
+    return _callAndCheckStatus('reverse', data);
+    // final response = await methodChannel.invokeMethod<dynamic>('reverse', data);
+    // return response;
   }
 
-  static Future<dynamic> logout() async {
+  Future<dynamic> logout() async {
     final response = await methodChannel.invokeMethod<dynamic>('logout');
-    return response;
+    return jsonDecode(response);
   }
 
-  static Future<dynamic> setup() async {
+  Future<dynamic> setup() async {
     final response = await methodChannel.invokeMethod<dynamic>('setup');
-    return response;
+    return jsonDecode(response);
   }
 
-  static Future<dynamic> session({
+  /// needs future work
+  Future<dynamic> session({
     required String sessionID,
     bool enableReceiptUi = true,
     bool enableReversal = true,
@@ -155,13 +166,14 @@ class Nearpay {
       "enableReversal": enableReversal,
       "finishTimeout": finishTimeout // Optional
     };
+
     final response = await methodChannel.invokeMethod<dynamic>('session', data);
-    return response;
+    return jsonDecode(response);
   }
 
-  static Future<dynamic> receiptToImage(Map<dynamic, dynamic> data) async {
+  Future<dynamic> receiptToImage(Map<dynamic, dynamic> data) async {
     final response =
         await methodChannel.invokeMethod<dynamic>('receiptToImage', data);
-    return response;
+    return jsonDecode(response);
   }
 }

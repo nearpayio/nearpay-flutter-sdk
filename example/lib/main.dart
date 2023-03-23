@@ -18,6 +18,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final nearpay = Nearpay(
+    authType: AuthenticationType.email,
+    authValue: "f.alhajeri@nearpay.io",
+    env: Environments.sandbox,
+  );
+
   final authvalue = "f.alhajeri@nearpay.io";
   final authType = AuthenticationType.email;
   final timeout = 60;
@@ -26,7 +32,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    sdkInitialize();
+    // sdkInitialize();
   }
 
   addResponse(dynamic response) {
@@ -35,19 +41,19 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  sdkInitialize() async {
-    var jsonResponse = await Nearpay.initialize(
-        authType: authType,
-        authValue: authvalue,
-        env: Environments.sandbox,
-        locale: Locale.localeDefault //optional
-        );
+  // sdkInitialize() async {
+  //   var jsonResponse = await nearpay.initialize(
+  //       authType: authType,
+  //       authValue: authvalue,
+  //       env: Environments.sandbox,
+  //       locale: Locale.localeDefault //optional
+  //       );
 
-    print("...sdkInitialize....$jsonResponse....");
-  }
+  //   print("...sdkInitialize....$jsonResponse....");
+  // }
 
   purchaseWithRefund() async {
-    var jsonResponse = await Nearpay.purchase(
+    var jsonResponse = await nearpay.purchase(
       amount: 0001,
       customerReferenceNumber: "123", // optional
       enableReceiptUi: true, // optional
@@ -77,7 +83,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   purchaseWithReverse() async {
-    var jsonResponse = await Nearpay.purchase(
+    var jsonResponse = await nearpay.purchase(
       amount: 0001,
       enableReceiptUi: true,
     );
@@ -101,18 +107,19 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  purchaseAction() async {
-    var jsonResponse = await Nearpay.purchase(
-      amount: 0001,
-    );
-
-    jsonResponse = json.decode(jsonResponse);
-
-    print("... purchase response...------$jsonResponse");
+  Future<dynamic> purchaseAction() async {
+    return nearpay
+        .purchase(amount: 0001, enableReceiptUi: true)
+        .then((response) {
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("err, $err");
+    });
   }
 
   refundAction(String uuid) async {
-    var jsonResponse = await Nearpay.refund(
+    var jsonResponse = await nearpay.refund(
       amount: 0001,
       transactionUUID: uuid,
       customerReferenceNumber: "123",
@@ -127,7 +134,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   reconcileAction() async {
-    var jsonResponse = await Nearpay.reconcile(
+    var jsonResponse = await nearpay.reconcile(
       enableReceiptUi: true,
       adminPin: '0000',
       finishTimeout: 60,
@@ -137,7 +144,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   reverseAction(String uuid) async {
-    var jsonResponse = await Nearpay.reverse(
+    var jsonResponse = await nearpay.reverse(
       transactionUUID: uuid,
       enableReceiptUi: true,
       finishTimeout: 60,
@@ -147,19 +154,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   logoutAction() async {
-    var jsonResponse = await Nearpay.logout();
+    var jsonResponse = await nearpay.logout();
 
     print("...logoutAction response...------$jsonResponse.");
   }
 
   setupAction() async {
-    var jsonResponse = await Nearpay.setup();
+    var jsonResponse = await nearpay.setup();
 
     print("...setupAction response...------$jsonResponse.");
   }
 
   sessionAction() async {
-    var jsonResponse = await Nearpay.session(
+    var jsonResponse = await nearpay.session(
       sessionID: "ea5e30d4-54c7-4ad9-8372-f798259ff589",
       enableReceiptUi: true,
       enableReversal: true,
