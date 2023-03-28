@@ -3,10 +3,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nearpay_flutter_sdk/nearpay.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+
   runApp(const MyApp());
 }
 
@@ -20,26 +23,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay(
     authType: AuthenticationType.email,
-    authValue: "f.alhajeri@nearpay.io",
+    authValue: dotenv.get("TESTING_EMAIL", fallback: ""),
     env: Environments.sandbox,
   );
-
-  final authvalue = "f.alhajeri@nearpay.io";
-  final authType = AuthenticationType.email;
-  final timeout = 60;
-  final List<dynamic> responsesList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // sdkInitialize();
-  }
-
-  addResponse(dynamic response) {
-    setState(() {
-      responsesList.add(response);
-    });
-  }
 
   // sdkInitialize() async {
   //   var jsonResponse = await nearpay.initialize(
@@ -52,74 +38,52 @@ class _MyAppState extends State<MyApp> {
   //   print("...sdkInitialize....$jsonResponse....");
   // }
 
-  purchaseWithRefund() async {
-    var jsonResponse = await nearpay.purchase(
-      amount: 0001,
-      customerReferenceNumber: "123", // optional
-      enableReceiptUi: true, // optional
-      enableReversal: true, // optional
-      finishTimeout: 60, // optional
-    );
+  Future<dynamic> purchaseWithRefund() async {
+    print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
 
-    var jsonData = json.decode(jsonResponse);
-    var status = jsonData['status'];
-    var message = jsonData['message'];
-
-    if (status == 200) {
-      List<dynamic> purchaseList = jsonData["list"];
-
-      Future.delayed(const Duration(milliseconds: 5000), () {
-        // Your code
-        if (purchaseList.isNotEmpty) {
-          String uuid = purchaseList[0]['uuid'];
-          refundAction(uuid);
-        }
+    await purchaseAction().then((value) {
+      final transactionUUID = value['list'][0]['transaction_uuid'];
+      refundAction(transactionUUID).catchError((e) {
+        showToast(e['message'], true);
       });
-    } else if (status == 401) {
-      showToast(message, true);
-    } else {
-      showToast(message, true);
-    }
-  }
-
-  purchaseWithReverse() async {
-    var jsonResponse = await nearpay.purchase(
-      amount: 0001,
-      enableReceiptUi: true,
-    );
-
-    var jsonData = json.decode(jsonResponse);
-    var status = jsonData['status'];
-    var message = jsonData['message'];
-    if (status == 200) {
-      List<dynamic> purchaseList = jsonData["list"];
-      Future.delayed(const Duration(milliseconds: 5000), () {
-        // Your code
-        if (purchaseList.isNotEmpty) {
-          String uuid = purchaseList[0]['uuid'];
-          reverseAction(uuid);
-        }
-      });
-    } else if (status == 401) {
-      showToast(message, true);
-    } else {
-      showToast(message, true);
-    }
-  }
-
-  Future<dynamic> purchaseAction() async {
-    return nearpay
-        .purchase(amount: 0001, enableReceiptUi: true)
-        .then((response) {
-      print("response $response");
-      return response;
-    }).catchError((err) {
-      print("err, $err");
+    }).catchError((e) {
+      showToast(e['message'], true);
     });
   }
 
-  refundAction(String uuid) async {
-    var jsonResponse = await nearpay.refund(
+  Future<dynamic> purchaseWithReverse() async {
+    print("=-=-=-=-= Start Purchase with Reverse Action =-=-=-=-=");
+
+    return purchaseAction().then((value) {
+      final uuid = value['list'][0]['transaction_uuid'];
+      reverseAction(uuid).catchError((e) {
+        showToast(e['message'], true);
+      });
+    }).catchError((e) {
+      showToast(e['message'], true);
+    });
+    ;
+  }
+
+  Future<dynamic> purchaseAction() async {
+    print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
+    return nearpay
+        .purchase(amount: 0001, enableReceiptUi: true)
+        .then((response) {
+      print("=-=-=-=-= Purchase Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Purchase Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
+  }
+
+  Future<dynamic> refundAction(String uuid) async {
+    print("=-=-=-=-= Start Refund Action =-=-=-=-=");
+    return nearpay
+        .refund(
       amount: 0001,
       transactionUUID: uuid,
       customerReferenceNumber: "123",
@@ -128,56 +92,107 @@ class _MyAppState extends State<MyApp> {
       enableReceiptUi: true,
       enableReversal: true,
       finishTimeout: 60,
-    );
-
-    print("...refund response...------$jsonResponse.");
+    )
+        .then((response) {
+      print("=-=-=-=-= Refund Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Refund Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
   }
 
-  reconcileAction() async {
-    var jsonResponse = await nearpay.reconcile(
+  Future<dynamic> reconcileAction() async {
+    print("=-=-=-=-= Start Reconcile Action =-=-=-=-=");
+
+    return nearpay
+        .reconcile(
       enableReceiptUi: true,
       adminPin: '0000',
       finishTimeout: 60,
-    );
-
-    print("...reconcileAction response...------$jsonResponse.");
+    )
+        .then((response) {
+      print("=-=-=-=-= Reconcile Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Reconcile Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
   }
 
-  reverseAction(String uuid) async {
-    var jsonResponse = await nearpay.reverse(
+  Future<dynamic> reverseAction(String uuid) async {
+    print("=-=-=-=-= Start Reverse Action =-=-=-=-=");
+
+    return nearpay
+        .reverse(
       transactionUUID: uuid,
       enableReceiptUi: true,
       finishTimeout: 60,
-    );
-
-    print("...reverseAction response...------$jsonResponse.");
+    )
+        .then((response) {
+      print("=-=-=-=-= Reverse Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Reverse Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
   }
 
-  logoutAction() async {
-    var jsonResponse = await nearpay.logout();
+  Future<dynamic> logoutAction() async {
+    print("=-=-=-=-= Start Logout Action =-=-=-=-=");
 
-    print("...logoutAction response...------$jsonResponse.");
+    return nearpay.logout().then((response) {
+      print("=-=-=-=-= Logout Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Logout Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
   }
 
-  setupAction() async {
-    var jsonResponse = await nearpay.setup();
+  Future<dynamic> setupAction() async {
+    print("=-=-=-=-= Start Setup Action =-=-=-=-=");
 
-    print("...setupAction response...------$jsonResponse.");
+    return nearpay.setup().then((response) {
+      print("=-=-=-=-= Setup Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Setup Failed =-=-=-=-=");
+      print("error, $err");
+      throw err;
+    });
   }
 
-  sessionAction() async {
-    var jsonResponse = await nearpay.session(
+  Future<dynamic> sessionAction() async {
+    print("=-=-=-=-= Start Session Action =-=-=-=-=");
+
+    return nearpay
+        .session(
       sessionID: "ea5e30d4-54c7-4ad9-8372-f798259ff589",
       enableReceiptUi: true,
       enableReversal: true,
       finishTimeout: 60,
-    );
-
-    print("...sessionAction response...------$jsonResponse.");
+    )
+        .then((response) {
+      print("=-=-=-=-= Session Success =-=-=-=-=");
+      print("response $response");
+      return response;
+    }).catchError((err) {
+      print("=-=-=-=-= Session Failed =-=-=-=-=");
+      print("error, $err");
+    });
   }
 
   showToast(String message, bool isError) {
-    print("..$isError....showtoast.....4.....$message....");
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_LONG,

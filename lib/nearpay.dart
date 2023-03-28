@@ -59,11 +59,9 @@ class Nearpay {
     final response =
         await methodChannel.invokeMethod<dynamic>(methodName, data);
 
-    final jsonResponse = jsonDecode(response);
+    if (response['status'] != 200) throw response;
 
-    if (jsonResponse['status'] != 200) throw jsonResponse;
-
-    return jsonResponse;
+    return response;
   }
 
   Future<dynamic> purchase({
@@ -80,6 +78,7 @@ class Nearpay {
       "enableReversal": enableReversal,
       "finishTimeout": finishTimeout,
     };
+    // return await methodChannel.invokeMethod<dynamic>('purchase', data);
 
     return _callAndCheckStatus('purchase', data);
   }
@@ -105,10 +104,8 @@ class Nearpay {
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin,
     };
-    return _callAndCheckStatus('refund', data);
 
-    // final response = await methodChannel.invokeMethod<dynamic>('refund', data);
-    // return response;
+    return _callAndCheckStatus('refund', data);
   }
 
   Future<dynamic> reconcile({
@@ -123,9 +120,6 @@ class Nearpay {
     };
 
     return _callAndCheckStatus('reconcile', data);
-    // final response =
-    //     await methodChannel.invokeMethod<dynamic>('reconcile', data);
-    //     return response;
   }
 
   Future<dynamic> reverse({
@@ -139,18 +133,14 @@ class Nearpay {
       "finishTimeout": finishTimeout // Optional
     };
     return _callAndCheckStatus('reverse', data);
-    // final response = await methodChannel.invokeMethod<dynamic>('reverse', data);
-    // return response;
   }
 
   Future<dynamic> logout() async {
-    final response = await methodChannel.invokeMethod<dynamic>('logout');
-    return jsonDecode(response);
+    return _callAndCheckStatus('logout', {});
   }
 
   Future<dynamic> setup() async {
-    final response = await methodChannel.invokeMethod<dynamic>('setup');
-    return jsonDecode(response);
+    return _callAndCheckStatus('setup', {});
   }
 
   /// needs future work
@@ -167,8 +157,7 @@ class Nearpay {
       "finishTimeout": finishTimeout // Optional
     };
 
-    final response = await methodChannel.invokeMethod<dynamic>('session', data);
-    return jsonDecode(response);
+    return _callAndCheckStatus('session', data);
   }
 
   Future<dynamic> receiptToImage(Map<dynamic, dynamic> data) async {

@@ -7,21 +7,32 @@ import java.util.Map;
 import java.util.Optional;
 
 import io.nearpay.flutter.plugin.NearpayPlugin;
+import io.nearpay.flutter.plugin.PluginProvider;
 
 public class OperatorFactory {
+    private PluginProvider provider;
 
-    public OperatorFactory(NearpayPlugin nearpay) {
-        operationMap = getOperationMap(nearpay);
+    public OperatorFactory(PluginProvider provider) {
+        this.provider = provider;
+        operationMap = getOperationMap();
     }
 
     Map<String, BaseOperation> operationMap;
 
-    Map<String, BaseOperation> getOperationMap(NearpayPlugin nearpay) {
+    Map<String, BaseOperation> getOperationMap() {
         Map<String, BaseOperation> map = new HashMap<>();
-        map.put("purchase", new PurchaseOperation(nearpay));
-        map.put("initialize", new InitializeOperation(nearpay));
+        map.put("purchase", new PurchaseOperation(provider));
+        map.put("initialize", new InitializeOperation(provider));
+        map.put("refund", new RefundOperation(provider));
+        map.put("reconcile", new ReconciliationOperation(provider));
+        map.put("reverse", new ReverseOperation(provider));
+        map.put("logout", new LogoutOperation(provider));
+        map.put("setup", new SetupOperation(provider));
+        map.put("session", new SessionOperation(provider));
+
         // more operators
-        return  map;
+
+        return map;
     }
 
     public Optional<BaseOperation> getOperation(String operator) {

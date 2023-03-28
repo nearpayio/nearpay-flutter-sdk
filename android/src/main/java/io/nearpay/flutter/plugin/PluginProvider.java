@@ -1,16 +1,21 @@
 package io.nearpay.flutter.plugin;
 
+import io.nearpay.flutter.plugin.util.ArgsFilter;
+
 public class PluginProvider {
-    private ChannelManager channelManager;
-
+    private NearpayLib nearpayLib;
+    private ArgsFilter argsFilter;
     public PluginProvider(){
-
-        channelManager = new ChannelManager(this);
+        nearpayLib = new NearpayLib(this);
+        argsFilter = new ArgsFilter(this);
     }
 
 
-    ChannelManager getChannelManager(){
-        return  this.channelManager;
+    public NearpayLib getNearpayLib() {
+        return nearpayLib;
     }
 
+    public ArgsFilter getArgsFilter() {
+        return argsFilter;
+    }
 }

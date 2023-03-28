@@ -20,6 +20,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.nearpay.flutter.plugin.operations.BaseOperation;
 import io.nearpay.flutter.plugin.operations.OperationENUM;
 import io.nearpay.flutter.plugin.operations.OperatorFactory;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 import io.nearpay.sdk.data.models.Session;
@@ -49,6 +50,8 @@ import io.nearpay.sdk.utils.listeners.LogoutListener;
 import io.nearpay.sdk.utils.listeners.ReversalListener;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import io.nearpay.sdk.utils.listeners.SessionListener;
 import io.nearpay.sdk.utils.listeners.SetupListener;
@@ -63,23 +66,20 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     /// and unregister it
     /// when the Flutter Engine is detached from the Activity
     public MethodChannel channel;
-    public NearPay nearPay;
+    // public NearPay nearPay;
     public static Result flutterResult;
-    public Context context;
     public String jwtKey = "jwt";
     public String timeOutDefault = "10";
     public String authTypeShared = "";
     public String authValueShared = "";
-
-    public OperatorFactory operatorFactory = new OperatorFactory(this);
-
     PluginProvider provider = new PluginProvider();
+    public OperatorFactory operatorFactory = new OperatorFactory(provider);
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "nearpay");
         channel.setMethodCallHandler(this);
-        this.context = flutterPluginBinding.getApplicationContext();
+        this.provider.getNearpayLib().context = flutterPluginBinding.getApplicationContext();
     }
 
     @Override
@@ -104,23 +104,32 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         flutterResult = result;
+        CompletableFuture<Map> opPromise = new CompletableFuture<>();
+        opPromise.thenAccept(opResult -> {
+            int status = (int) opResult.get("status");
+            sendResponse(opResult);
+        });
+
+        Map args = call.arguments();
+
+        // filter args and put default values to them
+        provider.getArgsFilter().filter(args);
 
         // nearpay object isn't initialized
         // return a general error
-        if (nearPay == null && !(call.method.equals("initialize") || call.method.equals("setup"))) {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
+        if (provider.getNearpayLib().nearpay == null && !(call.method.equals("initialize") ||
+                call.method.equals("setup"))) {
+            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.initialise_failed_code,
                     "Plugin Initialise missing, please initialise");
-            sendResponse(paramMap);
+            opPromise.complete(paramMap);
             return;
         }
-        System.out.println("====================== op is ===================");
 
         BaseOperation op = operatorFactory.getOperation(call.method)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 
-        System.out.println("====================== op is ===================");
-        System.out.println(op);
-        op.run(call);
+        op.run(args, opPromise);
+
         // if (call.method.equals("purchase")) {
         // paymentValidation(call);
         // } else if (call.method.equals("refund")) {
@@ -143,7 +152,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         //
         // if (!isAuthValidated) {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "Authentication parameter missing");
         // sendResponse(paramMap);
         // } else {
@@ -168,12 +177,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         //
         // if (transactionUuid == "") {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "Transaction UUID parameter missing");
         // sendResponse(paramMap);
         // } else if (!isAuthValidated) {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "Authentication parameter missing");
         // sendResponse(paramMap);
         // } else {
@@ -189,7 +198,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
         // if (!isAuthValidated) {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "Authentication parameter missing");
         // sendResponse(paramMap);
         // } else {
@@ -214,13 +223,15 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         // Environments.TESTING;
         // if (!isAuthValidated) {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "Authentication parameter missing");
         // sendResponse(paramMap);
         // } else {
-        // nearPay = new NearPay(this.context, getAuthType(authType, authvalue), locale,
+        // provider.getNearpayLib().nearpay = new NearPay(this.context,
+        // getAuthType(authType, authvalue), locale,
         // env);
-        // Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,
+        // Map<String, Object> paramMap =
+        // NearpayLib.commonResponse(ErrorStatus.success_code,
         // "NearPay initialized");
         // sendResponse(paramMap);
         // }
@@ -238,7 +249,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         //
         // if (sessionID == "") {
         // Map<String, Object> paramMap =
-        // commonResponse(ErrorStatus.invalid_argument_code,
+        // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
         // "SessionID parameter missing");
         // sendResponse(paramMap);
         // } else {
@@ -251,379 +262,472 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         // }
     }
 
-    public void doInitialization(@NonNull MethodCall call) {
-        String authvalue = call.argument("authvalue") == null ? "" : call.argument("authvalue").toString();
-        String authType = call.argument("authtype") == null ? "" : call.argument("authtype").toString();
-        System.out.println(authType + " ---- " + authvalue);
-        this.authTypeShared = authType;
-        this.authValueShared = authvalue;
-        boolean isAuthValidated = this.isAuthInputValidation(authType, authvalue);
-        String localeStr = call.argument("locale") != null ? call.argument("locale").toString() : "default";
-        Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
-        String environmentStr = call.argument("environment") == null ? "sandbox"
-                : call.argument("environment").toString();
-        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
-                : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
-        if (!isAuthValidated) {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Authentication parameter missing");
-            sendResponse(paramMap);
-        } else {
-            nearpay.nearPay = new NearPay(nearpay.context, nearpay.getAuthType(authType, authvalue), locale, env);
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,
-                    "NearPay initialized");
-            sendResponse(paramMap);
-        }
+    // public void doInitialization(@NonNull MethodCall call) {
+    // String authvalue = call.argument("authvalue") == null ? "" :
+    // call.argument("authvalue").toString();
+    // String authType = call.argument("authtype") == null ? "" :
+    // call.argument("authtype").toString();
+    // this.authTypeShared = authType;
+    // this.authValueShared = authvalue;
+    // boolean isAuthValidated = this.isAuthInputValidation(authType, authvalue);
+    // String localeStr = call.argument("locale") != null ?
+    // call.argument("locale").toString() : "default";
+    // Locale locale = localeStr.equals("default") ? Locale.getDefault() :
+    // Locale.getDefault();
+    // String environmentStr = call.argument("environment") == null ? "sandbox"
+    // : call.argument("environment").toString();
+    // Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
+    // : environmentStr.equals("production") ? Environments.PRODUCTION :
+    // Environments.TESTING;
+    // if (!isAuthValidated) {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Authentication parameter missing");
+    // sendResponse(paramMap);
+    // } else {
+    // provider.getNearpayLib().nearpay = new NearPay(this.context,
+    // this.getAuthType(authType,
+    // authvalue), locale, env);
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.success_code,
+    // "NearPay initialized");
+    // sendResponse(paramMap);
+    // }
+    //
+    // }
 
-    }
+    // public void paymentValidation(@NonNull MethodCall call) {
+    //
+    // Log.i("purchase....", provider.getNearpayLib().nearpay.toString());
+    // String amountStr = call.argument("amount") != null ?
+    // call.argument("amount").toString() : "";
+    // String customer_reference_number = call.argument("customer_reference_number")
+    // != null
+    // ? call.argument("customer_reference_number").toString()
+    // : "";
+    // Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true :
+    // call.argument("enableReceiptUi");
+    // String authvalue = call.argument("authvalue") == null ? this.authValueShared
+    // : call.argument("authvalue").toString();
+    // String authType = call.argument("authtype") == null ? this.authTypeShared
+    // : call.argument("authtype").toString();
+    // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+    // Boolean enableReversal = call.argument("enableReversal");
+    // String finishTimeout = call.argument("finishTimeout") != null ?
+    // call.argument("finishTimeout").toString()
+    // : timeOutDefault;
+    // Long timeout = Long.valueOf(finishTimeout);
+    //
+    // // empty value case
+    // if (amountStr == "") {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Purchase amount parameter missing");
+    // sendResponse(paramMap);
+    // return;
+    // }
+    //
+    // // auth parameter missing case
+    // if (!isAuthValidated) {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Authentication parameter missing");
+    // sendResponse(paramMap);
+    // return;
+    // }
+    //
+    // Long amount = Long.valueOf(amountStr);
+    // doPaymentAction(amount, customer_reference_number, enableReceiptUi,
+    // enableReversal, authType, authvalue,
+    // timeout);
+    //
+    // }
+    //
+    // private void doPaymentAction(Long amount, String customerReferenceNumber,
+    // Boolean enableReceiptUi,
+    // Boolean enableReversal, String authType, String inputValue, long
+    // finishTimeOut) {
+    //
+    // provider.getNearpayLib().nearpay.purchase(amount, customerReferenceNumber,
+    // enableReceiptUi, enableReversal,
+    // finishTimeOut,
+    // new PurchaseListener() {
+    // @Override
+    // public void onPurchaseFailed(@NonNull PurchaseFailure purchaseFailure) {
+    // if (purchaseFailure instanceof PurchaseFailure.GeneralFailure) {
+    // // when there is General error .
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+    // ErrorStatus.general_messsage);
+    // sendResponse(paramMap);
+    // } else if (purchaseFailure instanceof PurchaseFailure.PurchaseDeclined) {
+    // // when the payment declined.
+    // String messageResp = ((PurchaseFailure.PurchaseDeclined)
+    // purchaseFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.purchase_declined_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.purchase_declined_code, message);
+    // sendResponse(paramMap);
+    // } else if (purchaseFailure instanceof PurchaseFailure.PurchaseRejected) {
+    // // when the payment rejected.
+    // String messageResp = ((PurchaseFailure.PurchaseRejected)
+    // purchaseFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.purchase_rejected_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.purchase_rejected_code, message);
+    // sendResponse(paramMap);
+    // } else if (purchaseFailure instanceof PurchaseFailure.AuthenticationFailed) {
+    // String messageResp = ((PurchaseFailure.AuthenticationFailed)
+    // purchaseFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.authentication_failed_message;
+    // if (authType.equalsIgnoreCase(jwtKey)) {
+    // provider.getNearpayLib().nearpay
+    // .updateAuthentication(getAuthType(authType, inputValue));
+    // }
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
+    // message);
+    // sendResponse(paramMap);
+    // } else if (purchaseFailure instanceof PurchaseFailure.InvalidStatus) {
+    // // you can get the status using the following code
+    // String messageResp = ((PurchaseFailure.InvalidStatus)
+    // purchaseFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.invalid_status_messsage;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_code,
+    // message);
+    // sendResponse(paramMap);
+    // }
+    // }
+    //
+    // @Override
+    // public void onPurchaseApproved(@Nullable List<TransactionReceipt> list) {
+    // Log.i("onPurchaseApproved...", "transactionReceipt,,,444,,");
+    // List<Map<String, Object>> transactionList = new ArrayList<>();
+    // for (TransactionReceipt transReceipt : list) {
+    // String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
+    // transactionList.add(JSONStringToMap(jsonStr));
+    // }
+    // Map<String, Object> responseDict =
+    // NearpayLib.commonResponse(ErrorStatus.success_code,
+    // "Payment Success");
+    // responseDict.put("list", transactionList);
+    // sendResponse(responseDict);
+    //
+    // }
+    // });
+    //
+    // }
 
-    public void paymentValidation(@NonNull MethodCall call) {
+    // private void refundValidation(@NonNull MethodCall call) {
+    // String amountStr = call.argument("amount") != null ?
+    // call.argument("amount").toString() : "";
+    // String reference_retrieval_number = call.argument("transaction_uuid") != null
+    // ? call.argument("transaction_uuid").toString()
+    // : "";
+    // String customer_reference_number =
+    // call.argument("customer_reference_number").toString();
+    // Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true :
+    // call.argument("enableReceiptUi");
+    // String authvalue = call.argument("authvalue") == null ? this.authValueShared
+    // : call.argument("authvalue").toString();
+    // String authType = call.argument("authtype") == null ? this.authTypeShared
+    // : call.argument("authtype").toString();
+    // Boolean enableReversal = call.argument("enableReversal");
+    // Boolean enableEditableRefundAmountUi =
+    // call.argument("enableEditableRefundAmountUi") == null ? true
+    // : call.argument("enableEditableRefundAmountUi");
+    // String finishTimeout = call.argument("finishTimeout") != null ?
+    // call.argument("finishTimeout").toString()
+    // : timeOutDefault;
+    // Long timeout = Long.valueOf(finishTimeout);
+    // boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
+    // String adminPin = call.argument("adminPin") == null ? null :
+    // call.argument("adminPin");
+    //
+    // if (amountStr == "") {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Purchase amount parameter missing");
+    // sendResponse(paramMap);
+    // return;
+    // }
+    //
+    // if (reference_retrieval_number == "") {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Transaction UUID parameter missing");
+    // sendResponse(paramMap);
+    // return;
+    // }
+    //
+    // if (!isAuthValidated) {
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
+    // "Authentication parameter missing");
+    // sendResponse(paramMap);
+    // return;
+    // }
+    //
+    // Long amount = Long.valueOf(amountStr);
+    // doRefundAction(amount, reference_retrieval_number, customer_reference_number,
+    // enableReceiptUi, enableReversal,
+    // enableEditableRefundAmountUi, authType, authvalue, timeout, adminPin);
+    //
+    // }
+    //
+    // private void doRefundAction(Long amount, String
+    // transactionReferenceRetrievalNumber, String customerReferenceNumber,
+    // Boolean enableReceiptUi, boolean enableReversal, Boolean
+    // isEnableRefundAmountUi, String authType,
+    // String authvalue, long finishTimeOut, String adminPin) {
+    // provider.getNearpayLib().nearpay.refund(amount,
+    // transactionReferenceRetrievalNumber,
+    // customerReferenceNumber, enableReceiptUi,
+    // enableReversal, isEnableRefundAmountUi, finishTimeOut, adminPin, new
+    // RefundListener() {
+    // @Override
+    // public void onRefundFailed(@NonNull RefundFailure refundFailure) {
+    //
+    // if (refundFailure instanceof RefundFailure.GeneralFailure) {
+    // // when there is General error .
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+    // ErrorStatus.general_messsage);
+    // sendResponse(paramMap);
+    // } else if (refundFailure instanceof RefundFailure.RefundDeclined) {
+    // // when the payment declined.
+    // String messageResp = ((RefundFailure.RefundDeclined)
+    // refundFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.refund_declined_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.refund_declined_code, message);
+    // sendResponse(paramMap);
+    // } else if (refundFailure instanceof RefundFailure.RefundRejected) {
+    // // when the payment rejected.
+    // String messageResp = ((RefundFailure.RefundRejected)
+    // refundFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.refund_rejected_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.refund_rejected_code, message);
+    // sendResponse(paramMap);
+    // } else if (refundFailure instanceof RefundFailure.AuthenticationFailed) {
+    // String messageResp = ((RefundFailure.AuthenticationFailed)
+    // refundFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.authentication_failed_message;
+    // if (authType.equalsIgnoreCase(jwtKey)) {
+    // Log.d("..call jwt call.1111...", authvalue);
+    // provider.getNearpayLib().nearpay
+    // .updateAuthentication(getAuthType(authType, authvalue));
+    // }
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
+    // message);
+    // sendResponse(paramMap);
+    // } else if (refundFailure instanceof RefundFailure.InvalidStatus) {
+    // // you can get the status using the following code
+    // String messageResp = ((RefundFailure.InvalidStatus)
+    // refundFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.invalid_status_messsage;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_code,
+    // message);
+    // sendResponse(paramMap);
+    // }
+    // }
+    //
+    // @Override
+    // public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
+    // List<Map<String, Object>> transactionList = new ArrayList<>();
+    // for (TransactionReceipt transReceipt : list) {
+    // String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
+    // transactionList.add(JSONStringToMap(jsonStr));
+    // }
+    // Map<String, Object> responseDict =
+    // NearpayLib.commonResponse(ErrorStatus.success_code,
+    // "Refund Success");
+    // responseDict.put("list", transactionList);
+    // sendResponse(responseDict);
+    // }
+    // });
+    //
+    // }
 
-        Log.i("purchase....", nearPay.toString());
-        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
-        String customer_reference_number = call.argument("customer_reference_number") != null
-                ? call.argument("customer_reference_number").toString()
-                : "";
-        Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true : call.argument("enableReceiptUi");
-        String authvalue = call.argument("authvalue") == null ? this.authValueShared
-                : call.argument("authvalue").toString();
-        String authType = call.argument("authtype") == null ? this.authTypeShared
-                : call.argument("authtype").toString();
-        boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-        Boolean enableReversal = call.argument("enableReversal");
-        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString()
-                : timeOutDefault;
-        Long timeout = Long.valueOf(finishTimeout);
+    // private void doReconcileAction(Boolean enableReceiptUi, String authType,
+    // String inputValue, long finishTimeOut,
+    // String adminPin) {
+    // Log.i("doReconcile....", "doReconcile.......first....");
+    // provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin,
+    // finishTimeOut,
+    // new ReconcileListener() {
+    // @Override
+    // public void onReconcileFinished(@Nullable ReconciliationReceipt
+    // reconciliationReceipt) {
+    // // you can use the object to get the reconciliationReceipt data .
+    // // write your code here
+    // // Map<String, Object> responseDict =
+    // // reconcileGetResponse(reconciliationReceipt, "Successfull Reconcile");
+    // Map<String, Object> responseDict = JSONStringToMap(
+    // ReceiptUtilsKt.toJson(reconciliationReceipt));
 
-        // empty value case
-        if (amountStr == "") {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Purchase amount parameter missing");
-            sendResponse(paramMap);
-            return;
-        }
+    // sendResponse(responseDict);
+    // }
 
-        // auth parameter missing case
-        if (!isAuthValidated) {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Authentication parameter missing");
-            sendResponse(paramMap);
-            return;
-        }
+    // @Override
+    // public void onReconcileFailed(@NonNull ReconcileFailure reconcileFailure) {
+    // if (reconcileFailure instanceof ReconcileFailure.AuthenticationFailed) {
+    // // when the Authentication is failed
+    // String messageResp = ((ReconcileFailure.AuthenticationFailed)
+    // reconcileFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.authentication_failed_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
+    // message);
+    // sendResponse(paramMap);
+    // if (authType.equalsIgnoreCase(jwtKey)) {
+    // Log.d("..call jwt call.1111...", inputValue);
+    // provider.getNearpayLib().nearpay
+    // .updateAuthentication(getAuthType(authType, inputValue));
+    // }
+    // } else if (reconcileFailure instanceof ReconcileFailure.GeneralFailure) {
+    // // when there is general error .
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+    // ErrorStatus.general_messsage);
+    // sendResponse(paramMap);
+    // } else if (reconcileFailure instanceof ReconcileFailure.FailureMessage) {
+    // // when there is FailureMessage
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.failure_code,
+    // ErrorStatus.failure_messsage);
+    // sendResponse(paramMap);
+    // } else if (reconcileFailure instanceof ReconcileFailure.InvalidStatus) {
+    // // you can get the status using following code
+    // String messageResp = ((ReconcileFailure.InvalidStatus)
+    // reconcileFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.invalid_status_messsage;
 
-        Long amount = Long.valueOf(amountStr);
-        doPaymentAction(amount, customer_reference_number, enableReceiptUi, enableReversal, authType, authvalue,
-                timeout);
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_code,
+    // message);
+    // sendResponse(paramMap);
+    // }
+    // }
+    // });
+    // }
 
-    }
+    // private void doReverseAction(String transactionUuid, Boolean enableReceiptUi,
+    // String authType, String inputValue,
+    // long finishTimeOut) {
+    // Log.i("doReverseAction....", "doReverseAction.......first....");
+    // provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi,
+    // finishTimeOut,
+    // new ReversalListener() {
 
-    private void doPaymentAction(Long amount, String customerReferenceNumber, Boolean enableReceiptUi,
-            Boolean enableReversal, String authType, String inputValue, long finishTimeOut) {
+    // @Override
+    // public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
+    // // you can use "transactionReceipt" to get the transactionReceipt data .
+    // List<Map<String, Object>> transactionList = new ArrayList<>();
+    // for (TransactionReceipt transReceipt : list) {
+    // String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
+    // transactionList.add(JSONStringToMap(jsonStr));
+    // }
+    // Map<String, Object> responseDict = NearpayLib.commonResponse(200, "Payment
+    // Success");
+    // responseDict.put("list", transactionList);
+    // sendResponse(responseDict);
+    // }
 
-        nearPay.purchase(amount, customerReferenceNumber, enableReceiptUi, enableReversal, finishTimeOut,
-                new PurchaseListener() {
-                    @Override
-                    public void onPurchaseFailed(@NonNull PurchaseFailure purchaseFailure) {
-                        if (purchaseFailure instanceof PurchaseFailure.GeneralFailure) {
-                            // when there is General error .
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                                    ErrorStatus.general_messsage);
-                            sendResponse(paramMap);
-                        } else if (purchaseFailure instanceof PurchaseFailure.PurchaseDeclined) {
-                            // when the payment declined.
-                            String messageResp = ((PurchaseFailure.PurchaseDeclined) purchaseFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.purchase_declined_message;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.purchase_declined_code, message);
-                            sendResponse(paramMap);
-                        } else if (purchaseFailure instanceof PurchaseFailure.PurchaseRejected) {
-                            // when the payment rejected.
-                            String messageResp = ((PurchaseFailure.PurchaseRejected) purchaseFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.purchase_rejected_message;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.purchase_rejected_code, message);
-                            sendResponse(paramMap);
-                        } else if (purchaseFailure instanceof PurchaseFailure.AuthenticationFailed) {
-                            String messageResp = ((PurchaseFailure.AuthenticationFailed) purchaseFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.authentication_failed_message;
-                            if (authType.equalsIgnoreCase(jwtKey)) {
-                                nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                            }
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                            sendResponse(paramMap);
-                        } else if (purchaseFailure instanceof PurchaseFailure.InvalidStatus) {
-                            // you can get the status using the following code
-                            String messageResp = ((PurchaseFailure.InvalidStatus) purchaseFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.invalid_status_messsage;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
-                            sendResponse(paramMap);
-                        }
-                    }
+    // @Override
+    // public void onReversalFailed(@NonNull ReversalFailure reversalFailure) {
+    // if (reversalFailure instanceof ReversalFailure.AuthenticationFailed) {
+    // // when the Authentication is failed
+    // String messageResp = ((ReversalFailure.AuthenticationFailed)
+    // reversalFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.authentication_failed_message;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
+    // message);
+    // sendResponse(paramMap);
+    // if (authType.equalsIgnoreCase(jwtKey)) {
+    // Log.d("..call jwt call.1111...", inputValue);
+    // provider.getNearpayLib().nearpay
+    // .updateAuthentication(getAuthType(authType, inputValue));
+    // }
+    // } else if (reversalFailure instanceof ReversalFailure.GeneralFailure) {
+    // // when there is general error .
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+    // ErrorStatus.general_messsage);
+    // sendResponse(paramMap);
+    // } else if (reversalFailure instanceof ReversalFailure.FailureMessage) {
+    // // when there is FailureMessage
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.failure_code,
+    // ErrorStatus.failure_messsage);
+    // sendResponse(paramMap);
+    // } else if (reversalFailure instanceof ReversalFailure.InvalidStatus) {
+    // // you can get the status using following code
+    // String messageResp = ((ReversalFailure.InvalidStatus)
+    // reversalFailure).toString();
+    // String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+    // : ErrorStatus.invalid_status_messsage;
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.invalid_code,
+    // message);
+    // sendResponse(paramMap);
+    // }
+    // }
+    // });
+    // }
 
-                    @Override
-                    public void onPurchaseApproved(@Nullable List<TransactionReceipt> list) {
-                        Log.i("onPurchaseApproved...", "transactionReceipt,,,444,,");
-                        List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transReceipt : list) {
-                            String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                            transactionList.add(JSONStringToMap(jsonStr));
-                        }
-                        Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "Payment Success");
-                        responseDict.put("list", transactionList);
-                        sendResponse(responseDict);
-
-                    }
-                });
-
-    }
-
-    private void refundValidation(@NonNull MethodCall call) {
-        String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
-        String reference_retrieval_number = call.argument("transaction_uuid") != null
-                ? call.argument("transaction_uuid").toString()
-                : "";
-        String customer_reference_number = call.argument("customer_reference_number").toString();
-        Boolean enableReceiptUi = call.argument("enableReceiptUi") == null ? true : call.argument("enableReceiptUi");
-        String authvalue = call.argument("authvalue") == null ? this.authValueShared
-                : call.argument("authvalue").toString();
-        String authType = call.argument("authtype") == null ? this.authTypeShared
-                : call.argument("authtype").toString();
-        Boolean enableReversal = call.argument("enableReversal");
-        Boolean enableEditableRefundAmountUi = call.argument("enableEditableRefundAmountUi") == null ? true
-                : call.argument("enableEditableRefundAmountUi");
-        String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString()
-                : timeOutDefault;
-        Long timeout = Long.valueOf(finishTimeout);
-        boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
-        String adminPin = call.argument("adminPin") == null ? null : call.argument("adminPin");
-
-        if (amountStr == "") {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Purchase amount parameter missing");
-            sendResponse(paramMap);
-            return;
-        }
-
-        if (reference_retrieval_number == "") {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Transaction UUID parameter missing");
-            sendResponse(paramMap);
-            return;
-        }
-
-        if (!isAuthValidated) {
-            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
-                    "Authentication parameter missing");
-            sendResponse(paramMap);
-            return;
-        }
-
-        Long amount = Long.valueOf(amountStr);
-        doRefundAction(amount, reference_retrieval_number, customer_reference_number, enableReceiptUi, enableReversal,
-                enableEditableRefundAmountUi, authType, authvalue, timeout, adminPin);
-
-    }
-
-    private void doRefundAction(Long amount, String transactionReferenceRetrievalNumber, String customerReferenceNumber,
-            Boolean enableReceiptUi, boolean enableReversal, Boolean isEnableRefundAmountUi, String authType,
-            String authvalue, long finishTimeOut, String adminPin) {
-        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,
-                enableReversal, isEnableRefundAmountUi, finishTimeOut, adminPin, new RefundListener() {
-                    @Override
-                    public void onRefundFailed(@NonNull RefundFailure refundFailure) {
-
-                        if (refundFailure instanceof RefundFailure.GeneralFailure) {
-                            // when there is General error .
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                                    ErrorStatus.general_messsage);
-                            sendResponse(paramMap);
-                        } else if (refundFailure instanceof RefundFailure.RefundDeclined) {
-                            // when the payment declined.
-                            String messageResp = ((RefundFailure.RefundDeclined) refundFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.refund_declined_message;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.refund_declined_code, message);
-                            sendResponse(paramMap);
-                        } else if (refundFailure instanceof RefundFailure.RefundRejected) {
-                            // when the payment rejected.
-                            String messageResp = ((RefundFailure.RefundRejected) refundFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.refund_rejected_message;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.refund_rejected_code, message);
-                            sendResponse(paramMap);
-                        } else if (refundFailure instanceof RefundFailure.AuthenticationFailed) {
-                            String messageResp = ((RefundFailure.AuthenticationFailed) refundFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.authentication_failed_message;
-                            if (authType.equalsIgnoreCase(jwtKey)) {
-                                Log.d("..call jwt call.1111...", authvalue);
-                                nearPay.updateAuthentication(getAuthType(authType, authvalue));
-                            }
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                            sendResponse(paramMap);
-                        } else if (refundFailure instanceof RefundFailure.InvalidStatus) {
-                            // you can get the status using the following code
-                            String messageResp = ((RefundFailure.InvalidStatus) refundFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.invalid_status_messsage;
-                            Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
-                            sendResponse(paramMap);
-                        }
-                    }
-
-                    @Override
-                    public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
-                        List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transReceipt : list) {
-                            String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                            transactionList.add(JSONStringToMap(jsonStr));
-                        }
-                        Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "Refund Success");
-                        responseDict.put("list", transactionList);
-                        sendResponse(responseDict);
-                    }
-                });
-
-    }
-
-    private void doReconcileAction(Boolean enableReceiptUi, String authType, String inputValue, long finishTimeOut,
-            String adminPin) {
-        Log.i("doReconcile....", "doReconcile.......first....");
-        nearPay.reconcile(enableReceiptUi, adminPin, finishTimeOut, new ReconcileListener() {
-            @Override
-            public void onReconcileFinished(@Nullable ReconciliationReceipt reconciliationReceipt) {
-                // you can use the object to get the reconciliationReceipt data .
-                // write your code here
-                // Map<String, Object> responseDict =
-                // reconcileGetResponse(reconciliationReceipt, "Successfull Reconcile");
-                Map<String, Object> responseDict = JSONStringToMap(ReceiptUtilsKt.toJson(reconciliationReceipt));
-
-                sendResponse(responseDict);
-            }
-
-            @Override
-            public void onReconcileFailed(@NonNull ReconcileFailure reconcileFailure) {
-                if (reconcileFailure instanceof ReconcileFailure.AuthenticationFailed) {
-                    // when the Authentication is failed
-                    String messageResp = ((ReconcileFailure.AuthenticationFailed) reconcileFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.authentication_failed_message;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                    sendResponse(paramMap);
-                    if (authType.equalsIgnoreCase(jwtKey)) {
-                        Log.d("..call jwt call.1111...", inputValue);
-                        nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                    }
-                } else if (reconcileFailure instanceof ReconcileFailure.GeneralFailure) {
-                    // when there is general error .
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                            ErrorStatus.general_messsage);
-                    sendResponse(paramMap);
-                } else if (reconcileFailure instanceof ReconcileFailure.FailureMessage) {
-                    // when there is FailureMessage
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.failure_code,
-                            ErrorStatus.failure_messsage);
-                    sendResponse(paramMap);
-                } else if (reconcileFailure instanceof ReconcileFailure.InvalidStatus) {
-                    // you can get the status using following code
-                    String messageResp = ((ReconcileFailure.InvalidStatus) reconcileFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.invalid_status_messsage;
-
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
-                    sendResponse(paramMap);
-                }
-            }
-        });
-    }
-
-    private void doReverseAction(String transactionUuid, Boolean enableReceiptUi, String authType, String inputValue,
-            long finishTimeOut) {
-        Log.i("doReverseAction....", "doReverseAction.......first....");
-        nearPay.reverse(transactionUuid, enableReceiptUi, finishTimeOut, new ReversalListener() {
-
-            @Override
-            public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
-                // you can use "transactionReceipt" to get the transactionReceipt data .
-                List<Map<String, Object>> transactionList = new ArrayList<>();
-                for (TransactionReceipt transReceipt : list) {
-                    String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                    transactionList.add(JSONStringToMap(jsonStr));
-                }
-                Map<String, Object> responseDict = commonResponse(200, "Payment Success");
-                responseDict.put("list", transactionList);
-                sendResponse(responseDict);
-            }
-
-            @Override
-            public void onReversalFailed(@NonNull ReversalFailure reversalFailure) {
-                if (reversalFailure instanceof ReversalFailure.AuthenticationFailed) {
-                    // when the Authentication is failed
-                    String messageResp = ((ReversalFailure.AuthenticationFailed) reversalFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.authentication_failed_message;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                    sendResponse(paramMap);
-                    if (authType.equalsIgnoreCase(jwtKey)) {
-                        Log.d("..call jwt call.1111...", inputValue);
-                        nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                    }
-                } else if (reversalFailure instanceof ReversalFailure.GeneralFailure) {
-                    // when there is general error .
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                            ErrorStatus.general_messsage);
-                    sendResponse(paramMap);
-                } else if (reversalFailure instanceof ReversalFailure.FailureMessage) {
-                    // when there is FailureMessage
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.failure_code,
-                            ErrorStatus.failure_messsage);
-                    sendResponse(paramMap);
-                } else if (reversalFailure instanceof ReversalFailure.InvalidStatus) {
-                    // you can get the status using following code
-                    String messageResp = ((ReversalFailure.InvalidStatus) reversalFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.invalid_status_messsage;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
-                    sendResponse(paramMap);
-                }
-            }
-        });
-    }
-
-    private void doLogoutAction() {
-        nearPay.logout(new LogoutListener() {
-            @Override
-            public void onLogoutCompleted() {
-                // write your message here
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code, "Logout Successfully");
-                sendResponse(paramMap);
-            }
-
-            @Override
-            public void onLogoutFailed(@NonNull LogoutFailure logoutFailure) {
-                if (logoutFailure instanceof LogoutFailure.AlreadyLoggedOut) {
-                    // when the user is already logged out
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.logout_already_code,
-                            "User already logout");
-                    sendResponse(paramMap);
-                } else if (logoutFailure instanceof LogoutFailure.GeneralFailure) {
-                    // when the error is general error
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                            ErrorStatus.general_messsage);
-                    sendResponse(paramMap);
-                }
-            }
-        });
-    }
+    // private void doLogoutAction() {
+    // provider.getNearpayLib().nearpay.logout(new LogoutListener() {
+    // @Override
+    // public void onLogoutCompleted() {
+    // // write your message here
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.success_code,
+    // "Logout Successfully");
+    // sendResponse(paramMap);
+    // }
+    //
+    // @Override
+    // public void onLogoutFailed(@NonNull LogoutFailure logoutFailure) {
+    // if (logoutFailure instanceof LogoutFailure.AlreadyLoggedOut) {
+    // // when the user is already logged out
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.logout_already_code,
+    // "User already logout");
+    // sendResponse(paramMap);
+    // } else if (logoutFailure instanceof LogoutFailure.GeneralFailure) {
+    // // when the error is general error
+    // Map<String, Object> paramMap =
+    // NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+    // ErrorStatus.general_messsage);
+    // sendResponse(paramMap);
+    // }
+    // }
+    // });
+    // }
 
     private void doSetup(String authType, String inputValue) {
-        nearPay.setup(new SetupListener() {
+        provider.getNearpayLib().nearpay.setup(new SetupListener() {
             @Override
             public void onSetupCompleted() {
                 // when the setup is done successfully
-                Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code,
+                Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.success_code,
                         "Application setup completed successfully");
                 sendResponse(paramMap);
             }
@@ -632,12 +736,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             public void onSetupFailed(@NonNull SetupFailure setupFailure) {
                 if (setupFailure instanceof SetupFailure.AlreadyInstalled) {
                     // when the payment plugin is already installed .
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.already_installed_code,
+                    Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.already_installed_code,
                             "Plugin Application Already Installed");
                     sendResponse(paramMap);
                 } else if (setupFailure instanceof SetupFailure.NotInstalled) {
                     // when the installtion failed .
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.not_installed_code,
+                    Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.not_installed_code,
                             "Plugin Application Installation Failed");
                     sendResponse(paramMap);
                 } else if (setupFailure instanceof SetupFailure.AuthenticationFailed) {
@@ -647,11 +751,11 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                             : ErrorStatus.authentication_failed_message;
 
                     if (authType.equalsIgnoreCase(jwtKey)) {
-                        nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
+                        provider.getNearpayLib().nearpay.updateAuthentication(getAuthType(authType, inputValue));
+                        Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code, message);
                         sendResponse(paramMap);
                     } else {
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
+                        Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code, message);
                         sendResponse(paramMap);
                     }
 
@@ -660,7 +764,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     String messageResp = ((SetupFailure.InvalidStatus) setupFailure).toString();
                     String message = messageResp != "" && messageResp.length() > 0 ? messageResp
                             : ErrorStatus.invalid_status_messsage;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
+                    Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_code, message);
                     sendResponse(paramMap);
                 }
             }
@@ -668,61 +772,69 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private void setSession(String sessionID, Boolean enableReceiptUi, Boolean enableReversal, Long finishTimeOut) {
-        nearPay.session(sessionID, enableReceiptUi, enableReversal, finishTimeOut, new SessionListener() {
-            @Override
-            public void onSessionClosed(@Nullable Session session) {
-                // when the session is closed
-                Map<String, Object> responseDict = sessionResponse(session, "Session Closed");
-                sendResponse(responseDict);
-            }
+        provider.getNearpayLib().nearpay.session(sessionID, enableReceiptUi, enableReversal, finishTimeOut,
+                new SessionListener() {
+                    @Override
+                    public void onSessionClosed(@Nullable Session session) {
+                        // when the session is closed
+//                        Map<String, Object> responseDict = sessionResponse(session, "Session Closed");
+//                        Gson gson = new Gson(); // Or use new GsonBuilder().create();
+//                        String json = gson.toJson(session); // serializes target to Json
 
-            @Override
-            public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
-                // when the session is open , you can get the receipt by using
-                // TransactionReceipt
-                List<Map<String, Object>> transactionList = new ArrayList<>();
-                for (TransactionReceipt transReceipt : list) {
-                    String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                    transactionList.add(JSONStringToMap(jsonStr));
-                }
-                Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "Session Success");
-                responseDict.put("list", transactionList);
-                sendResponse(responseDict);
-            }
-
-            @Override
-            public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
-                if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
-                    // when the authentication is failed
-                    String messageResp = ((SessionFailure.AuthenticationFailed) sessionFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.authentication_failed_message;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                    sendResponse(paramMap);
-                    if (authTypeShared.equalsIgnoreCase(jwtKey)) {
-                        nearPay.updateAuthentication(getAuthType(authTypeShared, authTypeShared));
+                        Map<String, Object> responseDict = sessionResponse(session, "Session Closed");
+                        sendResponse(responseDict);
                     }
 
-                } else if (sessionFailure instanceof SessionFailure.GeneralFailure) {
-                    // when there is general error .
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.general_failure_code,
-                            ErrorStatus.general_messsage);
-                    sendResponse(paramMap);
-                } else if (sessionFailure instanceof SessionFailure.FailureMessage) {
-                    // when there is FailureMessage
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.failure_code,
-                            ErrorStatus.failure_messsage);
-                    sendResponse(paramMap);
-                } else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
-                    // you can get the status using the following code
-                    String messageResp = ((SessionFailure.InvalidStatus) sessionFailure).toString();
-                    String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                            : ErrorStatus.invalid_status_messsage;
-                    Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_code, message);
-                    sendResponse(paramMap);
-                }
-            }
-        });
+                    @Override
+                    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
+                        // when the session is open , you can get the receipt by using
+                        // TransactionReceipt
+                        List<Map<String, Object>> transactionList = new ArrayList<>();
+                        for (TransactionReceipt transReceipt : list) {
+                            String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
+                            transactionList.add(NearpayLib.JSONStringToMap(jsonStr));
+                        }
+                        Map<String, Object> responseDict = NearpayLib.commonResponse(ErrorStatus.success_code,
+                                "Session Success");
+                        responseDict.put("list", transactionList);
+                        sendResponse(responseDict);
+                    }
+
+                    @Override
+                    public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
+                        if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
+                            // when the authentication is failed
+                            String messageResp = ((SessionFailure.AuthenticationFailed) sessionFailure).toString();
+                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+                                    : ErrorStatus.authentication_failed_message;
+                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
+                                    message);
+                            sendResponse(paramMap);
+                            if (authTypeShared.equalsIgnoreCase(jwtKey)) {
+                                provider.getNearpayLib().nearpay
+                                        .updateAuthentication(getAuthType(authTypeShared, authTypeShared));
+                            }
+
+                        } else if (sessionFailure instanceof SessionFailure.GeneralFailure) {
+                            // when there is general error .
+                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.general_failure_code,
+                                    ErrorStatus.general_messsage);
+                            sendResponse(paramMap);
+                        } else if (sessionFailure instanceof SessionFailure.FailureMessage) {
+                            // when there is FailureMessage
+                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.failure_code,
+                                    ErrorStatus.failure_messsage);
+                            sendResponse(paramMap);
+                        } else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
+                            // you can get the status using the following code
+                            String messageResp = ((SessionFailure.InvalidStatus) sessionFailure).toString();
+                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
+                                    : ErrorStatus.invalid_status_messsage;
+                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_code, message);
+                            sendResponse(paramMap);
+                        }
+                    }
+                });
     }
 
     private static Map<String, Object> sessionResponse(Session session, String message) {
@@ -764,7 +876,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         List<Map<String, Object>> transactionList = new ArrayList<>();
         for (TransactionReceipt transReceipt : session.getTransaction().getReceipts()) {
             String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-            transactionList.add(JSONStringToMap(jsonStr));
+            transactionList.add(NearpayLib.JSONStringToMap(jsonStr));
         }
 
         transaction.put("receipts", transactionList);
@@ -799,34 +911,38 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     private void getRecieptImageTrans(TransactionReceipt recipt, int imgwidth, int fontSize) {
-        ReceiptUtilsKt.toImage(recipt, this.context, imgwidth, fontSize, (BitmapListener) bitmap -> {
-            // bitmap
-            Log.i("getTransimg..", bitmap.toString());
+        ReceiptUtilsKt.toImage(recipt, this.provider.getNearpayLib().context, imgwidth, fontSize,
+                (BitmapListener) bitmap -> {
+                    // bitmap
+                    Log.i("getTransimg..", bitmap.toString());
 
-        });
+                });
     }
 
     private void getRecieptImageReconcile(ReconciliationReceipt recipt, int imgwidth, int fontSize) {
-        ReceiptUtilsKt.toImage(recipt, this.context, imgwidth, fontSize, (BitmapListener) bitmap -> {
-            // bitmap
-            Log.i("getRecimg..", bitmap.toString());
-        });
+        ReceiptUtilsKt.toImage(recipt,
+                this.provider.getNearpayLib().context, imgwidth, fontSize, (BitmapListener) bitmap -> {
+                    // bitmap
+                    Log.i("getRecimg..", bitmap.toString());
+                });
     }
 
     public static void sendResponse(Map<String, Object> paramMap) {
-        Gson gson = new Gson();
-        flutterResult.success(gson.toJson(paramMap));
+        // Gson gson = new Gson();
+        // // flutterResult.success(gson.toJson(paramMap));
+        flutterResult.success(paramMap);
     }
 
-    private static Map<String, Object> JSONStringToMap(String jsonStr) {
-        Map<String, Object> data = new Gson().fromJson(jsonStr, HashMap.class);
-        return data;
-    }
+    // private static Map<String, Object> JSONStringToMap(String jsonStr) {
+    // Map<String, Object> data = new Gson().fromJson(jsonStr, HashMap.class);
+    // return data;
+    // }
 
-    public static Map<String, Object> commonResponse(int responseCode, String message) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("status", responseCode);
-        paramMap.put("message", message);
-        return paramMap;
-    }
+    // public static Map<String, Object> commonResponse(int responseCode, String
+    // message) {
+    // Map<String, Object> paramMap = new HashMap<>();
+    // paramMap.put("status", responseCode);
+    // paramMap.put("message", message);
+    // return paramMap;
+    // }
 }
