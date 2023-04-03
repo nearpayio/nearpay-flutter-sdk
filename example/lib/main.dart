@@ -1,11 +1,10 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nearpay_flutter_sdk/nearpay.dart';
+import 'package:nearpay_flutter_sdk/types.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -26,6 +25,17 @@ class _MyAppState extends State<MyApp> {
     authValue: dotenv.get("TESTING_EMAIL", fallback: ""),
     env: Environments.sandbox,
   );
+
+  NearpayState state = NearpayState.notReady;
+
+  @override
+  initState() {
+    nearpay.addStateListener((newState) {
+      setState(() {
+        state = newState;
+      });
+    });
+  }
 
   // sdkInitialize() async {
   //   var jsonResponse = await nearpay.initialize(
@@ -212,8 +222,11 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(children: [
           TextButton(
+            onPressed: () async {},
+            child: const Text("Test"),
+          ),
+          TextButton(
             onPressed: () async {
-              // Respond to button press
               purchaseAction();
             },
             child: const Text("Purchase"),
@@ -223,7 +236,6 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              // Respond to button press
               purchaseWithRefund();
             },
             child: const Text("Purchase and Refund"),
@@ -233,7 +245,6 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              // Respond to button press
               purchaseWithReverse();
             },
             child: const Text("Purchase and Reverse"),
@@ -243,7 +254,6 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              // Respond to button press
               reconcileAction();
             },
             child: const Text("RECONCILE"),
@@ -253,7 +263,6 @@ class _MyAppState extends State<MyApp> {
           ),
           /*TextButton(
             onPressed: () async {
-              // Respond to button press
               reverseAction();
             },
             child: const Text("REVERSE"),
@@ -263,7 +272,6 @@ class _MyAppState extends State<MyApp> {
           ),*/
           TextButton(
             onPressed: () async {
-              // Respond to button press
               setupAction();
             },
             child: const Text("Setup"),
@@ -273,7 +281,6 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              // Respond to button press
               logoutAction();
             },
             child: const Text("Logout"),
@@ -283,10 +290,16 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              // Respond to button press
               sessionAction();
             },
             child: const Text("Session"),
+          ),
+          Container(
+            color: Colors.black87,
+            child: Text(
+              "state is: $state",
+              style: const TextStyle(color: Colors.white),
+            ),
           )
         ]),
       ),

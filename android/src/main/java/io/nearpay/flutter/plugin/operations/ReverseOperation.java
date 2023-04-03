@@ -23,37 +23,11 @@ public class ReverseOperation extends BaseOperation {
     }
 
     private void doReverse(Map args, CompletableFuture<Map> promise) {
-        String transactionUuid = args.get("transaction_uuid") != null
-                ? args.get("transaction_uuid").toString()
-                : "";
-        Boolean enableReceiptUi = args.get("enableReceiptUi") == null ? true
-                : (Boolean) args.get("enableReceiptUi");
-        String authvalue = args.get("authvalue") == null ? provider.getNearpayLib().authValueShared
-                : args.get("authvalue").toString();
-        String authType = args.get("authtype") == null ? provider.getNearpayLib().authTypeShared
-                : args.get("authtype").toString();
-        String finishTimeout = args.get("finishTimeout") != null
-                ? args.get("finishTimeout").toString()
-                : provider.getNearpayLib().timeOutDefault;
-        Long timeout = Long.valueOf(finishTimeout);
-        boolean isAuthValidated = provider.getNearpayLib().isAuthInputValidation(authType, authvalue);
+        String transactionUuid = (String) args.get("transaction_uuid");
+        Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
+        Long finishTimeout = (Long) args.get("finishTimeout");
 
-        if (transactionUuid == "") {
-            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
-                    "Transaction UUID parameter missing");
-            promise.complete(paramMap);
-            return;
-        } else if (!isAuthValidated) {
-            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
-                    "Authentication parameter missing");
-            promise.complete(paramMap);
-            return;
-        }
-
-        // doReverseAction(transactionUuid, enableReceiptUi, authType, authvalue,
-        // timeout);
-
-        provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, timeout,
+        provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, finishTimeout,
                 new ReversalListener() {
 
                     @Override
@@ -79,11 +53,11 @@ public class ReverseOperation extends BaseOperation {
                             Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
                                     message);
                             promise.complete(paramMap);
-                            if (authType.equalsIgnoreCase("jwt")) {
-                                provider.getNearpayLib().nearpay
-                                        .updateAuthentication(
-                                                provider.getNearpayLib().getAuthType(authType, authvalue));
-                            }
+//                            if (authType.equalsIgnoreCase("jwt")) {
+//                                provider.getNearpayLib().nearpay
+//                                        .updateAuthentication(
+//                                                provider.getNearpayLib().getAuthType(authType, authvalue));
+//                            }
                         } else if (reversalFailure instanceof ReversalFailure.GeneralFailure) {
                             // when there is general error .
                             Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.general_failure_code,

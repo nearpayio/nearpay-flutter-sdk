@@ -25,28 +25,11 @@ public class ReconciliationOperation extends BaseOperation {
         }
 
         private void doReconcileAction(Map args, CompletableFuture<Map> promise) {
-                Boolean enableReceiptUi = args.get("enableReceiptUi") == null ? true
-                                : (Boolean) args.get("enableReceiptUi");
-                String authvalue = args.get("authvalue") == null ? this.provider.getNearpayLib().authValueShared
-                                : args.get("authvalue").toString();
-                String authType = args.get("authtype") == null ? this.provider.getNearpayLib().authTypeShared
-                                : args.get("authtype").toString();
-                String finishTimeout = args.get("finishTimeout") != null
-                                ? args.get("finishTimeout").toString()
-                                : this.provider.getNearpayLib().timeOutDefault;
+                Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
+                Long finishTimeout = (Long) args.get("finishTimeout");
                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
 
-                Long timeout = Long.valueOf(finishTimeout);
-                boolean isAuthValidated = this.provider.getNearpayLib().isAuthInputValidation(authType, authvalue);
-
-                if (!isAuthValidated) {
-                        Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
-                                        "Authentication parameter missing");
-                        promise.complete(paramMap);
-                        return;
-                }
-
-                provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin, timeout,
+                provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin, finishTimeout,
                                 new ReconcileListener() {
                                         @Override
                                         public void onReconcileFinished(
@@ -71,13 +54,13 @@ public class ReconciliationOperation extends BaseOperation {
                                                                         ErrorStatus.auth_failed_code,
                                                                         message);
                                                         promise.complete(paramMap);
-                                                        if (authType.equalsIgnoreCase("jwt")) {
-                                                                provider.getNearpayLib().nearpay
-                                                                                .updateAuthentication(
-                                                                                                provider.getNearpayLib()
-                                                                                                                .getAuthType(authType,
-                                                                                                                                authvalue));
-                                                        }
+                                                        // if (authType.equalsIgnoreCase("jwt")) {
+                                                        // provider.getNearpayLib().nearpay
+                                                        // .updateAuthentication(
+                                                        // provider.getNearpayLib()
+                                                        // .getAuthType(authType,
+                                                        // authvalue));
+                                                        // }
                                                 } else if (reconcileFailure instanceof ReconcileFailure.GeneralFailure) {
                                                         // when there is general error .
                                                         Map<String, Object> paramMap = NearpayLib.commonResponse(

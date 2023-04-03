@@ -3,6 +3,9 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
+import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
+import 'package:nearpay_flutter_sdk/types.dart';
 
 enum Environments {
   sandbox("sandbox"),
@@ -34,6 +37,8 @@ class Nearpay {
   final String authValue;
   final Environments env;
   final Locale locale;
+  NearpayState state = NearpayState.notReady;
+  late final NearpayProvider _provider = NearpayProvider(this);
 
   final MethodChannel methodChannel = const MethodChannel('nearpay');
 
@@ -50,7 +55,17 @@ class Nearpay {
       "environment": env.value,
     };
 
-    final response = methodChannel.invokeMethod<dynamic>('initialize', data);
+    final response =
+        methodChannel.invokeMethod<dynamic>('initialize', data).then((res) {
+      setup();
+    });
+
+    _addEventListener(
+        evnetName: NearpayEvent.stateChange,
+        callback: (args) {
+          NearpayState newState = args['state'];
+          state = newState;
+        });
   }
 
   /// calls a native method using a name of the method and a data
@@ -140,7 +155,14 @@ class Nearpay {
   }
 
   Future<dynamic> setup() async {
-    return _callAndCheckStatus('setup', {});
+    return _callAndCheckStatus('setup', {}).then((res) {
+      _provider.listener.emitStateChange(NearpayState.ready);
+      print("=-=-=-=-=-=-=-=-=-= setup sec =-=-=-=-=-=-=-=");
+      return res;
+    }).catchError((e) {
+      _provider.listener.emitStateChange(NearpayState.notReady);
+      throw e;
+    });
   }
 
   /// needs future work
@@ -164,5 +186,25 @@ class Nearpay {
     final response =
         await methodChannel.invokeMethod<dynamic>('receiptToImage', data);
     return jsonDecode(response);
+  }
+
+  // listeners
+  Function _addEventListener(
+      {required NearpayEvent evnetName,
+      required dynamic Function(dynamic) callback}) {
+    return _provider.listener
+        .addEventListener(evnetName: evnetName, callback: callback);
+  }
+
+  Function addStateListener(dynamic Function(NearpayState) callback) {
+    dynamic _callback(dynamic args) {
+      NearpayState newState = args["state"];
+      callback(newState);
+    }
+
+    return _addEventListener(
+      evnetName: NearpayEvent.stateChange,
+      callback: _callback,
+    );
   }
 }

@@ -16,10 +16,13 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+
     }
 }
 
 apply plugin: 'com.android.library'
+
+
 
 android {
     compileSdkVersion 33

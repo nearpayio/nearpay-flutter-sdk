@@ -18,21 +18,21 @@ public class NearpayLib {
     private PluginProvider provider;
     public NearPay nearpay;
     public Context context;
-    public String authTypeShared = "";
-    public String authValueShared = "";
 
-    public String timeOutDefault = "60";
+     public String authTypeShared = "";
+     public String authValueShared = "";
 
-    public NearpayLib(PluginProvider provider ){
+
+    public NearpayLib(PluginProvider provider) {
         this.provider = provider;
     }
 
     public AuthenticationData getAuthType(String authType, String inputValue) {
         AuthenticationData authentication = authType.equals("userenter") ? AuthenticationData.UserEnter.INSTANCE
                 : authType.equals("email") ? new AuthenticationData.Email(inputValue)
-                : authType.equals("mobile") ? new AuthenticationData.Mobile(inputValue)
-                : authType.equals("jwt") ? new AuthenticationData.Jwt(inputValue)
-                : AuthenticationData.UserEnter.INSTANCE;
+                        : authType.equals("mobile") ? new AuthenticationData.Mobile(inputValue)
+                                : authType.equals("jwt") ? new AuthenticationData.Jwt(inputValue)
+                                        : AuthenticationData.UserEnter.INSTANCE;
         return authentication;
     }
 
@@ -52,7 +52,5 @@ public class NearpayLib {
         Map<String, Object> data = new Gson().fromJson(jsonStr, HashMap.class);
         return data;
     }
-
-
 
 }

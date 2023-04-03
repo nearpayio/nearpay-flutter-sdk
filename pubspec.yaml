@@ -2,15 +2,15 @@ name: nearpay_flutter_sdk
 description: A new Flutter plugin project.
 version: 0.0.4
 
-
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: ">=2.17.0 <3.0.0"
   flutter: ">=2.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
+  event_listener: ^0.2.0
 
 dev_dependencies:
   flutter_test:

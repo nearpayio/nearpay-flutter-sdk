@@ -13,7 +13,8 @@ public class ArgsFilter {
 
     // return every map entry to its default
     public Map filter(Map args) {
-        Long amount ;
+
+        Long amount;
         if (args.get("amount") == null) {
             amount = 1L;
         } else {
@@ -28,7 +29,6 @@ public class ArgsFilter {
             timeout = Long.valueOf((Integer) args.get("finishTimeout"));
         }
         args.put("finishTimeout", timeout);
-
 
         if (args.get("customer_reference_number") == null) {
             args.put("customer_reference_number", "");
@@ -45,6 +45,7 @@ public class ArgsFilter {
         if (args.get("enableEditableRefundAmountUi") == null) {
             args.put("enableEditableRefundAmountUi", true);
         }
+
 
         return args;
     }
