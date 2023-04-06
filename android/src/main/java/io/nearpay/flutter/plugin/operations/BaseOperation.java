@@ -1,6 +1,5 @@
 package io.nearpay.flutter.plugin.operations;
 
-import io.flutter.plugin.common.MethodCall;
 import androidx.annotation.NonNull;
 
 import java.util.Map;

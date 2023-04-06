@@ -32,51 +32,31 @@ public class ReverseOperation extends BaseOperation {
 
                     @Override
                     public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
-                        // you can use "transactionReceipt" to get the transactionReceipt data .
-                        List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transReceipt : list) {
-                            String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                            transactionList.add(NearpayLib.JSONStringToMap(jsonStr));
-                        }
-                        Map<String, Object> responseDict = NearpayLib.commonResponse(200, "Payment Success");
-                        responseDict.put("list", transactionList);
+                        Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.success_code, null, list);
                         promise.complete(responseDict);
                     }
 
                     @Override
                     public void onReversalFailed(@NonNull ReversalFailure reversalFailure) {
+                        int status = ErrorStatus.general_failure_code;
+                        String message = null;
+                        List<TransactionReceipt> receipts = null;
+
                         if (reversalFailure instanceof ReversalFailure.AuthenticationFailed) {
                             // when the Authentication is failed
-                            String messageResp = ((ReversalFailure.AuthenticationFailed) reversalFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.authentication_failed_message;
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
-                                    message);
-                            promise.complete(paramMap);
-//                            if (authType.equalsIgnoreCase("jwt")) {
-//                                provider.getNearpayLib().nearpay
-//                                        .updateAuthentication(
-//                                                provider.getNearpayLib().getAuthType(authType, authvalue));
-//                            }
-                        } else if (reversalFailure instanceof ReversalFailure.GeneralFailure) {
-                            // when there is general error .
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.general_failure_code,
-                                    ErrorStatus.general_messsage);
-                            promise.complete(paramMap);
+                            status = ErrorStatus.auth_failed_code;
+                            message= ((ReversalFailure.AuthenticationFailed) reversalFailure).getMessage();
                         } else if (reversalFailure instanceof ReversalFailure.FailureMessage) {
-                            // when there is FailureMessage
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.failure_code,
-                                    ErrorStatus.failure_messsage);
-                            promise.complete(paramMap);
+                            status = ErrorStatus.failure_code;
+                            message= ((ReversalFailure.FailureMessage) reversalFailure).getMessage();
                         } else if (reversalFailure instanceof ReversalFailure.InvalidStatus) {
-                            // you can get the status using following code
-                            String messageResp = ((ReversalFailure.InvalidStatus) reversalFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.invalid_status_messsage;
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_code, message);
-                            promise.complete(paramMap);
+                            status = ErrorStatus.invalid_code;
                         }
+                        Map response = NearpayLib.ApiResponse(status, message, receipts);
+                        promise.complete(response);
+
                     }
+
                 });
 
     }

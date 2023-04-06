@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
+import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
 
@@ -85,6 +86,8 @@ class Nearpay {
     bool enableReceiptUi = true,
     bool enableReversal = true,
     int finishTimeout = 60,
+    void Function(List<TransactionReceipt>)? onPurchaseApproved,
+    void Function()? onPurchaseFailed,
   }) async {
     final data = {
       "amount": amount,
@@ -93,9 +96,30 @@ class Nearpay {
       "enableReversal": enableReversal,
       "finishTimeout": finishTimeout,
     };
-    // return await methodChannel.invokeMethod<dynamic>('purchase', data);
 
-    return _callAndCheckStatus('purchase', data);
+    final response =
+        await methodChannel.invokeMethod<dynamic>("purchase", data);
+
+    if (response["status"] == 200) {
+      // print("][][][][][][][][][][][][][][] types [][][][][][][][][][][][]");
+      // print(response["list"].runtimeType);
+
+      List<TransactionReceipt> receipts =
+          (response["receipts"] as List<dynamic>)
+              .map((json) => TransactionReceipt.fromJson(json))
+              .toList();
+
+      if (onPurchaseApproved != null) {
+        onPurchaseApproved(receipts);
+      }
+
+      return response;
+    } else {
+      throw response;
+    }
+
+    // old implementation
+    // return _callAndCheckStatus('purchase', data);
   }
 
   Future<dynamic> refund({
@@ -151,7 +175,8 @@ class Nearpay {
   }
 
   Future<dynamic> logout() async {
-    return _callAndCheckStatus('logout', {});
+    return _callAndCheckStatus('logout', {})
+        .then((_) => _provider.listener.emitStateChange(NearpayState.notReady));
   }
 
   Future<dynamic> setup() async {

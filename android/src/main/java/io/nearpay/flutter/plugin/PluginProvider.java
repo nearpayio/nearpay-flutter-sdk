@@ -7,6 +7,7 @@ public class PluginProvider {
     private ArgsFilter argsFilter;
     public PluginProvider(){
         nearpayLib = new NearpayLib(this);
+
         argsFilter = new ArgsFilter(this);
     }
 

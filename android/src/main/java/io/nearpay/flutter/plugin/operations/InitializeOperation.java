@@ -2,8 +2,6 @@ package io.nearpay.flutter.plugin.operations;
 
 import android.annotation.SuppressLint;
 
-import androidx.annotation.NonNull;
-import io.flutter.plugin.common.MethodCall;
 
 import java.util.Locale;
 import java.util.Map;
@@ -11,7 +9,6 @@ import java.util.concurrent.CompletableFuture;
 
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.NearpayPlugin;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;

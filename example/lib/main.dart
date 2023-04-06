@@ -1,8 +1,11 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:nearpay_example/util.dart';
 import 'package:nearpay_flutter_sdk/nearpay.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
 
@@ -51,39 +54,44 @@ class _MyAppState extends State<MyApp> {
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
 
-    await purchaseAction().then((value) {
-      final transactionUUID = value['list'][0]['transaction_uuid'];
+    await purchaseAction().then((response) {
+      final transactionUUID = response['receipts'][0]['transaction_uuid'];
       refundAction(transactionUUID).catchError((e) {
-        showToast(e['message'], true);
+        showToast(e['message'] ?? "", true);
       });
     }).catchError((e) {
-      showToast(e['message'], true);
+      showToast(e['message'] ?? "", true);
     });
   }
 
   Future<dynamic> purchaseWithReverse() async {
     print("=-=-=-=-= Start Purchase with Reverse Action =-=-=-=-=");
 
-    return purchaseAction().then((value) {
-      final uuid = value['list'][0]['transaction_uuid'];
-      reverseAction(uuid).catchError((e) {
-        showToast(e['message'], true);
+    await purchaseAction().then((response) {
+      final transactionUUID = response['receipts'][0]['transaction_uuid'];
+      reverseAction(transactionUUID).catchError((e) {
+        showToast(e['message'] ?? "", true);
       });
     }).catchError((e) {
-      showToast(e['message'], true);
+      showToast(e['message'] ?? "", true);
     });
-    ;
   }
 
   Future<dynamic> purchaseAction() async {
     print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
     return nearpay
-        .purchase(amount: 0001, enableReceiptUi: true)
-        .then((response) {
-      print("=-=-=-=-= Purchase Success =-=-=-=-=");
-      print("response $response");
-      return response;
-    }).catchError((err) {
+        .purchase(
+      amount: 0001,
+      enableReceiptUi: true,
+      onPurchaseApproved: (receipts) {
+        print(
+            "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
+        receipts.forEach((receipt) {
+          printJson(receipt.toJson());
+        });
+      },
+    )
+        .catchError((err) {
       print("=-=-=-=-= Purchase Failed =-=-=-=-=");
       print("error, $err");
       throw err;
@@ -94,7 +102,7 @@ class _MyAppState extends State<MyApp> {
     print("=-=-=-=-= Start Refund Action =-=-=-=-=");
     return nearpay
         .refund(
-      amount: 0001,
+      amount: 0002,
       transactionUUID: uuid,
       customerReferenceNumber: "123",
       adminPin: '0000',
@@ -220,48 +228,52 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Nearpay Example'),
         ),
-        body: Column(children: [
-          TextButton(
-            onPressed: () async {},
-            child: const Text("Test"),
-          ),
-          TextButton(
-            onPressed: () async {
-              purchaseAction();
-            },
-            child: const Text("Purchase"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () async {
-              purchaseWithRefund();
-            },
-            child: const Text("Purchase and Refund"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () async {
-              purchaseWithReverse();
-            },
-            child: const Text("Purchase and Reverse"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () async {
-              reconcileAction();
-            },
-            child: const Text("RECONCILE"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          /*TextButton(
+        body: Column(
+          children: [
+            Container(
+              color: Colors.black87,
+              child: Text(
+                "state is: $state",
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                purchaseAction();
+              },
+              child: const Text("Purchase"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                purchaseWithRefund();
+              },
+              child: const Text("Purchase and Refund"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                purchaseWithReverse();
+              },
+              child: const Text("Purchase and Reverse"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                reconcileAction();
+              },
+              child: const Text("RECONCILE"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            /*TextButton(
             onPressed: () async {
               reverseAction();
             },
@@ -270,38 +282,32 @@ class _MyAppState extends State<MyApp> {
           const SizedBox(
             height: 20,
           ),*/
-          TextButton(
-            onPressed: () async {
-              setupAction();
-            },
-            child: const Text("Setup"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () async {
-              logoutAction();
-            },
-            child: const Text("Logout"),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () async {
-              sessionAction();
-            },
-            child: const Text("Session"),
-          ),
-          Container(
-            color: Colors.black87,
-            child: Text(
-              "state is: $state",
-              style: const TextStyle(color: Colors.white),
+            TextButton(
+              onPressed: () async {
+                setupAction();
+              },
+              child: const Text("Setup"),
             ),
-          )
-        ]),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                logoutAction();
+              },
+              child: const Text("Logout"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                sessionAction();
+              },
+              child: const Text("Session"),
+            ),
+          ],
+        ),
       ),
     );
   }
