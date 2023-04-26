@@ -19,11 +19,11 @@ class Merchant {
   @JsonKey(name: "category_code")
   String categoryCode;
 
-  factory Merchant.fromJson(Map<dynamic, dynamic> json) =>
+  factory Merchant.fromJson(Map<String, dynamic> json) =>
       _$MerchantFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private , generated
   /// helper method `_$MerchantToJson`.
-  Map<dynamic, dynamic> toJson() => _$MerchantToJson(this);
+  Map<String, dynamic> toJson() => _$MerchantToJson(this);
 }

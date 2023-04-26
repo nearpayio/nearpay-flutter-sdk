@@ -12,7 +12,7 @@ class LocalizationField {
   @JsonKey(name: "english")
   String english;
 
-  factory LocalizationField.fromJson(Map<dynamic, dynamic> json) =>
+  factory LocalizationField.fromJson(Map<String, dynamic> json) =>
       _$LocalizationFieldFromJson(json);
 
   Map<dynamic, dynamic> toJson() => _$LocalizationFieldToJson(this);

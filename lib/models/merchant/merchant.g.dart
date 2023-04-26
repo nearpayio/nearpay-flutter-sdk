@@ -8,8 +8,10 @@ part of 'merchant.dart';
 
 Merchant _$MerchantFromJson(Map json) => Merchant(
       json['id'] as String,
-      LocalizationField.fromJson(json['name'] as Map),
-      LocalizationField.fromJson(json['address'] as Map),
+      LocalizationField.fromJson(
+          Map<String, dynamic>.from(json['name'] as Map)),
+      LocalizationField.fromJson(
+          Map<String, dynamic>.from(json['address'] as Map)),
       json['category_code'] as String,
     );
 

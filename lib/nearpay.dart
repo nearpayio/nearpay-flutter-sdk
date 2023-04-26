@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
@@ -80,14 +78,14 @@ class Nearpay {
     return response;
   }
 
-  Future<dynamic> purchase({
+  Future<Map<String, dynamic>> purchase({
     required int amount,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversal = true,
     int finishTimeout = 60,
     void Function(List<TransactionReceipt>)? onPurchaseApproved,
-    void Function()? onPurchaseFailed,
+    void Function(PurchaseError)? onPurchaseFailed,
   }) async {
     final data = {
       "amount": amount,
@@ -97,15 +95,19 @@ class Nearpay {
       "finishTimeout": finishTimeout,
     };
 
-    final response =
-        await methodChannel.invokeMethod<dynamic>("purchase", data);
+    Map? _response = await methodChannel.invokeMethod<Map>("purchase", data);
+
+    // TODO: handle the fail later
+    if (_response == null) {
+      throw '';
+    }
+
+    final response = jsonDecode(jsonEncode(_response));
+    // final response = Map<String, dynamic>.from(_response);
 
     if (response["status"] == 200) {
-      // print("][][][][][][][][][][][][][][] types [][][][][][][][][][][][]");
-      // print(response["list"].runtimeType);
-
       List<TransactionReceipt> receipts =
-          (response["receipts"] as List<dynamic>)
+          List<Map<String, dynamic>>.from(response["receipts"])
               .map((json) => TransactionReceipt.fromJson(json))
               .toList();
 
@@ -115,6 +117,9 @@ class Nearpay {
 
       return response;
     } else {
+      if (onPurchaseFailed != null) {
+        // onPurchaseFailed()
+      }
       throw response;
     }
 

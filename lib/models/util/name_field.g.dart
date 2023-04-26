@@ -7,7 +7,8 @@ part of 'name_field.dart';
 // **************************************************************************
 
 NameField<T> _$NameFieldFromJson<T>(Map json) => NameField<T>(
-      name: LocalizationField.fromJson(json['name'] as Map),
+      name: LocalizationField.fromJson(
+          Map<String, dynamic>.from(json['name'] as Map)),
       id: json['id'],
     );
 

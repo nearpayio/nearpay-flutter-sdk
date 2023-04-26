@@ -13,7 +13,7 @@ class NameField<T> {
   @JsonKey(name: "id")
   dynamic id;
 
-  factory NameField.fromJson(Map<dynamic, dynamic> json) =>
+  factory NameField.fromJson(Map<String, dynamic> json) =>
       _$NameFieldFromJson(json);
 
   Map<dynamic, dynamic> toJson() => _$NameFieldToJson(this);

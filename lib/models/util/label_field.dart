@@ -13,8 +13,8 @@ class LabelField<T> {
   @JsonKey(name: "value")
   dynamic value;
 
-  factory LabelField.fromJson(Map<dynamic, dynamic> json) =>
+  factory LabelField.fromJson(Map<String, dynamic> json) =>
       _$LabelFieldFromJson(json);
 
-  Map<dynamic, dynamic> toJson() => _$LabelFieldToJson(this);
+  Map<String, dynamic> toJson() => _$LabelFieldToJson(this);
 }

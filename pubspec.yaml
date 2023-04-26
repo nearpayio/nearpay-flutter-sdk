@@ -12,6 +12,7 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   event_listener: ^0.2.0
   json_annotation: any
+  freezed_annotation: any
 
 dev_dependencies:
   flutter_test:
@@ -19,6 +20,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: any
   json_serializable: any
+  freezed: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -7,7 +7,8 @@ part of 'label_field.dart';
 // **************************************************************************
 
 LabelField<T> _$LabelFieldFromJson<T>(Map json) => LabelField<T>(
-      label: LocalizationField.fromJson(json['label'] as Map),
+      label: LocalizationField.fromJson(
+          Map<String, dynamic>.from(json['label'] as Map)),
       value: json['value'],
     );
 

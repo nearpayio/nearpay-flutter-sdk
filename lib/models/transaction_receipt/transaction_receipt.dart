@@ -187,7 +187,7 @@ class TransactionReceipt {
   /// A necessary factory constructor for creating a new User instance
   /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
   /// The constructor is named after the source class, in this case, User.
-  factory TransactionReceipt.fromJson(Map<dynamic, dynamic> json) =>
+  factory TransactionReceipt.fromJson(Map<String, dynamic> json) =>
       _$TransactionReceiptFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
