@@ -1,5 +1,7 @@
 package io.nearpay.flutter.plugin;
 
+import static java.util.UUID.randomUUID;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -46,6 +48,7 @@ import io.nearpay.sdk.utils.listeners.LogoutListener;
 import io.nearpay.sdk.utils.listeners.ReversalListener;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import io.nearpay.sdk.utils.listeners.SessionListener;
 import io.nearpay.sdk.utils.listeners.SetupListener;
@@ -235,6 +238,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
         String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
         String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+        UUID transactionUuid = call.argument("transactionUuid") == null ? randomUUID() : UUID.fromString(call.argument("transactionUuid").toString())  ;
         boolean isAuthValidated = isAuthInputValidation(authType,authvalue);
         Boolean isEnableReverse = call.argument("isEnableReversal");
         String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
@@ -248,15 +252,15 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             sendResponse(paramMap);
         }else{
             Long amount =  Long.valueOf(amountStr); 
-            doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout);
+            doPaymentAction(amount,customer_reference_number,isEnableUI,isEnableReverse,authType ,authvalue,timeout, transactionUuid);
 
         }
     }
 
 
-    private void doPaymentAction(Long amount, String customerReferenceNumber,Boolean enableReceiptUi,Boolean enableReversal, String authType,String inputValue, long finishTimeOut ) {
+    private void doPaymentAction(Long amount, String customerReferenceNumber,Boolean enableReceiptUi,Boolean enableReversal, String authType,String inputValue, long finishTimeOut, UUID transactionUuid ) {
 
-        nearPay.purchase(amount, customerReferenceNumber, enableReceiptUi,enableReversal, finishTimeOut, new PurchaseListener() {
+        nearPay.purchase(amount, customerReferenceNumber, enableReceiptUi,enableReversal, finishTimeOut, transactionUuid,new PurchaseListener() {
             @Override
             public void onPurchaseFailed(@NonNull PurchaseFailure purchaseFailure) {
 
@@ -295,7 +299,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
             @Override
             public void onPurchaseApproved(@Nullable List<TransactionReceipt> list) {
-                Log.i("onPurchaseApproved...second", "transactionReceipt,,,444,,");
+                Log.i("onPurchaseApproved", "transactionReceipt,,,444,,");
                 List<Map<String, Object>> transactionList = new ArrayList<>();
                 for (TransactionReceipt transRecipt : list){
                     Map<String, Object> responseDict = getTransactionGetResponse(transRecipt, "Refund Successfull" );
@@ -317,6 +321,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         Boolean isEnableUI = call.argument("isEnableUI") == null ? true  : call.argument("isEnableUI");
         String authvalue = call.argument("authvalue") == null ? this.authValueShared : call.argument("authvalue").toString();
         String authType = call.argument("authtype") == null ? this.authTypeShared : call.argument("authtype").toString();
+        UUID transactionUuid = call.argument("transactionUuid") == null ? randomUUID() : UUID.fromString(call.argument("transactionUuid").toString())  ;
         Boolean isEnableReverse = call.argument("isEnableReversal");
         Boolean isEditableReversalUI = call.argument("isEditableReversalUI") == null ? true : call.argument("isEditableReversalUI");
         String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString() : timeOutDefault;
@@ -338,12 +343,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             sendResponse(paramMap);
         }else{
             Long amount =  Long.valueOf(amountStr); 
-            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout,adminPin );
+            doRefundAction(amount,reference_retrieval_number, customer_reference_number,isEnableUI,isEnableReverse,isEditableReversalUI,authType,authvalue,timeout,adminPin, transactionUuid );
         }
     }
 
-    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut,String adminPin) {
-        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut,adminPin, new RefundListener() {
+    private void doRefundAction(Long amount,String transactionReferenceRetrievalNumber, String customerReferenceNumber,Boolean enableReceiptUi, boolean isEnableReversal,Boolean isEnableRefundAmountUi,String authType,String authvalue,long finishTimeOut,String adminPin, UUID transactionUuid) {
+        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,isEnableReversal,isEnableRefundAmountUi,finishTimeOut, transactionUuid,adminPin, new RefundListener() {
             @Override
             public void onRefundFailed(@NonNull RefundFailure refundFailure) {
 
@@ -831,7 +836,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
-    channel.setMethodCallHandler(null);
+    channel.    setMethodCallHandler(null);
   }
 
 private void doSetup(String authType,String inputValue){
