@@ -1,6 +1,7 @@
 package io.nearpay.flutter.plugin.util;
 
 import java.util.Map;
+import java.util.UUID;
 
 import io.nearpay.flutter.plugin.PluginProvider;
 
@@ -32,6 +33,12 @@ public class ArgsFilter {
 
         if (args.get("customer_reference_number") == null) {
             args.put("customer_reference_number", "");
+        }
+
+        if (args.get("transaction_uuid") == null) {
+            args.put("transaction_uuid", UUID.randomUUID());
+        } else {
+            args.put("transaction_uuid", UUID.fromString(args.get("transaction_uuid").toString()));
         }
 
         if (args.get("enableReceiptUi") == null) {

@@ -294,3 +294,426 @@ abstract class _PurchaseDeclined implements PurchaseDeclined {
   _$$_PurchaseDeclinedCopyWith<_$_PurchaseDeclined> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+PurchaseAuthenticationFailed _$PurchaseAuthenticationFailedFromJson(
+    Map<String, dynamic> json) {
+  return _PurchaseAuthenticationFailed.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PurchaseAuthenticationFailed {
+  String get message => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PurchaseAuthenticationFailedCopyWith<PurchaseAuthenticationFailed>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PurchaseAuthenticationFailedCopyWith<$Res> {
+  factory $PurchaseAuthenticationFailedCopyWith(
+          PurchaseAuthenticationFailed value,
+          $Res Function(PurchaseAuthenticationFailed) then) =
+      _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
+          PurchaseAuthenticationFailed>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
+        $Val extends PurchaseAuthenticationFailed>
+    implements $PurchaseAuthenticationFailedCopyWith<$Res> {
+  _$PurchaseAuthenticationFailedCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PurchaseAuthenticationFailedCopyWith<$Res>
+    implements $PurchaseAuthenticationFailedCopyWith<$Res> {
+  factory _$$_PurchaseAuthenticationFailedCopyWith(
+          _$_PurchaseAuthenticationFailed value,
+          $Res Function(_$_PurchaseAuthenticationFailed) then) =
+      __$$_PurchaseAuthenticationFailedCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$_PurchaseAuthenticationFailedCopyWithImpl<$Res>
+    extends _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
+        _$_PurchaseAuthenticationFailed>
+    implements _$$_PurchaseAuthenticationFailedCopyWith<$Res> {
+  __$$_PurchaseAuthenticationFailedCopyWithImpl(
+      _$_PurchaseAuthenticationFailed _value,
+      $Res Function(_$_PurchaseAuthenticationFailed) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$_PurchaseAuthenticationFailed(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PurchaseAuthenticationFailed implements _PurchaseAuthenticationFailed {
+  const _$_PurchaseAuthenticationFailed({required this.message});
+
+  factory _$_PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
+      _$$_PurchaseAuthenticationFailedFromJson(json);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'PurchaseAuthenticationFailed(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PurchaseAuthenticationFailed &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PurchaseAuthenticationFailedCopyWith<_$_PurchaseAuthenticationFailed>
+      get copyWith => __$$_PurchaseAuthenticationFailedCopyWithImpl<
+          _$_PurchaseAuthenticationFailed>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PurchaseAuthenticationFailedToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PurchaseAuthenticationFailed
+    implements PurchaseAuthenticationFailed {
+  const factory _PurchaseAuthenticationFailed({required final String message}) =
+      _$_PurchaseAuthenticationFailed;
+
+  factory _PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) =
+      _$_PurchaseAuthenticationFailed.fromJson;
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PurchaseAuthenticationFailedCopyWith<_$_PurchaseAuthenticationFailed>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+PurchaseInvalidStatus _$PurchaseInvalidStatusFromJson(
+    Map<String, dynamic> json) {
+  return _PurchaseInvalidStatus.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PurchaseInvalidStatus {
+  dynamic get required => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PurchaseInvalidStatusCopyWith<PurchaseInvalidStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PurchaseInvalidStatusCopyWith<$Res> {
+  factory $PurchaseInvalidStatusCopyWith(PurchaseInvalidStatus value,
+          $Res Function(PurchaseInvalidStatus) then) =
+      _$PurchaseInvalidStatusCopyWithImpl<$Res, PurchaseInvalidStatus>;
+  @useResult
+  $Res call({dynamic required});
+}
+
+/// @nodoc
+class _$PurchaseInvalidStatusCopyWithImpl<$Res,
+        $Val extends PurchaseInvalidStatus>
+    implements $PurchaseInvalidStatusCopyWith<$Res> {
+  _$PurchaseInvalidStatusCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? required = freezed,
+  }) {
+    return _then(_value.copyWith(
+      required: freezed == required
+          ? _value.required
+          : required // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PurchaseInvalidStatusCopyWith<$Res>
+    implements $PurchaseInvalidStatusCopyWith<$Res> {
+  factory _$$_PurchaseInvalidStatusCopyWith(_$_PurchaseInvalidStatus value,
+          $Res Function(_$_PurchaseInvalidStatus) then) =
+      __$$_PurchaseInvalidStatusCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({dynamic required});
+}
+
+/// @nodoc
+class __$$_PurchaseInvalidStatusCopyWithImpl<$Res>
+    extends _$PurchaseInvalidStatusCopyWithImpl<$Res, _$_PurchaseInvalidStatus>
+    implements _$$_PurchaseInvalidStatusCopyWith<$Res> {
+  __$$_PurchaseInvalidStatusCopyWithImpl(_$_PurchaseInvalidStatus _value,
+      $Res Function(_$_PurchaseInvalidStatus) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? required = freezed,
+  }) {
+    return _then(_$_PurchaseInvalidStatus(
+      required: freezed == required ? _value.required! : required,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PurchaseInvalidStatus implements _PurchaseInvalidStatus {
+  const _$_PurchaseInvalidStatus({this.required});
+
+  factory _$_PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) =>
+      _$$_PurchaseInvalidStatusFromJson(json);
+
+  @override
+  final dynamic required;
+
+  @override
+  String toString() {
+    return 'PurchaseInvalidStatus(required: $required)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PurchaseInvalidStatus &&
+            const DeepCollectionEquality().equals(other.required, required));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PurchaseInvalidStatusCopyWith<_$_PurchaseInvalidStatus> get copyWith =>
+      __$$_PurchaseInvalidStatusCopyWithImpl<_$_PurchaseInvalidStatus>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PurchaseInvalidStatusToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PurchaseInvalidStatus implements PurchaseInvalidStatus {
+  const factory _PurchaseInvalidStatus({final dynamic required}) =
+      _$_PurchaseInvalidStatus;
+
+  factory _PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) =
+      _$_PurchaseInvalidStatus.fromJson;
+
+  @override
+  dynamic get required;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PurchaseInvalidStatusCopyWith<_$_PurchaseInvalidStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PurchaseGeneralFailure _$PurchaseGeneralFailureFromJson(
+    Map<String, dynamic> json) {
+  return _PurchaseGeneralFailure.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PurchaseGeneralFailure {
+  dynamic get required => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PurchaseGeneralFailureCopyWith<PurchaseGeneralFailure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PurchaseGeneralFailureCopyWith<$Res> {
+  factory $PurchaseGeneralFailureCopyWith(PurchaseGeneralFailure value,
+          $Res Function(PurchaseGeneralFailure) then) =
+      _$PurchaseGeneralFailureCopyWithImpl<$Res, PurchaseGeneralFailure>;
+  @useResult
+  $Res call({dynamic required});
+}
+
+/// @nodoc
+class _$PurchaseGeneralFailureCopyWithImpl<$Res,
+        $Val extends PurchaseGeneralFailure>
+    implements $PurchaseGeneralFailureCopyWith<$Res> {
+  _$PurchaseGeneralFailureCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? required = freezed,
+  }) {
+    return _then(_value.copyWith(
+      required: freezed == required
+          ? _value.required
+          : required // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PurchaseGeneralFailureCopyWith<$Res>
+    implements $PurchaseGeneralFailureCopyWith<$Res> {
+  factory _$$_PurchaseGeneralFailureCopyWith(_$_PurchaseGeneralFailure value,
+          $Res Function(_$_PurchaseGeneralFailure) then) =
+      __$$_PurchaseGeneralFailureCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({dynamic required});
+}
+
+/// @nodoc
+class __$$_PurchaseGeneralFailureCopyWithImpl<$Res>
+    extends _$PurchaseGeneralFailureCopyWithImpl<$Res,
+        _$_PurchaseGeneralFailure>
+    implements _$$_PurchaseGeneralFailureCopyWith<$Res> {
+  __$$_PurchaseGeneralFailureCopyWithImpl(_$_PurchaseGeneralFailure _value,
+      $Res Function(_$_PurchaseGeneralFailure) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? required = freezed,
+  }) {
+    return _then(_$_PurchaseGeneralFailure(
+      required: freezed == required ? _value.required! : required,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PurchaseGeneralFailure implements _PurchaseGeneralFailure {
+  const _$_PurchaseGeneralFailure({this.required});
+
+  factory _$_PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) =>
+      _$$_PurchaseGeneralFailureFromJson(json);
+
+  @override
+  final dynamic required;
+
+  @override
+  String toString() {
+    return 'PurchaseGeneralFailure(required: $required)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PurchaseGeneralFailure &&
+            const DeepCollectionEquality().equals(other.required, required));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PurchaseGeneralFailureCopyWith<_$_PurchaseGeneralFailure> get copyWith =>
+      __$$_PurchaseGeneralFailureCopyWithImpl<_$_PurchaseGeneralFailure>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PurchaseGeneralFailureToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PurchaseGeneralFailure implements PurchaseGeneralFailure {
+  const factory _PurchaseGeneralFailure({final dynamic required}) =
+      _$_PurchaseGeneralFailure;
+
+  factory _PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) =
+      _$_PurchaseGeneralFailure.fromJson;
+
+  @override
+  dynamic get required;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PurchaseGeneralFailureCopyWith<_$_PurchaseGeneralFailure> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import io.nearpay.flutter.plugin.ErrorStatus;
@@ -23,7 +24,7 @@ public class ReverseOperation extends BaseOperation {
     }
 
     private void doReverse(Map args, CompletableFuture<Map> promise) {
-        String transactionUuid = (String) args.get("transaction_uuid");
+        String transactionUuid = (String) args.get("original_transaction_uuid");
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Long finishTimeout = (Long) args.get("finishTimeout");
 

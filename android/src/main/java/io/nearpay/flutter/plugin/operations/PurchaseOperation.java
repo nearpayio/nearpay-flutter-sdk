@@ -5,8 +5,8 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-
 
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
@@ -24,12 +24,13 @@ public class PurchaseOperation extends BaseOperation {
     private void doPaymentAction(Map args, CompletableFuture<Map> promise) {
         Long amount = (Long) args.get("amount");
         String customerReferenceNumber = args.get("customer_reference_number").toString();
+        UUID transaction_uuid = (UUID) args.get("transaction_uuid");
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Boolean enableReversal = (Boolean) args.get("enableReversal");
         Long timeout = (Long) args.get("finishTimeout");
 
         this.provider.getNearpayLib().nearpay.purchase(amount, customerReferenceNumber, enableReceiptUi, enableReversal,
-                timeout,
+                timeout, transaction_uuid,
                 new PurchaseListener() {
 
                     @Override

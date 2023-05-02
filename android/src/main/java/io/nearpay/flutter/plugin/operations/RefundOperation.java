@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import io.nearpay.flutter.plugin.ErrorStatus;
@@ -24,17 +25,18 @@ public class RefundOperation extends BaseOperation {
 
         private void refundValidation(Map args, CompletableFuture<Map> promise) {
                 Long amount = (Long) args.get("amount");
-                String reference_retrieval_number = args.get("transaction_uuid").toString();
+                String original_transaction_uuid= args.get("original_transaction_uuid").toString();
                 String customer_reference_number = args.get("customer_reference_number").toString();
+                UUID transaction_uuid = (UUID) args.get("transaction_uuid");
                 Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
                 Boolean enableReversal = (Boolean) args.get("enableReversal");
                 Boolean enableEditableRefundAmountUi = (Boolean) args.get("enableEditableRefundAmountUi");
                 Long finishTimeout = (Long) args.get("finishTimeout");
                  String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
 
-                provider.getNearpayLib().nearpay.refund(amount, reference_retrieval_number,
+                provider.getNearpayLib().nearpay.refund(amount, original_transaction_uuid,
                                 customer_reference_number, enableReceiptUi,
-                                enableReversal, enableEditableRefundAmountUi, finishTimeout, adminPin,
+                                enableReversal, enableEditableRefundAmountUi, finishTimeout, transaction_uuid, adminPin,
                                 new RefundListener() {
                                         @Override
                                         public void onRefundApproved(@Nullable List<TransactionReceipt> list) {

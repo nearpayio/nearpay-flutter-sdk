@@ -8,6 +8,12 @@ PurchaseError getPurchaseError(Map<String, dynamic> nativeResponse) {
       return PurchaseDeclined.fromJson(nativeResponse);
     case 406:
       return PurchaseRejected.fromJson(nativeResponse);
+    case 401:
+      return PurchaseAuthenticationFailed.fromJson(nativeResponse);
+    case 404:
+      return PurchaseInvalidStatus.fromJson(nativeResponse);
+    case 402:
+      return PurchaseInvalidStatus.fromJson(nativeResponse);
   }
 
   throw "no Error with status ${status}";

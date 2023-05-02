@@ -1,10 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
+import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/refund_error/refund_error.dart';
+import 'package:nearpay_flutter_sdk/errors/refund_error/refund_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error.dart';
+import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error_switch.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
+import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_receipt.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
+import 'package:uuid/uuid.dart';
+import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
 
 enum Environments {
   sandbox("sandbox"),
@@ -30,6 +39,8 @@ enum Locale {
   const Locale(this.value);
   final String value;
 }
+
+var uuid = Uuid();
 
 class Nearpay {
   final AuthenticationType authType;
@@ -80,6 +91,7 @@ class Nearpay {
 
   Future<Map<String, dynamic>> purchase({
     required int amount,
+    String? transactionUUID,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversal = true,
@@ -89,10 +101,11 @@ class Nearpay {
   }) async {
     final data = {
       "amount": amount,
-      "customer_reference_number": customerReferenceNumber,
-      "enableReceiptUi": enableReceiptUi,
-      "enableReversal": enableReversal,
-      "finishTimeout": finishTimeout,
+      "transaction_uuid": transactionUUID, //Optional
+      "customer_reference_number": customerReferenceNumber, //Optional
+      "enableReceiptUi": enableReceiptUi, //Optional
+      "enableReversal": enableReversal, //Optional
+      "finishTimeout": finishTimeout, //Optional
     };
 
     Map? _response = await methodChannel.invokeMethod<Map>("purchase", data);
@@ -102,8 +115,8 @@ class Nearpay {
       throw '';
     }
 
+    // avoid annoying bug with this method
     final response = jsonDecode(jsonEncode(_response));
-    // final response = Map<String, dynamic>.from(_response);
 
     if (response["status"] == 200) {
       List<TransactionReceipt> receipts =
@@ -118,7 +131,8 @@ class Nearpay {
       return response;
     } else {
       if (onPurchaseFailed != null) {
-        // onPurchaseFailed()
+        PurchaseError err = getPurchaseError(response);
+        onPurchaseFailed(err);
       }
       throw response;
     }
@@ -129,17 +143,21 @@ class Nearpay {
 
   Future<dynamic> refund({
     required int amount,
-    required String transactionUUID,
+    required String originalTransactionUUID,
+    String? transactionUUID,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversal = true,
     bool editableRefundUI = true,
     int finishTimeout = 60,
     String? adminPin,
+    void Function(List<TransactionReceipt>)? onRefundApproved,
+    void Function(RefundError)? onRefundFailed,
   }) async {
     final data = {
       "amount": amount, // Required
-      "transaction_uuid": transactionUUID, // Required
+      "original_transaction_uuid": originalTransactionUUID, // Required
+      "transaction_uuid": transactionUUID, //Optional
       "customer_reference_number": customerReferenceNumber, //Optional
       "enableReceiptUi": enableReceiptUi, // Optional
       "enableReversal": enableReversal, // Optional
@@ -149,34 +167,128 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    return _callAndCheckStatus('refund', data);
+    Map? _response = await methodChannel.invokeMethod<Map>("refund", data);
+
+    // TODO: handle the fail later
+    if (_response == null) {
+      throw '';
+    }
+
+    // avoid annoying bug with this method
+    final response = jsonDecode(jsonEncode(_response));
+
+    if (response["status"] == 200) {
+      List<TransactionReceipt> receipts =
+          List<Map<String, dynamic>>.from(response["receipts"])
+              .map((json) => TransactionReceipt.fromJson(json))
+              .toList();
+
+      if (onRefundApproved != null) {
+        onRefundApproved(receipts);
+      }
+
+      return response;
+    } else {
+      if (onRefundFailed != null) {
+        RefundError err = getRefundError(response);
+        onRefundFailed(err);
+      }
+      throw response;
+    }
+
+    // old implementation
+    // return _callAndCheckStatus('refund', data);
   }
 
   Future<dynamic> reconcile({
     bool enableReceiptUi = true,
     int finishTimeout = 60,
     String? adminPin,
+    void Function(ReconciliationReceipt)? onReconcileFinished,
+    void Function(ReconcileError)? onReconcileFailed,
   }) async {
     final data = {
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin // Optional
     };
+    Map? _response = await methodChannel.invokeMethod<Map>("reconcile", data);
 
-    return _callAndCheckStatus('reconcile', data);
+    // TODO: handle the fail later
+    if (_response == null) {
+      throw '';
+    }
+
+    // avoid annoying bug with this method
+    final response = jsonDecode(jsonEncode(_response));
+
+    if (response["status"] == 200) {
+      List<ReconciliationReceipt> receipts =
+          List<Map<String, dynamic>>.from(response["receipts"])
+              .map((json) => ReconciliationReceipt.fromJson(json))
+              .toList();
+
+      ReconciliationReceipt receipt = receipts[0];
+
+      if (onReconcileFinished != null) {
+        onReconcileFinished(receipt);
+      }
+
+      return response;
+    } else {
+      if (onReconcileFailed != null) {
+        ReconcileError err = getReconcileError(response);
+        onReconcileFailed(err);
+      }
+      throw response;
+    }
+
+    // old implementation
+    // return _callAndCheckStatus('reconcile', data);
   }
 
   Future<dynamic> reverse({
-    required String transactionUUID,
+    required String originalTransactionUUID,
     bool enableReceiptUi = true,
     int finishTimeout = 60,
+    void Function(List<TransactionReceipt>)? onReversalFinished,
+    void Function(ReversalError)? onReversalFailed,
   }) async {
     var data = {
-      "transaction_uuid": transactionUUID, // Required
+      "original_transaction_uuid": originalTransactionUUID, // Required
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout // Optional
     };
-    return _callAndCheckStatus('reverse', data);
+    Map? _response = await methodChannel.invokeMethod<Map>("reverse", data);
+
+    // TODO: handle the fail later
+    if (_response == null) {
+      throw '';
+    }
+
+    // avoid annoying bug with this method
+    final response = jsonDecode(jsonEncode(_response));
+
+    if (response["status"] == 200) {
+      List<TransactionReceipt> receipts =
+          List<Map<String, dynamic>>.from(response["receipts"])
+              .map((json) => TransactionReceipt.fromJson(json))
+              .toList();
+
+      if (onReversalFinished != null) {
+        onReversalFinished(receipts);
+      }
+
+      return response;
+    } else {
+      if (onReversalFailed != null) {
+        ReversalError err = getReversalError(response);
+        onReversalFailed(err);
+      }
+      throw response;
+    }
+    // old implementation
+    // return _callAndCheckStatus('reverse', data);
   }
 
   Future<dynamic> logout() async {
