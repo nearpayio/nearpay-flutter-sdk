@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "<Enter Your Email Here>";
+  final tokenKey = "<enter your email>";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -109,7 +109,8 @@ class _MyAppState extends State<MyApp> {
           true, // [optional] true will enable the ui and false will disable
       "isEnableReversal":
           true, // it will allow you to enable or disable the reverse button
-      "finishTimeout": timeout // [optional] Add the number of seconds
+      "finishTimeout": timeout, // [optional] Add the number of seconds
+      "isUiDismissible": true
     };
     var jsonResponse = jsonDecode(await Nearpay.purchase(reqData));
     print('response ${jsonResponse['list'][0]['udid']}');
