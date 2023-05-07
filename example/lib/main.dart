@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nearpay_example/util.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
