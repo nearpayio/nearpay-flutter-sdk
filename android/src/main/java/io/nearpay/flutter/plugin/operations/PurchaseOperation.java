@@ -28,9 +28,9 @@ public class PurchaseOperation extends BaseOperation {
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Boolean enableReversal = (Boolean) args.get("enableReversal");
         Long timeout = (Long) args.get("finishTimeout");
-
+        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
         this.provider.getNearpayLib().nearpay.purchase(amount, customerReferenceNumber, enableReceiptUi, enableReversal,
-                timeout, transaction_uuid,
+                timeout, transaction_uuid, enableUiDismiss,
                 new PurchaseListener() {
 
                     @Override

@@ -28,8 +28,9 @@ public class ReconciliationOperation extends BaseOperation {
                 Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
                 Long finishTimeout = (Long) args.get("finishTimeout");
                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
+                Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
 
-                provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin, finishTimeout,
+                provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin, finishTimeout, enableUiDismiss,
                                 new ReconcileListener() {
                                         @Override
                                         public void onReconcileFinished(

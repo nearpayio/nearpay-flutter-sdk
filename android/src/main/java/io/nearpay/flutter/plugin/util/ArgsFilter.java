@@ -41,6 +41,10 @@ public class ArgsFilter {
             args.put("transaction_uuid", UUID.fromString(args.get("transaction_uuid").toString()));
         }
 
+        if (args.get("enableUiDismiss") == null) {
+            args.put("enableUiDismiss", true);
+        }
+
         if (args.get("enableReceiptUi") == null) {
             args.put("enableReceiptUi", true);
         }
@@ -52,7 +56,6 @@ public class ArgsFilter {
         if (args.get("enableEditableRefundAmountUi") == null) {
             args.put("enableEditableRefundAmountUi", true);
         }
-
 
         return args;
     }

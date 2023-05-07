@@ -27,8 +27,9 @@ public class ReverseOperation extends BaseOperation {
         String transactionUuid = (String) args.get("original_transaction_uuid");
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Long finishTimeout = (Long) args.get("finishTimeout");
+        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
 
-        provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, finishTimeout,
+        provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, finishTimeout,enableUiDismiss,
                 new ReversalListener() {
 
                     @Override

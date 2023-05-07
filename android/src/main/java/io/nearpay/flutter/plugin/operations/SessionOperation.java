@@ -39,9 +39,10 @@ public class SessionOperation extends BaseOperation {
         Long finishTimeout = (Long) args.get("finishTimeout");
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Boolean enableReversal = (Boolean) args.get("enableReversal");
+        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
 
         provider.getNearpayLib().nearpay.session(sessionID, enableReceiptUi, enableReversal,
-                finishTimeout,
+                finishTimeout, enableUiDismiss,
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {

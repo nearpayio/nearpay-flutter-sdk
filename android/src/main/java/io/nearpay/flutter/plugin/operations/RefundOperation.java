@@ -32,11 +32,12 @@ public class RefundOperation extends BaseOperation {
                 Boolean enableReversal = (Boolean) args.get("enableReversal");
                 Boolean enableEditableRefundAmountUi = (Boolean) args.get("enableEditableRefundAmountUi");
                 Long finishTimeout = (Long) args.get("finishTimeout");
-                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
+                String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
+                Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
 
                 provider.getNearpayLib().nearpay.refund(amount, original_transaction_uuid,
                                 customer_reference_number, enableReceiptUi,
-                                enableReversal, enableEditableRefundAmountUi, finishTimeout, transaction_uuid, adminPin,
+                                enableReversal, enableEditableRefundAmountUi, finishTimeout, transaction_uuid, adminPin,enableUiDismiss,
                                 new RefundListener() {
                                         @Override
                                         public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
