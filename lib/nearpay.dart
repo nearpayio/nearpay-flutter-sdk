@@ -95,6 +95,7 @@ class Nearpay {
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversal = true,
+    bool enableUiDismiss = true,
     int finishTimeout = 60,
     void Function(List<TransactionReceipt>)? onPurchaseApproved,
     void Function(PurchaseError)? onPurchaseFailed,
@@ -149,6 +150,7 @@ class Nearpay {
     bool enableReceiptUi = true,
     bool enableReversal = true,
     bool editableRefundUI = true,
+    bool enableUiDismiss = true,
     int finishTimeout = 60,
     String? adminPin,
     void Function(List<TransactionReceipt>)? onRefundApproved,
@@ -203,6 +205,7 @@ class Nearpay {
   Future<dynamic> reconcile({
     bool enableReceiptUi = true,
     int finishTimeout = 60,
+    bool enableUiDismiss = true,
     String? adminPin,
     void Function(ReconciliationReceipt)? onReconcileFinished,
     void Function(ReconcileError)? onReconcileFailed,
@@ -251,6 +254,7 @@ class Nearpay {
     required String originalTransactionUUID,
     bool enableReceiptUi = true,
     int finishTimeout = 60,
+    bool enableUiDismiss = true,
     void Function(List<TransactionReceipt>)? onReversalFinished,
     void Function(ReversalError)? onReversalFailed,
   }) async {
@@ -312,6 +316,7 @@ class Nearpay {
     required String sessionID,
     bool enableReceiptUi = true,
     bool enableReversal = true,
+    bool enableUiDismiss = true,
     int finishTimeout = 60,
   }) async {
     var data = {
