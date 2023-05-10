@@ -55,27 +55,56 @@ class _MyAppState extends State<MyApp> {
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
 
-    await purchaseAction().then((response) {
-      final transactionUUID = response['receipts'][0]['transaction_uuid'];
-      refundAction(transactionUUID).catchError((e) {
-        showToast(e['message'] ?? "", true);
-      });
-    }).catchError((e) {
-      showToast(e['message'] ?? "", true);
-    });
+    nearpay.purchase(
+        amount: 1000,
+        onPurchaseApproved: (reciepts) {
+          print(
+              "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
+          final String uuid = reciepts[0].transactionUuid;
+          nearpay.refund(
+            amount: 1000,
+            originalTransactionUUID: uuid,
+            onRefundApproved: (reciepts) {
+              print(
+                  "=-=-=-=-=-=-=-=-=-=- on refund approved =-=-=-=-=-=-=-=-=-=-=");
+            },
+            onRefundFailed: (err) {
+              print(
+                  "=-=-=-=-=-=-=-=-=-=- on refund failed =-=-=-=-=-=-=-=-=-=-=");
+            },
+          );
+        },
+        onPurchaseFailed: (err) {
+          print(
+              "=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
+        });
   }
 
   Future<dynamic> purchaseWithReverse() async {
     print("=-=-=-=-= Start Purchase with Reverse Action =-=-=-=-=");
 
-    await purchaseAction().then((response) {
-      final transactionUUID = response['receipts'][0]['transaction_uuid'];
-      reverseAction(transactionUUID).catchError((e) {
-        showToast(e['message'] ?? "", true);
-      });
-    }).catchError((e) {
-      showToast(e['message'] ?? "", true);
-    });
+    nearpay.purchase(
+        amount: 1000,
+        onPurchaseApproved: (reciepts) {
+          print(
+              "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
+          final String uuid = reciepts[0].transactionUuid;
+          nearpay.reverse(
+            originalTransactionUUID: uuid,
+            onReversalFinished: (reciepts) {
+              print(
+                  "=-=-=-=-=-=-=-=-=-=- on reverse approved =-=-=-=-=-=-=-=-=-=-=");
+            },
+            onReversalFailed: (err) {
+              print(
+                  "=-=-=-=-=-=-=-=-=-=- on reverse failed =-=-=-=-=-=-=-=-=-=-=");
+            },
+          );
+        },
+        onPurchaseFailed: (err) {
+          print(
+              "=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
+        });
   }
 
   Future<dynamic> purchaseAction() async {
@@ -105,28 +134,6 @@ class _MyAppState extends State<MyApp> {
         });
   }
 
-  Future<dynamic> refundAction(String uuid) async {
-    print("=-=-=-=-= Start Refund Action =-=-=-=-=");
-    return nearpay.refund(
-        amount: 0002,
-        originalTransactionUUID: uuid,
-        customerReferenceNumber: "123",
-        adminPin: '0000',
-        editableRefundUI: true,
-        enableReceiptUi: true,
-        enableReversal: true,
-        finishTimeout: 60,
-        onRefundApproved: (receipts) {
-          print("=-=-=-=-= Refund Success =-=-=-=-=");
-          receipts.forEach((receipt) {
-            printJson(receipt.toJson());
-          });
-        },
-        onRefundFailed: (err) {
-          print("=-=-=-=-= Refund Failed =-=-=-=-=");
-        });
-  }
-
   Future<dynamic> reconcileAction() async {
     print("=-=-=-=-= Start Reconcile Action =-=-=-=-=");
 
@@ -135,29 +142,11 @@ class _MyAppState extends State<MyApp> {
         adminPin: '0000',
         finishTimeout: 60,
         onReconcileFinished: (receipt) {
-          // receipt.schemes.forEach((x) {
-          //   print("=-=-=-=-=-=-= name: ${x.name}");
-          // });
           print("=-=-=-=-= Reconcile Success =-=-=-=-=");
           printJson(receipt.toJson());
         },
         onReconcileFailed: (err) {
           print("=-=-=-=-= Reconcile Failed =-=-=-=-=");
-        });
-  }
-
-  Future<dynamic> reverseAction(String uuid) async {
-    print("=-=-=-=-= Start Reverse Action =-=-=-=-=");
-
-    return nearpay.reverse(
-        originalTransactionUUID: uuid,
-        enableReceiptUi: true,
-        finishTimeout: 60,
-        onReversalFinished: (receipts) {
-          print("=-=-=-=-= Reverse Success =-=-=-=-=");
-        },
-        onReversalFailed: (err) {
-          print("=-=-=-=-= Reverse Failed =-=-=-=-=");
         });
   }
 
