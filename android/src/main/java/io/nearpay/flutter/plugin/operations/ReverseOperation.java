@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.ReversalFailure;
@@ -23,7 +24,7 @@ public class ReverseOperation extends BaseOperation {
         super(provider);
     }
 
-    private void doReverse(Map args, CompletableFuture<Map> promise) {
+    private void doReverse(Map args, NearpaySender sender) {
         String transactionUuid = (String) args.get("original_transaction_uuid");
         Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
         Long finishTimeout = (Long) args.get("finishTimeout");
@@ -35,7 +36,7 @@ public class ReverseOperation extends BaseOperation {
                     @Override
                     public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
                         Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.success_code, null, list);
-                        promise.complete(responseDict);
+                        sender.send(responseDict);
                     }
 
                     @Override
@@ -55,7 +56,7 @@ public class ReverseOperation extends BaseOperation {
                             status = ErrorStatus.invalid_code;
                         }
                         Map response = NearpayLib.ApiResponse(status, message, receipts);
-                        promise.complete(response);
+                        sender.send(response);
 
                     }
 
@@ -64,7 +65,7 @@ public class ReverseOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, CompletableFuture<Map> promise) {
-        doReverse(args, promise);
+    public void run(Map args, NearpaySender sender) {
+        doReverse(args, sender);
     }
 }

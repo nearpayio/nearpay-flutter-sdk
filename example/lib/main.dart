@@ -121,8 +121,6 @@ class _MyAppState extends State<MyApp> {
           receipts.forEach((receipt) {
             printJson(receipt.toJson());
           });
-
-          // print("response $receipts");
         },
         onRefundFailed: (err) {
           print("=-=-=-=-= Refund Failed =-=-=-=-=");
@@ -137,9 +135,9 @@ class _MyAppState extends State<MyApp> {
         adminPin: '0000',
         finishTimeout: 60,
         onReconcileFinished: (receipt) {
-          receipt.schemes.forEach((x) {
-            print("=-=-=-=-=-=-= name: ${x.name}");
-          });
+          // receipt.schemes.forEach((x) {
+          //   print("=-=-=-=-=-=-= name: ${x.name}");
+          // });
           print("=-=-=-=-= Reconcile Success =-=-=-=-=");
           printJson(receipt.toJson());
         },

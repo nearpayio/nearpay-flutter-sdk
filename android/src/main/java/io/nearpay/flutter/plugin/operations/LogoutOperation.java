@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.utils.enums.LogoutFailure;
 import io.nearpay.sdk.utils.listeners.LogoutListener;
 
@@ -17,14 +18,14 @@ public class LogoutOperation extends BaseOperation {
         super(provider);
     }
 
-    private void doLogoutAction(CompletableFuture<Map> promise) {
+    private void doLogoutAction(NearpaySender sender) {
         provider.getNearpayLib().nearpay.logout(new LogoutListener() {
             @Override
             public void onLogoutCompleted() {
                 // write your message here
                 Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.success_code,
                         "Logout Successfully");
-                promise.complete(paramMap);
+                sender.send(paramMap);
             }
 
             @Override
@@ -33,19 +34,19 @@ public class LogoutOperation extends BaseOperation {
                     // when the user is already logged out
                     Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.logout_already_code,
                             "User already logout");
-                    promise.complete(paramMap);
+                    sender.send(paramMap);
                 } else if (logoutFailure instanceof LogoutFailure.GeneralFailure) {
                     // when the error is general error
                     Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.general_failure_code,
                             ErrorStatus.general_messsage);
-                    promise.complete(paramMap);
+                    sender.send(paramMap);
                 }
             }
         });
     }
 
     @Override
-    public void run(Map args, CompletableFuture<Map> promise) {
-        doLogoutAction(promise);
+    public void run(Map args, NearpaySender sender) {
+        doLogoutAction(sender);
     }
 }

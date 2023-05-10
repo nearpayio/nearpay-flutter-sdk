@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.data.models.ReconciliationReceipt;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
@@ -24,7 +25,7 @@ public class ReconciliationOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void doReconcileAction(Map args, CompletableFuture<Map> promise) {
+        private void doReconcileAction(Map args, NearpaySender sender) {
                 Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
                 Long finishTimeout = (Long) args.get("finishTimeout");
                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
@@ -39,7 +40,7 @@ public class ReconciliationOperation extends BaseOperation {
                                                 list.add(reconciliationReceipt);
 
                                                 Map<String, Object> responseDict = NearpayLib.ReconcileResponse(ErrorStatus.success_code, null, list);
-                                                promise.complete(responseDict);
+                                                sender.send(responseDict);
                                         }
 
                                         @Override
@@ -58,7 +59,7 @@ public class ReconciliationOperation extends BaseOperation {
                                                         status = ErrorStatus.invalid_code;
                                                 }
                                                 Map response = NearpayLib.ApiResponse(status, message, receipts);
-                                                promise.complete(response);
+                                                sender.send(response);
 
                                         }
 
@@ -66,7 +67,7 @@ public class ReconciliationOperation extends BaseOperation {
         }
 
         @Override
-        public void run(Map args, CompletableFuture<Map> promise) {
-                doReconcileAction(args, promise);
+        public void run(Map args, NearpaySender sender) {
+                doReconcileAction(args, sender);
         }
 }

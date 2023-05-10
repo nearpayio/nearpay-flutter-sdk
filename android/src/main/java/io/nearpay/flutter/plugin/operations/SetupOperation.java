@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.utils.enums.SetupFailure;
 import io.nearpay.sdk.utils.listeners.SetupListener;
 
@@ -17,14 +18,14 @@ public class SetupOperation extends BaseOperation {
 
     }
 
-    private void doSetup(CompletableFuture<Map> promise) {
+    private void doSetup(NearpaySender sender) {
         String authvalue = provider.getNearpayLib().authValueShared;
         String authType = provider.getNearpayLib().authTypeShared;
         boolean isAuthValidated = provider.getNearpayLib().isAuthInputValidation(authType, authvalue);
         if (!isAuthValidated) {
             Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_argument_code,
                     "Authentication parameter missing");
-            promise.complete(paramMap);
+            sender.send(paramMap);
             return;
         }
 
@@ -34,7 +35,7 @@ public class SetupOperation extends BaseOperation {
                 // when the setup is done successfully
                 Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.success_code,
                         "Application setup completed successfully");
-                promise.complete(paramMap);
+                sender.send(paramMap);
             }
 
             @Override
@@ -43,12 +44,12 @@ public class SetupOperation extends BaseOperation {
                     // when the payment plugin is already installed .
                     Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.already_installed_code,
                             "Plugin Application Already Installed");
-                    promise.complete(paramMap);
+                    sender.send(paramMap);
                 } else if (setupFailure instanceof SetupFailure.NotInstalled) {
                     // when the installtion failed .
                     Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.not_installed_code,
                             "Plugin Application Installation Failed");
-                    promise.complete(paramMap);
+                    sender.send(paramMap);
                 } else if (setupFailure instanceof SetupFailure.AuthenticationFailed) {
                     // when the Authentication Failed.
                     String messageResp = ((SetupFailure.AuthenticationFailed) setupFailure).toString();
@@ -59,10 +60,10 @@ public class SetupOperation extends BaseOperation {
                         provider.getNearpayLib().nearpay
                                 .updateAuthentication(provider.getNearpayLib().getAuthType(authType, authvalue));
                         Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code, message);
-                        promise.complete(paramMap);
+                        sender.send(paramMap);
                     } else {
                         Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code, message);
-                        promise.complete(paramMap);
+                        sender.send(paramMap);
                     }
 
                 } else if (setupFailure instanceof SetupFailure.InvalidStatus) {
@@ -71,14 +72,14 @@ public class SetupOperation extends BaseOperation {
                     String message = messageResp != "" && messageResp.length() > 0 ? messageResp
                             : ErrorStatus.invalid_status_messsage;
                     Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_code, message);
-                    promise.complete(paramMap);
+                    sender.send(paramMap);
                 }
             }
         });
     }
 
     @Override
-    public void run(Map args, CompletableFuture<Map> promise) {
-        doSetup(promise);
+    public void run(Map args, NearpaySender sender) {
+        doSetup(sender);
     }
 }

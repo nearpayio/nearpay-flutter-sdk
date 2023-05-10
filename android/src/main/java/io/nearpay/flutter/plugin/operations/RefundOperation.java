@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.RefundFailure;
@@ -23,7 +24,7 @@ public class RefundOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void refundValidation(Map args, CompletableFuture<Map> promise) {
+        private void refundValidation(Map args, NearpaySender sender) {
                 Long amount = (Long) args.get("amount");
                 String original_transaction_uuid= args.get("original_transaction_uuid").toString();
                 String customer_reference_number = args.get("customer_reference_number").toString();
@@ -46,7 +47,7 @@ public class RefundOperation extends BaseOperation {
                                                         "Refund Success",
                                                         list
                                                 );
-                                                promise.complete(responseDict);
+                                                sender.send(responseDict);
                                         }
 
                                         @Override
@@ -70,7 +71,7 @@ public class RefundOperation extends BaseOperation {
                                                         status = ErrorStatus.invalid_code;
                                                 }
                                                 Map response = NearpayLib.ApiResponse(status, message, receipts);
-                                                promise.complete(response);
+                                                sender.send(response);
                                         }
 
                                 });
@@ -78,7 +79,7 @@ public class RefundOperation extends BaseOperation {
         }
 
         @Override
-        public void run(Map args, CompletableFuture<Map> promise) {
-                refundValidation(args, promise);
+        public void run(Map args, NearpaySender sender) {
+                refundValidation(args, sender);
         }
 }

@@ -58,17 +58,23 @@ class Nearpay {
     required this.env,
     this.locale = Locale.localeDefault,
   }) {
+    // String channelName = 'initilize-${const Uuid().v4()}';
     final data = {
       "authtype": authType.value,
       "authvalue": authValue,
       "locale": locale.value,
       "environment": env.value,
+      // "channel_name": channelName
     };
 
-    final response =
-        methodChannel.invokeMethod<dynamic>('initialize', data).then((res) {
+    _callAndReturnChannel('initialize', data, (response) {
       setup();
     });
+
+    // final response =
+    //     methodChannel.invokeMethod<dynamic>('initialize', data).then((res) {
+    //   setup();
+    // });
 
     _addEventListener(
         evnetName: NearpayEvent.stateChange,
@@ -80,16 +86,24 @@ class Nearpay {
 
   /// calls a native method using a name of the method and a data
   /// also handles the error cases of the transaction
-  Future<dynamic> _callAndCheckStatus(String methodName, dynamic data) async {
-    final response =
-        await methodChannel.invokeMethod<dynamic>(methodName, data);
+  Future<EventChannel> _callAndReturnChannel(String methodName, dynamic data,
+      Function(Map<String, dynamic>) callback) async {
+    String channelName = "$methodName-${Uuid().v4()}";
+    data['channel_name'] = channelName;
+    final xxxxx = await methodChannel.invokeMethod<dynamic>(methodName, data);
 
-    if (response['status'] != 200) throw response;
+    final eventChannel = EventChannel(channelName);
+    eventChannel.receiveBroadcastStream().forEach((tempResponse) {
+      // we need to do this transformation in order the flutter type system to work
+      final Map<String, dynamic> response =
+          jsonDecode(jsonEncode(tempResponse));
 
-    return response;
+      callback(response);
+    });
+    return eventChannel;
   }
 
-  Future<Map<String, dynamic>> purchase({
+  Future<void> purchase({
     required int amount,
     String? transactionUUID,
     String customerReferenceNumber = "",
@@ -109,34 +123,92 @@ class Nearpay {
       "finishTimeout": finishTimeout, //Optional
     };
 
-    Map? _response = await methodChannel.invokeMethod<Map>("purchase", data);
+    await _callAndReturnChannel(
+      "purchase",
+      data,
+      (response) {
+        if (response["status"] == 200) {
+          List<TransactionReceipt> receipts =
+              List<Map<String, dynamic>>.from(response["receipts"])
+                  .map((json) => TransactionReceipt.fromJson(json))
+                  .toList();
 
-    // TODO: handle the fail later
-    if (_response == null) {
-      throw '';
-    }
+          if (onPurchaseApproved != null) {
+            onPurchaseApproved(receipts);
+          }
 
-    // avoid annoying bug with this method
-    final response = jsonDecode(jsonEncode(_response));
+          // return response;
+        } else {
+          if (onPurchaseFailed != null) {
+            PurchaseError err = getPurchaseError(response);
+            onPurchaseFailed(err);
+          }
+          // throw response;
+        }
+      },
+    );
 
-    if (response["status"] == 200) {
-      List<TransactionReceipt> receipts =
-          List<Map<String, dynamic>>.from(response["receipts"])
-              .map((json) => TransactionReceipt.fromJson(json))
-              .toList();
+    // responseChannel.receiveBroadcastStream().forEach((tempResponse) {
+    //   final response = jsonDecode(jsonEncode(tempResponse));
+    //   if (response["status"] == 200) {
+    //     List<TransactionReceipt> receipts =
+    //         List<Map<String, dynamic>>.from(response["receipts"])
+    //             .map((json) => TransactionReceipt.fromJson(json))
+    //             .toList();
 
-      if (onPurchaseApproved != null) {
-        onPurchaseApproved(receipts);
-      }
+    //     if (onPurchaseApproved != null) {
+    //       onPurchaseApproved(receipts);
+    //     }
 
-      return response;
-    } else {
-      if (onPurchaseFailed != null) {
-        PurchaseError err = getPurchaseError(response);
-        onPurchaseFailed(err);
-      }
-      throw response;
-    }
+    //     // return response;
+    //   } else {
+    //     if (onPurchaseFailed != null) {
+    //       PurchaseError err = getPurchaseError(response);
+    //       onPurchaseFailed(err);
+    //     }
+    //     // throw response;
+    //   }
+    // });
+    // return Map<String, Map>();
+
+    // old implementation 2
+    // final data = {
+    //   "amount": amount,
+    //   "transaction_uuid": transactionUUID, //Optional
+    //   "customer_reference_number": customerReferenceNumber, //Optional
+    //   "enableReceiptUi": enableReceiptUi, //Optional
+    //   "enableReversal": enableReversal, //Optional
+    //   "finishTimeout": finishTimeout, //Optional
+    // };
+
+    // Map? _response = await methodChannel.invokeMethod<Map>("purchase", data);
+
+    // // TODO: handle the fail later
+    // if (_response == null) {
+    //   throw '';
+    // }
+
+    // // avoid annoying bug with this method
+    // final response = jsonDecode(jsonEncode(_response));
+
+    // if (response["status"] == 200) {
+    //   List<TransactionReceipt> receipts =
+    //       List<Map<String, dynamic>>.from(response["receipts"])
+    //           .map((json) => TransactionReceipt.fromJson(json))
+    //           .toList();
+
+    //   if (onPurchaseApproved != null) {
+    //     onPurchaseApproved(receipts);
+    //   }
+
+    //   return response;
+    // } else {
+    //   if (onPurchaseFailed != null) {
+    //     PurchaseError err = getPurchaseError(response);
+    //     onPurchaseFailed(err);
+    //   }
+    //   throw response;
+    // }
 
     // old implementation
     // return _callAndCheckStatus('purchase', data);
@@ -169,34 +241,52 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    Map? _response = await methodChannel.invokeMethod<Map>("refund", data);
-
-    // TODO: handle the fail later
-    if (_response == null) {
-      throw '';
-    }
-
-    // avoid annoying bug with this method
-    final response = jsonDecode(jsonEncode(_response));
-
-    if (response["status"] == 200) {
-      List<TransactionReceipt> receipts =
-          List<Map<String, dynamic>>.from(response["receipts"])
-              .map((json) => TransactionReceipt.fromJson(json))
-              .toList();
-
-      if (onRefundApproved != null) {
-        onRefundApproved(receipts);
+    _callAndReturnChannel('refund', data, (response) {
+      if (response["status"] == 200) {
+        List<TransactionReceipt> receipts =
+            List<Map<String, dynamic>>.from(response["receipts"])
+                .map((json) => TransactionReceipt.fromJson(json))
+                .toList();
+        if (onRefundApproved != null) {
+          onRefundApproved(receipts);
+        }
+      } else {
+        if (onRefundFailed != null) {
+          RefundError err = getRefundError(response);
+          onRefundFailed(err);
+        }
       }
+    });
 
-      return response;
-    } else {
-      if (onRefundFailed != null) {
-        RefundError err = getRefundError(response);
-        onRefundFailed(err);
-      }
-      throw response;
-    }
+    // old implementation
+    // Map? _response = await methodChannel.invokeMethod<Map>("refund", data);
+
+    // // TODO: handle the fail later
+    // if (_response == null) {
+    //   throw '';
+    // }
+
+    // // avoid annoying bug with this method
+    // final response = jsonDecode(jsonEncode(_response));
+
+    // if (response["status"] == 200) {
+    //   List<TransactionReceipt> receipts =
+    //       List<Map<String, dynamic>>.from(response["receipts"])
+    //           .map((json) => TransactionReceipt.fromJson(json))
+    //           .toList();
+
+    //   if (onRefundApproved != null) {
+    //     onRefundApproved(receipts);
+    //   }
+
+    //   return response;
+    // } else {
+    //   if (onRefundFailed != null) {
+    //     RefundError err = getRefundError(response);
+    //     onRefundFailed(err);
+    //   }
+    //   throw response;
+    // }
 
     // old implementation
     // return _callAndCheckStatus('refund', data);
@@ -215,36 +305,61 @@ class Nearpay {
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin // Optional
     };
-    Map? _response = await methodChannel.invokeMethod<Map>("reconcile", data);
 
-    // TODO: handle the fail later
-    if (_response == null) {
-      throw '';
-    }
+    _callAndReturnChannel('reconcile', data, (response) {
+      if (response["status"] == 200) {
+        List<ReconciliationReceipt> receipts =
+            List<Map<String, dynamic>>.from(response["receipts"])
+                .map((json) => ReconciliationReceipt.fromJson(json))
+                .toList();
 
-    // avoid annoying bug with this method
-    final response = jsonDecode(jsonEncode(_response));
+        ReconciliationReceipt receipt = receipts[0];
 
-    if (response["status"] == 200) {
-      List<ReconciliationReceipt> receipts =
-          List<Map<String, dynamic>>.from(response["receipts"])
-              .map((json) => ReconciliationReceipt.fromJson(json))
-              .toList();
+        if (onReconcileFinished != null) {
+          onReconcileFinished(receipt);
+        }
 
-      ReconciliationReceipt receipt = receipts[0];
-
-      if (onReconcileFinished != null) {
-        onReconcileFinished(receipt);
+        return response;
+      } else {
+        if (onReconcileFailed != null) {
+          ReconcileError err = getReconcileError(response);
+          onReconcileFailed(err);
+        }
+        throw response;
       }
+    });
 
-      return response;
-    } else {
-      if (onReconcileFailed != null) {
-        ReconcileError err = getReconcileError(response);
-        onReconcileFailed(err);
-      }
-      throw response;
-    }
+    // old implementation
+    // Map? _response = await methodChannel.invokeMethod<Map>("reconcile", data);
+
+    // // TODO: handle the fail later
+    // if (_response == null) {
+    //   throw '';
+    // }
+
+    // // avoid annoying bug with this method
+    // final response = jsonDecode(jsonEncode(_response));
+
+    // if (response["status"] == 200) {
+    //   List<ReconciliationReceipt> receipts =
+    //       List<Map<String, dynamic>>.from(response["receipts"])
+    //           .map((json) => ReconciliationReceipt.fromJson(json))
+    //           .toList();
+
+    //   ReconciliationReceipt receipt = receipts[0];
+
+    //   if (onReconcileFinished != null) {
+    //     onReconcileFinished(receipt);
+    //   }
+
+    //   return response;
+    // } else {
+    //   if (onReconcileFailed != null) {
+    //     ReconcileError err = getReconcileError(response);
+    //     onReconcileFailed(err);
+    //   }
+    //   throw response;
+    // }
 
     // old implementation
     // return _callAndCheckStatus('reconcile', data);
@@ -263,52 +378,90 @@ class Nearpay {
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout // Optional
     };
-    Map? _response = await methodChannel.invokeMethod<Map>("reverse", data);
+    _callAndReturnChannel('reverse', data, (response) {
+      if (response["status"] == 200) {
+        List<TransactionReceipt> receipts =
+            List<Map<String, dynamic>>.from(response["receipts"])
+                .map((json) => TransactionReceipt.fromJson(json))
+                .toList();
 
-    // TODO: handle the fail later
-    if (_response == null) {
-      throw '';
-    }
-
-    // avoid annoying bug with this method
-    final response = jsonDecode(jsonEncode(_response));
-
-    if (response["status"] == 200) {
-      List<TransactionReceipt> receipts =
-          List<Map<String, dynamic>>.from(response["receipts"])
-              .map((json) => TransactionReceipt.fromJson(json))
-              .toList();
-
-      if (onReversalFinished != null) {
-        onReversalFinished(receipts);
+        if (onReversalFinished != null) {
+          onReversalFinished(receipts);
+        }
+      } else {
+        if (onReversalFailed != null) {
+          ReversalError err = getReversalError(response);
+          onReversalFailed(err);
+        }
       }
+    });
 
-      return response;
-    } else {
-      if (onReversalFailed != null) {
-        ReversalError err = getReversalError(response);
-        onReversalFailed(err);
-      }
-      throw response;
-    }
+    // old implementation
+    // Map? _response = await methodChannel.invokeMethod<Map>("reverse", data);
+
+    // // TODO: handle the fail later
+    // if (_response == null) {
+    //   throw '';
+    // }
+
+    // // avoid annoying bug with this method
+    // final response = jsonDecode(jsonEncode(_response));
+
+    // if (response["status"] == 200) {
+    //   List<TransactionReceipt> receipts =
+    //       List<Map<String, dynamic>>.from(response["receipts"])
+    //           .map((json) => TransactionReceipt.fromJson(json))
+    //           .toList();
+
+    //   if (onReversalFinished != null) {
+    //     onReversalFinished(receipts);
+    //   }
+
+    //   return response;
+    // } else {
+    //   if (onReversalFailed != null) {
+    //     ReversalError err = getReversalError(response);
+    //     onReversalFailed(err);
+    //   }
+    //   throw response;
+    // }
+
     // old implementation
     // return _callAndCheckStatus('reverse', data);
   }
 
   Future<dynamic> logout() async {
-    return _callAndCheckStatus('logout', {})
-        .then((_) => _provider.listener.emitStateChange(NearpayState.notReady));
+    return _callAndReturnChannel('logout', {}, (response) {
+      if (response["status"] == 200) {
+        _provider.listener.emitStateChange(NearpayState.notReady);
+      }
+    });
   }
 
   Future<dynamic> setup() async {
-    return _callAndCheckStatus('setup', {}).then((res) {
-      _provider.listener.emitStateChange(NearpayState.ready);
-      print("=-=-=-=-=-=-=-=-=-= setup sec =-=-=-=-=-=-=-=");
-      return res;
-    }).catchError((e) {
-      _provider.listener.emitStateChange(NearpayState.notReady);
-      throw e;
-    });
+    print('setup ');
+    await _callAndReturnChannel(
+      'setup',
+      {},
+      (response) {
+        if (response["status"] == 200) {
+          _provider.listener.emitStateChange(NearpayState.ready);
+        } else {
+          _provider.listener.emitStateChange(NearpayState.notReady);
+        }
+      },
+    );
+
+    // responseChannel.receiveBroadcastStream().forEach((response) {});
+
+    // old implementation
+    // return _callAndReturnChannel('setup', {}).then((res) {
+    //   _provider.listener.emitStateChange(NearpayState.ready);
+    //   return res;
+    // }).catchError((e) {
+    //   _provider.listener.emitStateChange(NearpayState.notReady);
+    //   throw e;
+    // });
   }
 
   /// needs future work
@@ -326,7 +479,9 @@ class Nearpay {
       "finishTimeout": finishTimeout // Optional
     };
 
-    return _callAndCheckStatus('session', data);
+    return _callAndReturnChannel('session', data, (response) {
+      throw 'unimplemented session function';
+    });
   }
 
   Future<dynamic> receiptToImage(Map<dynamic, dynamic> data) async {
