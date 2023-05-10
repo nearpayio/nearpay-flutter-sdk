@@ -7,8 +7,11 @@ import 'package:nearpay_flutter_sdk/errors/refund_error/refund_error.dart';
 import 'package:nearpay_flutter_sdk/errors/refund_error/refund_error_switch.dart';
 import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error.dart';
 import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/session_error/session_error.dart';
+import 'package:nearpay_flutter_sdk/errors/session_error/session_error_switch.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
 import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_receipt.dart';
+import 'package:nearpay_flutter_sdk/models/session/session.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
@@ -471,6 +474,9 @@ class Nearpay {
     bool enableReversal = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
+    void Function(List<TransactionReceipt>)? onSessionOpen,
+    void Function(Session)? onSessionClosed,
+    void Function(SessionError)? onSessionFailed,
   }) async {
     var data = {
       "sessionID": sessionID, // Required
@@ -480,7 +486,25 @@ class Nearpay {
     };
 
     return _callAndReturnChannel('session', data, (response) {
-      throw 'unimplemented session function';
+      if (response["status"] == 200) {
+        List<TransactionReceipt> receipts =
+            List<Map<String, dynamic>>.from(response["receipts"])
+                .map((json) => TransactionReceipt.fromJson(json))
+                .toList();
+        if (onSessionOpen != null) {
+          onSessionOpen(receipts);
+        }
+      } else if (response["status"] == 500) {
+        if (onSessionClosed != null) {
+          Session session = Session.fromJson(response['session']);
+          onSessionClosed(session);
+        }
+      } else {
+        SessionError err = getSessionError(response);
+        if (onSessionFailed != null) {
+          onSessionFailed(err);
+        }
+      }
     });
   }
 

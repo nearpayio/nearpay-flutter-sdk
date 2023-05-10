@@ -47,64 +47,39 @@ public class SessionOperation extends BaseOperation {
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {
-                        // when the session is closed
-                        // Map<String, Object> responseDict = sessionResponse(session, "Session
-                        // Closed");
-
-                        // Map<String, Object> responseDict = sessionResponse(session, "Session
-                        // Closed");
-                        Map<String, Object> responseDict = sessionToJson(session);
+                        Map<String, Object> responseDict = NearpayLib.SessionResponse(ErrorStatus.session_closed_code, "", session);
                         sender.send(responseDict);
                     }
 
                     @Override
                     public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
-                        // when the session is open , you can get the receipt by using
-                        // TransactionReceipt
-                        List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transReceipt : list) {
-                            String jsonStr = ReceiptUtilsKt.toJson(transReceipt);
-                            transactionList.add(NearpayLib.JSONStringToMap(jsonStr));
-                        }
-                        Map<String, Object> responseDict = NearpayLib.commonResponse(ErrorStatus.success_code,
-                                "Session Success");
-                        responseDict.put("list", transactionList);
-                        sender.send(responseDict);
+                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", list);
+                        sender.send(response);
                     }
 
                     @Override
                     public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
-                        if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
-                            // when the authentication is failed
-                            String messageResp = ((SessionFailure.AuthenticationFailed) sessionFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.authentication_failed_message;
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.auth_failed_code,
-                                    message);
-                            sender.send(paramMap);
-                            // if (authTypeShared.equalsIgnoreCase(jwtKey)) {
-                            // provider.getNearpayLib().nearpay
-                            // .updateAuthentication(getAuthType(authTypeShared, authTypeShared));
-                            // }
+                        int status = ErrorStatus.general_failure_code;
+                        String message = null;
+                        List<TransactionReceipt> receipts = null;
 
+
+                        if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
+                            message =((SessionFailure.AuthenticationFailed) sessionFailure).getMessage();
+                            status = ErrorStatus.auth_failed_code;
                         } else if (sessionFailure instanceof SessionFailure.GeneralFailure) {
-                            // when there is general error .
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.general_failure_code,
-                                    ErrorStatus.general_messsage);
-                            sender.send(paramMap);
+                            status = ErrorStatus.general_failure_code;
+
                         } else if (sessionFailure instanceof SessionFailure.FailureMessage) {
                             // when there is FailureMessage
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.failure_code,
-                                    ErrorStatus.failure_messsage);
-                            sender.send(paramMap);
-                        } else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
-                            // you can get the status using the following code
-                            String messageResp = ((SessionFailure.InvalidStatus) sessionFailure).toString();
-                            String message = messageResp != "" && messageResp.length() > 0 ? messageResp
-                                    : ErrorStatus.invalid_status_messsage;
-                            Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.invalid_code, message);
-                            sender.send(paramMap);
+                            status = ErrorStatus.failure_code;
+                            message = ((SessionFailure.FailureMessage) sessionFailure).getMessage();
                         }
+                        else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
+                            status = ErrorStatus.invalid_code;
+                        }
+                        Map response = NearpayLib.ApiResponse(status, message, receipts);
+                        sender.send(response);
                     }
                 });
     }
