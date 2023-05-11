@@ -124,6 +124,7 @@ class Nearpay {
       "enableReceiptUi": enableReceiptUi, //Optional
       "enableReversal": enableReversal, //Optional
       "finishTimeout": finishTimeout, //Optional
+      "enableUiDismiss": enableUiDismiss,
     };
 
     await _callAndReturnChannel(
@@ -240,6 +241,7 @@ class Nearpay {
       "enableReversal": enableReversal, // Optional
       "enableEditableRefundAmountUiableReversalUI":
           editableRefundUI, // Optional
+      "enableUiDismiss": enableUiDismiss,
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin,
     };
@@ -306,7 +308,8 @@ class Nearpay {
     final data = {
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
-      "adminPin": adminPin // Optional
+      "adminPin": adminPin, // Optional
+      "enableUiDismiss": enableUiDismiss,
     };
 
     _callAndReturnChannel('reconcile', data, (response) {
@@ -379,7 +382,8 @@ class Nearpay {
     var data = {
       "original_transaction_uuid": originalTransactionUUID, // Required
       "enableReceiptUi": enableReceiptUi, // Optional
-      "finishTimeout": finishTimeout // Optional
+      "finishTimeout": finishTimeout, // Optional
+      "enableUiDismiss": enableUiDismiss,
     };
     _callAndReturnChannel('reverse', data, (response) {
       if (response["status"] == 200) {
@@ -442,7 +446,6 @@ class Nearpay {
   }
 
   Future<dynamic> setup() async {
-    print('setup ');
     await _callAndReturnChannel(
       'setup',
       {},
@@ -482,7 +485,8 @@ class Nearpay {
       "sessionID": sessionID, // Required
       "enableReceiptUi": enableReceiptUi, //Optional
       "enableReversal": enableReversal,
-      "finishTimeout": finishTimeout // Optional
+      "finishTimeout": finishTimeout, // Optional
+      "enableUiDismiss": enableUiDismiss,
     };
 
     return _callAndReturnChannel('session', data, (response) {
