@@ -251,9 +251,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             }
         } else if (call.method.equals("receiptToImage")) {
 
-        }
-
-        else {
+        } else if (call.method.equals("updateAuthentication")) {
+            String authType = call.argument("authType").toString();
+            String inputValue = call.argument("authValue").toString();
+            nearPay.updateAuthentication(getAuthType(authType, inputValue));
+            sendResponse(new HashMap<>());
+        } else {
             result.notImplemented();
         }
     }

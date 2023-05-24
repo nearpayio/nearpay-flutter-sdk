@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "<enter your email>";
+  final tokenKey = "<enter youe email here>";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -184,6 +184,18 @@ class _MyAppState extends State<MyApp> {
         fontSize: 16.0);
   }
 
+  updateAuthentication({
+    required AuthenticationType authType,
+    required String authValue,
+  }) async {
+    var reqData = {
+      "authType": authType.value,
+      "authValue": authValue,
+    };
+    var jsonResponse = await Nearpay.updateAuthentication(reqData);
+    print("...updateAuth response...------$jsonResponse.");
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -268,6 +280,16 @@ class _MyAppState extends State<MyApp> {
               sessionAction();
             },
             child: const Text("Session"),
+          ),
+          TextButton(
+            onPressed: () async {
+              // Respond to button press
+              updateAuthentication(
+                authType: AuthenticationType.email,
+                authValue: "<new email>",
+              );
+            },
+            child: const Text("update auth"),
           )
         ]),
       ),
