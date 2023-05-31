@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "<enter youe email here>";
+  final tokenKey = "f.alhajeri@nearpay.io";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -101,16 +101,28 @@ class _MyAppState extends State<MyApp> {
 
   purchaseAction() async {
     var reqData = {
-      "amount": 0001, // Required
-      // "transactionUuid": "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
+      // "amount": 0001, // Required
+      // // "transactionUuid": "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
+      // "customer_reference_number":
+      //     "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
+      // "isEnableUI":
+      //     true, // [optional] true will enable the ui and false will disable
+      // "isEnableReversal":
+      //     true, // it will allow you to enable or disable the reverse button
+      // "finishTimeout": timeout, // [optional] Add the number of seconds
+      // "isUiDismissible": true
+      "amount": 0001, // [Required] ammount you want to set .
       "customer_reference_number":
-          "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
+          "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
       "isEnableUI":
           true, // [optional] true will enable the ui and false will disable
       "isEnableReversal":
           true, // it will allow you to enable or disable the reverse button
-      "finishTimeout": timeout, // [optional] Add the number of seconds
-      "isUiDismissible": true
+      "finishTimeout": 2, //[optional] Add the number of seconds
+      "isUiDismissible":
+          true, //[optional] allow the transaction to be dismissed from ui
+      "transactionUuid":
+          "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
     };
     var jsonResponse = jsonDecode(await Nearpay.purchase(reqData));
     print('response ${jsonResponse['list'][0]['udid']}');
@@ -290,7 +302,7 @@ class _MyAppState extends State<MyApp> {
               );
             },
             child: const Text("update auth"),
-          )
+          ),
         ]),
       ),
     );
