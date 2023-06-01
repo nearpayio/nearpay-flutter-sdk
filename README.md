@@ -33,10 +33,10 @@ Authentication Types
 - JWT
 
 ```dart
- AuthenticationType.login.values // If you want user to decide what will use to login email or mobile
- AuthenticationType.email.values // if you want restrict only email and you need to provide it to the auth value
- AuthenticationType.mobile.values // if you want restrict only mobile and you need to provide it to the auth value
- AuthenticationType.jwt.values // if you want restrict only jwt and you need to provide it to the auth value
+ AuthenticationType.login.value // If you want user to decide what will use to login email or mobile
+ AuthenticationType.email.value // if you want restrict only email and you need to provide it to the auth value
+ AuthenticationType.mobile.value // if you want restrict only mobile and you need to provide it to the auth value
+ AuthenticationType.jwt.value // if you want restrict only jwt and you need to provide it to the auth value
 ```
 
 ### loggedin user information
@@ -63,9 +63,9 @@ if(status == 200){
   // Initialize Success with 200
 
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
 }
 
@@ -73,7 +73,7 @@ if(status == 200){
 
 # 3. Setup
 
-``` dart
+```dart
 
 var jsonResponse = await Nearpay.setup();
 var jsonData = json.decode(jsonResponse);
@@ -82,9 +82,9 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
 }
 
@@ -94,7 +94,7 @@ if(status == 200){
 
 ```dart
 var reqData = {
-      "amount": 0001, // [Required] ammount you want to set . 
+      "amount": 0001, // [Required] ammount you want to set .
       "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
       "isEnableUI" : true, // [optional] true will enable the ui and false will disable
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
@@ -108,9 +108,9 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   //Amount parameter null
 }
@@ -120,7 +120,7 @@ if(status == 200){
 
 ```dart
 var reqData = {
-      "amount": 0001, // [Required] ammount you want to set . 
+      "amount": 0001, // [Required] ammount you want to set .
       "transaction_uuid" :  purchaseReceipt.uuid,// [Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
       "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
       "isEnableUI" : true,  // [optional] true will enable the ui and false will disable
@@ -137,9 +137,9 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   // Amount parameter null
   // Transaction UUID null
@@ -150,7 +150,7 @@ if(status == 200){
 
 ```dart
 var reqData = {
-      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
+      "isEnableUI" : true, //[optional] true will enable the ui and false will disable
       "finishTimeout" : 2, // [optional] Add the number of seconds
       "adminPin" : "0000" // Optional
     };
@@ -162,15 +162,15 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
-} 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
+}
 ```
 
 # 7. Reverse
 
 ```dart
 var reqData = {
-      "isEnableUI" : true, //[optional] true will enable the ui and false will disable 
+      "isEnableUI" : true, //[optional] true will enable the ui and false will disable
       "transaction_uuid" :purchaseReceipt.uuid, //[Required] add Transaction Reference Retrieval Number we need to pass from purchase response list contains uuid dict key "udid",  pass that value here.
       "finishTimeout" : 2 // [optional] Add the number of seconds
     };
@@ -182,9 +182,9 @@ var status = jsonData['status'];
 if(status == 200){
   // Initialize Success with 200
 }else if(status == 204){
-  // Initialize Failed with 204, Plugin iniyialize failed with null 
+  // Initialize Failed with 204, Plugin iniyialize failed with null
 }else if(status == 400){
-  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value 
+  // Missing parameter Failed with 400, Authentication paramer missing Auth Type and Auth Value
   // Auth type and Auth value missing
   // Transaction UUID null
 }
@@ -196,7 +196,7 @@ if(status == 200){
     var reqData = {
       "sessionID" :"ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
       "isEnableUI" : true, //Optional
-      "isEnableReversal" : true, 
+      "isEnableReversal" : true,
       "finishTimeout" : timeout  // Optional
     };
     var jsonResponse = await Nearpay.session(reqData) ;
