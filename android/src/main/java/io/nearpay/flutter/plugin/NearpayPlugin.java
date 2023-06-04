@@ -257,6 +257,15 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 setSession(callUUID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
             }
         } else if (call.method.equals("receiptToImage")) {
+//            String transactionJson  = call.argument("receipt") != null
+//                    ? (String) call.argument("receipt")
+//                    : "";// [optional] it will allow you to control dismissing the UI
+//
+//            if(transactionJson.equals("")){
+//                sendResponse(commonResponse(ErrorStatus.general_failure_code, "receipt must be provided"), callUUID);
+//            }
+//
+//            new Gson().fromJson(transactionJson, TransactionReceipt.class);
 
         } else if (call.method.equals("updateAuthentication")) {
             String authType = call.argument("authType").toString();
