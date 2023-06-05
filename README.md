@@ -48,7 +48,7 @@ the created `Nearpay` object should be preserved accross the application
 ```dart
 final nearpay = Nearpay(
     authType: AuthenticationType.email,// [Required] Same as above reference
-    authValue: "f.alhajeri@nearpay.io",// [Required] Give auth type value
+    authValue: "<your email here>",// [Required] Give auth type value
     env: Environments.sandbox,// [Required] environment reference
     locale: Locale.localeDefault, // [Optional] locale reference
   );
