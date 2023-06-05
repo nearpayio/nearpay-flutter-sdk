@@ -50,7 +50,10 @@ class Nearpay {
   final String authValue;
   final Environments env;
   final Locale locale;
-  NearpayState state = NearpayState.notReady;
+  bool _initialized = false;
+
+  // NearpayState state = NearpayState.notReady;
+
   late final NearpayProvider _provider = NearpayProvider(this);
 
   final MethodChannel methodChannel = const MethodChannel('nearpay');
@@ -61,36 +64,23 @@ class Nearpay {
     required this.env,
     this.locale = Locale.localeDefault,
   }) {
-    // String channelName = 'initilize-${const Uuid().v4()}';
-    final data = {
-      "authtype": authType.value,
-      "authvalue": authValue,
-      "locale": locale.value,
-      "environment": env.value,
-      // "channel_name": channelName
-    };
-
-    _callAndReturnChannel('initialize', data, (response) {
-      setup();
-    });
-
-    // final response =
-    //     methodChannel.invokeMethod<dynamic>('initialize', data).then((res) {
-    //   setup();
-    // });
-
-    _addEventListener(
-        evnetName: NearpayEvent.stateChange,
-        callback: (args) {
-          NearpayState newState = args['state'];
-          state = newState;
-        });
+    // _addEventListener(
+    //     evnetName: NearpayEvent.stateChange,
+    //     callback: (args) {
+    //       NearpayState newState = args['state'];
+    //       state = newState;
+    //     });
   }
 
   /// calls a native method using a name of the method and a data
   /// also handles the error cases of the transaction
-  Future<EventChannel> _callAndReturnChannel(String methodName, dynamic data,
-      Function(Map<String, dynamic>) callback) async {
+  Future<EventChannel> _callAndReturnChannel(
+      String methodName, dynamic data, Function(Map<String, dynamic>) callback,
+      {bool safe = false}) async {
+    if (!safe && !_initialized) {
+      throw "you can't call method ($methodName) before initialize";
+    }
+
     String channelName = "$methodName-${Uuid().v4()}";
     data['channel_name'] = channelName;
     final xxxxx = await methodChannel.invokeMethod<dynamic>(methodName, data);
@@ -106,12 +96,37 @@ class Nearpay {
     return eventChannel;
   }
 
+  Future<void> initialize(
+      {void Function()? onInitializeSuccess,
+      void Function()? onInitializeFail}) async {
+    final data = {
+      "authtype": authType.value,
+      "authvalue": authValue,
+      "locale": locale.value,
+      "environment": env.value,
+      // "channel_name": channelName
+    };
+
+    _callAndReturnChannel('initialize', data, (response) {
+      if (response["status"] == 200) {
+        _initialized = true;
+        if (onInitializeSuccess != null) {
+          onInitializeSuccess();
+        }
+      } else {
+        if (onInitializeFail != null) {
+          onInitializeFail();
+        }
+      }
+    }, safe: true);
+  }
+
   Future<void> purchase({
     required int amount,
     String? transactionUUID,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
-    bool enableReversal = true,
+    bool enableReversalUi = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
     void Function(List<TransactionReceipt>)? onPurchaseApproved,
@@ -122,7 +137,7 @@ class Nearpay {
       "transaction_uuid": transactionUUID, //Optional
       "customer_reference_number": customerReferenceNumber, //Optional
       "enableReceiptUi": enableReceiptUi, //Optional
-      "enableReversal": enableReversal, //Optional
+      "enableReversal": enableReversalUi, //Optional
       "finishTimeout": finishTimeout, //Optional
       "enableUiDismiss": enableUiDismiss,
     };
@@ -140,82 +155,14 @@ class Nearpay {
           if (onPurchaseApproved != null) {
             onPurchaseApproved(receipts);
           }
-
-          // return response;
         } else {
           if (onPurchaseFailed != null) {
             PurchaseError err = getPurchaseError(response);
             onPurchaseFailed(err);
           }
-          // throw response;
         }
       },
     );
-
-    // responseChannel.receiveBroadcastStream().forEach((tempResponse) {
-    //   final response = jsonDecode(jsonEncode(tempResponse));
-    //   if (response["status"] == 200) {
-    //     List<TransactionReceipt> receipts =
-    //         List<Map<String, dynamic>>.from(response["receipts"])
-    //             .map((json) => TransactionReceipt.fromJson(json))
-    //             .toList();
-
-    //     if (onPurchaseApproved != null) {
-    //       onPurchaseApproved(receipts);
-    //     }
-
-    //     // return response;
-    //   } else {
-    //     if (onPurchaseFailed != null) {
-    //       PurchaseError err = getPurchaseError(response);
-    //       onPurchaseFailed(err);
-    //     }
-    //     // throw response;
-    //   }
-    // });
-    // return Map<String, Map>();
-
-    // old implementation 2
-    // final data = {
-    //   "amount": amount,
-    //   "transaction_uuid": transactionUUID, //Optional
-    //   "customer_reference_number": customerReferenceNumber, //Optional
-    //   "enableReceiptUi": enableReceiptUi, //Optional
-    //   "enableReversal": enableReversal, //Optional
-    //   "finishTimeout": finishTimeout, //Optional
-    // };
-
-    // Map? _response = await methodChannel.invokeMethod<Map>("purchase", data);
-
-    // // TODO: handle the fail later
-    // if (_response == null) {
-    //   throw '';
-    // }
-
-    // // avoid annoying bug with this method
-    // final response = jsonDecode(jsonEncode(_response));
-
-    // if (response["status"] == 200) {
-    //   List<TransactionReceipt> receipts =
-    //       List<Map<String, dynamic>>.from(response["receipts"])
-    //           .map((json) => TransactionReceipt.fromJson(json))
-    //           .toList();
-
-    //   if (onPurchaseApproved != null) {
-    //     onPurchaseApproved(receipts);
-    //   }
-
-    //   return response;
-    // } else {
-    //   if (onPurchaseFailed != null) {
-    //     PurchaseError err = getPurchaseError(response);
-    //     onPurchaseFailed(err);
-    //   }
-    //   throw response;
-    // }
-
-    // old implementation
-    // return _callAndCheckStatus('purchase', data);
   }
 
   Future<dynamic> refund({
@@ -224,7 +171,7 @@ class Nearpay {
     String? transactionUUID,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
-    bool enableReversal = true,
+    bool enableReversalUi = true,
     bool editableRefundUI = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
@@ -238,7 +185,7 @@ class Nearpay {
       "transaction_uuid": transactionUUID, //Optional
       "customer_reference_number": customerReferenceNumber, //Optional
       "enableReceiptUi": enableReceiptUi, // Optional
-      "enableReversal": enableReversal, // Optional
+      "enableReversal": enableReversalUi, // Optional
       "enableEditableRefundAmountUiableReversalUI":
           editableRefundUI, // Optional
       "enableUiDismiss": enableUiDismiss,
@@ -474,7 +421,7 @@ class Nearpay {
   Future<dynamic> session({
     required String sessionID,
     bool enableReceiptUi = true,
-    bool enableReversal = true,
+    bool enableReversalUi = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
     void Function(List<TransactionReceipt>)? onSessionOpen,
@@ -484,7 +431,7 @@ class Nearpay {
     var data = {
       "sessionID": sessionID, // Required
       "enableReceiptUi": enableReceiptUi, //Optional
-      "enableReversal": enableReversal,
+      "enableReversal": enableReversalUi,
       "finishTimeout": finishTimeout, // Optional
       "enableUiDismiss": enableUiDismiss,
     };
@@ -526,15 +473,15 @@ class Nearpay {
         .addEventListener(evnetName: evnetName, callback: callback);
   }
 
-  Function addStateListener(dynamic Function(NearpayState) callback) {
-    dynamic _callback(dynamic args) {
-      NearpayState newState = args["state"];
-      callback(newState);
-    }
+  // Function addStateListener(dynamic Function(NearpayState) callback) {
+  //   dynamic _callback(dynamic args) {
+  //     NearpayState newState = args["state"];
+  //     callback(newState);
+  //   }
 
-    return _addEventListener(
-      evnetName: NearpayEvent.stateChange,
-      callback: _callback,
-    );
-  }
+  //   return _addEventListener(
+  //     evnetName: NearpayEvent.stateChange,
+  //     callback: _callback,
+  //   );
+  // }
 }
