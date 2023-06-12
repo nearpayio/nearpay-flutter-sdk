@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
     };
     var jsonResponse = await Nearpay.initialize(reqData);
     print("...sdkInitialize....$jsonResponse....");
+    return jsonResponse;
   }
 
   purchaseWithRefund() async {
@@ -302,6 +303,30 @@ class _MyAppState extends State<MyApp> {
               );
             },
             child: const Text("update auth"),
+          ),
+          TextButton(
+            onPressed: () async {
+              // Respond to button press
+              var reqData = {
+                "authtype": AuthenticationType.email.value,
+                "authvalue": "nonValid@email.com",
+                "locale": Locale.localeDefault.value,
+                "environment": Environments.sandbox.value
+              };
+              var initResponse = jsonDecode(await Nearpay.initialize(reqData));
+
+              if (initResponse['status'] == 200) {
+                var setupResponse = jsonDecode(await Nearpay.setup());
+
+                if (setupResponse['status'] == 200) {
+                  // email exsists
+                } else if (setupResponse['status'] == 401) {
+                  // email doesn't exsists
+                  print(setupResponse);
+                }
+              }
+            },
+            child: const Text("test initialize with email condition"),
           ),
         ]),
       ),

@@ -257,15 +257,16 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 setSession(callUUID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
             }
         } else if (call.method.equals("receiptToImage")) {
-//            String transactionJson  = call.argument("receipt") != null
-//                    ? (String) call.argument("receipt")
-//                    : "";// [optional] it will allow you to control dismissing the UI
-//
-//            if(transactionJson.equals("")){
-//                sendResponse(commonResponse(ErrorStatus.general_failure_code, "receipt must be provided"), callUUID);
-//            }
-//
-//            new Gson().fromJson(transactionJson, TransactionReceipt.class);
+            // String transactionJson = call.argument("receipt") != null
+            // ? (String) call.argument("receipt")
+            // : "";// [optional] it will allow you to control dismissing the UI
+            //
+            // if(transactionJson.equals("")){
+            // sendResponse(commonResponse(ErrorStatus.general_failure_code, "receipt must
+            // be provided"), callUUID);
+            // }
+            //
+            // new Gson().fromJson(transactionJson, TransactionReceipt.class);
 
         } else if (call.method.equals("updateAuthentication")) {
             String authType = call.argument("authType").toString();
@@ -962,14 +963,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     String message = messageResp != "" && messageResp.length() > 0 ? messageResp
                             : ErrorStatus.authentication_failed_message;
 
-                    if (authType.equalsIgnoreCase(jwtKey)) {
-                        nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                        sendResponse(paramMap, callUUID);
-                    } else {
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                        sendResponse(paramMap, callUUID);
-                    }
+                    Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
+                    sendResponse(paramMap, callUUID);
 
                 } else if (setupFailure instanceof SetupFailure.InvalidStatus) {
                     // you can get the status using the following code
