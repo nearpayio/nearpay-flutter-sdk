@@ -21,15 +21,23 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
+import io.nearpay.sdk.data.models.ReconciliationList;
 import io.nearpay.sdk.data.models.Session;
+import io.nearpay.sdk.data.models.TransactionBannerList;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
+import io.nearpay.sdk.utils.enums.GetDataFailure;
+import io.nearpay.sdk.utils.enums.GetTransactionFailure;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.RefundFailure;
 import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.StatusCheckError;
 import io.nearpay.sdk.utils.listeners.BitmapListener;
+import io.nearpay.sdk.utils.listeners.GetReconcileListener;
+import io.nearpay.sdk.utils.listeners.GetReconciliationPageListener;
+import io.nearpay.sdk.utils.listeners.GetTransactionListener;
+import io.nearpay.sdk.utils.listeners.GetTransactionPageListener;
 import io.nearpay.sdk.utils.listeners.PurchaseListener;
 import io.nearpay.sdk.utils.listeners.RefundListener;
 import io.nearpay.sdk.utils.enums.ReconcileFailure;
@@ -257,15 +265,99 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 setSession(callUUID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
             }
         } else if (call.method.equals("receiptToImage")) {
+            // String transactionJson = call.argument("receipt") != null
+            // ? (String) call.argument("receipt")
+            // : "";// [optional] it will allow you to control dismissing the UI
+            //
+            // if(transactionJson.equals("")){
+            // sendResponse(commonResponse(ErrorStatus.general_failure_code, "receipt must
+            // be provided"), callUUID);
+            // }
+            //
+            // new Gson().fromJson(transactionJson, TransactionReceipt.class);
 
         } else if (call.method.equals("updateAuthentication")) {
             String authType = call.argument("authType").toString();
             String inputValue = call.argument("authValue").toString();
             nearPay.updateAuthentication(getAuthType(authType, inputValue));
             sendResponse(new HashMap<>(), callUUID);
-        } else if (call.method.equals("error")) {
-            sendResponse(new HashMap<>(), callUUID);
-            // sendResponse(new HashMap<>(), callUUID);
+        } else if (call.method.equals("getTransactionsList")) {
+            int page = call.argument("page") == null ? 1 : (int) call.argument("page");
+            int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
+            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+
+
+
+            nearPay.getTransactionListPage(adminPin, page , limit, new GetTransactionPageListener() {
+                @Override
+                public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
+                    Map res = commonResponse(ErrorStatus.success_code, "");
+                    res.put("list", classToMap(transactionBannerList));
+                    sendResponse(res, callUUID);
+                }
+
+                @Override
+                public void onFailure(@NonNull GetDataFailure getDataFailure) {
+                    sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
+                }
+            });
+        } else if (call.method.equals("getTransaction")) {
+            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+            String transactionUUID = call.argument("transactionUuid") == null ? null :  call.argument("transactionUuid").toString();
+
+            nearPay.getTransactionByUuid(transactionUUID, adminPin, new GetTransactionListener() {
+                @Override
+                public void onSuccess(@Nullable List<TransactionReceipt> list) {
+                    Map res = commonResponse(ErrorStatus.success_code, "");
+                    res.put("list", classToMap(list));
+                    sendResponse(res, callUUID);
+                }
+
+                @Override
+                public void onFailure(@NonNull GetTransactionFailure getTransactionFailure) {
+                    sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
+                }
+            });
+        } else if (call.method.equals("getReconciliationsList")) {
+            int page = call.argument("page") == null ? 1 : (int) call.argument("page");
+            int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
+            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+
+
+
+            nearPay.getReconciliationListPage(adminPin, page, limit, new GetReconciliationPageListener() {
+                @Override
+                public void onSuccess(@Nullable ReconciliationList reconciliationList) {
+                    Map res = commonResponse(ErrorStatus.success_code, "");
+                    res.put("list", classToMap(reconciliationList));
+                    sendResponse(res, callUUID);
+
+                }
+
+                @Override
+                public void onFailure(@NonNull GetDataFailure getDataFailure) {
+                    sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
+                }
+            });
+        } else if (call.method.equals("getReconciliation")) {
+            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+            String reconciliationUUID = call.argument("reconciliationUuid") == null ? null :  call.argument("reconciliationUuid").toString();
+
+            nearPay.getReconciliationByUuid(reconciliationUUID, adminPin, new GetReconcileListener() {
+                @Override
+                public void onSuccess(@Nullable ReconciliationReceipt reconciliationReceipt) {
+                    Map res = commonResponse(ErrorStatus.success_code, "");
+                    res.put("list", classToMap(reconciliationReceipt));
+                    sendResponse(res, callUUID);
+
+                }
+
+                @Override
+                public void onFailure(@NonNull ReconcileFailure reconcileFailure) {
+                    sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
+
+                }
+            });
         } else {
             result.notImplemented();
         }
@@ -953,14 +1045,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     String message = messageResp != "" && messageResp.length() > 0 ? messageResp
                             : ErrorStatus.authentication_failed_message;
 
-                    if (authType.equalsIgnoreCase(jwtKey)) {
-                        nearPay.updateAuthentication(getAuthType(authType, inputValue));
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                        sendResponse(paramMap, callUUID);
-                    } else {
-                        Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
-                        sendResponse(paramMap, callUUID);
-                    }
+                    Map<String, Object> paramMap = commonResponse(ErrorStatus.auth_failed_code, message);
+                    sendResponse(paramMap, callUUID);
 
                 } else if (setupFailure instanceof SetupFailure.InvalidStatus) {
                     // you can get the status using the following code
@@ -1107,6 +1193,21 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         paramMap.put("message", message);
 
         return paramMap;
+    }
+
+    private Object classToMap(Object obj) {
+        Map tempConvertor = new HashMap<>();
+        tempConvertor.put("__", obj);
+
+        Gson gson = new Gson();
+        String inString = gson.toJson(tempConvertor);
+        Map asMap = gson.fromJson(inString, HashMap.class);
+        return  asMap.get("__");
+    }
+
+    private Map classToMapArr(Object obj) {
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(obj), HashMap.class);
     }
 
     private void getRecieptImageTrans(TransactionReceipt recipt, int imgwidth, int fontSize) {

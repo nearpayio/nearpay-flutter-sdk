@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "<enter your email>";
+  final tokenKey = "f.alhajeri@nearpay.io";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
     };
     var jsonResponse = await Nearpay.initialize(reqData);
     print("...sdkInitialize....$jsonResponse....");
+    return jsonResponse;
   }
 
   purchaseWithRefund() async {
@@ -101,16 +102,6 @@ class _MyAppState extends State<MyApp> {
 
   purchaseAction() async {
     var reqData = {
-      // "amount": 0001, // Required
-      // // "transactionUuid": "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
-      // "customer_reference_number":
-      //     "uuyuyuyuy65565675", // [optional] any number you want to add as a refrence
-      // "isEnableUI":
-      //     true, // [optional] true will enable the ui and false will disable
-      // "isEnableReversal":
-      //     true, // it will allow you to enable or disable the reverse button
-      // "finishTimeout": timeout, // [optional] Add the number of seconds
-      // "isUiDismissible": true
       "amount": 0001, // [Required] ammount you want to set .
       "customer_reference_number":
           "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
@@ -121,8 +112,8 @@ class _MyAppState extends State<MyApp> {
       "finishTimeout": 2, //[optional] Add the number of seconds
       "isUiDismissible":
           true, //[optional] allow the transaction to be dismissed from ui
-      "transactionUuid":
-          "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
+      // "transactionUuid":
+      //     "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
     };
     var jsonResponse = jsonDecode(await Nearpay.purchase(reqData));
     print('response ${jsonResponse['list'][0]['udid']}');
@@ -171,6 +162,14 @@ class _MyAppState extends State<MyApp> {
   setupAction() async {
     var jsonResponse = await Nearpay.setup();
     print("...setupAction response...------$jsonResponse.");
+  }
+
+// query functions
+
+  getTransactionList() async {
+    var jsonResponse = await Nearpay.getTransactions();
+    print("=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-===-=-=-=");
+    print(jsonResponse);
   }
 
   sessionAction() async {
@@ -294,14 +293,36 @@ class _MyAppState extends State<MyApp> {
             child: const Text("Session"),
           ),
           TextButton(
-            onPressed: () async {
-              // Respond to button press
-              updateAuthentication(
-                authType: AuthenticationType.email,
-                authValue: "<new email>",
-              );
+            onPressed: () {
+              getTransactionList();
             },
-            child: const Text("update auth"),
+            child: const Text("get transaction list"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final response = await Nearpay.getTransaction(
+                  transactionUuid: "a2fd6519-2b37-4336-be6d-5520bb3b6427");
+              print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+              print(response);
+            },
+            child: const Text("get transaction by uuid"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final response = await Nearpay.getReconciliationsList();
+              print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+              print(response);
+            },
+            child: const Text("get reconciliation list"),
+          ),
+          TextButton(
+            onPressed: () async {
+              final response = await Nearpay.getReconciliation(
+                  reconciliationUuid: "6d4a48b8-d194-4aad-92c9-a77606758799");
+              print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+              print(response);
+            },
+            child: const Text("get reconciliation by uuid"),
           ),
         ]),
       ),
