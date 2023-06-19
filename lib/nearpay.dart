@@ -85,4 +85,64 @@ class Nearpay {
         await methodChannel.invokeMethod<dynamic>('updateAuthentication', data);
     return response;
   }
+
+  static Future<dynamic> getTransactions({
+    int page = 1,
+    int limit = 30,
+    String? adminPin,
+  }) async {
+    final data = {
+      "page": page,
+      "limit": limit,
+      "adminPin": adminPin,
+    };
+
+    final response =
+        await methodChannel.invokeMethod<dynamic>('getTransactionsList', data);
+    return response;
+  }
+
+  static Future<dynamic> getTransaction({
+    required String transactionUuid,
+    String? adminPin,
+  }) async {
+    final data = {
+      "adminPin": adminPin,
+      "transactionUuid": transactionUuid,
+    };
+
+    final response =
+        await methodChannel.invokeMethod<dynamic>('getTransaction', data);
+    return response;
+  }
+
+  static Future<dynamic> getReconciliationsList({
+    int page = 1,
+    int limit = 30,
+    String? adminPin,
+  }) async {
+    final data = {
+      "page": page,
+      "limit": limit,
+      "adminPin": adminPin,
+    };
+
+    final response = await methodChannel.invokeMethod<dynamic>(
+        'getReconciliationsList', data);
+    return response;
+  }
+
+  static Future<dynamic> getReconciliation({
+    required String reconciliationUuid,
+    String? adminPin,
+  }) async {
+    final data = {
+      "adminPin": adminPin,
+      "reconciliationUuid": reconciliationUuid,
+    };
+
+    final response =
+        await methodChannel.invokeMethod<dynamic>('getReconciliation', data);
+    return response;
+  }
 }
