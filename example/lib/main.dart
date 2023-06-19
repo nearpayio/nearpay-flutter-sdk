@@ -164,14 +164,6 @@ class _MyAppState extends State<MyApp> {
     print("...setupAction response...------$jsonResponse.");
   }
 
-// query functions
-
-  getTransactionList() async {
-    var jsonResponse = await Nearpay.getTransactions();
-    print("=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-===-=-=-=");
-    print(jsonResponse);
-  }
-
   sessionAction() async {
     var reqData = {
       "sessionID": "ea5e30d4-54c7-4ad9-8372-f798259ff589", // Required
@@ -293,8 +285,11 @@ class _MyAppState extends State<MyApp> {
             child: const Text("Session"),
           ),
           TextButton(
-            onPressed: () {
-              getTransactionList();
+            onPressed: () async {
+              var jsonResponse = await Nearpay.getTransactions(page: 1);
+              print(
+                  "=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-===-=-=-=");
+              print(jsonResponse);
             },
             child: const Text("get transaction list"),
           ),
