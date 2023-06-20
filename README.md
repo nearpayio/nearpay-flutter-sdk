@@ -217,6 +217,56 @@ var jsonData = json.decode(jsonResponse);
 var status = jsonData['status'];
 ```
 
+# 10. getTransaction
+
+gets a transaction by uuid
+
+```dart
+final response = await Nearpay.getTransaction(
+  transactionUuid: "a2fd6519-2b37-4336-be6d-5520bb3b6427", // [Required] transaction uuid to fetch
+  adminPin: "0000", // [Optional] admin pin to access
+);
+print(response);
+```
+
+# 11. getTransactions
+
+gets transactions list
+
+```dart
+var jsonResponse = await Nearpay.getTransactions(
+  page: 1, // [Optopnal] page number , default (1)
+  limit: 30, // [Optopnal] page size, default (30)
+  adminPin: "0000", // [Optopnal] admin pin to access
+);
+print(jsonResponse);
+```
+
+# 12. getReconciliation
+
+gets a reaconciliation by uuid
+
+```dart
+final response = await Nearpay.getReconciliation(
+  reconciliationUuid: "6d4a48b8-d194-4aad-92c9-a77606758799",  // [Required] reconciliation uuid to fetch
+  adminPin: "0000", // [Optional] admin pin to access
+);
+print(response);
+```
+
+# 13. getReconciliations
+
+get reaconciliations
+
+```dart
+final response = await Nearpay.getReconciliationsList(
+  page: 1, // [Optopnal] page number , default (1)
+  limit: 30, // [Optopnal] page size, default (30)
+  adminPin: "0000", // [Optopnal] admin pin to access
+);
+print(response);
+```
+
 ### Response Status
 
 ```
