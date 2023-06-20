@@ -7,9 +7,14 @@ import io.nearpay.flutter.plugin.PluginProvider;
 
 public class ArgsFilter {
     private PluginProvider provider;
+    private Map savedArgs;
 
     public ArgsFilter(PluginProvider provider) {
         this.provider = provider;
+    }
+
+    public ArgsFilter(Map args) {
+        savedArgs =args;
     }
 
     // return every map entry to its default
@@ -57,6 +62,36 @@ public class ArgsFilter {
             args.put("enableEditableRefundAmountUi", true);
         }
 
+
+        if (args.get("page") == null || (int) args.get("page") < 1) {
+            args.put("page", 1);
+        }
+
+        if (args.get("limit") == null || (int) args.get("limit") < 1) {
+            args.put("limit", 30);
+        }
+
         return args;
     }
+
+    public String getTransactionUuid() {
+        return savedArgs.get("transaction_uuid").toString();
+    }
+
+    public String getReconciliationUuid() {
+        return savedArgs.get("reconciliation_uuid").toString();
+    }
+
+
+    public String getAdminPin(){
+        return savedArgs.get("adminPin") == null ? null : savedArgs.get("adminPin").toString();
+    }
+
+    public int getPage(){
+        return savedArgs.get("page") == null ? 1 : (int) savedArgs.get("page");
+    }
+    public int getLimit(){
+        return savedArgs.get("limit") == null ? 30 : (int) savedArgs.get("limit");
+    }
+
 }

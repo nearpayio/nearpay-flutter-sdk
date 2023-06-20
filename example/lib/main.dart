@@ -208,15 +208,43 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  showToast(String message, bool isError) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.black,
-        fontSize: 16.0);
+  // =-=-=- Queries -=-=-=
+  Future<dynamic> getTransaction() async {
+    nearpay.getTransaction(
+      transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
+      onResult: (receipts) {
+        printJson(receipts[0].toJson());
+      },
+    );
+  }
+
+  Future<dynamic> getTransactions() async {
+    nearpay.getTransactions(
+      page: 1,
+      limit: 30,
+      onResult: (banner) {
+        printJson(banner.toJson());
+      },
+    );
+  }
+
+  Future<dynamic> getReconciliation() async {
+    nearpay.getReconciliation(
+      reconciliationUUID: "6d4a48b8-d194-4aad-92c9-a77606758799",
+      onResult: (receipts) {
+        printJson(receipts.toJson());
+      },
+    );
+  }
+
+  Future<dynamic> getReconciliations() async {
+    nearpay.getReconciliations(
+      page: 1,
+      limit: 30,
+      onResult: (banner) {
+        printJson(banner.toJson());
+      },
+    );
   }
 
   @override
@@ -226,7 +254,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Nearpay Example'),
         ),
-        body: Column(
+        body: ListView(
           children: [
             TextButton(
               onPressed: () async {
@@ -287,6 +315,30 @@ class _MyAppState extends State<MyApp> {
                 sessionAction();
               },
               child: const Text("Session"),
+            ),
+            TextButton(
+              onPressed: () async {
+                getTransaction();
+              },
+              child: const Text("get transaction by uuid"),
+            ),
+            TextButton(
+              onPressed: () async {
+                getTransactions();
+              },
+              child: const Text("get transactions"),
+            ),
+            TextButton(
+              onPressed: () async {
+                getReconciliation();
+              },
+              child: const Text("get reconciliation by uuid"),
+            ),
+            TextButton(
+              onPressed: () async {
+                getReconciliations();
+              },
+              child: const Text("get reconciliations"),
             ),
           ],
         ),

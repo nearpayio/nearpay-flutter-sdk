@@ -33,6 +33,7 @@ public class ErrorStatus {
     // Refund Code
     public static final int already_installed_code = 410;
     public static final int not_installed_code = 411;
+    public static final int invalid_admin_pin = 412;
 
     public static final int session_opened_code = 200;
 

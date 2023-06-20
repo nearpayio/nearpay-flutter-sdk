@@ -10,8 +10,10 @@ import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error_switch.d
 import 'package:nearpay_flutter_sdk/errors/session_error/session_error.dart';
 import 'package:nearpay_flutter_sdk/errors/session_error/session_error_switch.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
+import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_banner.dart';
 import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_receipt.dart';
 import 'package:nearpay_flutter_sdk/models/session/session.dart';
+import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_banner.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
@@ -455,6 +457,113 @@ class Nearpay {
         if (onSessionFailed != null) {
           onSessionFailed(err);
         }
+      }
+    });
+  }
+
+  // =-=-=- Queries -=-=-=
+  Future<dynamic> getTransactions({
+    int page = 1,
+    int limit = 30,
+    String? adminPin,
+    void Function(TransactionBannerList)? onResult,
+    void Function(SessionError)? onFail,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+      "adminPin": adminPin,
+    };
+
+    return _callAndReturnChannel('getTransactions', data, (response) {
+      if (response["status"] == 200) {
+        TransactionBannerList banner =
+            TransactionBannerList.fromJson(response['result']);
+        if (onResult != null) {
+          onResult(banner);
+        }
+      } else {
+        // TODO: implement later
+      }
+    });
+  }
+
+  Future<dynamic> getTransaction({
+    required String transactionUUID,
+    String? adminPin,
+    void Function(List<TransactionReceipt>)? onResult,
+    void Function(SessionError)? onFail,
+  }) async {
+    var data = {
+      "transaction_uuid": transactionUUID, // Required
+      "adminPin": adminPin,
+    };
+
+    return _callAndReturnChannel('getTransaction', data, (response) {
+      if (response["status"] == 200) {
+        List<TransactionReceipt> receipts =
+            List<Map<String, dynamic>>.from(response["result"])
+                .map((json) => TransactionReceipt.fromJson(json))
+                .toList();
+        if (onResult != null) {
+          onResult(receipts);
+        }
+      } else {
+        // TODO: implement later
+      }
+    });
+  }
+
+  Future<dynamic> getReconciliations({
+    int page = 1,
+    int limit = 30,
+    String? adminPin,
+    void Function(ReconciliationBannerList)? onResult,
+    void Function(SessionError)? onFail,
+  }) async {
+    var data = {
+      "page": page,
+      "limit": limit,
+      "adminPin": adminPin,
+    };
+
+    return _callAndReturnChannel('getReconciliations', data, (response) {
+      if (response["status"] == 200) {
+        ReconciliationBannerList banner =
+            ReconciliationBannerList.fromJson(response['result']);
+        if (onResult != null) {
+          onResult(banner);
+        }
+      } else {
+        // TODO: implement later
+      }
+    });
+  }
+
+  Future<dynamic> getReconciliation({
+    required String reconciliationUUID,
+    String? adminPin,
+    void Function(ReconciliationReceipt)? onResult,
+    void Function(SessionError)? onFail,
+  }) async {
+    var data = {
+      "reconciliation_uuid": reconciliationUUID, // Required
+      "adminPin": adminPin,
+    };
+
+    return _callAndReturnChannel('getReconciliation', data, (response) {
+      if (response["status"] == 200) {
+        print("=-=-=-=-=-=-=-=-=-=-xxxxxx");
+        print(response['result']);
+
+        ReconciliationReceipt receipts =
+            ReconciliationReceipt.fromJson(response['result']);
+
+        if (onResult != null) {
+          onResult(receipts);
+        }
+      } else {
+        // TODO: implement later
       }
     });
   }

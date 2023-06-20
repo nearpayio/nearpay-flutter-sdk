@@ -31,7 +31,7 @@ public class NearpayLib {
         this.provider = provider;
     }
 
-    public AuthenticationData getAuthType(String authType, String inputValue) {
+    public static AuthenticationData getAuthType(String authType, String inputValue) {
         AuthenticationData authentication = authType.equals("userenter") ? AuthenticationData.UserEnter.INSTANCE
                 : authType.equals("email") ? new AuthenticationData.Email(inputValue)
                         : authType.equals("mobile") ? new AuthenticationData.Mobile(inputValue)
@@ -89,6 +89,17 @@ public class NearpayLib {
         return paramMap;
     }
 
+    public static Map<String, Object> QueryResponse(int responseCode, String message,
+                                                    Object toSend) {
+        Map<String, Object> paramMap = new HashMap<>();
+
+        paramMap.put("status", responseCode);
+        paramMap.put("message", message);
+        paramMap.put("result", classToMap(toSend));
+        return paramMap;
+    }
+
+
     public static Map<String, Object> SessionResponse(int responseCode, String message, Session session){
         Map<String, Object> paramMap = new HashMap<>();
         Map<String, Object> sessionJson = new HashMap<>();
@@ -110,5 +121,21 @@ public class NearpayLib {
         Map<String, Object> data = new Gson().fromJson(jsonStr, HashMap.class);
         return data;
     }
+
+    public static Object classToMap(Object obj) {
+        // return default hashmap for empty given obj
+        if (obj == null) {
+            return  new HashMap<>();
+        }
+
+        Map tempConvertor = new HashMap<>();
+        tempConvertor.put("__", obj);
+
+        Gson gson = new Gson();
+        String inString = gson.toJson(tempConvertor);
+        Map asMap = gson.fromJson(inString, HashMap.class);
+        return asMap.get("__");
+    }
+
 
 }
