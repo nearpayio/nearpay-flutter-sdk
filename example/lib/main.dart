@@ -286,7 +286,7 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
-              var jsonResponse = await Nearpay.getTransactions(
+              var jsonResponse = await Nearpay.getTransactionsList(
                 page: 1,
                 limit: 30,
                 adminPin: "0000",

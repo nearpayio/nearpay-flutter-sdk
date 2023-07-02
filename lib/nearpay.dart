@@ -86,7 +86,7 @@ class Nearpay {
     return response;
   }
 
-  static Future<dynamic> getTransactions({
+  static Future<dynamic> getTransactionsList({
     int page = 1,
     int limit = 30,
     String? adminPin,

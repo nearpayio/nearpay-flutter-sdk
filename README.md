@@ -234,12 +234,12 @@ print(response);
 gets transactions list
 
 ```dart
-var jsonResponse = await Nearpay.getTransactions(
+var response = await Nearpay.getTransactionsList(
   page: 1, // [Optopnal] page number , default (1)
   limit: 30, // [Optopnal] page size, default (30)
   adminPin: "0000", // [Optopnal] admin pin to access
 );
-print(jsonResponse);
+print(response);
 ```
 
 # 12. getReconciliation
