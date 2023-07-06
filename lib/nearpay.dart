@@ -89,12 +89,10 @@ class Nearpay {
   static Future<dynamic> getTransactionsList({
     int page = 1,
     int limit = 30,
-    String? adminPin,
   }) async {
     final data = {
       "page": page,
       "limit": limit,
-      "adminPin": adminPin,
     };
 
     final response =
@@ -104,10 +102,8 @@ class Nearpay {
 
   static Future<dynamic> getTransaction({
     required String transactionUuid,
-    String? adminPin,
   }) async {
     final data = {
-      "adminPin": adminPin,
       "transactionUuid": transactionUuid,
     };
 
@@ -119,12 +115,10 @@ class Nearpay {
   static Future<dynamic> getReconciliationsList({
     int page = 1,
     int limit = 30,
-    String? adminPin,
   }) async {
     final data = {
       "page": page,
       "limit": limit,
-      "adminPin": adminPin,
     };
 
     final response = await methodChannel.invokeMethod<dynamic>(
@@ -134,10 +128,8 @@ class Nearpay {
 
   static Future<dynamic> getReconciliation({
     required String reconciliationUuid,
-    String? adminPin,
   }) async {
     final data = {
-      "adminPin": adminPin,
       "reconciliationUuid": reconciliationUuid,
     };
 
