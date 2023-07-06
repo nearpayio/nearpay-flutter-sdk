@@ -286,7 +286,6 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
             // String adminPin = call.argument("adminPin") == null ? null :
             // call.argument("adminPin").toString();
-
             nearPay.getTransactionListPage(page, limit, new GetTransactionPageListener() {
                 @Override
                 public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
