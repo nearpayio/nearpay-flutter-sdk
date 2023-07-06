@@ -289,7 +289,6 @@ class _MyAppState extends State<MyApp> {
               var jsonResponse = await Nearpay.getTransactionsList(
                 page: 1,
                 limit: 30,
-                adminPin: "0000",
               );
               print(
                   "=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-===-=-=-=");
@@ -301,7 +300,6 @@ class _MyAppState extends State<MyApp> {
             onPressed: () async {
               final response = await Nearpay.getTransaction(
                 transactionUuid: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
-                adminPin: "0000",
               );
               print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
               print(response);
@@ -313,7 +311,6 @@ class _MyAppState extends State<MyApp> {
               final response = await Nearpay.getReconciliationsList(
                 page: 1,
                 limit: 30,
-                adminPin: "0000",
               );
               print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
               print(response);
@@ -324,7 +321,6 @@ class _MyAppState extends State<MyApp> {
             onPressed: () async {
               final response = await Nearpay.getReconciliation(
                 reconciliationUuid: "6d4a48b8-d194-4aad-92c9-a77606758799",
-                adminPin: "0000",
               );
               print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
               print(response);
