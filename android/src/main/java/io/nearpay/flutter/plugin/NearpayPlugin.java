@@ -284,11 +284,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         } else if (call.method.equals("getTransactionsList")) {
             int page = call.argument("page") == null ? 1 : (int) call.argument("page");
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
-            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+            // String adminPin = call.argument("adminPin") == null ? null :
+            // call.argument("adminPin").toString();
 
-
-
-            nearPay.getTransactionListPage(adminPin, page , limit, new GetTransactionPageListener() {
+            nearPay.getTransactionListPage(page, limit, new GetTransactionPageListener() {
                 @Override
                 public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -302,10 +301,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 }
             });
         } else if (call.method.equals("getTransaction")) {
-            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
-            String transactionUUID = call.argument("transactionUuid") == null ? null :  call.argument("transactionUuid").toString();
+            // String adminPin = call.argument("adminPin") == null ? null :
+            // call.argument("adminPin").toString();
+            String transactionUUID = call.argument("transactionUuid") == null ? null
+                    : call.argument("transactionUuid").toString();
 
-            nearPay.getTransactionByUuid(transactionUUID, adminPin, new GetTransactionListener() {
+            nearPay.getTransactionByUuid(transactionUUID, new GetTransactionListener() {
                 @Override
                 public void onSuccess(@Nullable List<TransactionReceipt> list) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -321,11 +322,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         } else if (call.method.equals("getReconciliationsList")) {
             int page = call.argument("page") == null ? 1 : (int) call.argument("page");
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
-            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
+            // String adminPin = call.argument("adminPin") == null ? null :
+            // call.argument("adminPin").toString();
 
-
-
-            nearPay.getReconciliationListPage(adminPin, page, limit, new GetReconciliationPageListener() {
+            nearPay.getReconciliationListPage(page, limit, new GetReconciliationPageListener() {
                 @Override
                 public void onSuccess(@Nullable ReconciliationList reconciliationList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -340,10 +340,12 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 }
             });
         } else if (call.method.equals("getReconciliation")) {
-            String adminPin = call.argument("adminPin") == null ? null :  call.argument("adminPin").toString();
-            String reconciliationUUID = call.argument("reconciliationUuid") == null ? null :  call.argument("reconciliationUuid").toString();
+            // String adminPin = call.argument("adminPin") == null ? null :
+            // call.argument("adminPin").toString();
+            String reconciliationUUID = call.argument("reconciliationUuid") == null ? null
+                    : call.argument("reconciliationUuid").toString();
 
-            nearPay.getReconciliationByUuid(reconciliationUUID, adminPin, new GetReconcileListener() {
+            nearPay.getReconciliationByUuid(reconciliationUUID, new GetReconcileListener() {
                 @Override
                 public void onSuccess(@Nullable ReconciliationReceipt reconciliationReceipt) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -1202,7 +1204,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         Gson gson = new Gson();
         String inString = gson.toJson(tempConvertor);
         Map asMap = gson.fromJson(inString, HashMap.class);
-        return  asMap.get("__");
+        return asMap.get("__");
     }
 
     private Map classToMapArr(Object obj) {
