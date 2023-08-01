@@ -197,10 +197,14 @@ class Nearpay {
 
     _callAndReturnChannel('refund', data, (response) {
       if (response["status"] == 200) {
-        List<TransactionReceipt> receipts =
-            List<Map<String, dynamic>>.from(response["receipts"])
-                .map((json) => TransactionReceipt.fromJson(json))
-                .toList();
+        // List<TransactionReceipt> receipts =
+        //     List<Map<String, dynamic>>.from(response["receipts"])
+        //         .map((json) => TransactionReceipt.fromJson(json))
+        //         .toList();
+
+        TransactionData receipts =
+            TransactionData.fromJson(response['receipts']);
+
         if (onRefundApproved != null) {
           onRefundApproved(receipts);
         }
@@ -247,6 +251,7 @@ class Nearpay {
   }
 
   Future<dynamic> reconcile({
+    String? reconciliationUUID,
     bool enableReceiptUi = true,
     int finishTimeout = 60,
     bool enableUiDismiss = true,
@@ -255,6 +260,7 @@ class Nearpay {
     void Function(ReconcileError)? onReconcileFailed,
   }) async {
     final data = {
+      "reconciliation_uuid": reconciliationUUID,
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin, // Optional
@@ -325,7 +331,8 @@ class Nearpay {
     bool enableReceiptUi = true,
     int finishTimeout = 60,
     bool enableUiDismiss = true,
-    void Function(List<TransactionReceipt>)? onReversalFinished,
+    // void Function(List<TransactionReceipt>)? onReversalFinished,
+    void Function(TransactionData)? onReversalFinished,
     void Function(ReversalError)? onReversalFailed,
   }) async {
     var data = {
@@ -336,10 +343,13 @@ class Nearpay {
     };
     _callAndReturnChannel('reverse', data, (response) {
       if (response["status"] == 200) {
-        List<TransactionReceipt> receipts =
-            List<Map<String, dynamic>>.from(response["receipts"])
-                .map((json) => TransactionReceipt.fromJson(json))
-                .toList();
+        // List<TransactionReceipt> receipts =
+        //     List<Map<String, dynamic>>.from(response["receipts"])
+        //         .map((json) => TransactionReceipt.fromJson(json))
+        //         .toList();
+
+        TransactionData receipts =
+            TransactionData.fromJson(response['receipts']);
 
         if (onReversalFinished != null) {
           onReversalFinished(receipts);
@@ -426,7 +436,8 @@ class Nearpay {
     bool enableReversalUi = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
-    void Function(List<TransactionReceipt>)? onSessionOpen,
+    // void Function(List<TransactionReceipt>)? onSessionOpen,
+    void Function(TransactionData)? onSessionOpen,
     void Function(Session)? onSessionClosed,
     void Function(SessionError)? onSessionFailed,
   }) async {
@@ -440,10 +451,13 @@ class Nearpay {
 
     return _callAndReturnChannel('session', data, (response) {
       if (response["status"] == 200) {
-        List<TransactionReceipt> receipts =
-            List<Map<String, dynamic>>.from(response["receipts"])
-                .map((json) => TransactionReceipt.fromJson(json))
-                .toList();
+        // List<TransactionReceipt> receipts =
+        //     List<Map<String, dynamic>>.from(response["receipts"])
+        //         .map((json) => TransactionReceipt.fromJson(json))
+        //         .toList();
+        TransactionData receipts =
+            TransactionData.fromJson(response['receipts']);
+
         if (onSessionOpen != null) {
           onSessionOpen(receipts);
         }
@@ -491,7 +505,8 @@ class Nearpay {
   Future<dynamic> getTransaction({
     required String transactionUUID,
     String? adminPin,
-    void Function(List<TransactionReceipt>)? onResult,
+    // void Function(List<TransactionReceipt>)? onResult,
+    void Function(TransactionData)? onResult,
     void Function(SessionError)? onFail,
   }) async {
     var data = {
@@ -501,10 +516,14 @@ class Nearpay {
 
     return _callAndReturnChannel('getTransaction', data, (response) {
       if (response["status"] == 200) {
-        List<TransactionReceipt> receipts =
-            List<Map<String, dynamic>>.from(response["result"])
-                .map((json) => TransactionReceipt.fromJson(json))
-                .toList();
+        // List<TransactionReceipt> receipts =
+        //     List<Map<String, dynamic>>.from(response["result"])
+        //         .map((json) => TransactionReceipt.fromJson(json))
+        //         .toList();
+
+        TransactionData receipts =
+            TransactionData.fromJson(response['receipts']);
+
         if (onResult != null) {
           onResult(receipts);
         }
