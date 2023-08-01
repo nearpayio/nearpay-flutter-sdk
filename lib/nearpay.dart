@@ -131,7 +131,8 @@ class Nearpay {
     bool enableReversalUi = true,
     bool enableUiDismiss = true,
     int finishTimeout = 60,
-    void Function(List<TransactionReceipt>)? onPurchaseApproved,
+    // void Function(List<TransactionReceipt>)? onPurchaseApproved,
+    void Function(TransactionData)? onPurchaseApproved,
     void Function(PurchaseError)? onPurchaseFailed,
   }) async {
     final data = {
@@ -149,10 +150,8 @@ class Nearpay {
       data,
       (response) {
         if (response["status"] == 200) {
-          List<TransactionReceipt> receipts =
-              List<Map<String, dynamic>>.from(response["receipts"])
-                  .map((json) => TransactionReceipt.fromJson(json))
-                  .toList();
+          TransactionData receipts =
+              TransactionData.fromJson(response['receipts']);
 
           if (onPurchaseApproved != null) {
             onPurchaseApproved(receipts);
@@ -178,7 +177,8 @@ class Nearpay {
     bool enableUiDismiss = true,
     int finishTimeout = 60,
     String? adminPin,
-    void Function(List<TransactionReceipt>)? onRefundApproved,
+    // void Function(List<TransactionReceipt>)? onRefundApproved,
+    void Function(TransactionData)? onRefundApproved,
     void Function(RefundError)? onRefundFailed,
   }) async {
     final data = {
