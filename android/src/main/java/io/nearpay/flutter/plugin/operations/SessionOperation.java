@@ -18,6 +18,7 @@ import io.nearpay.sdk.data.models.Session;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.SessionFailure;
+import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.SessionListener;
 
 public class SessionOperation extends BaseOperation {
@@ -52,16 +53,23 @@ public class SessionOperation extends BaseOperation {
                     }
 
                     @Override
-                    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
-                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", list);
+                    public void onSessionOpen(@NonNull TransactionData transactionData) {
+                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", transactionData);
                         sender.send(response);
+
                     }
+
+//                    @Override
+//                    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
+//                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", list);
+//                        sender.send(response);
+//                    }
 
                     @Override
                     public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
                         int status = ErrorStatus.general_failure_code;
                         String message = null;
-                        List<TransactionReceipt> receipts = null;
+                        TransactionData receipts = null;
 
 
                         if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {

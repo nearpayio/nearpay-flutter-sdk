@@ -30,7 +30,7 @@ public class GetReconciliationsPageOperation extends BaseOperation {
     int page = filter.getPage();
     int limit = filter.getLimit();
 
-    provider.getNearpayLib().nearpay.getReconciliationListPage(adminPin, page, limit,
+    provider.getNearpayLib().nearpay.getReconciliationListPage( page, limit,
         new GetReconciliationPageListener() {
           @Override
           public void onSuccess(@Nullable ReconciliationList reconciliationList) {
@@ -44,9 +44,7 @@ public class GetReconciliationsPageOperation extends BaseOperation {
             int status = ErrorStatus.general_failure_code;
             String message = null;
 
-            if (getDataFailure instanceof GetDataFailure.InvalidAdminPin) {
-              status = ErrorStatus.invalid_admin_pin;
-            } else if (getDataFailure instanceof GetDataFailure.FailureMessage) {
+         if (getDataFailure instanceof GetDataFailure.FailureMessage) {
               status = ErrorStatus.failure_code;
               message = ((GetDataFailure.FailureMessage) getDataFailure).getMessage();
             } else if (getDataFailure instanceof GetDataFailure.AuthenticationFailed) {

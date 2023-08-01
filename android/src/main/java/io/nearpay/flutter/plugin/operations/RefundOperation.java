@@ -16,6 +16,7 @@ import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.RefundFailure;
+import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.RefundListener;
 
 public class RefundOperation extends BaseOperation {
@@ -41,11 +42,10 @@ public class RefundOperation extends BaseOperation {
                                 enableReversal, enableEditableRefundAmountUi, finishTimeout, transaction_uuid, adminPin,enableUiDismiss,
                                 new RefundListener() {
                                         @Override
-                                        public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
+                                        public void onRefundApproved(@NonNull TransactionData transactionData) {
                                                 Map<String, Object> responseDict = NearpayLib.ApiResponse(
                                                         ErrorStatus.success_code,
-                                                        "Refund Success",
-                                                        list
+                                                        "Refund Success", transactionData
                                                 );
                                                 sender.send(responseDict);
                                         }
@@ -54,12 +54,12 @@ public class RefundOperation extends BaseOperation {
                                         public void onRefundFailed(@NonNull RefundFailure refundFailure) {
                                                 int status = ErrorStatus.general_failure_code;
                                                 String message = null;
-                                                List<TransactionReceipt> receipts = null;
+                                                TransactionData receipts = null;
 
                                                 if (refundFailure instanceof RefundFailure.RefundDeclined) {
                                                         // when the payment declined.
                                                         status = ErrorStatus.refund_declined_code;
-                                                        receipts = ((RefundFailure.RefundDeclined) refundFailure).getReceipts();
+                                                        receipts = ((RefundFailure.RefundDeclined) refundFailure).getTransactionData();
 
                                                 } else if (refundFailure instanceof RefundFailure.RefundRejected) {
                                                         status = ErrorStatus.refund_rejected_code;
@@ -72,8 +72,43 @@ public class RefundOperation extends BaseOperation {
                                                 }
                                                 Map response = NearpayLib.ApiResponse(status, message, receipts);
                                                 sender.send(response);
+
                                         }
 
+                                        //                                        @Override
+//                                        public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
+//                                                Map<String, Object> responseDict = NearpayLib.ApiResponse(
+//                                                        ErrorStatus.success_code,
+//                                                        "Refund Success",
+//                                                        list
+//                                                );
+//                                                sender.send(responseDict);
+//                                        }
+//
+//                                        @Override
+//                                        public void onRefundFailed(@NonNull RefundFailure refundFailure) {
+//                                                int status = ErrorStatus.general_failure_code;
+//                                                String message = null;
+//                                                List<TransactionReceipt> receipts = null;
+//
+//                                                if (refundFailure instanceof RefundFailure.RefundDeclined) {
+//                                                        // when the payment declined.
+//                                                        status = ErrorStatus.refund_declined_code;
+//                                                        receipts = ((RefundFailure.RefundDeclined) refundFailure).getReceipts();
+//
+//                                                } else if (refundFailure instanceof RefundFailure.RefundRejected) {
+//                                                        status = ErrorStatus.refund_rejected_code;
+//                                                        message = ((RefundFailure.RefundRejected) refundFailure).getMessage();
+//                                                } else if (refundFailure instanceof RefundFailure.AuthenticationFailed) {
+//                                                        status = ErrorStatus.auth_failed_code;
+//                                                        message = ((RefundFailure.AuthenticationFailed) refundFailure).getMessage();
+//                                                } else if (refundFailure instanceof RefundFailure.InvalidStatus) {
+//                                                        status = ErrorStatus.invalid_code;
+//                                                }
+//                                                Map response = NearpayLib.ApiResponse(status, message, receipts);
+//                                                sender.send(response);
+//                                        }
+//
                                 });
 
         }

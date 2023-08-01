@@ -46,6 +46,13 @@ public class ArgsFilter {
             args.put("transaction_uuid", UUID.fromString(args.get("transaction_uuid").toString()));
         }
 
+        if (args.get("reconciliation_uuid") == null) {
+            args.put("reconciliation_uuid", UUID.randomUUID());
+        } else {
+            args.put("reconciliation_uuid", UUID.fromString(args.get("reconciliation_uuid").toString()));
+        }
+
+
         if (args.get("enableUiDismiss") == null) {
             args.put("enableUiDismiss", true);
         }

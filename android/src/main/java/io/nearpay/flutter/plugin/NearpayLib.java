@@ -18,6 +18,7 @@ import io.nearpay.sdk.data.models.ReconciliationReceipt;
 import io.nearpay.sdk.data.models.Session;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
+import io.nearpay.sdk.utils.enums.TransactionData;
 
 public class NearpayLib {
     private PluginProvider provider;
@@ -52,16 +53,16 @@ public class NearpayLib {
         return paramMap;
     }
 
-    public static Map<String, Object> ApiResponse(int responseCode, String message, List<TransactionReceipt> receipts) {
+    public static Map<String, Object> ApiResponse(int responseCode, String message, TransactionData receipts) {
         Map<String, Object> paramMap = new HashMap<>();
-        List<Map<String, Object>> transactionListJson = new ArrayList<>();
-        if(receipts != null){
-            for (TransactionReceipt transReceipt : receipts) {
-                Gson gson = new Gson(); // Or use new GsonBuilder().create();
-                String json = gson.toJson(transReceipt); // serializes target to Json
-                transactionListJson.add(NearpayLib.JSONStringToMap(json));
-            }
-        }
+        Object transactionListJson = classToMap(receipts);
+//        if(receipts != null){
+//            for (TransactionReceipt transReceipt : receipts) {
+//                Gson gson = new Gson(); // Or use new GsonBuilder().create();
+//                String json = gson.toJson(transReceipt); // serializes target to Json
+//                transactionListJson.add(NearpayLib.JSONStringToMap(json));
+//            }
+//        }
 
 
         paramMap.put("status", responseCode);

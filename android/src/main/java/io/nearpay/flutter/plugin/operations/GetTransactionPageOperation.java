@@ -29,11 +29,10 @@ public class GetTransactionPageOperation extends BaseOperation {
   @Override
   public void run(Map args, NearpaySender sender) {
     ArgsFilter filter = new ArgsFilter(args);
-    String adminPin = filter.getAdminPin();
     int page = filter.getPage();
     int limit = filter.getLimit();
 
-    provider.getNearpayLib().nearpay.getTransactionListPage(adminPin, page, limit, new GetTransactionPageListener() {
+    provider.getNearpayLib().nearpay.getTransactionListPage( page, limit, new GetTransactionPageListener() {
       @Override
       public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
         Map toSend = NearpayLib.QueryResponse(ErrorStatus.success_code, null, transactionBannerList);
@@ -46,9 +45,7 @@ public class GetTransactionPageOperation extends BaseOperation {
         int status = ErrorStatus.general_failure_code;
         String message = null;
 
-        if (getDataFailure instanceof GetDataFailure.InvalidAdminPin) {
-          status = ErrorStatus.invalid_admin_pin;
-        } else if (getDataFailure instanceof GetDataFailure.FailureMessage) {
+       if (getDataFailure instanceof GetDataFailure.FailureMessage) {
           status = ErrorStatus.failure_code;
           message = ((GetDataFailure.FailureMessage) getDataFailure).getMessage();
         } else if (getDataFailure instanceof GetDataFailure.AuthenticationFailed) {

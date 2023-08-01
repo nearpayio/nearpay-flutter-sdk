@@ -16,6 +16,7 @@ import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.ReversalFailure;
+import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.ReversalListener;
 
 public class ReverseOperation extends BaseOperation {
@@ -32,18 +33,22 @@ public class ReverseOperation extends BaseOperation {
 
         provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, finishTimeout,enableUiDismiss,
                 new ReversalListener() {
-
                     @Override
-                    public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
-                        Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.success_code, null, list);
+                    public void onReversalFinished(@NonNull TransactionData transactionData) {
+                        Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.success_code, null, transactionData);
                         sender.send(responseDict);
                     }
+                    //                    @Override
+//                    public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
+//                        Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.success_code, null, list);
+//                        sender.send(responseDict);
+//                    }
 
                     @Override
                     public void onReversalFailed(@NonNull ReversalFailure reversalFailure) {
                         int status = ErrorStatus.general_failure_code;
                         String message = null;
-                        List<TransactionReceipt> receipts = null;
+                        TransactionData receipts = null;
 
                         if (reversalFailure instanceof ReversalFailure.AuthenticationFailed) {
                             // when the Authentication is failed

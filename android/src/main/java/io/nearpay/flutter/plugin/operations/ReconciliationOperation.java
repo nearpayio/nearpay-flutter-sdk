@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import io.nearpay.flutter.plugin.ErrorStatus;
@@ -17,6 +18,7 @@ import io.nearpay.sdk.data.models.ReconciliationReceipt;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.ReconcileFailure;
+import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.ReconcileListener;
 
 public class ReconciliationOperation extends BaseOperation {
@@ -30,8 +32,10 @@ public class ReconciliationOperation extends BaseOperation {
                 Long finishTimeout = (Long) args.get("finishTimeout");
                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
                 Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+                UUID reconciliationUuid = (UUID) args.get("reconciliation_uuid");
 
-                provider.getNearpayLib().nearpay.reconcile(enableReceiptUi, adminPin, finishTimeout, enableUiDismiss,
+
+                provider.getNearpayLib().nearpay.reconcile(reconciliationUuid, enableReceiptUi, adminPin, finishTimeout, enableUiDismiss,
                                 new ReconcileListener() {
                                         @Override
                                         public void onReconcileFinished(
@@ -47,7 +51,7 @@ public class ReconciliationOperation extends BaseOperation {
                                         public void onReconcileFailed(@NonNull ReconcileFailure reconcileFailure) {
                                                 int status = ErrorStatus.general_failure_code;
                                                 String message = null;
-                                                List<TransactionReceipt> receipts = null;
+                                                TransactionData receipts = null;
 
                                                 if (reconcileFailure instanceof ReconcileFailure.AuthenticationFailed) {
                                                         status = ErrorStatus.auth_failed_code;
