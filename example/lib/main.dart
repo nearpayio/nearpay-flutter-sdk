@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "f.alhajeri@nearpay.io";
+  final tokenKey = "<your email here>";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
       "finishTimeout": 2, //[optional] Add the number of seconds
       "isUiDismissible":
           true, //[optional] allow the transaction to be dismissed from ui
-      // "transactionUuid":
+      // "transactionId":
       //     "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
     };
     var jsonResponse = jsonDecode(await Nearpay.purchase(reqData));

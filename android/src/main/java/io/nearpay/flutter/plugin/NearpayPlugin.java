@@ -141,6 +141,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 Boolean enableUiDismiss = call.argument("isUiDismissible") != null
                         ? (Boolean) call.argument("isUiDismissible")
                         : true;// [optional] it will allow you to control dismissing the UI
+                UUID jobId = call.argument("reconcileId") == null ? randomUUID()
+                        : UUID.fromString(call.argument("reconcileId").toString());
+
+
 
                 Long timeout = Long.valueOf(finishTimeout);
                 boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
@@ -150,7 +154,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                             "Authentication parameter missing");
                     sendResponse(paramMap, callUUID);
                 } else {
-                    doReconcileAction(callUUID, isEnableUI, authType, authvalue, timeout, adminPin, enableUiDismiss);
+                    doReconcileAction(callUUID, isEnableUI, authType, authvalue, timeout, adminPin, enableUiDismiss, jobId);
                 }
 
             } else {
@@ -375,8 +379,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 : call.argument("authvalue").toString();
         String authType = call.argument("authtype") == null ? this.authTypeShared
                 : call.argument("authtype").toString();
-        UUID transactionUuid = call.argument("transactionUuid") == null ? randomUUID()
-                : UUID.fromString(call.argument("transactionUuid").toString());
+        UUID jobId = call.argument("transactionId") == null ? randomUUID()
+                : UUID.fromString(call.argument("transactionId").toString());
         boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
         Boolean isEnableReverse = call.argument("isEnableReversal");
         String finishTimeout = call.argument("finishTimeout") != null ? call.argument("finishTimeout").toString()
@@ -397,17 +401,17 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Long amount = Long.valueOf(amountStr);
             doPaymentAction(callUUID, amount, customer_reference_number, isEnableUI, isEnableReverse, authType,
                     authvalue,
-                    timeout, transactionUuid, enableUiDismiss);
+                    timeout, jobId, enableUiDismiss);
 
         }
     }
 
     private void doPaymentAction(String callUUID, Long amount, String customerReferenceNumber, Boolean enableReceiptUi,
-            Boolean enableReversal, String authType, String inputValue, long finishTimeOut, UUID transactionUuid,
+            Boolean enableReversal, String authType, String inputValue, long finishTimeOut, UUID jobId,
             Boolean isUiDismissible) {
 
         nearPay.purchase(amount, customerReferenceNumber, enableReceiptUi, enableReversal, finishTimeOut,
-                transactionUuid, isUiDismissible, new PurchaseListener() {
+                jobId, isUiDismissible, new PurchaseListener() {
                     @Override
                     public void onPurchaseFailed(@NonNull PurchaseFailure purchaseFailure) {
 
@@ -469,7 +473,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     private void refundValidation(@NonNull MethodCall call, String callUUID) {
         String amountStr = call.argument("amount") != null ? call.argument("amount").toString() : "";
-        String reference_retrieval_number = call.argument("transaction_uuid") != null
+        String originalTransactionUUID = call.argument("transaction_uuid") != null
                 ? call.argument("transaction_uuid").toString()
                 : "";
         String customer_reference_number = call.argument("customer_reference_number").toString();
@@ -478,8 +482,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 : call.argument("authvalue").toString();
         String authType = call.argument("authtype") == null ? this.authTypeShared
                 : call.argument("authtype").toString();
-        UUID transactionUuid = call.argument("transactionUuid") == null ? randomUUID()
-                : UUID.fromString(call.argument("transactionUuid").toString());
+        UUID jobId = call.argument("transactionId") == null ? randomUUID()
+                : UUID.fromString(call.argument("transactionId").toString());
         Boolean isEnableReverse = call.argument("isEnableReversal");
         Boolean isEditableReversalUI = call.argument("isEditableReversalUI") == null ? true
                 : call.argument("isEditableReversalUI");
@@ -495,7 +499,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
                     "Purchase amount parameter missing");
             sendResponse(paramMap, callUUID);
-        } else if (reference_retrieval_number == "") {
+        } else if (originalTransactionUUID == "") {
             Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
                     "Transaction UUID parameter missing");
             sendResponse(paramMap, callUUID);
@@ -505,18 +509,18 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             sendResponse(paramMap, callUUID);
         } else {
             Long amount = Long.valueOf(amountStr);
-            doRefundAction(callUUID, amount, reference_retrieval_number, customer_reference_number, isEnableUI,
+            doRefundAction(callUUID, amount, originalTransactionUUID, customer_reference_number, isEnableUI,
                     isEnableReverse,
-                    isEditableReversalUI, authType, authvalue, timeout, adminPin, transactionUuid, enableUiDismiss);
+                    isEditableReversalUI, authType, authvalue, timeout, adminPin, jobId, enableUiDismiss);
         }
     }
 
-    private void doRefundAction(String callUUID, Long amount, String transactionReferenceRetrievalNumber,
+    private void doRefundAction(String callUUID, Long amount, String originalTrasnsactionUuid,
             String customerReferenceNumber,
             Boolean enableReceiptUi, boolean isEnableReversal, Boolean isEnableRefundAmountUi, String authType,
-            String authvalue, long finishTimeOut, String adminPin, UUID transactionUuid, Boolean isUiDismissible) {
-        nearPay.refund(amount, transactionReferenceRetrievalNumber, customerReferenceNumber, enableReceiptUi,
-                isEnableReversal, isEnableRefundAmountUi, finishTimeOut, transactionUuid, adminPin, isUiDismissible,
+            String authvalue, long finishTimeOut, String adminPin, UUID jobId, Boolean isUiDismissible) {
+        nearPay.refund(amount, originalTrasnsactionUuid, customerReferenceNumber, enableReceiptUi,
+                isEnableReversal, isEnableRefundAmountUi, finishTimeOut, jobId, adminPin, isUiDismissible,
                 new RefundListener() {
                     @Override
                     public void onRefundFailed(@NonNull RefundFailure refundFailure) {
@@ -745,9 +749,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     private void doReconcileAction(String callUUID, Boolean enableReceiptUi, String authType, String inputValue,
             long finishTimeOut,
-            String adminPin, Boolean isUiDismissible) {
+            String adminPin, Boolean isUiDismissible, UUID jobId) {
         Log.i("doReconcile....", "doReconcile.......first....");
-        nearPay.reconcile(enableReceiptUi, adminPin, finishTimeOut, isUiDismissible, new ReconcileListener() {
+        nearPay.reconcile( enableReceiptUi, adminPin, finishTimeOut, isUiDismissible, new ReconcileListener() {
             @Override
             public void onReconcileFinished(@Nullable ReconciliationReceipt reconciliationReceipt) {
                 // you can use the object to get the reconciliationReceipt data .

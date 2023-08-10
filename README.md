@@ -104,7 +104,10 @@ var reqData = {
       "customer_reference_number": "uuid()", // [optional] any number you want to add as a refrence Any string as a reference number
       "isEnableUI" : true, // [optional] true will enable the ui and false will disable
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
-      "finishTimeout" : 2  //[optional] Add the number of seconds
+      "finishTimeout" : 2,  //[optional] Add the number of seconds
+      "transactionId":
+         "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
+
     };
 
 var purchaseReceipt = await Nearpay.purchase(reqData);
@@ -133,7 +136,10 @@ var reqData = {
       "isEnableReversal" : true, // it will allow you to enable or disable the reverse button
       "isEditableReversalUI" : true, // [optional] true will enable the ui and false will disable
       "finishTimeout" : 2,//[optional] Add the number of seconds
-      "adminPin" : "0000" // Optional
+      "adminPin" : "0000", // Optional
+      "transactionId":
+         "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
+
     };
 
 var refundReceipt = await Nearpay.refund(reqData);
