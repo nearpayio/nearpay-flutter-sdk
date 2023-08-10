@@ -2,8 +2,6 @@ package io.nearpay.flutter.plugin;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -12,11 +10,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 import io.nearpay.sdk.data.models.ReconciliationReceipt;
 import io.nearpay.sdk.data.models.Session;
-import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 import io.nearpay.sdk.utils.enums.TransactionData;
 

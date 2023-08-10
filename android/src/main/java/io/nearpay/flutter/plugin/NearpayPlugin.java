@@ -1,15 +1,7 @@
 package io.nearpay.flutter.plugin;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.List;
-import java.util.Locale;
-import android.content.Context;
-import android.util.Log;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -22,42 +14,7 @@ import io.nearpay.flutter.plugin.operations.BaseOperation;
 
 import io.nearpay.flutter.plugin.operations.OperatorFactory;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
-import io.nearpay.sdk.Environments;
-import io.nearpay.sdk.NearPay;
-import io.nearpay.sdk.data.models.Session;
-import io.nearpay.sdk.data.models.TransactionReceipt;
-import io.nearpay.sdk.utils.ReceiptUtilsKt;
-import io.nearpay.sdk.utils.enums.AuthenticationData;
-import io.nearpay.sdk.utils.enums.PurchaseFailure;
-import io.nearpay.sdk.utils.enums.RefundFailure;
-import io.nearpay.sdk.utils.enums.SessionFailure;
-import io.nearpay.sdk.utils.enums.StatusCheckError;
-import io.nearpay.sdk.utils.listeners.BitmapListener;
-import io.nearpay.sdk.utils.listeners.PurchaseListener;
-import io.nearpay.sdk.utils.listeners.RefundListener;
-import io.nearpay.sdk.utils.enums.ReconcileFailure;
-import io.nearpay.sdk.data.models.Merchant;
-import io.nearpay.sdk.data.models.LocalizationField;
-import io.nearpay.sdk.data.models.NameField;
-import io.nearpay.sdk.data.models.LabelField;
-import io.nearpay.sdk.data.models.ReconciliationReceipt;
-import io.nearpay.sdk.data.models.ReconciliationDetails;
-import io.nearpay.sdk.data.models.ReconciliationLabelField;
-import io.nearpay.sdk.data.models.ReconciliationSchemes;
-import io.nearpay.sdk.utils.listeners.ReconcileListener;
-import io.nearpay.sdk.utils.enums.ReversalFailure;
-import io.nearpay.sdk.utils.enums.LogoutFailure;
-import io.nearpay.sdk.utils.listeners.LogoutListener;
-import io.nearpay.sdk.utils.listeners.ReversalListener;
-import com.google.gson.Gson;
-import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
-import io.nearpay.sdk.utils.listeners.SessionListener;
-import io.nearpay.sdk.utils.listeners.SetupListener;
-import io.nearpay.sdk.utils.enums.SetupFailure;
 
 /** NearpayPlugin */
 public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {

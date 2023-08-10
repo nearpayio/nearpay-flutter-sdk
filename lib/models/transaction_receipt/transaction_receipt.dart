@@ -203,8 +203,7 @@ class TransactionData with _$TransactionData {
   const factory TransactionData({
     @JsonKey(name: 'receipts', nullable: true)
         List<TransactionReceipt>? receipts,
-    @JsonKey(name: 'isNewTransaction', nullable: true)
-        required bool isNewTransaction,
+    @JsonKey(name: 'isNewTransaction', nullable: true) bool? isNewTransaction,
   }) = _TransactionData;
 
   factory TransactionData.fromJson(Map<String, dynamic> json) =>
@@ -214,8 +213,8 @@ class TransactionData with _$TransactionData {
 @Freezed()
 class TransactionReceipt with _$TransactionReceipt {
   const factory TransactionReceipt({
-    @JsonKey(name: "id")
-        required String receipt_id,
+    // @JsonKey(name: "id")
+    //     required String id,
     @JsonKey(name: "transaction_uuid")
         required String transaction_uuid,
     @JsonKey(name: "merchant")

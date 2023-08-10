@@ -11,7 +11,7 @@ _$_TransactionData _$$_TransactionDataFromJson(Map json) => _$_TransactionData(
           ?.map((e) =>
               TransactionReceipt.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
-      isNewTransaction: json['isNewTransaction'] as bool,
+      isNewTransaction: json['isNewTransaction'] as bool?,
     );
 
 Map<String, dynamic> _$$_TransactionDataToJson(_$_TransactionData instance) =>
@@ -22,7 +22,6 @@ Map<String, dynamic> _$$_TransactionDataToJson(_$_TransactionData instance) =>
 
 _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
     _$_TransactionReceipt(
-      receipt_id: json['id'] as String,
       transaction_uuid: json['transaction_uuid'] as String,
       merchant:
           Merchant.fromJson(Map<String, dynamic>.from(json['merchant'] as Map)),
@@ -90,7 +89,6 @@ _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
 Map<String, dynamic> _$$_TransactionReceiptToJson(
         _$_TransactionReceipt instance) =>
     <String, dynamic>{
-      'id': instance.receipt_id,
       'transaction_uuid': instance.transaction_uuid,
       'merchant': instance.merchant.toJson(),
       'start_date': instance.start_date,

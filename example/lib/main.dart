@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -54,11 +55,12 @@ class _MyAppState extends State<MyApp> {
         onPurchaseApproved: (reciepts) {
           print(
               "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-          final String transactionUuid = reciepts[0].transactionUuid;
+          final String? transactionUuid =
+              reciepts.receipts?[0].transaction_uuid;
           nearpay.refund(
             amount: 1000, // [Required], means 10.00
             originalTransactionUUID:
-                transactionUuid, // [Required] the orginal trnasaction uuid that you want to refund
+                transactionUuid!, // [Required] the orginal trnasaction uuid that you want to refund
             transactionUUID:
                 uuid.v4(), //[Optional] speacify the transaction uuid
             customerReferenceNumber: '', //[Optional]
@@ -92,12 +94,12 @@ class _MyAppState extends State<MyApp> {
 
     nearpay.purchase(
         amount: 1000,
-        onPurchaseApproved: (reciepts) {
+        onPurchaseApproved: (data) {
           print(
               "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-          final String uuid = reciepts[0].transactionUuid;
+          final String? uuid = data.receipts?[0].transaction_uuid;
           nearpay.reverse(
-            originalTransactionUUID: uuid,
+            originalTransactionUUID: uuid!,
             enableReceiptUi: true,
             enableUiDismiss: true,
             finishTimeout: 60,
@@ -133,7 +135,7 @@ class _MyAppState extends State<MyApp> {
       onPurchaseApproved: (receipts) {
         print(
             "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-        receipts.forEach((receipt) {
+        receipts.receipts?.forEach((receipt) {
           printJson(receipt.toJson());
         });
       },
@@ -185,9 +187,28 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> sessionAction() async {
     print("=-=-=-=-= Start Session Action =-=-=-=-=");
+    final dio = Dio();
+
+    const terminalId = '12a8abeb-cdf6-4432-a287-2d3a54bc7b88';
+
+    const apiKey =
+        'A221mIWc0ldmrmqkAM3kSITN3i58smLvhpBAP0pOyXxc9mDxphrkqmBKt4HL';
+
+    const url =
+        'https://sandbox-api.nearpay.io/v1/clients-sdk/terminals/$terminalId/sessions';
+
+    final sessionResponse = await dio.post(url,
+        data: {
+          'type': 'purchase',
+          'amount': 400,
+        },
+        options: Options(headers: {'api-key': apiKey}));
+    // .then((value) => jsonDecode(value.data));
+
+    print(sessionResponse.data['id']);
 
     return nearpay.session(
-      sessionID: 'ea5e30d4-54c7-4ad9-8372-f798259ff589', // Required
+      sessionID: sessionResponse.data['id'], // Required
       enableReceiptUi: true, // [Optional] show the reciept in ui
       enableReversalUi:
           true, //[Optional] enable reversal of transaction from ui
@@ -195,11 +216,11 @@ class _MyAppState extends State<MyApp> {
       finishTimeout: 60, //[Optional] finish timeout in seconds
       onSessionClosed: (session) {
         print("session closed");
-        print(session);
+        printJson(session.toJson());
       },
       onSessionOpen: (receipt) {
         print("session opened");
-        print(receipt);
+        printJson(receipt.toJson());
       },
       onSessionFailed: (err) {
         print("session error");
@@ -213,7 +234,7 @@ class _MyAppState extends State<MyApp> {
     nearpay.getTransaction(
       transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
       onResult: (receipts) {
-        printJson(receipts[0].toJson());
+        printJson(receipts.receipts![0].toJson());
       },
     );
   }

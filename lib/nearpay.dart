@@ -17,6 +17,7 @@ import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_banne
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
+import 'package:nearpay_flutter_sdk/util/util.dart';
 import 'package:uuid/uuid.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
 
@@ -347,6 +348,8 @@ class Nearpay {
         //     List<Map<String, dynamic>>.from(response["receipts"])
         //         .map((json) => TransactionReceipt.fromJson(json))
         //         .toList();
+
+        printJson(response);
 
         TransactionData receipts =
             TransactionData.fromJson(response['receipts']);

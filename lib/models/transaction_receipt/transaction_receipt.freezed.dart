@@ -23,7 +23,7 @@ mixin _$TransactionData {
   @JsonKey(name: 'receipts', nullable: true)
   List<TransactionReceipt>? get receipts => throw _privateConstructorUsedError;
   @JsonKey(name: 'isNewTransaction', nullable: true)
-  bool get isNewTransaction => throw _privateConstructorUsedError;
+  bool? get isNewTransaction => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ abstract class $TransactionDataCopyWith<$Res> {
       {@JsonKey(name: 'receipts', nullable: true)
           List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          bool isNewTransaction});
+          bool? isNewTransaction});
 }
 
 /// @nodoc
@@ -58,17 +58,17 @@ class _$TransactionDataCopyWithImpl<$Res, $Val extends TransactionData>
   @override
   $Res call({
     Object? receipts = freezed,
-    Object? isNewTransaction = null,
+    Object? isNewTransaction = freezed,
   }) {
     return _then(_value.copyWith(
       receipts: freezed == receipts
           ? _value.receipts
           : receipts // ignore: cast_nullable_to_non_nullable
               as List<TransactionReceipt>?,
-      isNewTransaction: null == isNewTransaction
+      isNewTransaction: freezed == isNewTransaction
           ? _value.isNewTransaction
           : isNewTransaction // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -85,7 +85,7 @@ abstract class _$$_TransactionDataCopyWith<$Res>
       {@JsonKey(name: 'receipts', nullable: true)
           List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          bool isNewTransaction});
+          bool? isNewTransaction});
 }
 
 /// @nodoc
@@ -100,17 +100,17 @@ class __$$_TransactionDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? receipts = freezed,
-    Object? isNewTransaction = null,
+    Object? isNewTransaction = freezed,
   }) {
     return _then(_$_TransactionData(
       receipts: freezed == receipts
           ? _value._receipts
           : receipts // ignore: cast_nullable_to_non_nullable
               as List<TransactionReceipt>?,
-      isNewTransaction: null == isNewTransaction
+      isNewTransaction: freezed == isNewTransaction
           ? _value.isNewTransaction
           : isNewTransaction // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -122,7 +122,7 @@ class _$_TransactionData implements _TransactionData {
       {@JsonKey(name: 'receipts', nullable: true)
           final List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          required this.isNewTransaction})
+          this.isNewTransaction})
       : _receipts = receipts;
 
   factory _$_TransactionData.fromJson(Map<String, dynamic> json) =>
@@ -141,7 +141,7 @@ class _$_TransactionData implements _TransactionData {
 
   @override
   @JsonKey(name: 'isNewTransaction', nullable: true)
-  final bool isNewTransaction;
+  final bool? isNewTransaction;
 
   @override
   String toString() {
@@ -182,7 +182,7 @@ abstract class _TransactionData implements TransactionData {
       {@JsonKey(name: 'receipts', nullable: true)
           final List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          required final bool isNewTransaction}) = _$_TransactionData;
+          final bool? isNewTransaction}) = _$_TransactionData;
 
   factory _TransactionData.fromJson(Map<String, dynamic> json) =
       _$_TransactionData.fromJson;
@@ -192,7 +192,7 @@ abstract class _TransactionData implements TransactionData {
   List<TransactionReceipt>? get receipts;
   @override
   @JsonKey(name: 'isNewTransaction', nullable: true)
-  bool get isNewTransaction;
+  bool? get isNewTransaction;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionDataCopyWith<_$_TransactionData> get copyWith =>
@@ -205,8 +205,8 @@ TransactionReceipt _$TransactionReceiptFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionReceipt {
-  @JsonKey(name: "id")
-  String get receipt_id => throw _privateConstructorUsedError;
+// @JsonKey(name: "id")
+//     required String id,
   @JsonKey(name: "transaction_uuid")
   String get transaction_uuid => throw _privateConstructorUsedError;
   @JsonKey(name: "merchant")
@@ -310,9 +310,7 @@ abstract class $TransactionReceiptCopyWith<$Res> {
       _$TransactionReceiptCopyWithImpl<$Res, TransactionReceipt>;
   @useResult
   $Res call(
-      {@JsonKey(name: "id")
-          String receipt_id,
-      @JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "transaction_uuid")
           String transaction_uuid,
       @JsonKey(name: "merchant")
           Merchant merchant,
@@ -411,7 +409,6 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? receipt_id = null,
     Object? transaction_uuid = null,
     Object? merchant = null,
     Object? start_date = null,
@@ -456,10 +453,6 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
     Object? qr_code = null,
   }) {
     return _then(_value.copyWith(
-      receipt_id: null == receipt_id
-          ? _value.receipt_id
-          : receipt_id // ignore: cast_nullable_to_non_nullable
-              as String,
       transaction_uuid: null == transaction_uuid
           ? _value.transaction_uuid
           : transaction_uuid // ignore: cast_nullable_to_non_nullable
@@ -641,9 +634,7 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "id")
-          String receipt_id,
-      @JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "transaction_uuid")
           String transaction_uuid,
       @JsonKey(name: "merchant")
           Merchant merchant,
@@ -740,7 +731,6 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? receipt_id = null,
     Object? transaction_uuid = null,
     Object? merchant = null,
     Object? start_date = null,
@@ -785,10 +775,6 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
     Object? qr_code = null,
   }) {
     return _then(_$_TransactionReceipt(
-      receipt_id: null == receipt_id
-          ? _value.receipt_id
-          : receipt_id // ignore: cast_nullable_to_non_nullable
-              as String,
       transaction_uuid: null == transaction_uuid
           ? _value.transaction_uuid
           : transaction_uuid // ignore: cast_nullable_to_non_nullable
@@ -965,9 +951,7 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TransactionReceipt implements _TransactionReceipt {
   const _$_TransactionReceipt(
-      {@JsonKey(name: "id")
-          required this.receipt_id,
-      @JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "transaction_uuid")
           required this.transaction_uuid,
       @JsonKey(name: "merchant")
           required this.merchant,
@@ -1055,9 +1039,8 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   factory _$_TransactionReceipt.fromJson(Map<String, dynamic> json) =>
       _$$_TransactionReceiptFromJson(json);
 
-  @override
-  @JsonKey(name: "id")
-  final String receipt_id;
+// @JsonKey(name: "id")
+//     required String id,
   @override
   @JsonKey(name: "transaction_uuid")
   final String transaction_uuid;
@@ -1187,7 +1170,7 @@ class _$_TransactionReceipt implements _TransactionReceipt {
 
   @override
   String toString() {
-    return 'TransactionReceipt(receipt_id: $receipt_id, transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, receipt_line_two: $receipt_line_two, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, pan_suffix: $pan_suffix, created_at: $created_at, updated_at: $updated_at, qr_code: $qr_code)';
+    return 'TransactionReceipt(transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, receipt_line_two: $receipt_line_two, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, pan_suffix: $pan_suffix, created_at: $created_at, updated_at: $updated_at, qr_code: $qr_code)';
   }
 
   @override
@@ -1195,8 +1178,6 @@ class _$_TransactionReceipt implements _TransactionReceipt {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TransactionReceipt &&
-            (identical(other.receipt_id, receipt_id) ||
-                other.receipt_id == receipt_id) &&
             (identical(other.transaction_uuid, transaction_uuid) ||
                 other.transaction_uuid == transaction_uuid) &&
             (identical(other.merchant, merchant) ||
@@ -1271,7 +1252,6 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        receipt_id,
         transaction_uuid,
         merchant,
         start_date,
@@ -1333,9 +1313,7 @@ class _$_TransactionReceipt implements _TransactionReceipt {
 
 abstract class _TransactionReceipt implements TransactionReceipt {
   const factory _TransactionReceipt(
-      {@JsonKey(name: "id")
-          required final String receipt_id,
-      @JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "transaction_uuid")
           required final String transaction_uuid,
       @JsonKey(name: "merchant")
           required final Merchant merchant,
@@ -1423,10 +1401,8 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   factory _TransactionReceipt.fromJson(Map<String, dynamic> json) =
       _$_TransactionReceipt.fromJson;
 
-  @override
-  @JsonKey(name: "id")
-  String get receipt_id;
-  @override
+  @override // @JsonKey(name: "id")
+//     required String id,
   @JsonKey(name: "transaction_uuid")
   String get transaction_uuid;
   @override
