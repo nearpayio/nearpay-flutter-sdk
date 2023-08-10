@@ -40,10 +40,10 @@ public class ArgsFilter {
             args.put("customer_reference_number", "");
         }
 
-        if (args.get("transaction_uuid") == null) {
-            args.put("transaction_uuid", UUID.randomUUID());
+        if (args.get("job_id") == null) {
+            args.put("job_id", UUID.randomUUID());
         } else {
-            args.put("transaction_uuid", UUID.fromString(args.get("transaction_uuid").toString()));
+            args.put("job_id", UUID.fromString(args.get("job_id").toString()));
         }
 
         if (args.get("reconciliation_uuid") == null) {
@@ -102,4 +102,14 @@ public class ArgsFilter {
     public String getReceipt() {
         return savedArgs.get("receipt") == null ? "" : (String) savedArgs.get("receipt");
     }
+
+    public UUID getJobId() {
+        if (savedArgs.get("job_id") == null) {
+            return UUID.randomUUID();
+        } else {
+            // savedArgs.put("job_id", UUID.fromString(args.get("job_id").toString()));
+            return UUID.fromString(savedArgs.get("job_id").toString());
+        }
+    }
+
 }

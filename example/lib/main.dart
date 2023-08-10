@@ -61,8 +61,7 @@ class _MyAppState extends State<MyApp> {
             amount: 1000, // [Required], means 10.00
             originalTransactionUUID:
                 transactionUuid!, // [Required] the orginal trnasaction uuid that you want to refund
-            transactionUUID:
-                uuid.v4(), //[Optional] speacify the transaction uuid
+            transactionId: uuid.v4(), //[Optional] speacify the transaction uuid
             customerReferenceNumber: '', //[Optional]
             enableReceiptUi: true, // [Optional] show the reciept in ui
             enableReversalUi:
@@ -123,8 +122,8 @@ class _MyAppState extends State<MyApp> {
     print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
     return nearpay.purchase(
       amount: 0001, // [Required] ammount you want to set .
-      transactionUUID: uuid
-          .v4(), // [Optional] specefy the transaction uuid for later referance
+      transactionId:
+          '12a8abeb-cdf6-4432-a287-2d3a54bc7b88', // [Optional] specefy the transaction uuid for later referance
       customerReferenceNumber:
           '123', // [Optional] any number you want to add as a refrence Any string as a reference number
       enableReceiptUi: true, // [Optional] show the reciept in ui
@@ -163,6 +162,7 @@ class _MyAppState extends State<MyApp> {
       enableUiDismiss: true,
       adminPin: '0000',
       finishTimeout: 60,
+      reconciliationId: uuid.v4(),
       onReconcileFinished: (receipt) {
         print("=-=-=-=-= Reconcile Success =-=-=-=-=");
         printJson(receipt.toJson());

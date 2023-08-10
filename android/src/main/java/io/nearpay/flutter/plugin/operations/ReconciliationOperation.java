@@ -3,7 +3,6 @@ package io.nearpay.flutter.plugin.operations;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.data.models.ReconciliationReceipt;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
@@ -28,14 +28,17 @@ public class ReconciliationOperation extends BaseOperation {
         }
 
         private void doReconcileAction(Map args, NearpaySender sender) {
+                ArgsFilter filter = new ArgsFilter(args);
+
                 Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
                 Long finishTimeout = (Long) args.get("finishTimeout");
                 String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
                 Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
-                UUID reconciliationUuid = (UUID) args.get("reconciliation_uuid");
+                UUID jobId = filter.getJobId();
+                // UUID reconciliationUuid = (UUID) args.get("reconciliation_uuid");
 
-
-                provider.getNearpayLib().nearpay.reconcile(reconciliationUuid, enableReceiptUi, adminPin, finishTimeout, enableUiDismiss,
+                provider.getNearpayLib().nearpay.reconcile(jobId, enableReceiptUi, adminPin, finishTimeout,
+                                enableUiDismiss,
                                 new ReconcileListener() {
                                         @Override
                                         public void onReconcileFinished(
@@ -43,7 +46,8 @@ public class ReconciliationOperation extends BaseOperation {
                                                 List<ReconciliationReceipt> list = new ArrayList();
                                                 list.add(reconciliationReceipt);
 
-                                                Map<String, Object> responseDict = NearpayLib.ReconcileResponse(ErrorStatus.success_code, null, list);
+                                                Map<String, Object> responseDict = NearpayLib.ReconcileResponse(
+                                                                ErrorStatus.success_code, null, list);
                                                 sender.send(responseDict);
                                         }
 
@@ -55,10 +59,12 @@ public class ReconciliationOperation extends BaseOperation {
 
                                                 if (reconcileFailure instanceof ReconcileFailure.AuthenticationFailed) {
                                                         status = ErrorStatus.auth_failed_code;
-                                                        message = ((ReconcileFailure.AuthenticationFailed) reconcileFailure).getMessage();
+                                                        message = ((ReconcileFailure.AuthenticationFailed) reconcileFailure)
+                                                                        .getMessage();
                                                 } else if (reconcileFailure instanceof ReconcileFailure.FailureMessage) {
                                                         status = ErrorStatus.failure_code;
-                                                        message = ((ReconcileFailure.FailureMessage) reconcileFailure).getMessage();
+                                                        message = ((ReconcileFailure.FailureMessage) reconcileFailure)
+                                                                        .getMessage();
                                                 } else if (reconcileFailure instanceof ReconcileFailure.InvalidStatus) {
                                                         status = ErrorStatus.invalid_code;
                                                 }

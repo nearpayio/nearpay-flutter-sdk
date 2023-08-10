@@ -126,7 +126,7 @@ class Nearpay {
 
   Future<void> purchase({
     required int amount,
-    String? transactionUUID,
+    String? transactionId,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversalUi = true,
@@ -138,7 +138,7 @@ class Nearpay {
   }) async {
     final data = {
       "amount": amount,
-      "transaction_uuid": transactionUUID, //Optional
+      "job_id": transactionId, //Optional
       "customer_reference_number": customerReferenceNumber, //Optional
       "enableReceiptUi": enableReceiptUi, //Optional
       "enableReversal": enableReversalUi, //Optional
@@ -170,7 +170,7 @@ class Nearpay {
   Future<dynamic> refund({
     required int amount,
     required String originalTransactionUUID,
-    String? transactionUUID,
+    String? transactionId,
     String customerReferenceNumber = "",
     bool enableReceiptUi = true,
     bool enableReversalUi = true,
@@ -185,12 +185,11 @@ class Nearpay {
     final data = {
       "amount": amount, // Required
       "original_transaction_uuid": originalTransactionUUID, // Required
-      "transaction_uuid": transactionUUID, //Optional
+      "job_id": transactionId, //Optional
       "customer_reference_number": customerReferenceNumber, //Optional
       "enableReceiptUi": enableReceiptUi, // Optional
       "enableReversal": enableReversalUi, // Optional
-      "enableEditableRefundAmountUiableReversalUI":
-          editableRefundUI, // Optional
+      "enableEditableRefundAmountUi": editableRefundUI, // Optional
       "enableUiDismiss": enableUiDismiss,
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin,
@@ -252,7 +251,7 @@ class Nearpay {
   }
 
   Future<dynamic> reconcile({
-    String? reconciliationUUID,
+    String? reconciliationId,
     bool enableReceiptUi = true,
     int finishTimeout = 60,
     bool enableUiDismiss = true,
@@ -261,7 +260,7 @@ class Nearpay {
     void Function(ReconcileError)? onReconcileFailed,
   }) async {
     final data = {
-      "reconciliation_uuid": reconciliationUUID,
+      "job_id": reconciliationId,
       "enableReceiptUi": enableReceiptUi, // Optional
       "finishTimeout": finishTimeout, // Optional
       "adminPin": adminPin, // Optional
