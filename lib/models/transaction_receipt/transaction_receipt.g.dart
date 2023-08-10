@@ -22,6 +22,7 @@ Map<String, dynamic> _$$_TransactionDataToJson(_$_TransactionData instance) =>
 
 _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
     _$_TransactionReceipt(
+      receipt_id: json['receipt_id'] as String,
       transaction_uuid: json['transaction_uuid'] as String,
       merchant:
           Merchant.fromJson(Map<String, dynamic>.from(json['merchant'] as Map)),
@@ -89,6 +90,7 @@ _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
 Map<String, dynamic> _$$_TransactionReceiptToJson(
         _$_TransactionReceipt instance) =>
     <String, dynamic>{
+      'receipt_id': instance.receipt_id,
       'transaction_uuid': instance.transaction_uuid,
       'merchant': instance.merchant.toJson(),
       'start_date': instance.start_date,

@@ -34,7 +34,7 @@ public class OperatorFactory {
         map.put("getReconciliations", new GetReconciliationsPageOperation(provider));
         map.put("getTransaction", new GetTransactionOperation(provider));
         map.put("getTransactions", new GetTransactionPageOperation(provider));
-
+        map.put("receiptToImage", new ReceiptToImageOperation(provider));
         // more operators
 
         return map;

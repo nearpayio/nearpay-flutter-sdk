@@ -590,10 +590,14 @@ class Nearpay {
     });
   }
 
-  Future<dynamic> receiptToImage(Map<dynamic, dynamic> data) async {
-    final response =
-        await methodChannel.invokeMethod<dynamic>('receiptToImage', data);
-    return jsonDecode(response);
+  Future<dynamic> receiptToImage({required TransactionReceipt receipt}) async {
+    var data = {
+      "receipt": jsonEncode(receipt), // Required
+    };
+
+    return _callAndReturnChannel('receiptToImage', data, (response) {
+      print("response");
+    });
   }
 
   // listeners

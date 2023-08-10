@@ -205,8 +205,8 @@ TransactionReceipt _$TransactionReceiptFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TransactionReceipt {
-// @JsonKey(name: "id")
-//     required String id,
+  @JsonKey(name: "receipt_id")
+  String get receipt_id => throw _privateConstructorUsedError;
   @JsonKey(name: "transaction_uuid")
   String get transaction_uuid => throw _privateConstructorUsedError;
   @JsonKey(name: "merchant")
@@ -310,7 +310,9 @@ abstract class $TransactionReceiptCopyWith<$Res> {
       _$TransactionReceiptCopyWithImpl<$Res, TransactionReceipt>;
   @useResult
   $Res call(
-      {@JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "receipt_id")
+          String receipt_id,
+      @JsonKey(name: "transaction_uuid")
           String transaction_uuid,
       @JsonKey(name: "merchant")
           Merchant merchant,
@@ -409,6 +411,7 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? receipt_id = null,
     Object? transaction_uuid = null,
     Object? merchant = null,
     Object? start_date = null,
@@ -453,6 +456,10 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
     Object? qr_code = null,
   }) {
     return _then(_value.copyWith(
+      receipt_id: null == receipt_id
+          ? _value.receipt_id
+          : receipt_id // ignore: cast_nullable_to_non_nullable
+              as String,
       transaction_uuid: null == transaction_uuid
           ? _value.transaction_uuid
           : transaction_uuid // ignore: cast_nullable_to_non_nullable
@@ -634,7 +641,9 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "receipt_id")
+          String receipt_id,
+      @JsonKey(name: "transaction_uuid")
           String transaction_uuid,
       @JsonKey(name: "merchant")
           Merchant merchant,
@@ -731,6 +740,7 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? receipt_id = null,
     Object? transaction_uuid = null,
     Object? merchant = null,
     Object? start_date = null,
@@ -775,6 +785,10 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
     Object? qr_code = null,
   }) {
     return _then(_$_TransactionReceipt(
+      receipt_id: null == receipt_id
+          ? _value.receipt_id
+          : receipt_id // ignore: cast_nullable_to_non_nullable
+              as String,
       transaction_uuid: null == transaction_uuid
           ? _value.transaction_uuid
           : transaction_uuid // ignore: cast_nullable_to_non_nullable
@@ -951,7 +965,9 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TransactionReceipt implements _TransactionReceipt {
   const _$_TransactionReceipt(
-      {@JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "receipt_id")
+          required this.receipt_id,
+      @JsonKey(name: "transaction_uuid")
           required this.transaction_uuid,
       @JsonKey(name: "merchant")
           required this.merchant,
@@ -1039,8 +1055,9 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   factory _$_TransactionReceipt.fromJson(Map<String, dynamic> json) =>
       _$$_TransactionReceiptFromJson(json);
 
-// @JsonKey(name: "id")
-//     required String id,
+  @override
+  @JsonKey(name: "receipt_id")
+  final String receipt_id;
   @override
   @JsonKey(name: "transaction_uuid")
   final String transaction_uuid;
@@ -1170,7 +1187,7 @@ class _$_TransactionReceipt implements _TransactionReceipt {
 
   @override
   String toString() {
-    return 'TransactionReceipt(transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, receipt_line_two: $receipt_line_two, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, pan_suffix: $pan_suffix, created_at: $created_at, updated_at: $updated_at, qr_code: $qr_code)';
+    return 'TransactionReceipt(receipt_id: $receipt_id, transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, receipt_line_two: $receipt_line_two, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, pan_suffix: $pan_suffix, created_at: $created_at, updated_at: $updated_at, qr_code: $qr_code)';
   }
 
   @override
@@ -1178,6 +1195,8 @@ class _$_TransactionReceipt implements _TransactionReceipt {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TransactionReceipt &&
+            (identical(other.receipt_id, receipt_id) ||
+                other.receipt_id == receipt_id) &&
             (identical(other.transaction_uuid, transaction_uuid) ||
                 other.transaction_uuid == transaction_uuid) &&
             (identical(other.merchant, merchant) ||
@@ -1252,6 +1271,7 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        receipt_id,
         transaction_uuid,
         merchant,
         start_date,
@@ -1313,7 +1333,9 @@ class _$_TransactionReceipt implements _TransactionReceipt {
 
 abstract class _TransactionReceipt implements TransactionReceipt {
   const factory _TransactionReceipt(
-      {@JsonKey(name: "transaction_uuid")
+      {@JsonKey(name: "receipt_id")
+          required final String receipt_id,
+      @JsonKey(name: "transaction_uuid")
           required final String transaction_uuid,
       @JsonKey(name: "merchant")
           required final Merchant merchant,
@@ -1401,8 +1423,10 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   factory _TransactionReceipt.fromJson(Map<String, dynamic> json) =
       _$_TransactionReceipt.fromJson;
 
-  @override // @JsonKey(name: "id")
-//     required String id,
+  @override
+  @JsonKey(name: "receipt_id")
+  String get receipt_id;
+  @override
   @JsonKey(name: "transaction_uuid")
   String get transaction_uuid;
   @override

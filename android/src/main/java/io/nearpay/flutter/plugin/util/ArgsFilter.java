@@ -14,7 +14,7 @@ public class ArgsFilter {
     }
 
     public ArgsFilter(Map args) {
-        savedArgs =args;
+        savedArgs = args;
     }
 
     // return every map entry to its default
@@ -52,7 +52,6 @@ public class ArgsFilter {
             args.put("reconciliation_uuid", UUID.fromString(args.get("reconciliation_uuid").toString()));
         }
 
-
         if (args.get("enableUiDismiss") == null) {
             args.put("enableUiDismiss", true);
         }
@@ -68,7 +67,6 @@ public class ArgsFilter {
         if (args.get("enableEditableRefundAmountUi") == null) {
             args.put("enableEditableRefundAmountUi", true);
         }
-
 
         if (args.get("page") == null || (int) args.get("page") < 1) {
             args.put("page", 1);
@@ -89,16 +87,19 @@ public class ArgsFilter {
         return savedArgs.get("reconciliation_uuid").toString();
     }
 
-
-    public String getAdminPin(){
+    public String getAdminPin() {
         return savedArgs.get("adminPin") == null ? null : savedArgs.get("adminPin").toString();
     }
 
-    public int getPage(){
+    public int getPage() {
         return savedArgs.get("page") == null ? 1 : (int) savedArgs.get("page");
     }
-    public int getLimit(){
+
+    public int getLimit() {
         return savedArgs.get("limit") == null ? 30 : (int) savedArgs.get("limit");
     }
 
+    public String getReceipt() {
+        return savedArgs.get("receipt") == null ? "" : (String) savedArgs.get("receipt");
+    }
 }

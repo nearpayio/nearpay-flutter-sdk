@@ -213,8 +213,8 @@ class TransactionData with _$TransactionData {
 @Freezed()
 class TransactionReceipt with _$TransactionReceipt {
   const factory TransactionReceipt({
-    // @JsonKey(name: "id")
-    //     required String id,
+    @JsonKey(name: "receipt_id")
+        required String receipt_id,
     @JsonKey(name: "transaction_uuid")
         required String transaction_uuid,
     @JsonKey(name: "merchant")
