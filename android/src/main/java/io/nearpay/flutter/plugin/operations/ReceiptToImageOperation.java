@@ -22,10 +22,9 @@ public class ReceiptToImageOperation extends BaseOperation{
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
-        ArgsFilter filtered = new ArgsFilter(args);
+    public void run(ArgsFilter filter, NearpaySender sender) {
 
-        String stringfiedReceipt = filtered.getReceipt();
+        String stringfiedReceipt = filter.getReceipt();
 
 
         TransactionReceipt receipt = new Gson().fromJson(stringfiedReceipt, TransactionReceipt.class);

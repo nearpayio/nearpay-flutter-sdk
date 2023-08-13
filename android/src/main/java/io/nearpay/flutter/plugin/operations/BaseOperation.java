@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import io.nearpay.flutter.plugin.NearpayPlugin;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 
 public class BaseOperation {
     protected PluginProvider provider;
@@ -16,7 +17,7 @@ public class BaseOperation {
         this.provider = provider;
     }
 
-    public void run(Map args, NearpaySender sender) {
+    public void run(ArgsFilter filter, NearpaySender sender) {
 
     }
 }

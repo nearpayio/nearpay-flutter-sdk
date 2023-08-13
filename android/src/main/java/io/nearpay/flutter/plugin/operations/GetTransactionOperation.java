@@ -26,8 +26,7 @@ public class GetTransactionOperation extends BaseOperation {
   }
 
   @Override
-  public void run(Map args, NearpaySender sender) {
-    ArgsFilter filter = new ArgsFilter(args);
+  public void run(ArgsFilter filter, NearpaySender sender) {
     String trUuid = filter.getTransactionUuid();
 
     provider.getNearpayLib().nearpay.getTransactionByUuid(trUuid, new GetTransactionListener() {

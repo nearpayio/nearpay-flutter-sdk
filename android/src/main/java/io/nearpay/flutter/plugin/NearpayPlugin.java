@@ -14,6 +14,8 @@ import io.nearpay.flutter.plugin.operations.BaseOperation;
 
 import io.nearpay.flutter.plugin.operations.OperatorFactory;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
+
 import java.util.concurrent.CompletableFuture;
 
 /** NearpayPlugin */
@@ -57,7 +59,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Map args = call.arguments();
 
             // filter args and put default values to them
-            provider.getArgsFilter().filter(args);
+            ArgsFilter filter = new ArgsFilter(args);
 
             // nearpay object isn't initialized
             // return a general error
@@ -72,7 +74,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             BaseOperation op = operatorFactory.getOperation(call.method)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 
-            op.run(args, sender);
+            op.run(filter, sender);
 
         });
 

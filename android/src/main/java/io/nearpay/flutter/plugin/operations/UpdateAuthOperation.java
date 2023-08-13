@@ -8,6 +8,7 @@ import java.util.Map;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 
 public class UpdateAuthOperation extends BaseOperation {
@@ -16,10 +17,10 @@ public class UpdateAuthOperation extends BaseOperation {
   }
 
   @Override
-  public void run(Map args, NearpaySender sender) {
-    String authvalue = args.get("authvalue") == null ? "" : args.get("authvalue").toString();
-    String authType = args.get("authtype") == null ? "" : args.get("authtype").toString();
-    AuthenticationData authData = NearpayLib.getAuthType(authType, authvalue);
+  public void run(ArgsFilter filter, NearpaySender sender) {
+    String authValue = filter.getAuthValue();
+    String authType = filter.getAuthType();
+    AuthenticationData authData = NearpayLib.getAuthType(authType, authValue);
     provider.getNearpayLib().nearpay.updateAuthentication(authData);
     sender.send(new HashMap<>());
   }

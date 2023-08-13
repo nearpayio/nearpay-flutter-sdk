@@ -9,6 +9,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.utils.enums.LogoutFailure;
 import io.nearpay.sdk.utils.listeners.LogoutListener;
 
@@ -46,7 +47,7 @@ public class LogoutOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
+    public void run(ArgsFilter filter, NearpaySender sender) {
         doLogoutAction(sender);
     }
 }

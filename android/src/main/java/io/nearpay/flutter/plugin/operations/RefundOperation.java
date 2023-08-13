@@ -26,19 +26,18 @@ public class RefundOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void refundValidation(Map args, NearpaySender sender) {
-                ArgsFilter filter = new ArgsFilter(args);
+        private void refundValidation(ArgsFilter filter, NearpaySender sender) {
 
-                Long amount = (Long) args.get("amount");
-                String original_transaction_uuid = args.get("original_transaction_uuid").toString();
-                String customer_reference_number = args.get("customer_reference_number").toString();
+                Long amount =filter.getAmount();
+                String original_transaction_uuid = filter.getOriginalTransactionUuid();
+                String customer_reference_number = filter.getCustomerReferenceNumber();
                 UUID jobId = filter.getJobId();
-                Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
-                Boolean enableReversal = (Boolean) args.get("enableReversal");
-                Boolean enableEditableRefundAmountUi = (Boolean) args.get("enableEditableRefundAmountUi");
-                Long finishTimeout = (Long) args.get("finishTimeout");
-                String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
-                Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+                Boolean enableReceiptUi = filter.isEnableReceiptUi();
+                Boolean enableReversal = filter.isEnableReversal();
+                Boolean enableEditableRefundAmountUi =filter.isEnableEditableRefundAmountUi();
+                Long finishTimeout = filter.getTimeout();
+                String adminPin =filter.getAdminPin();
+                Boolean enableUiDismiss = filter.isEnableUiDismiss();
 
                 provider.getNearpayLib().nearpay.refund(amount, original_transaction_uuid,
                                 customer_reference_number, enableReceiptUi,
@@ -120,7 +119,7 @@ public class RefundOperation extends BaseOperation {
         }
 
         @Override
-        public void run(Map args, NearpaySender sender) {
-                refundValidation(args, sender);
+        public void run(ArgsFilter filter, NearpaySender sender) {
+                refundValidation(filter, sender);
         }
 }

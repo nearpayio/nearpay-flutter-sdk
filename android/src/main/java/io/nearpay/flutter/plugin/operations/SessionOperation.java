@@ -14,6 +14,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.data.models.Session;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
@@ -36,12 +37,12 @@ public class SessionOperation extends BaseOperation {
         return response;
     }
 
-    private void doSession(Map args, NearpaySender sender) {
-        String sessionID = (String) args.get("sessionID");
-        Long finishTimeout = (Long) args.get("finishTimeout");
-        Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
-        Boolean enableReversal = (Boolean) args.get("enableReversal");
-        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+    private void doSession(ArgsFilter filter, NearpaySender sender) {
+        String sessionID = filter.getSessionId();
+        Long finishTimeout = filter.getTimeout();
+        Boolean enableReceiptUi = filter.isEnableReceiptUi();
+        Boolean enableReversal = filter.isEnableReversal();
+        Boolean enableUiDismiss = filter.isEnableUiDismiss();
 
         provider.getNearpayLib().nearpay.session(sessionID, enableReceiptUi, enableReversal,
                 finishTimeout, enableUiDismiss,
@@ -93,7 +94,7 @@ public class SessionOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
-        doSession(args, sender);
+    public void run(ArgsFilter filter, NearpaySender sender) {
+        doSession(filter, sender);
     }
 }

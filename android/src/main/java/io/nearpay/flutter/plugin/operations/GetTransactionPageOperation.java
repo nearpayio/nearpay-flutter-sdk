@@ -27,8 +27,7 @@ public class GetTransactionPageOperation extends BaseOperation {
   }
 
   @Override
-  public void run(Map args, NearpaySender sender) {
-    ArgsFilter filter = new ArgsFilter(args);
+  public void run(ArgsFilter filter, NearpaySender sender) {
     int page = filter.getPage();
     int limit = filter.getLimit();
 

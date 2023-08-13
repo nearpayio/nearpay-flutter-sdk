@@ -11,6 +11,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 
@@ -20,18 +21,15 @@ public class InitializeOperation extends BaseOperation {
         super(provider);
     }
 
-    public void doInitialization(Map args, NearpaySender sender) {
-        String authvalue = args.get("authvalue") == null ? "" : args.get("authvalue").toString();
-        String authType = args.get("authtype") == null ? "" : args.get("authtype").toString();
+    public void doInitialization(ArgsFilter filter, NearpaySender sender) {
+        String authValue = filter.getAuthValue();
+        String authType = filter.getAuthType();
+        Locale locale = filter.getLocale();
+        Environments env = filter.getEnviroment();
+
         this.provider.getNearpayLib().authTypeShared = authType;
-        this.provider.getNearpayLib().authValueShared = authvalue;
-        boolean isAuthValidated = this.provider.getNearpayLib().isAuthInputValidation(authType, authvalue);
-        String localeStr = args.get("locale") != null ? args.get("locale").toString() : "default";
-        Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
-        String environmentStr = args.get("environment") == null ? "sandbox"
-                : args.get("environment").toString();
-        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
-                : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
+        this.provider.getNearpayLib().authValueShared = authValue;
+        boolean isAuthValidated = this.provider.getNearpayLib().isAuthInputValidation(authType, authValue);
 
         Map<String, Object> response;
 
@@ -41,7 +39,7 @@ public class InitializeOperation extends BaseOperation {
         } else {
             this.provider.getNearpayLib().nearpay = new NearPay(
                     this.provider.getNearpayLib().context,
-                    this.provider.getNearpayLib().getAuthType(authType, authvalue),
+                    this.provider.getNearpayLib().getAuthType(authType, authValue),
                     locale,
                     env);
 
@@ -55,7 +53,7 @@ public class InitializeOperation extends BaseOperation {
 
     @SuppressLint("NewApi")
     @Override
-    public void run(Map args, NearpaySender sender) {
-        doInitialization(args, sender);
+    public void run(ArgsFilter filter, NearpaySender sender) {
+        doInitialization(filter, sender);
     }
 }

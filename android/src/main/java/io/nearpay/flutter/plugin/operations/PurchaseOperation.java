@@ -1,18 +1,14 @@
 package io.nearpay.flutter.plugin.operations;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
 import io.nearpay.flutter.plugin.util.ArgsFilter;
-import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.PurchaseListener;
@@ -25,16 +21,15 @@ public class PurchaseOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
-        ArgsFilter filter = new ArgsFilter(args);
+    public void run(ArgsFilter filter, NearpaySender sender) {
 
-        Long amount = (Long) args.get("amount");
-        String customerReferenceNumber = args.get("customer_reference_number").toString();
+        Long amount = filter.getAmount();
+        String customerReferenceNumber = filter.getCustomerReferenceNumber();
         UUID jobId = filter.getJobId();
-        Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
-        Boolean enableReversal = (Boolean) args.get("enableReversal");
-        Long timeout = (Long) args.get("finishTimeout");
-        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+        Boolean enableReceiptUi = filter.isEnableReceiptUi();
+        Boolean enableReversal = filter.isEnableReversal();
+        Long timeout = filter.getTimeout();
+        Boolean enableUiDismiss =filter.isEnableUiDismiss();
 
         this.provider.getNearpayLib().nearpay.purchase(amount, customerReferenceNumber, enableReceiptUi, enableReversal,
                 timeout,

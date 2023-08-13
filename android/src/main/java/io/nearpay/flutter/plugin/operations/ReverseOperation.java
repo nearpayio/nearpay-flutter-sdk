@@ -13,6 +13,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.ReversalFailure;
@@ -25,11 +26,11 @@ public class ReverseOperation extends BaseOperation {
         super(provider);
     }
 
-    private void doReverse(Map args, NearpaySender sender) {
-        String transactionUuid = (String) args.get("original_transaction_uuid");
-        Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
-        Long finishTimeout = (Long) args.get("finishTimeout");
-        Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+    private void doReverse(ArgsFilter filter, NearpaySender sender) {
+        String transactionUuid = filter.getOriginalTransactionUuid();
+        Boolean enableReceiptUi = filter.isEnableReceiptUi();
+        Boolean enableUiDismiss = filter.isEnableUiDismiss();
+        Long finishTimeout = filter.getTimeout();
 
         provider.getNearpayLib().nearpay.reverse(transactionUuid, enableReceiptUi, finishTimeout,enableUiDismiss,
                 new ReversalListener() {
@@ -70,7 +71,7 @@ public class ReverseOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
-        doReverse(args, sender);
+    public void run(ArgsFilter filter, NearpaySender sender) {
+        doReverse(filter, sender);
     }
 }

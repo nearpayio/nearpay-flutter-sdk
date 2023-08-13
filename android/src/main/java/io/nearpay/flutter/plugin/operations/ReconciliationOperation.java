@@ -27,15 +27,13 @@ public class ReconciliationOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void doReconcileAction(Map args, NearpaySender sender) {
-                ArgsFilter filter = new ArgsFilter(args);
+        private void doReconcileAction(ArgsFilter filter, NearpaySender sender) {
 
-                Boolean enableReceiptUi = (Boolean) args.get("enableReceiptUi");
-                Long finishTimeout = (Long) args.get("finishTimeout");
-                String adminPin = args.get("adminPin") == null ? null : (String) args.get("adminPin");
-                Boolean enableUiDismiss = (Boolean) args.get("enableUiDismiss");
+                Boolean enableReceiptUi = filter.isEnableReceiptUi();
+                Long finishTimeout = filter.getTimeout();
+                String adminPin =filter.getAdminPin();
+                Boolean enableUiDismiss = filter.isEnableUiDismiss();
                 UUID jobId = filter.getJobId();
-                // UUID reconciliationUuid = (UUID) args.get("reconciliation_uuid");
 
                 provider.getNearpayLib().nearpay.reconcile(jobId, enableReceiptUi, adminPin, finishTimeout,
                                 enableUiDismiss,
@@ -77,7 +75,7 @@ public class ReconciliationOperation extends BaseOperation {
         }
 
         @Override
-        public void run(Map args, NearpaySender sender) {
-                doReconcileAction(args, sender);
+        public void run(ArgsFilter filter, NearpaySender sender) {
+                doReconcileAction(filter, sender);
         }
 }

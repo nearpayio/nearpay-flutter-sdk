@@ -9,6 +9,7 @@ import io.nearpay.flutter.plugin.ErrorStatus;
 import io.nearpay.flutter.plugin.NearpayLib;
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.flutter.plugin.sender.NearpaySender;
+import io.nearpay.flutter.plugin.util.ArgsFilter;
 import io.nearpay.sdk.utils.enums.SetupFailure;
 import io.nearpay.sdk.utils.listeners.SetupListener;
 
@@ -79,7 +80,7 @@ public class SetupOperation extends BaseOperation {
     }
 
     @Override
-    public void run(Map args, NearpaySender sender) {
+    public void run(ArgsFilter filter, NearpaySender sender) {
         doSetup(sender);
     }
 }
