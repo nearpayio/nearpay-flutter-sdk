@@ -341,11 +341,12 @@ class _MyAppState extends State<MyApp> {
             TextButton(
               onPressed: () async {
                 await nearpay.purchase(
-                    amount: 1200,
-                    onPurchaseApproved: (receipt) async {
-                      await nearpay.receiptToImage(
-                          receipt: receipt.receipts![0]);
-                    });
+                  amount: 1200,
+                  // onPurchaseApproved: (receipt) async {
+                  //   await nearpay.receiptToImage(
+                  //       receipt: receipt.receipts![0]);
+                  // }
+                );
                 // nearpay.receiptToImage(receipt: receipt)
               },
               child: const Text("Receipt to Image"),

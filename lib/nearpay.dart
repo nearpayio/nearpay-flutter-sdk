@@ -585,15 +585,15 @@ class Nearpay {
     });
   }
 
-  Future<dynamic> receiptToImage({required TransactionReceipt receipt}) async {
-    var data = {
-      "receipt": jsonEncode(receipt), // Required
-    };
+// Future<dynamic> receiptToImage({required TransactionReceipt receipt}) async {
+//   var data = {
+//     "receipt": jsonEncode(receipt), // Required
+//   };
 
-    return _callAndReturnChannel('receiptToImage', data, (response) {
-      print("response");
-    });
-  }
+//   return _callAndReturnChannel('receiptToImage', data, (response) {
+//     print("response");
+//   });
+// }
 
   // listeners
   Function _addEventListener(

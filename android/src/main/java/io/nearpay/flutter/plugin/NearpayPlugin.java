@@ -30,6 +30,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     PluginProvider provider = new PluginProvider();
     public OperatorFactory operatorFactory = new OperatorFactory(provider);
     private FlutterPluginBinding flutterPluginBinding;
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         this.flutterPluginBinding = flutterPluginBinding;
@@ -46,12 +47,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         String channelName = call.argument("channel_name").toString();
-        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= channel name");
-        System.out.println(channelName);
 
         EventChannel eChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), channelName);
 
-//        we use this array method because Java limit us to it
+        // we use this array method because Java limit us to it
         final NearpaySender[] senderArray = new NearpaySender[1];
         CompletableFuture<NearpaySender> opPromise = new CompletableFuture<>();
         opPromise.thenAccept(sender -> {
@@ -78,7 +77,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
         });
 
-        eChannel.setStreamHandler(new FlutterEventHandler(){
+        eChannel.setStreamHandler(new FlutterEventHandler() {
             @Override
             public void onListen(Object arguments, EventChannel.EventSink events) {
                 senderArray[0] = (Object data) -> {
@@ -91,6 +90,5 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         result.success("");
 
     }
-
 
 }
