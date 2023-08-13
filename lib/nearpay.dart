@@ -401,7 +401,7 @@ class Nearpay {
   Future<dynamic> logout() async {
     return _callAndReturnChannel('logout', {}, (response) {
       if (response["status"] == 200) {
-        _provider.listener.emitStateChange(NearpayState.notReady);
+        // _provider.listener.emitStateChange(NearpayState.notReady);
       }
     });
   }
@@ -411,11 +411,11 @@ class Nearpay {
       'setup',
       {},
       (response) {
-        if (response["status"] == 200) {
-          _provider.listener.emitStateChange(NearpayState.ready);
-        } else {
-          _provider.listener.emitStateChange(NearpayState.notReady);
-        }
+        // if (response["status"] == 200) {
+        //   _provider.listener.emitStateChange(NearpayState.ready);
+        // } else {
+        //   _provider.listener.emitStateChange(NearpayState.notReady);
+        // }
       },
     );
 
@@ -523,8 +523,7 @@ class Nearpay {
         //         .map((json) => TransactionReceipt.fromJson(json))
         //         .toList();
 
-        TransactionData receipts =
-            TransactionData.fromJson(response['receipts']);
+        TransactionData receipts = TransactionData.fromJson(response['result']);
 
         if (onResult != null) {
           onResult(receipts);
@@ -574,9 +573,6 @@ class Nearpay {
 
     return _callAndReturnChannel('getReconciliation', data, (response) {
       if (response["status"] == 200) {
-        print("=-=-=-=-=-=-=-=-=-=-xxxxxx");
-        print(response['result']);
-
         ReconciliationReceipt receipts =
             ReconciliationReceipt.fromJson(response['result']);
 
