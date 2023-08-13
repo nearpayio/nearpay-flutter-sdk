@@ -6,13 +6,14 @@ part 'label_field.g.dart';
 part 'label_field.freezed.dart';
 
 @Freezed()
-class LabelField<T> with _$LabelField {
+class LabelField<T> with _$LabelField<T> {
   const factory LabelField({
     @JsonKey(name: "label") required LocalizationField label,
     @JsonKey(name: "value") required dynamic value,
   }) = _LabelField;
 
-  factory LabelField.fromJson(Map<String, dynamic> json) =>
+  factory LabelField.fromJson(
+          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
       _$LabelFieldFromJson(json);
 }
 
