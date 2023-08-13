@@ -6,16 +6,17 @@ part of 'merchant.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Merchant _$MerchantFromJson(Map json) => Merchant(
-      json['id'] as String,
-      LocalizationField.fromJson(
+_$_Merchant _$$_MerchantFromJson(Map json) => _$_Merchant(
+      id: json['id'] as String,
+      name: LocalizationField.fromJson(
           Map<String, dynamic>.from(json['name'] as Map)),
-      LocalizationField.fromJson(
+      address: LocalizationField.fromJson(
           Map<String, dynamic>.from(json['address'] as Map)),
-      json['category_code'] as String,
+      categoryCode: json['category_code'] as String,
     );
 
-Map<String, dynamic> _$MerchantToJson(Merchant instance) => <String, dynamic>{
+Map<String, dynamic> _$$_MerchantToJson(_$_Merchant instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name.toJson(),
       'address': instance.address.toJson(),

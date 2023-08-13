@@ -84,7 +84,9 @@ abstract class $ReconciliationReceiptCopyWith<$Res> {
       @JsonKey(name: "pos_software_version_number")
           String pos_software_version_number});
 
+  $LabelFieldCopyWith<bool, $Res> get is_balanced;
   $ReconciliationDetailsCopyWith<$Res> get details;
+  $MerchantCopyWith<$Res> get merchant;
 }
 
 /// @nodoc
@@ -168,9 +170,25 @@ class _$ReconciliationReceiptCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<bool, $Res> get is_balanced {
+    return $LabelFieldCopyWith<bool, $Res>(_value.is_balanced, (value) {
+      return _then(_value.copyWith(is_balanced: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $ReconciliationDetailsCopyWith<$Res> get details {
     return $ReconciliationDetailsCopyWith<$Res>(_value.details, (value) {
       return _then(_value.copyWith(details: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MerchantCopyWith<$Res> get merchant {
+    return $MerchantCopyWith<$Res>(_value.merchant, (value) {
+      return _then(_value.copyWith(merchant: value) as $Val);
     });
   }
 }
@@ -210,7 +228,11 @@ abstract class _$$_ReconciliationRecieptCopyWith<$Res>
           String pos_software_version_number});
 
   @override
+  $LabelFieldCopyWith<bool, $Res> get is_balanced;
+  @override
   $ReconciliationDetailsCopyWith<$Res> get details;
+  @override
+  $MerchantCopyWith<$Res> get merchant;
 }
 
 /// @nodoc
@@ -853,6 +875,7 @@ abstract class $ReconciliationSchemesCopyWith<$Res> {
       @JsonKey(name: "pos") ReconciliationSchemesDetails pos,
       @JsonKey(name: "host") ReconciliationSchemesDetails host});
 
+  $LabelFieldCopyWith<String, $Res> get name;
   $ReconciliationSchemesDetailsCopyWith<$Res> get pos;
   $ReconciliationSchemesDetailsCopyWith<$Res> get host;
 }
@@ -893,6 +916,14 @@ class _$ReconciliationSchemesCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<String, $Res> get name {
+    return $LabelFieldCopyWith<String, $Res>(_value.name, (value) {
+      return _then(_value.copyWith(name: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $ReconciliationSchemesDetailsCopyWith<$Res> get pos {
     return $ReconciliationSchemesDetailsCopyWith<$Res>(_value.pos, (value) {
       return _then(_value.copyWith(pos: value) as $Val);
@@ -921,6 +952,8 @@ abstract class _$$_ReconciliationSchemesCopyWith<$Res>
       @JsonKey(name: "pos") ReconciliationSchemesDetails pos,
       @JsonKey(name: "host") ReconciliationSchemesDetails host});
 
+  @override
+  $LabelFieldCopyWith<String, $Res> get name;
   @override
   $ReconciliationSchemesDetailsCopyWith<$Res> get pos;
   @override

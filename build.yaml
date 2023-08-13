@@ -17,7 +17,7 @@ targets:
           disallow_unrecognized_keys: false
           explicit_to_json: true
           field_rename: none
-          generic_argument_factories: false
+          generic_argument_factories: true
           ignore_unannotated: false
           include_if_null: true
       freezed:

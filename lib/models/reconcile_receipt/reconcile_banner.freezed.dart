@@ -242,6 +242,8 @@ abstract class $ReconciliationItemCopyWith<$Res> {
       @JsonKey(name: "is_balanced") LabelField<bool> isBalanced,
       @JsonKey(name: "total") String total,
       @JsonKey(name: "currency") LocalizationField currency});
+
+  $LabelFieldCopyWith<bool, $Res> get isBalanced;
 }
 
 /// @nodoc
@@ -291,6 +293,14 @@ class _$ReconciliationItemCopyWithImpl<$Res, $Val extends ReconciliationItem>
               as LocalizationField,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<bool, $Res> get isBalanced {
+    return $LabelFieldCopyWith<bool, $Res>(_value.isBalanced, (value) {
+      return _then(_value.copyWith(isBalanced: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -308,6 +318,9 @@ abstract class _$$_ReconciliationItemCopyWith<$Res>
       @JsonKey(name: "is_balanced") LabelField<bool> isBalanced,
       @JsonKey(name: "total") String total,
       @JsonKey(name: "currency") LocalizationField currency});
+
+  @override
+  $LabelFieldCopyWith<bool, $Res> get isBalanced;
 }
 
 /// @nodoc

@@ -1,29 +1,19 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nearpay_flutter_sdk/models/util/localization_field.dart';
 
 part "merchant.g.dart";
+part 'merchant.freezed.dart';
 
-@JsonSerializable(explicitToJson: true)
-class Merchant {
-  Merchant(this.id, this.name, this.address, this.categoryCode);
-
-  @JsonKey(name: "id")
-  String id;
-
-  @JsonKey(name: "name")
-  LocalizationField name;
-
-  @JsonKey(name: "address")
-  LocalizationField address;
-
-  @JsonKey(name: "category_code")
-  String categoryCode;
+@Freezed()
+class Merchant with _$Merchant {
+  const factory Merchant({
+    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "name") required LocalizationField name,
+    @JsonKey(name: "address") required LocalizationField address,
+    @JsonKey(name: "category_code") required String categoryCode,
+  }) = _Merchant;
 
   factory Merchant.fromJson(Map<String, dynamic> json) =>
       _$MerchantFromJson(json);
-
-  /// `toJson` is the convention for a class to declare support for serialization
-  /// to JSON. The implementation simply calls the private , generated
-  /// helper method `_$MerchantToJson`.
-  Map<String, dynamic> toJson() => _$MerchantToJson(this);
 }

@@ -396,6 +396,13 @@ abstract class $TransactionReceiptCopyWith<$Res> {
           String? updated_at,
       @JsonKey(name: "qr_code")
           String qr_code});
+
+  $MerchantCopyWith<$Res> get merchant;
+  $NameFieldCopyWith<String, $Res> get card_scheme;
+  $NameFieldCopyWith<String, $Res> get transaction_type;
+  $LabelFieldCopyWith<String, $Res> get amount_authorized;
+  $LabelFieldCopyWith<String, $Res> get amount_other;
+  $LabelFieldCopyWith<String, $Res>? get approval_code;
 }
 
 /// @nodoc
@@ -630,6 +637,58 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
               as String,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MerchantCopyWith<$Res> get merchant {
+    return $MerchantCopyWith<$Res>(_value.merchant, (value) {
+      return _then(_value.copyWith(merchant: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NameFieldCopyWith<String, $Res> get card_scheme {
+    return $NameFieldCopyWith<String, $Res>(_value.card_scheme, (value) {
+      return _then(_value.copyWith(card_scheme: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NameFieldCopyWith<String, $Res> get transaction_type {
+    return $NameFieldCopyWith<String, $Res>(_value.transaction_type, (value) {
+      return _then(_value.copyWith(transaction_type: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<String, $Res> get amount_authorized {
+    return $LabelFieldCopyWith<String, $Res>(_value.amount_authorized, (value) {
+      return _then(_value.copyWith(amount_authorized: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<String, $Res> get amount_other {
+    return $LabelFieldCopyWith<String, $Res>(_value.amount_other, (value) {
+      return _then(_value.copyWith(amount_other: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LabelFieldCopyWith<String, $Res>? get approval_code {
+    if (_value.approval_code == null) {
+      return null;
+    }
+
+    return $LabelFieldCopyWith<String, $Res>(_value.approval_code!, (value) {
+      return _then(_value.copyWith(approval_code: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -727,6 +786,19 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
           String? updated_at,
       @JsonKey(name: "qr_code")
           String qr_code});
+
+  @override
+  $MerchantCopyWith<$Res> get merchant;
+  @override
+  $NameFieldCopyWith<String, $Res> get card_scheme;
+  @override
+  $NameFieldCopyWith<String, $Res> get transaction_type;
+  @override
+  $LabelFieldCopyWith<String, $Res> get amount_authorized;
+  @override
+  $LabelFieldCopyWith<String, $Res> get amount_other;
+  @override
+  $LabelFieldCopyWith<String, $Res>? get approval_code;
 }
 
 /// @nodoc
