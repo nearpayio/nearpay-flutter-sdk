@@ -435,14 +435,10 @@ class Nearpay {
       throw "you can't call method ($methodName) before initialize";
     }
 
-    String channelName = "$methodName-${Uuid().v4()}";
-    data['channel_name'] = channelName;
-    final xxxxx = await methodChannel.invokeMethod<dynamic>(methodName, data);
-
-    final eventChannel = EventChannel(channelName);
-
     final tempResponse =
-        await eventChannel.receiveBroadcastStream().firstWhere((_) => true);
+        await methodChannel.invokeMethod<dynamic>(methodName, data);
+
+    // we need this decode encode to resolve some flutter type issues
     final Map<String, dynamic> response = jsonDecode(jsonEncode(tempResponse));
 
     return response;

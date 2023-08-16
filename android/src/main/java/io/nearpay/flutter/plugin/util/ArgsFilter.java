@@ -11,9 +11,6 @@ public class ArgsFilter {
     private PluginProvider provider;
     private Map savedArgs;
 
-    public ArgsFilter(PluginProvider provider) {
-        this.provider = provider;
-    }
 
     public ArgsFilter(Map args) {
         savedArgs = args;

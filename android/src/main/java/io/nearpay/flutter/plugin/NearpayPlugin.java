@@ -30,6 +30,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     PluginProvider provider = new PluginProvider();
     public OperatorFactory operatorFactory = new OperatorFactory(provider);
     private FlutterPluginBinding flutterPluginBinding;
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         this.flutterPluginBinding = flutterPluginBinding;
@@ -45,52 +46,62 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-        String channelName = call.argument("channel_name").toString();
-        System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= channel name");
-        System.out.println(channelName);
 
-        EventChannel eChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), channelName);
+        ArgsFilter filter = new ArgsFilter(call.arguments());
 
-//        we use this array method because Java limit us to it
-        final NearpaySender[] senderArray = new NearpaySender[1];
-        CompletableFuture<NearpaySender> opPromise = new CompletableFuture<>();
-        opPromise.thenAccept(sender -> {
+        NearpaySender sender = (toSend) -> {
+            result.success(toSend);
+        };
 
-            Map args = call.arguments();
+        BaseOperation op = operatorFactory.getOperation(call.method)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
 
-            // filter args and put default values to them
-            ArgsFilter filter = new ArgsFilter(args);
-
-            // nearpay object isn't initialized
-            // return a general error
-            if (provider.getNearpayLib().nearpay == null && !(call.method.equals("initialize") ||
-                    call.method.equals("setup"))) {
-                Map<String, Object> paramMap = NearpayLib.commonResponse(ErrorStatus.initialise_failed_code,
-                        "Plugin Initialise missing, please initialise");
-                sender.send(paramMap);
-                return;
-            }
-
-            BaseOperation op = operatorFactory.getOperation(call.method)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
-
-            op.run(filter, sender);
-
-        });
-
-        eChannel.setStreamHandler(new FlutterEventHandler(){
-            @Override
-            public void onListen(Object arguments, EventChannel.EventSink events) {
-                senderArray[0] = (Object data) -> {
-                    events.success(data);
-                };
-                opPromise.complete(senderArray[0]);
-            }
-        });
-
-        result.success("");
-
+        op.run(filter, sender);
     }
 
+    /**
+     * old implementation of events way of sending
+     */
+    private void temp() {
+        // String channelName = call.argument("channel_name").toString();
+        // System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        // channel name");
+        // System.out.println(channelName);
 
+        // EventChannel eChannel = new
+        // EventChannel(flutterPluginBinding.getBinaryMessenger(), channelName);
+
+        // we use this array method because Java limit us to it
+        // final NearpaySender[] senderArray = new NearpaySender[1];
+        // CompletableFuture<NearpaySender> opPromise = new CompletableFuture<>();
+        // opPromise.thenAccept(sender -> {
+        //
+        // Map args = call.arguments();
+        //
+        // // filter args and put default values to them
+        // ArgsFilter filter = new ArgsFilter(args);
+        //
+        // // nearpay object isn't initialized
+        // // return a general error
+        // if (provider.getNearpayLib().nearpay == null &&
+        // !(call.method.equals("initialize") ||
+        // call.method.equals("setup"))) {
+        // Map<String, Object> paramMap =
+        // NearpayLib.commonResponse(ErrorStatus.initialise_failed_code,
+        // "Plugin Initialise missing, please initialise");
+        // sender.send(paramMap);
+        // return;
+        // }
+        // eChannel.setStreamHandler(new FlutterEventHandler(){
+        // @Override
+        // public void onListen(Object arguments, EventChannel.EventSink events) {
+        // senderArray[0] = (Object data) -> {
+        // events.success(data);
+        // };
+        // opPromise.complete(senderArray[0]);
+        // }
+        // });
+        //
+        // result.success("");
+    }
 }
