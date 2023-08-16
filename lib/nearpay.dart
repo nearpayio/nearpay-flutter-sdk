@@ -46,13 +46,49 @@ enum Locale {
   final String value;
 }
 
+enum NetworkConfiguration {
+  SIM_ONLY('SIM_ONLY'),
+  SIM_PREFERRED('SIM_PREFERRED'),
+  DEFAULT('DEFAULT');
+
+  const NetworkConfiguration(this.value);
+  final String value;
+}
+
+enum UIPosition {
+  TOP_START('TOP_START'),
+  TOP_END('TOP_END'),
+  TOP_RIGHT('TOP_RIGHT'),
+  TOP_LEFT('TOP_LEFT'),
+  BOTTOM_START('BOTTOM_START'),
+  BOTTOM_END('BOTTOM_END'),
+  BOTTOM_RIGHT('BOTTOM_RIGHT'),
+  BOTTOM_LEFT('BOTTOM_LEFT'),
+  CENTER_START('CENTER_START'),
+  CENTER_END('CENTER_END'),
+  CENTER_RIGHT('CENTER_RIGHT'),
+  CENTER_LEFT('CENTER_LEFT'),
+  CENTER_TOP('CENTER_TOP'),
+  CENTER_BOTTOM('CENTER_BOTTOM'),
+  CENTER('CENTER'),
+  DEFAULT('DEFAULT');
+
+  const UIPosition(this.value);
+  final String value;
+}
+
 var uuid = Uuid();
 
 class Nearpay {
-  final AuthenticationType authType;
-  final String authValue;
-  final Environments env;
-  final Locale locale;
+  final AuthenticationType _authType;
+  final String _authValue;
+  final Environments _env;
+  final Locale _locale;
+  final bool _uiLoading;
+  final NetworkConfiguration _networkConfig;
+  final UIPosition _uiPosition;
+  final String? _arabicPaymentText;
+  final String? _englishPaymentText;
   bool _initialized = false;
 
   // NearpayState state = NearpayState.notReady;
@@ -62,11 +98,24 @@ class Nearpay {
   final MethodChannel methodChannel = const MethodChannel('nearpay');
 
   Nearpay({
-    required this.authType,
-    required this.authValue,
-    required this.env,
-    this.locale = Locale.localeDefault,
-  }) {
+    required AuthenticationType authType,
+    required String authValue,
+    required Environments env,
+    Locale locale = Locale.localeDefault,
+    NetworkConfiguration networkConfig = NetworkConfiguration.DEFAULT,
+    bool uiLoading = true,
+    UIPosition uiPosition = UIPosition.DEFAULT,
+    String? arabicPaymentText,
+    String? englishPaymentText,
+  })  : _locale = locale,
+        _env = env,
+        _authValue = authValue,
+        _authType = authType,
+        _networkConfig = networkConfig,
+        _uiLoading = uiLoading,
+        _uiPosition = uiPosition,
+        _arabicPaymentText = arabicPaymentText,
+        _englishPaymentText = englishPaymentText {
     // _addEventListener(
     //     evnetName: NearpayEvent.stateChange,
     //     callback: (args) {
@@ -79,11 +128,15 @@ class Nearpay {
       {void Function()? onInitializeSuccess,
       void Function()? onInitializeFail}) async {
     final data = {
-      "authtype": authType.value,
-      "authvalue": authValue,
-      "locale": locale.value,
-      "environment": env.value,
-      // "channel_name": channelName
+      "authtype": _authType.value,
+      "authvalue": _authValue,
+      "locale": _locale.value,
+      "environment": _env.value,
+      "network_configuration": _networkConfig,
+      "ui_position": _uiPosition,
+      "loading_ui": _uiLoading,
+      "arabic_payment_text": _arabicPaymentText,
+      "english_payment_text": _englishPaymentText,
     };
 
     final response =
