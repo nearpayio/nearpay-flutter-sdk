@@ -216,10 +216,6 @@ class _MyAppState extends State<MyApp> {
         print("session opened");
         printJson(receipt.toJson());
       },
-      onSessionFailed: (err) {
-        print("session error");
-        print(err);
-      },
     );
   }
 

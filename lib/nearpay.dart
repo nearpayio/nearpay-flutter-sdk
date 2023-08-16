@@ -266,7 +266,7 @@ class Nearpay {
     int finishTimeout = 60,
     void Function(TransactionData)? onSessionOpen,
     void Function(Session)? onSessionClosed,
-    void Function(SessionError)? onSessionFailed,
+    // void Function(SessionError)? onSessionFailed,
   }) async {
     var data = {
       "sessionID": sessionID, // Required
@@ -294,9 +294,7 @@ class Nearpay {
       }
     } else {
       SessionError err = getSessionError(response);
-      if (onSessionFailed != null) {
-        onSessionFailed(err);
-      }
+      throw err;
     }
   }
 

@@ -81,10 +81,6 @@ nearpay.purchase(
   enableReversalUi: true, // [Optional] it will allow you to enable or disable the reverse button
   enableUiDismiss: true, // [Optional] the ui is dimissible
   finishTimeout: 60, // [Optional] finish timeout in seconds
-  onPurchaseApproved: (receipts) { // [Optional] callback on purchase success
-  },
-  onPurchaseFailed: (err) { // [Optional] callback on purchase error
-  },
 );
 ```
 
@@ -102,10 +98,6 @@ nearpay.refund(
   enableUiDismiss: true, //[Optional] the ui is dimissible
   finishTimeout: 60, //[Optional] finish timeout in seconds
   adminPin: '0000', // [Optional] when you add the admin pin here , the UI for admin pin won't be shown.
-  onRefundApproved: (reciepts) { // [Optional] callback on refund success
-  },
-  onRefundFailed: (err) { // [Optional] callback on refund fail
-  },
 );
 ```
 
@@ -117,10 +109,6 @@ nearpay.reverse(
   enableReceiptUi: true, // [Optional] show the reciept in ui
   enableUiDismiss: true, //[Optional] the ui is dimissible
   finishTimeout: 60, //[Optional] finish timeout in seconds
-  onReversalFinished: (reciepts) { // [Optional] callback on reversal finish
-  },
-  onReversalFailed: (err) { // [Optional] callback on reversal fail
-  },
 );
 ```
 
@@ -132,10 +120,7 @@ nearpay.reconcile(
   enableUiDismiss: true, //[Optional] the ui is dimissible
   finishTimeout: 60, //[Optional] finish timeout in seconds
   adminPin: '0000', // [optional] when you add the admin pin here , the UI for admin pin won't be shown.
-  onReconcileFinished: (receipt) { // [Optional] callback on reconcile finish
-  },
-  onReconcileFailed: (err) { // [Optional] callback on reconcile fail
-  },
+
 );
 ```
 
@@ -151,8 +136,6 @@ nearpay.session(
   onSessionClosed: (session) {  // [Optional] callback on session closed
   },
   onSessionOpen: (receipt) { // [Optional] callback on session open
-  },
-  onSessionFailed: (err) { // [Optional] callback on session fail
   },
 );
 ```
