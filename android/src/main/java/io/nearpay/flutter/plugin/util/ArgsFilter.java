@@ -1,5 +1,11 @@
 package io.nearpay.flutter.plugin.util;
 
+import android.annotation.SuppressLint;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -177,6 +183,36 @@ public class ArgsFilter {
 
     }
 
+
+    @SuppressLint("NewApi")
+    public LocalDateTime getStartDate() {
+//        String isoDate = savedArgs.get("start_date") != null ? (String) savedArgs.get("start_date") : null;
+//
+//        System.out.println("from: " + isoDate);
+//
+//        if(isoDate == null) return  null;
+//
+//        return LocalDateTime.parse(isoDate);
+        return  getIsoDate("start_date");
+    }
+
+    @SuppressLint("NewApi")
+    public LocalDateTime getEndDate() {
+//        String isoDate = savedArgs.get("end_date") != null ? (String) savedArgs.get("end_date") : null;
+//
+//        DateTimeFormatter formatter
+//                = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+//
+//        System.out.println("to: " + isoDate);
+//
+//        if(isoDate == null) return  null;
+//
+//        return LocalDateTime.parse(isoDate, formatter);
+//
+        return  getIsoDate("end_date");
+
+    }
+
     public Boolean isEnableUiDismiss() {
         return savedArgs.get("enableUiDismiss") == null ? true : (Boolean) savedArgs.get("enableUiDismiss");
     }
@@ -192,6 +228,19 @@ public class ArgsFilter {
     public Boolean isEnableEditableRefundAmountUi() {
         return savedArgs.get("enableEditableRefundAmountUi") == null ? true
                 : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
+    }
+    @SuppressLint("NewApi")
+    private LocalDateTime getIsoDate(String fieldName) {
+        String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;
+
+        DateTimeFormatter formatter
+                = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        System.out.println(fieldName + ": " + isoDate);
+
+        if(isoDate == null) return  null;
+
+        return LocalDateTime.parse(isoDate, formatter);
     }
 
 }

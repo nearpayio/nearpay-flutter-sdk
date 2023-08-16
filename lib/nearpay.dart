@@ -356,11 +356,15 @@ class Nearpay {
     int page = 1,
     int limit = 30,
     String? adminPin,
+    DateTime? startDate,
+    DateTime? endDate,
   }) async {
     var data = {
       "page": page,
       "limit": limit,
       "adminPin": adminPin,
+      "start_date": startDate?.toIso8601String(),
+      "end_date": endDate?.toIso8601String(),
     };
 
     final response = await _callAndReturnMapResponse(
@@ -405,11 +409,15 @@ class Nearpay {
     int page = 1,
     int limit = 30,
     String? adminPin,
+    DateTime? startDate,
+    DateTime? endDate,
   }) async {
     var data = {
       "page": page,
       "limit": limit,
       "adminPin": adminPin,
+      "start_date": startDate?.toIso8601String(),
+      "end_date": endDate?.toIso8601String(),
     };
 
     final response = await _callAndReturnMapResponse(
