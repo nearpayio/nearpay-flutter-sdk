@@ -31,7 +31,7 @@ public class GetTransactionPageOperation extends BaseOperation {
     int page = filter.getPage();
     int limit = filter.getLimit();
 
-    provider.getNearpayLib().nearpay.getTransactionListPage( page, limit, new GetTransactionPageListener() {
+    provider.getNearpayLib().nearpay.getTransactionListPage( page, limit, null, null, new GetTransactionPageListener() {
       @Override
       public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
         Map toSend = NearpayLib.QueryResponse(ErrorStatus.success_code, null, transactionBannerList);

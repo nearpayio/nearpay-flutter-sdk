@@ -28,16 +28,8 @@ public class SessionOperation extends BaseOperation {
         super(provider);
     }
 
-    private Map sessionToJson(Session session) {
-        Gson gson = new Gson(); // Or use new GsonBuilder().create();
-        String json = gson.toJson(session); // serializes target to Json return
-        Map sessionMap = NearpayLib.JSONStringToMap(json);
-        Map response = NearpayLib.commonResponse(ErrorStatus.success_code, "Session Closed");
-        response.put("session", sessionMap);
-        return response;
-    }
-
-    private void doSession(ArgsFilter filter, NearpaySender sender) {
+    @Override
+    public void run(ArgsFilter filter, NearpaySender sender) {
         String sessionID = filter.getSessionId();
         Long finishTimeout = filter.getTimeout();
         Boolean enableReceiptUi = filter.isEnableReceiptUi();
@@ -49,22 +41,18 @@ public class SessionOperation extends BaseOperation {
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {
-                        Map<String, Object> responseDict = NearpayLib.SessionResponse(ErrorStatus.session_closed_code, "", session);
+                        Map<String, Object> responseDict = NearpayLib.SessionResponse(ErrorStatus.session_closed_code,
+                                "", session);
                         sender.send(responseDict);
                     }
 
                     @Override
                     public void onSessionOpen(@NonNull TransactionData transactionData) {
-                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", transactionData);
+                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "",
+                                transactionData);
                         sender.send(response);
 
                     }
-
-//                    @Override
-//                    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
-//                        Map<String, Object> response = NearpayLib.ApiResponse(ErrorStatus.session_opened_code, "", list);
-//                        sender.send(response);
-//                    }
 
                     @Override
                     public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
@@ -72,9 +60,8 @@ public class SessionOperation extends BaseOperation {
                         String message = null;
                         TransactionData receipts = null;
 
-
                         if (sessionFailure instanceof SessionFailure.AuthenticationFailed) {
-                            message =((SessionFailure.AuthenticationFailed) sessionFailure).getMessage();
+                            message = ((SessionFailure.AuthenticationFailed) sessionFailure).getMessage();
                             status = ErrorStatus.auth_failed_code;
                         } else if (sessionFailure instanceof SessionFailure.GeneralFailure) {
                             status = ErrorStatus.general_failure_code;
@@ -83,18 +70,12 @@ public class SessionOperation extends BaseOperation {
                             // when there is FailureMessage
                             status = ErrorStatus.failure_code;
                             message = ((SessionFailure.FailureMessage) sessionFailure).getMessage();
-                        }
-                        else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
+                        } else if (sessionFailure instanceof SessionFailure.InvalidStatus) {
                             status = ErrorStatus.invalid_code;
                         }
                         Map response = NearpayLib.ApiResponse(status, message, receipts);
                         sender.send(response);
                     }
                 });
-    }
-
-    @Override
-    public void run(ArgsFilter filter, NearpaySender sender) {
-        doSession(filter, sender);
     }
 }

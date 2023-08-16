@@ -75,31 +75,7 @@ class Nearpay {
     //     });
   }
 
-  /// calls a native method using a name of the method and a data
-  /// also handles the error cases of the transaction
-  Future<EventChannel> _callAndReturnChannel(
-      String methodName, dynamic data, Function(Map<String, dynamic>) callback,
-      {bool safe = false}) async {
-    if (!safe && !_initialized) {
-      throw "you can't call method ($methodName) before initialize";
-    }
-
-    String channelName = "$methodName-${Uuid().v4()}";
-    data['channel_name'] = channelName;
-    final xxxxx = await methodChannel.invokeMethod<dynamic>(methodName, data);
-
-    final eventChannel = EventChannel(channelName);
-    eventChannel.receiveBroadcastStream().forEach((tempResponse) {
-      // we need to do this transformation in order the flutter type system to work
-      final Map<String, dynamic> response =
-          jsonDecode(jsonEncode(tempResponse));
-
-      callback(response);
-    });
-    return eventChannel;
-  }
-
-  Future<void> initialize(
+  Future<dynamic> initialize(
       {void Function()? onInitializeSuccess,
       void Function()? onInitializeFail}) async {
     final data = {
@@ -110,21 +86,16 @@ class Nearpay {
       // "channel_name": channelName
     };
 
-    _callAndReturnChannel('initialize', data, (response) {
+    return await _callAndReturnChannel('initialize', data, (response) async {
       if (response["status"] == 200) {
         _initialized = true;
-        if (onInitializeSuccess != null) {
-          onInitializeSuccess();
-        }
       } else {
-        if (onInitializeFail != null) {
-          onInitializeFail();
-        }
+        throw "initialize failed";
       }
     }, safe: true);
   }
 
-  Future<void> purchase({
+  Future<TransactionData> purchase({
     required int amount,
     String? transactionId,
     String customerReferenceNumber = "",
@@ -133,8 +104,8 @@ class Nearpay {
     bool enableUiDismiss = true,
     int finishTimeout = 60,
     // void Function(List<TransactionReceipt>)? onPurchaseApproved,
-    void Function(TransactionData)? onPurchaseApproved,
-    void Function(PurchaseError)? onPurchaseFailed,
+    // void Function(TransactionData)? onPurchaseApproved,
+    // void Function(PurchaseError)? onPurchaseFailed,
   }) async {
     final data = {
       "amount": amount,
@@ -146,22 +117,18 @@ class Nearpay {
       "enableUiDismiss": enableUiDismiss,
     };
 
-    await _callAndReturnChannel(
+    return await _callAndReturnChannel<TransactionData>(
       "purchase",
       data,
-      (response) {
+      (response) async {
         if (response["status"] == 200) {
           TransactionData receipts =
               TransactionData.fromJson(response['receipts']);
 
-          if (onPurchaseApproved != null) {
-            onPurchaseApproved(receipts);
-          }
+          return receipts;
         } else {
-          if (onPurchaseFailed != null) {
-            PurchaseError err = getPurchaseError(response);
-            onPurchaseFailed(err);
-          }
+          PurchaseError err = getPurchaseError(response);
+          throw err;
         }
       },
     );
@@ -195,7 +162,7 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    _callAndReturnChannel('refund', data, (response) {
+    _callAndReturnChannel('refund', data, (response) async {
       if (response["status"] == 200) {
         // List<TransactionReceipt> receipts =
         //     List<Map<String, dynamic>>.from(response["receipts"])
@@ -267,7 +234,7 @@ class Nearpay {
       "enableUiDismiss": enableUiDismiss,
     };
 
-    _callAndReturnChannel('reconcile', data, (response) {
+    _callAndReturnChannel('reconcile', data, (response) async {
       if (response["status"] == 200) {
         List<ReconciliationReceipt> receipts =
             List<Map<String, dynamic>>.from(response["receipts"])
@@ -341,7 +308,7 @@ class Nearpay {
       "finishTimeout": finishTimeout, // Optional
       "enableUiDismiss": enableUiDismiss,
     };
-    _callAndReturnChannel('reverse', data, (response) {
+    _callAndReturnChannel('reverse', data, (response) async {
       if (response["status"] == 200) {
         // List<TransactionReceipt> receipts =
         //     List<Map<String, dynamic>>.from(response["receipts"])
@@ -399,7 +366,7 @@ class Nearpay {
   }
 
   Future<dynamic> logout() async {
-    return _callAndReturnChannel('logout', {}, (response) {
+    return _callAndReturnChannel('logout', {}, (response) async {
       if (response["status"] == 200) {
         // _provider.listener.emitStateChange(NearpayState.notReady);
       }
@@ -410,7 +377,8 @@ class Nearpay {
     await _callAndReturnChannel(
       'setup',
       {},
-      (response) {
+      (response) async {
+        return response;
         // if (response["status"] == 200) {
         //   _provider.listener.emitStateChange(NearpayState.ready);
         // } else {
@@ -451,7 +419,7 @@ class Nearpay {
       "enableUiDismiss": enableUiDismiss,
     };
 
-    return _callAndReturnChannel('session', data, (response) {
+    return _callAndReturnChannel('session', data, (response) async {
       if (response["status"] == 200) {
         // List<TransactionReceipt> receipts =
         //     List<Map<String, dynamic>>.from(response["receipts"])
@@ -491,7 +459,7 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    return _callAndReturnChannel('getTransactions', data, (response) {
+    return _callAndReturnChannel('getTransactions', data, (response) async {
       if (response["status"] == 200) {
         TransactionBannerList banner =
             TransactionBannerList.fromJson(response['result']);
@@ -516,7 +484,7 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    return _callAndReturnChannel('getTransaction', data, (response) {
+    return _callAndReturnChannel('getTransaction', data, (response) async {
       if (response["status"] == 200) {
         // List<TransactionReceipt> receipts =
         //     List<Map<String, dynamic>>.from(response["result"])
@@ -547,7 +515,7 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    return _callAndReturnChannel('getReconciliations', data, (response) {
+    return _callAndReturnChannel('getReconciliations', data, (response) async {
       if (response["status"] == 200) {
         ReconciliationBannerList banner =
             ReconciliationBannerList.fromJson(response['result']);
@@ -571,7 +539,7 @@ class Nearpay {
       "adminPin": adminPin,
     };
 
-    return _callAndReturnChannel('getReconciliation', data, (response) {
+    return _callAndReturnChannel('getReconciliation', data, (response) async {
       if (response["status"] == 200) {
         ReconciliationReceipt receipts =
             ReconciliationReceipt.fromJson(response['result']);
@@ -585,14 +553,58 @@ class Nearpay {
     });
   }
 
-  Future<dynamic> receiptToImage({required TransactionReceipt receipt}) async {
+  Future<dynamic> receiptToImage({
+    required TransactionReceipt receipt,
+    int width = 850,
+    int fontSize = 1,
+    Function(Uint8List)? bitmapHandler,
+  }) async {
     var data = {
       "receipt": jsonEncode(receipt), // Required
+      "receipt_width": width,
+      "receipt_font_size": fontSize,
     };
 
-    return _callAndReturnChannel('receiptToImage', data, (response) {
-      print("response");
+    return await _callAndReturnChannel('receiptToImage', data,
+        (response) async {
+      // print(response['result']);
+      // print(response['result'].length);
+
+      List<int> bitmap = List.from(response['result'])
+          .cast<double>()
+          .map((bit) => bit.toInt())
+          .toList();
+
+      final arr = Uint8List.fromList(bitmap);
+
+      bitmapHandler != null ? bitmapHandler(arr) : null;
+
+      // print(arr);
+
+      // print("object")
     });
+  }
+
+  /// calls a native method using a name of the method and a data
+  /// also handles the error cases of the transaction
+  Future<T> _callAndReturnChannel<T>(String methodName, dynamic data,
+      Future<T> Function(Map<String, dynamic>) callback,
+      {bool safe = false}) async {
+    if (!safe && !_initialized) {
+      throw "you can't call method ($methodName) before initialize";
+    }
+
+    String channelName = "$methodName-${Uuid().v4()}";
+    data['channel_name'] = channelName;
+    final xxxxx = await methodChannel.invokeMethod<dynamic>(methodName, data);
+
+    final eventChannel = EventChannel(channelName);
+
+    final tempResponse =
+        await eventChannel.receiveBroadcastStream().firstWhere((_) => true);
+    final Map<String, dynamic> response = jsonDecode(jsonEncode(tempResponse));
+
+    return await callback(response);
   }
 
   // listeners

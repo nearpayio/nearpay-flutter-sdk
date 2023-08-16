@@ -26,17 +26,17 @@ public class RefundOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void refundValidation(ArgsFilter filter, NearpaySender sender) {
-
-                Long amount =filter.getAmount();
+        @Override
+        public void run(ArgsFilter filter, NearpaySender sender) {
+                Long amount = filter.getAmount();
                 String original_transaction_uuid = filter.getOriginalTransactionUuid();
                 String customer_reference_number = filter.getCustomerReferenceNumber();
                 UUID jobId = filter.getJobId();
                 Boolean enableReceiptUi = filter.isEnableReceiptUi();
                 Boolean enableReversal = filter.isEnableReversal();
-                Boolean enableEditableRefundAmountUi =filter.isEnableEditableRefundAmountUi();
+                Boolean enableEditableRefundAmountUi = filter.isEnableEditableRefundAmountUi();
                 Long finishTimeout = filter.getTimeout();
-                String adminPin =filter.getAdminPin();
+                String adminPin = filter.getAdminPin();
                 Boolean enableUiDismiss = filter.isEnableUiDismiss();
 
                 provider.getNearpayLib().nearpay.refund(amount, original_transaction_uuid,
@@ -79,47 +79,7 @@ public class RefundOperation extends BaseOperation {
                                                 sender.send(response);
 
                                         }
-
-                                        // @Override
-                                        // public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
-                                        // Map<String, Object> responseDict = NearpayLib.ApiResponse(
-                                        // ErrorStatus.success_code,
-                                        // "Refund Success",
-                                        // list
-                                        // );
-                                        // sender.send(responseDict);
-                                        // }
-                                        //
-                                        // @Override
-                                        // public void onRefundFailed(@NonNull RefundFailure refundFailure) {
-                                        // int status = ErrorStatus.general_failure_code;
-                                        // String message = null;
-                                        // List<TransactionReceipt> receipts = null;
-                                        //
-                                        // if (refundFailure instanceof RefundFailure.RefundDeclined) {
-                                        // // when the payment declined.
-                                        // status = ErrorStatus.refund_declined_code;
-                                        // receipts = ((RefundFailure.RefundDeclined) refundFailure).getReceipts();
-                                        //
-                                        // } else if (refundFailure instanceof RefundFailure.RefundRejected) {
-                                        // status = ErrorStatus.refund_rejected_code;
-                                        // message = ((RefundFailure.RefundRejected) refundFailure).getMessage();
-                                        // } else if (refundFailure instanceof RefundFailure.AuthenticationFailed) {
-                                        // status = ErrorStatus.auth_failed_code;
-                                        // message = ((RefundFailure.AuthenticationFailed) refundFailure).getMessage();
-                                        // } else if (refundFailure instanceof RefundFailure.InvalidStatus) {
-                                        // status = ErrorStatus.invalid_code;
-                                        // }
-                                        // Map response = NearpayLib.ApiResponse(status, message, receipts);
-                                        // sender.send(response);
-                                        // }
-                                        //
                                 });
 
-        }
-
-        @Override
-        public void run(ArgsFilter filter, NearpaySender sender) {
-                refundValidation(filter, sender);
         }
 }

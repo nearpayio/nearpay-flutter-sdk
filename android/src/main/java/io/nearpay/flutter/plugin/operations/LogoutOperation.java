@@ -19,7 +19,8 @@ public class LogoutOperation extends BaseOperation {
         super(provider);
     }
 
-    private void doLogoutAction(NearpaySender sender) {
+    @Override
+    public void run(ArgsFilter filter, NearpaySender sender) {
         provider.getNearpayLib().nearpay.logout(new LogoutListener() {
             @Override
             public void onLogoutCompleted() {
@@ -44,10 +45,5 @@ public class LogoutOperation extends BaseOperation {
                 }
             }
         });
-    }
-
-    @Override
-    public void run(ArgsFilter filter, NearpaySender sender) {
-        doLogoutAction(sender);
     }
 }

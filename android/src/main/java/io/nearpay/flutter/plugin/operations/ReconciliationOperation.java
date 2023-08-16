@@ -27,11 +27,11 @@ public class ReconciliationOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void doReconcileAction(ArgsFilter filter, NearpaySender sender) {
-
+        @Override
+        public void run(ArgsFilter filter, NearpaySender sender) {
                 Boolean enableReceiptUi = filter.isEnableReceiptUi();
                 Long finishTimeout = filter.getTimeout();
-                String adminPin =filter.getAdminPin();
+                String adminPin = filter.getAdminPin();
                 Boolean enableUiDismiss = filter.isEnableUiDismiss();
                 UUID jobId = filter.getJobId();
 
@@ -72,10 +72,5 @@ public class ReconciliationOperation extends BaseOperation {
                                         }
 
                                 });
-        }
-
-        @Override
-        public void run(ArgsFilter filter, NearpaySender sender) {
-                doReconcileAction(filter, sender);
         }
 }

@@ -19,7 +19,8 @@ public class SetupOperation extends BaseOperation {
 
     }
 
-    private void doSetup(NearpaySender sender) {
+    @Override
+    public void run(ArgsFilter filter, NearpaySender sender) {
         String authvalue = provider.getNearpayLib().authValueShared;
         String authType = provider.getNearpayLib().authTypeShared;
         boolean isAuthValidated = provider.getNearpayLib().isAuthInputValidation(authType, authvalue);
@@ -77,10 +78,5 @@ public class SetupOperation extends BaseOperation {
                 }
             }
         });
-    }
-
-    @Override
-    public void run(ArgsFilter filter, NearpaySender sender) {
-        doSetup(sender);
     }
 }

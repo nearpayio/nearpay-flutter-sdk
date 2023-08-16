@@ -2,7 +2,6 @@ package io.nearpay.flutter.plugin.operations;
 
 import android.annotation.SuppressLint;
 
-
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -21,7 +20,8 @@ public class InitializeOperation extends BaseOperation {
         super(provider);
     }
 
-    public void doInitialization(ArgsFilter filter, NearpaySender sender) {
+    @Override
+    public void run(ArgsFilter filter, NearpaySender sender) {
         String authValue = filter.getAuthValue();
         String authType = filter.getAuthType();
         Locale locale = filter.getLocale();
@@ -48,12 +48,5 @@ public class InitializeOperation extends BaseOperation {
         }
 
         sender.send(response);
-
-    }
-
-    @SuppressLint("NewApi")
-    @Override
-    public void run(ArgsFilter filter, NearpaySender sender) {
-        doInitialization(filter, sender);
     }
 }
