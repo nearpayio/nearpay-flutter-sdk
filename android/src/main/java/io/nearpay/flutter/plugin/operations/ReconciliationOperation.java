@@ -44,8 +44,11 @@ public class ReconciliationOperation extends BaseOperation {
                                                 List<ReconciliationReceipt> list = new ArrayList();
                                                 list.add(reconciliationReceipt);
 
-                                                Map<String, Object> responseDict = NearpayLib.ReconcileResponse(
+                                                Map<String, Object> responseDict = NearpayLib.ApiResponse(
                                                                 ErrorStatus.success_code, null, list);
+
+                                                System.out.println("-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                System.out.println(responseDict);
                                                 sender.send(responseDict);
                                         }
 

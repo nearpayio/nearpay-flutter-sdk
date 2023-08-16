@@ -32,7 +32,7 @@ public class GetTransactionOperation extends BaseOperation {
     provider.getNearpayLib().nearpay.getTransactionByUuid(trUuid, new GetTransactionListener() {
       @Override
       public void onSuccess(@NonNull TransactionData transactionData) {
-        Map toSend = NearpayLib.QueryResponse(ErrorStatus.success_code, null, transactionData);
+        Map toSend = NearpayLib.ApiResponse(ErrorStatus.success_code, null, transactionData);
         sender.send(toSend);
 
       }
@@ -52,7 +52,7 @@ public class GetTransactionOperation extends BaseOperation {
         } else if (getDataFailure instanceof GetDataFailure.InvalidStatus) {
           status = ErrorStatus.invalid_code;
         }
-        Map response = NearpayLib.QueryResponse(status, message, new ArrayList());
+        Map response = NearpayLib.ApiResponse(status, message, new ArrayList());
         sender.send(response);
 
       }

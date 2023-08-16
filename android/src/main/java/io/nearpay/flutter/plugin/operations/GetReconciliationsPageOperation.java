@@ -33,7 +33,7 @@ public class GetReconciliationsPageOperation extends BaseOperation {
         new GetReconciliationPageListener() {
           @Override
           public void onSuccess(@Nullable ReconciliationList reconciliationList) {
-            Map toSend = NearpayLib.QueryResponse(ErrorStatus.success_code, null, reconciliationList);
+            Map toSend = NearpayLib.ApiResponse(ErrorStatus.success_code, null, reconciliationList);
             sender.send(toSend);
 
           }
@@ -52,7 +52,7 @@ public class GetReconciliationsPageOperation extends BaseOperation {
             } else if (getDataFailure instanceof GetDataFailure.InvalidStatus) {
               status = ErrorStatus.invalid_code;
             }
-            Map response = NearpayLib.QueryResponse(status, message, new ArrayList());
+            Map response = NearpayLib.ApiResponse(status, message, new ArrayList());
             sender.send(response);
 
           }

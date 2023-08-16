@@ -41,7 +41,7 @@ public class SessionOperation extends BaseOperation {
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {
-                        Map<String, Object> responseDict = NearpayLib.SessionResponse(ErrorStatus.session_closed_code,
+                        Map<String, Object> responseDict = NearpayLib.ApiResponse(ErrorStatus.session_closed_code,
                                 "", session);
                         sender.send(responseDict);
                     }

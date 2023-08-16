@@ -42,6 +42,7 @@ public class NearpayLib {
         return isAuthValidate;
     }
 
+    @Deprecated
     public static Map<String, Object> commonResponse(int responseCode, String message) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("status", responseCode);
@@ -49,74 +50,13 @@ public class NearpayLib {
         return paramMap;
     }
 
-    public static Map<String, Object> ApiResponse(int responseCode, String message, TransactionData receipts) {
-        Map<String, Object> paramMap = new HashMap<>();
-        Object transactionListJson = classToMap(receipts);
-//        if(receipts != null){
-//            for (TransactionReceipt transReceipt : receipts) {
-//                Gson gson = new Gson(); // Or use new GsonBuilder().create();
-//                String json = gson.toJson(transReceipt); // serializes target to Json
-//                transactionListJson.add(NearpayLib.JSONStringToMap(json));
-//            }
-//        }
-
-
-        paramMap.put("status", responseCode);
-        paramMap.put("message", message);
-        paramMap.put("receipts", transactionListJson);
-        return paramMap;
-    }
-
-
-    public static Map<String, Object> ReconcileResponse(int responseCode, String message, List<ReconciliationReceipt> receipts) {
-        Map<String, Object> paramMap = new HashMap<>();
-        List<Map<String, Object>> reconcileListJson = new ArrayList<>();
-        if(receipts != null){
-            for (ReconciliationReceipt reconcileReceipt : receipts) {
-                Gson gson = new Gson(); // Or use new GsonBuilder().create();
-                String json = gson.toJson(reconcileReceipt); // serializes target to Json
-                reconcileListJson.add(NearpayLib.JSONStringToMap(json));
-            }
-        }
-
-
-        paramMap.put("status", responseCode);
-        paramMap.put("message", message);
-        paramMap.put("receipts", reconcileListJson);
-        return paramMap;
-    }
-
-    public static Map<String, Object> QueryResponse(int responseCode, String message,
-                                                    Object toSend) {
+    public static Map<String, Object> ApiResponse(int responseCode, String message, Object data) {
         Map<String, Object> paramMap = new HashMap<>();
 
         paramMap.put("status", responseCode);
         paramMap.put("message", message);
-        paramMap.put("result", classToMap(toSend));
+        paramMap.put("result", classToMap(data));
         return paramMap;
-    }
-
-
-    public static Map<String, Object> SessionResponse(int responseCode, String message, Session session){
-        Map<String, Object> paramMap = new HashMap<>();
-        Map<String, Object> sessionJson = new HashMap<>();
-        if(session != null){
-            Gson gson = new Gson(); // Or use new GsonBuilder().create();
-            String json = gson.toJson(session); // serializes target to Json return
-            sessionJson = NearpayLib.JSONStringToMap(json);
-
-        }
-
-
-        paramMap.put("status", responseCode);
-        paramMap.put("message", message);
-        paramMap.put("session", sessionJson);
-        return paramMap;
-    }
-
-    public static Map<String, Object> JSONStringToMap(String jsonStr) {
-        Map<String, Object> data = new Gson().fromJson(jsonStr, HashMap.class);
-        return data;
     }
 
     public static Object classToMap(Object obj) {

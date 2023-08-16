@@ -42,7 +42,7 @@ public class ReceiptToImageOperation extends BaseOperation {
             byte[] byteArray = stream.toByteArray();
             bitmap.recycle();
 
-            sender.send(NearpayLib.QueryResponse(200,"", byteArray));
+            sender.send(NearpayLib.ApiResponse(200,"", byteArray));
         });
 
     }
