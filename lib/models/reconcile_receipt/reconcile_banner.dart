@@ -2,8 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:nearpay_flutter_sdk/models/util/label_field.dart';
 import 'package:nearpay_flutter_sdk/models/util/localization_field.dart';
 
-part 'reconcile_banner.freezed.dart';
 part 'reconcile_banner.g.dart';
+part 'reconcile_banner.freezed.dart';
 
 @Freezed()
 class ReconciliationBannerList with _$ReconciliationBannerList {

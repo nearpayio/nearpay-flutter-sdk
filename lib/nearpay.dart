@@ -364,6 +364,8 @@ class Nearpay {
       data,
     );
 
+    print(response);
+
     if (response["status"] == 200) {
       ReconciliationBannerList banner =
           ReconciliationBannerList.fromJson(response['result']);

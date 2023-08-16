@@ -6,14 +6,15 @@ part 'name_field.g.dart';
 part 'name_field.freezed.dart';
 
 @Freezed()
-class NameField<T> with _$NameField {
+class NameField<T> with _$NameField<T> {
   const factory NameField({
     @JsonKey(name: "name") required LocalizationField name,
     @JsonKey(name: "id") required dynamic id,
   }) = _NameField;
 
-  factory NameField.fromJson(Map<String, dynamic> json) =>
-      _$NameFieldFromJson(json);
+  factory NameField.fromJson(Map<String, dynamic> json) => _$NameFieldFromJson(
+        json,
+      );
 }
 
 // @JsonSerializable(explicitToJson: true)

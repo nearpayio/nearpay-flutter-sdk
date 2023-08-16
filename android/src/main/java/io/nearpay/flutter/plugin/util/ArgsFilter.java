@@ -1,83 +1,22 @@
 package io.nearpay.flutter.plugin.util;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import io.nearpay.flutter.plugin.PluginProvider;
 import io.nearpay.sdk.Environments;
+import io.nearpay.sdk.utils.enums.NetworkConfiguration;
+import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
     private PluginProvider provider;
     private Map savedArgs;
 
-
     public ArgsFilter(Map args) {
         savedArgs = args;
     }
-
-    // return every map entry to its default
-    // public Map filter(Map args) {
-
-    // Long amount;
-    // if (args.get("amount") == null) {
-    // amount = 1L;
-    // } else {
-    // amount = Long.valueOf((Integer) args.get("amount"));
-    // }
-    // args.put("amount", amount);
-
-    // Long timeout;
-    // if (args.get("finishTimeout") == null) {
-    // timeout = 60L;
-    // } else {
-    // timeout = Long.valueOf((Integer) args.get("finishTimeout"));
-    // }
-    // args.put("finishTimeout", timeout);
-
-    // if (args.get("customer_reference_number") == null) {
-    // args.put("customer_reference_number", "");
-    // }
-
-    // if (args.get("job_id") == null) {
-    // args.put("job_id", UUID.randomUUID());
-    // } else {
-    // args.put("job_id", UUID.fromString(args.get("job_id").toString()));
-    // }
-
-    // if (args.get("reconciliation_uuid") == null) {
-    // args.put("reconciliation_uuid", UUID.randomUUID());
-    // } else {
-    // args.put("reconciliation_uuid",
-    // UUID.fromString(args.get("reconciliation_uuid").toString()));
-    // }
-
-    // if (args.get("enableUiDismiss") == null) {
-    // args.put("enableUiDismiss", true);
-    // }
-
-    // if (args.get("enableReceiptUi") == null) {
-    // args.put("enableReceiptUi", true);
-    // }
-
-    // if (args.get("enableReversal") == null) {
-    // args.put("enableReversal", true);
-    // }
-
-    // if (args.get("enableEditableRefundAmountUi") == null) {
-    // args.put("enableEditableRefundAmountUi", true);
-    // }
-
-    // if (args.get("page") == null || (int) args.get("page") < 1) {
-    // args.put("page", 1);
-    // }
-
-    // if (args.get("limit") == null || (int) args.get("limit") < 1) {
-    // args.put("limit", 30);
-    // }
-
-    // return args;
-    // }
 
     public String getTransactionUuid() {
         return savedArgs.get("transaction_uuid").toString();
@@ -104,13 +43,12 @@ public class ArgsFilter {
     }
 
     public int getReceiptWidth() {
-        return  savedArgs.get("receipt_width") != null ?  (int) savedArgs.get("receipt_width")  : 850;
+        return savedArgs.get("receipt_width") != null ? (int) savedArgs.get("receipt_width") : 850;
     }
 
     public int getReceiptFontSize() {
-        return  savedArgs.get("receipt_font_size") != null ?  (int) savedArgs.get("receipt_font_size")  : 1;
+        return savedArgs.get("receipt_font_size") != null ? (int) savedArgs.get("receipt_font_size") : 1;
     }
-
 
     public UUID getJobId() {
         if (savedArgs.get("job_id") == null) {
@@ -143,9 +81,9 @@ public class ArgsFilter {
     }
 
     public String getCustomerReferenceNumber() {
-        return savedArgs.get("customer_reference_number") == null ? "" : savedArgs.get("customer_reference_number").toString();
+        return savedArgs.get("customer_reference_number") == null ? ""
+                : savedArgs.get("customer_reference_number").toString();
     }
-
 
     public String getAuthType() {
         return savedArgs.get("authtype") == null ? "" : savedArgs.get("authtype").toString();
@@ -179,6 +117,66 @@ public class ArgsFilter {
         return env;
     }
 
+    public NetworkConfiguration getNetworkConfiguration() {
+
+        String configStr = savedArgs.get("network_configuration") == null ? "default"
+                : savedArgs.get("network_configuration").toString();
+
+        NetworkConfiguration config = configStr.equals("sim_only") ? NetworkConfiguration.SIM_ONLY
+                : configStr.equals("production") ? NetworkConfiguration.SIM_PREFERRED : NetworkConfiguration.DEFAULT;
+
+        return config;
+    }
+
+    public UIPosition getUiPosition() {
+
+        Map<String, UIPosition> uiPosMap = new HashMap<>();
+
+        uiPosMap.put("TOP_START", UIPosition.TOP_START);
+        uiPosMap.put("TOP_END", UIPosition.TOP_END);
+        uiPosMap.put("TOP_RIGHT", UIPosition.TOP_RIGHT);
+        uiPosMap.put("TOP_LEFT", UIPosition.TOP_LEFT);
+
+        uiPosMap.put("BOTTOM_START", UIPosition.BOTTOM_START);
+        uiPosMap.put("BOTTOM_END", UIPosition.BOTTOM_END);
+        uiPosMap.put("BOTTOM_RIGHT", UIPosition.BOTTOM_RIGHT);
+        uiPosMap.put("BOTTOM_LEFT", UIPosition.BOTTOM_LEFT);
+
+        uiPosMap.put("CENTER_START", UIPosition.CENTER_START);
+        uiPosMap.put("CENTER_END", UIPosition.CENTER_END);
+        uiPosMap.put("CENTER_RIGHT", UIPosition.CENTER_RIGHT);
+        uiPosMap.put("CENTER_LEFT", UIPosition.CENTER_LEFT);
+        uiPosMap.put("CENTER_TOP", UIPosition.CENTER_TOP);
+        uiPosMap.put("CENTER_BOTTOM", UIPosition.CENTER_BOTTOM);
+        uiPosMap.put("CENTER", UIPosition.CENTER);
+
+        uiPosMap.put("DEFAULT", UIPosition.DEFAULT);
+
+        String uiPosStr = savedArgs.get("ui_position") == null ? "DEFAULT"
+                : savedArgs.get("ui_position").toString();
+
+        UIPosition uiPos = uiPosMap.get(uiPosStr);
+
+        if (uiPos != null)
+            return uiPos;
+        return UIPosition.DEFAULT;
+    }
+
+    public Boolean getLoadingUi() {
+        return savedArgs.get("loading_ui") != null ? (Boolean) savedArgs.get("loading_ui") : true;
+    }
+
+    public String getArabicPaymentText() {
+        return savedArgs.get("arabic_payment_text") != null ? (String) savedArgs.get("arabic_payment_text")
+                : "يرجى تمرير الطاقة";
+    }
+
+    public String getEnglishPaymentText() {
+        return savedArgs.get("english_payment_text") != null ? (String) savedArgs.get("english_payment_text")
+                : "please tap your card";
+
+    }
+
     public Boolean isEnableUiDismiss() {
         return savedArgs.get("enableUiDismiss") == null ? true : (Boolean) savedArgs.get("enableUiDismiss");
     }
@@ -192,7 +190,8 @@ public class ArgsFilter {
     }
 
     public Boolean isEnableEditableRefundAmountUi() {
-        return savedArgs.get("enableEditableRefundAmountUi") == null ? true : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
+        return savedArgs.get("enableEditableRefundAmountUi") == null ? true
+                : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
     }
 
 }

@@ -13,7 +13,8 @@ class LabelField<T> with _$LabelField<T> {
   }) = _LabelField;
 
   factory LabelField.fromJson(
-          Map<String, dynamic> json, T Function(Object?) fromJsonT) =>
+    Map<String, dynamic> json,
+  ) =>
       _$LabelFieldFromJson(json);
 }
 
