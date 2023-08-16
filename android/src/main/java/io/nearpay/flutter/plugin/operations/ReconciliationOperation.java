@@ -27,11 +27,11 @@ public class ReconciliationOperation extends BaseOperation {
                 super(provider);
         }
 
-        private void doReconcileAction(ArgsFilter filter, NearpaySender sender) {
-
+        @Override
+        public void run(ArgsFilter filter, NearpaySender sender) {
                 Boolean enableReceiptUi = filter.isEnableReceiptUi();
                 Long finishTimeout = filter.getTimeout();
-                String adminPin =filter.getAdminPin();
+                String adminPin = filter.getAdminPin();
                 Boolean enableUiDismiss = filter.isEnableUiDismiss();
                 UUID jobId = filter.getJobId();
 
@@ -44,8 +44,11 @@ public class ReconciliationOperation extends BaseOperation {
                                                 List<ReconciliationReceipt> list = new ArrayList();
                                                 list.add(reconciliationReceipt);
 
-                                                Map<String, Object> responseDict = NearpayLib.ReconcileResponse(
+                                                Map<String, Object> responseDict = NearpayLib.ApiResponse(
                                                                 ErrorStatus.success_code, null, list);
+
+                                                System.out.println("-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                                                System.out.println(responseDict);
                                                 sender.send(responseDict);
                                         }
 
@@ -72,10 +75,5 @@ public class ReconciliationOperation extends BaseOperation {
                                         }
 
                                 });
-        }
-
-        @Override
-        public void run(ArgsFilter filter, NearpaySender sender) {
-                doReconcileAction(filter, sender);
         }
 }

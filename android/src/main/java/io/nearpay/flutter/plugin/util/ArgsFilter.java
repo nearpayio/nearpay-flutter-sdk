@@ -11,9 +11,6 @@ public class ArgsFilter {
     private PluginProvider provider;
     private Map savedArgs;
 
-    public ArgsFilter(PluginProvider provider) {
-        this.provider = provider;
-    }
 
     public ArgsFilter(Map args) {
         savedArgs = args;
@@ -105,6 +102,15 @@ public class ArgsFilter {
     public String getReceipt() {
         return savedArgs.get("receipt") == null ? "" : (String) savedArgs.get("receipt");
     }
+
+    public int getReceiptWidth() {
+        return  savedArgs.get("receipt_width") != null ?  (int) savedArgs.get("receipt_width")  : 850;
+    }
+
+    public int getReceiptFontSize() {
+        return  savedArgs.get("receipt_font_size") != null ?  (int) savedArgs.get("receipt_font_size")  : 1;
+    }
+
 
     public UUID getJobId() {
         if (savedArgs.get("job_id") == null) {

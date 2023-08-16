@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nearpay_example/util.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/models/session/session.dart';
+import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/nearpay.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
 import 'package:uuid/uuid.dart';
@@ -36,6 +38,8 @@ class _MyAppState extends State<MyApp> {
     locale: Locale.localeDefault,
   );
 
+  Uint8List? bytes;
+
   // NearpayState state = NearpayState.notReady;
 
   @override
@@ -51,77 +55,63 @@ class _MyAppState extends State<MyApp> {
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
 
-    nearpay.purchase(
-        amount: 1000,
-        onPurchaseApproved: (reciepts) {
-          print(
-              "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-          final String? transactionUuid =
-              reciepts.receipts?[0].transaction_uuid;
-          nearpay.refund(
-            amount: 1000, // [Required], means 10.00
-            originalTransactionUUID:
-                transactionUuid!, // [Required] the orginal trnasaction uuid that you want to refund
-            transactionId: uuid.v4(), //[Optional] speacify the transaction uuid
-            customerReferenceNumber: '', //[Optional]
-            enableReceiptUi: true, // [Optional] show the reciept in ui
-            enableReversalUi:
-                true, //[Optional] enable reversal of transaction from ui
-            editableRefundUI:
-                true, // [Optional] edit the reversal amount from uid
-            enableUiDismiss: true, //[Optional] the ui is dimissible
-            finishTimeout: 60, //[Optional] finish timeout in seconds
-            adminPin:
-                '0000', // [Optional] when you add the admin pin here , the UI for admin pin won't be shown.
-            onRefundApproved: (reciepts) {
-              print(
-                  "=-=-=-=-=-=-=-=-=-=- on refund approved =-=-=-=-=-=-=-=-=-=-=");
-            },
-            onRefundFailed: (err) {
-              print(
-                  "=-=-=-=-=-=-=-=-=-=- on refund failed =-=-=-=-=-=-=-=-=-=-=");
-            },
-          );
-        },
-        onPurchaseFailed: (err) {
-          print(
-              "=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
-        });
+    final transactionData = await nearpay
+        .purchase(
+      amount: 1000,
+    )
+        .catchError((err) {
+      print("=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
+      throw err;
+    });
+
+    final String? transactionUuid =
+        transactionData.receipts?[0].transaction_uuid;
+
+    final refundData = await nearpay.refund(
+      amount: 1000, originalTransactionUUID: transactionUuid!,
+      transactionId: uuid.v4(), //[Optional] speacify the transaction uuid
+      customerReferenceNumber: '', //[Optional]
+      enableReceiptUi: true, // [Optional] show the reciept in ui
+      enableReversalUi:
+          true, //[Optional] enable reversal of transaction from ui
+      editableRefundUI: true, // [Optional] edit the reversal amount from uid
+      enableUiDismiss: true, //[Optional] the ui is dimissible
+      finishTimeout: 60, //[Optional] finish timeout in seconds
+      adminPin:
+          '0000', // [Optional] when you add the admin pin here , the UI for admin pin won't be shown.
+    );
+
+    printJson(refundData.toJson());
   }
 
   Future<dynamic> purchaseWithReverse() async {
     print("=-=-=-=-= Start Purchase with Reverse Action =-=-=-=-=");
 
-    nearpay.purchase(
-        amount: 1000,
-        onPurchaseApproved: (data) {
-          print(
-              "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-          final String? uuid = data.receipts?[0].transaction_uuid;
-          nearpay.reverse(
-            originalTransactionUUID: uuid!,
-            enableReceiptUi: true,
-            enableUiDismiss: true,
-            finishTimeout: 60,
-            onReversalFinished: (reciepts) {
-              print(
-                  "=-=-=-=-=-=-=-=-=-=- on reverse approved =-=-=-=-=-=-=-=-=-=-=");
-            },
-            onReversalFailed: (err) {
-              print(
-                  "=-=-=-=-=-=-=-=-=-=- on reverse failed =-=-=-=-=-=-=-=-=-=-=");
-            },
-          );
-        },
-        onPurchaseFailed: (err) {
-          print(
-              "=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
-        });
+    final transactionData = await nearpay
+        .purchase(
+      amount: 1000,
+    )
+        .catchError((err) {
+      print("=-=-=-=-=-=-=-=-=-=- on purchase failed =-=-=-=-=-=-=-=-=-=-=");
+      throw err;
+    });
+
+    print("=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
+    final String? uuid = transactionData.receipts?[0].transaction_uuid;
+    final reverseData = await nearpay.reverse(
+      originalTransactionUUID: uuid!,
+      enableReceiptUi: true,
+      enableUiDismiss: true,
+      finishTimeout: 60,
+    );
+
+    printJson(reverseData.toJson());
   }
 
   Future<dynamic> purchaseAction() async {
     print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
-    return nearpay.purchase(
+    final transactionData = await nearpay
+        .purchase(
       amount: 0001, // [Required] ammount you want to set .
       transactionId: uuid
           .v4(), // [Optional] specefy the transaction uuid for later referance
@@ -132,46 +122,51 @@ class _MyAppState extends State<MyApp> {
           true, // [Optional] it will allow you to enable or disable the reverse button
       enableUiDismiss: true, // [Optional] the ui is dimissible
       finishTimeout: 60, // [Optional] finish timeout in seconds
-      onPurchaseApproved: (receipts) {
-        print(
-            "=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
-        receipts.receipts?.forEach((receipt) {
-          printJson(receipt.toJson());
-        });
-      },
-      onPurchaseFailed: (err) {
-        print("=-=-=-=-= Purchase Failed =-=-=-=-=");
+      // onPurchaseApproved: (receipts) {
 
-        if (err is PurchaseDeclined) {
-          print("declined");
-        }
-        if (err is PurchaseGeneralFailure) {
-          print("general");
-        }
-        if (err is PurchaseInvalidStatus) {
-          print('invalid');
-        }
-      },
-    );
+      // },
+      // onPurchaseFailed: ,
+    )
+        .catchError((err) {
+      print("=-=-=-=-= Purchase Failed =-=-=-=-=");
+
+      if (err is PurchaseDeclined) {
+        print("declined");
+      }
+      if (err is PurchaseGeneralFailure) {
+        print("general");
+      }
+      if (err is PurchaseInvalidStatus) {
+        print('invalid');
+      }
+
+      throw err;
+    });
+
+    print("=-=-=-=-=-=-=-=-=-=- on purchase approved =-=-=-=-=-=-=-=-=-=-=");
+    transactionData.receipts?.forEach((receipt) {
+      printJson(receipt.toJson());
+    });
   }
 
   Future<dynamic> reconcileAction() async {
     print("=-=-=-=-= Start Reconcile Action =-=-=-=-=");
 
-    return nearpay.reconcile(
+    final receipt = await nearpay
+        .reconcile(
       enableReceiptUi: true,
       enableUiDismiss: true,
       adminPin: '0000',
       finishTimeout: 60,
       reconciliationId: uuid.v4(),
-      onReconcileFinished: (receipt) {
-        print("=-=-=-=-= Reconcile Success =-=-=-=-=");
-        printJson(receipt.toJson());
-      },
-      onReconcileFailed: (err) {
-        print("=-=-=-=-= Reconcile Failed =-=-=-=-=");
-      },
-    );
+    )
+        .catchError((err) {
+      print("=-=-=-=-= Reconcile Failed =-=-=-=-=");
+      throw err;
+    });
+
+    print("=-=-=-=-= Reconcile Success =-=-=-=-=");
+    printJson(receipt.toJson());
   }
 
   Future<dynamic> logoutAction() async {
@@ -206,8 +201,6 @@ class _MyAppState extends State<MyApp> {
         options: Options(headers: {'api-key': apiKey}));
     // .then((value) => jsonDecode(value.data));
 
-    print(sessionResponse.data['id']);
-
     return nearpay.session(
       sessionID: sessionResponse.data['id'], // Required
       enableReceiptUi: true, // [Optional] show the reciept in ui
@@ -232,41 +225,37 @@ class _MyAppState extends State<MyApp> {
 
   // =-=-=- Queries -=-=-=
   Future<dynamic> getTransaction() async {
-    nearpay.getTransaction(
+    final transaction = await nearpay.getTransaction(
       transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
-      onResult: (receipts) {
-        printJson(receipts.receipts![0].toJson());
-      },
     );
+
+    printJson(transaction.receipts![0].toJson());
   }
 
   Future<dynamic> getTransactions() async {
-    nearpay.getTransactions(
+    final banner = await nearpay.getTransactions(
       page: 1,
       limit: 30,
-      onResult: (banner) {
-        printJson(banner.toJson());
-      },
     );
+
+    printJson(banner.toJson());
   }
 
   Future<dynamic> getReconciliation() async {
-    nearpay.getReconciliation(
+    final receipt = await nearpay.getReconciliation(
       reconciliationUUID: "6d4a48b8-d194-4aad-92c9-a77606758799",
-      onResult: (receipts) {
-        printJson(receipts.toJson());
-      },
     );
+
+    printJson(receipt.toJson());
   }
 
   Future<dynamic> getReconciliations() async {
-    nearpay.getReconciliations(
+    final banner = await nearpay.getReconciliations(
       page: 1,
       limit: 30,
-      onResult: (banner) {
-        printJson(banner.toJson());
-      },
     );
+
+    printJson(banner.toJson());
   }
 
   @override
@@ -340,19 +329,6 @@ class _MyAppState extends State<MyApp> {
             ),
             TextButton(
               onPressed: () async {
-                await nearpay.purchase(
-                  amount: 1200,
-                  // onPurchaseApproved: (receipt) async {
-                  //   await nearpay.receiptToImage(
-                  //       receipt: receipt.receipts![0]);
-                  // }
-                );
-                // nearpay.receiptToImage(receipt: receipt)
-              },
-              child: const Text("Receipt to Image"),
-            ),
-            TextButton(
-              onPressed: () async {
                 getTransaction();
               },
               child: const Text("get transaction by uuid"),
@@ -375,6 +351,31 @@ class _MyAppState extends State<MyApp> {
               },
               child: const Text("get reconciliations"),
             ),
+            TextButton(
+              onPressed: () async {
+                final transactionData = await nearpay.purchase(
+                  amount: 1200,
+                );
+
+                if (transactionData.receipts == null) return;
+
+                final imageBytes = await nearpay.receiptToImage(
+                  receipt: transactionData.receipts![0],
+                  fontSize: 1,
+                  width: 850,
+                );
+
+                setState(() {
+                  bytes = imageBytes;
+                });
+              },
+              child: const Text("test receipt image"),
+            ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: bytes != null ? Image.memory(bytes!) : Text('no Image'),
+            ),
+            Text("end of receipt")
           ],
         ),
       ),
