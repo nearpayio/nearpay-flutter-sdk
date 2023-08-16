@@ -73,7 +73,7 @@ nearpay.setup()
 # 4. Purchase
 
 ```dart
-nearpay.purchase(
+final transactionData = await nearpay.purchase(
   amount: 0001,// [Required] ammount you want to set .
   transactionUUID: uuid.v4(), // [Optional] specefy the transaction uuid for later referance
   customerReferenceNumber: '123',// [Optional] any number you want to add as a refrence Any string as a reference number
@@ -87,7 +87,7 @@ nearpay.purchase(
 # 5. Refund
 
 ```dart
-nearpay.refund(
+final transactionData = await nearpay.refund(
   amount: 1000, // [Required], means 10.00
   originalTransactionUUID: "f5079b9d-b61c-4180-8a4d-9780f7a9cd8f", // [Required] the orginal trnasaction uuid that you want to refund
   transactionUUID: uuidv4(), //[Optional] speacify the transaction uuid
@@ -104,7 +104,7 @@ nearpay.refund(
 # 6. Reverse
 
 ```dart
-nearpay.reverse(
+final transactionData = await nearpay.reverse(
   originalTransactionUUID: "2ddbbd15-a97e-4949-b5c2-fa073ab750eb", // [Required] the orginal trnasaction uuid that you want to reverse
   enableReceiptUi: true, // [Optional] show the reciept in ui
   enableUiDismiss: true, //[Optional] the ui is dimissible
@@ -115,7 +115,7 @@ nearpay.reverse(
 # 7. Reconcile
 
 ```dart
-nearpay.reconcile(
+final receipt = await nearpay.reconcile(
   enableReceiptUi: true, // [Optional] show the reciept in ui
   enableUiDismiss: true, //[Optional] the ui is dimissible
   finishTimeout: 60, //[Optional] finish timeout in seconds
@@ -144,6 +144,49 @@ nearpay.session(
 
 ```dart
 nearpay.logout();
+```
+
+# 10. getTransaction
+
+gets a transaction by uuid
+
+```dart
+final transaction = await nearpay.getTransaction(
+  transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
+);
+
+```
+
+# 11. getTransactions
+
+gets transactions list
+
+```dart
+final banner = await nearpay.getTransactionsList(
+  page: 1,
+  limit: 30,
+);
+```
+
+# 12. getReconciliation
+
+gets a reaconciliation by uuid
+
+```dart
+final receipt = await nearpay.getReconciliation(
+  reconciliationUUID: "6d4a48b8-d194-4aad-92c9-a77606758799",
+);
+```
+
+# 13. getReconciliations
+
+get reaconciliations
+
+```dart
+final banner = await nearpay.getReconciliationsList(
+  page: 1,
+  limit: 30,
+);
 ```
 
 ## Nearpay plugin response will be be in below formats
