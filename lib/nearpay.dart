@@ -299,7 +299,7 @@ class Nearpay {
   }
 
   // =-=-=- Queries -=-=-=
-  Future<TransactionBannerList> getTransactions({
+  Future<TransactionBannerList> getTransactionsList({
     int page = 1,
     int limit = 30,
     String? adminPin,
@@ -311,7 +311,7 @@ class Nearpay {
     };
 
     final response = await _callAndReturnMapResponse(
-      'getTransactions',
+      'getTransactionsList',
       data,
     );
 
@@ -348,7 +348,7 @@ class Nearpay {
     }
   }
 
-  Future<ReconciliationBannerList> getReconciliations({
+  Future<ReconciliationBannerList> getReconciliationsList({
     int page = 1,
     int limit = 30,
     String? adminPin,
@@ -360,7 +360,7 @@ class Nearpay {
     };
 
     final response = await _callAndReturnMapResponse(
-      'getReconciliations',
+      'getReconciliationsList',
       data,
     );
 

@@ -229,7 +229,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<dynamic> getTransactions() async {
-    final banner = await nearpay.getTransactions(
+    final banner = await nearpay.getTransactionsList(
       page: 1,
       limit: 30,
     );
@@ -246,7 +246,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<dynamic> getReconciliations() async {
-    final banner = await nearpay.getReconciliations(
+    final banner = await nearpay.getReconciliationsList(
       page: 1,
       limit: 30,
     );
