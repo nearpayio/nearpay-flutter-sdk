@@ -233,9 +233,7 @@ public class ArgsFilter {
 
         DateTimeFormatter formatter
                 = DateTimeFormatter.ISO_DATE_TIME;
-
-        System.out.println(fieldName + ": " + isoDate);
-
+        
         if(isoDate == null) return  null;
 
         return LocalDateTime.parse(isoDate, formatter);

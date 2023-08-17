@@ -250,9 +250,6 @@ class _MyAppState extends State<MyApp> {
     // DateTime from = DateTime.now();
     DateTime to = DateTime.now();
 
-    print(from.toIso8601String());
-    print(to.toIso8601String());
-
     final banner = await nearpay.getReconciliationsList(
       page: 1,
       limit: 30,
