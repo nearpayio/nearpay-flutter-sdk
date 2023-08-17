@@ -233,7 +233,7 @@ public class ArgsFilter {
 
         DateTimeFormatter formatter
                 = DateTimeFormatter.ISO_DATE_TIME;
-        
+
         if(isoDate == null) return  null;
 
         return LocalDateTime.parse(isoDate, formatter);
