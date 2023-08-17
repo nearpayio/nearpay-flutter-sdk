@@ -340,7 +340,7 @@ class Nearpay {
       if (onSessionOpen != null) {
         onSessionOpen(receipts);
       }
-    } else if (response["status"] == 500) {
+    } else if (response["status"] == 210) {
       if (onSessionClosed != null) {
         Session session = Session.fromJson(response['result']);
         onSessionClosed(session);
