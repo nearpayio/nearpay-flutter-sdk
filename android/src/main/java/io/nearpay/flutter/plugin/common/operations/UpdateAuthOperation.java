@@ -1,14 +1,13 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 
 import java.util.HashMap;
-import java.util.Map;
 
 
-import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.PluginProvider;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+import io.nearpay.flutter.plugin.common.NearpayLib;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 
 public class UpdateAuthOperation extends BaseOperation {

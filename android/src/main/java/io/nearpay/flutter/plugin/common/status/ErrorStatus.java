@@ -1,4 +1,4 @@
-package io.nearpay.flutter.plugin;
+package io.nearpay.flutter.plugin.common.status;
 
 //General Response
 public class ErrorStatus {

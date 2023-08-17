@@ -1,6 +1,4 @@
-package io.nearpay.flutter.plugin;
-
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+package io.nearpay.flutter.plugin.common;
 
 public class PluginProvider {
     private NearpayLib nearpayLib;

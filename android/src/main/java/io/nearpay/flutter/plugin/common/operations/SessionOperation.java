@@ -1,23 +1,16 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
-import io.nearpay.flutter.plugin.ErrorStatus;
-import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.PluginProvider;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+import io.nearpay.flutter.plugin.common.status.ErrorStatus;
+import io.nearpay.flutter.plugin.common.NearpayLib;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.data.models.Session;
-import io.nearpay.sdk.data.models.TransactionReceipt;
-import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.SessionListener;

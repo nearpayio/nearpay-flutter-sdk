@@ -1,4 +1,4 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 public enum OperationENUM {
     purchase,

@@ -1,7 +1,6 @@
 package io.nearpay.flutter.plugin;
 
 import androidx.annotation.NonNull;
-import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -10,13 +9,12 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.EventChannel;
 
-import io.nearpay.flutter.plugin.operations.BaseOperation;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.operations.BaseOperation;
 
-import io.nearpay.flutter.plugin.operations.OperatorFactory;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
-
-import java.util.concurrent.CompletableFuture;
+import io.nearpay.flutter.plugin.common.operations.OperatorFactory;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 
 /** NearpayPlugin */
 public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
@@ -81,7 +79,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         // !(call.method.equals("initialize") ||
         // call.method.equals("setup"))) {
         // Map<String, Object> paramMap =
-        // NearpayLib.commonResponse(ErrorStatus.initialise_failed_code,
+        // NearpayLib.ApiResponse(ErrorStatus.initialise_failed_code,
         // "Plugin Initialise missing, please initialise");
         // sender.send(paramMap);
         // return;

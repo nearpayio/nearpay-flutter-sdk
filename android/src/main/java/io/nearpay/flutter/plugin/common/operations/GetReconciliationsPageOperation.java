@@ -1,24 +1,20 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
-import io.nearpay.flutter.plugin.ErrorStatus;
-import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.PluginProvider;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+import io.nearpay.flutter.plugin.common.status.ErrorStatus;
+import io.nearpay.flutter.plugin.common.NearpayLib;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.data.models.ReconciliationList;
-import io.nearpay.sdk.data.models.TransactionBannerList;
 import io.nearpay.sdk.utils.enums.GetDataFailure;
 import io.nearpay.sdk.utils.listeners.GetReconciliationPageListener;
-import io.nearpay.sdk.utils.listeners.GetTransactionPageListener;
 
 public class GetReconciliationsPageOperation extends BaseOperation {
   public GetReconciliationsPageOperation(PluginProvider provider) {

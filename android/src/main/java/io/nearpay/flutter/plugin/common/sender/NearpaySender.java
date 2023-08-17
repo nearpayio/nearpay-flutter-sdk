@@ -1,4 +1,4 @@
-package io.nearpay.flutter.plugin.sender;
+package io.nearpay.flutter.plugin.common.sender;
 
 
 public interface NearpaySender  {

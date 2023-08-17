@@ -246,8 +246,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<dynamic> getReconciliations() async {
-    DateTime from = DateTime.now();
+    DateTime from = DateTime.utc(2023, 8, 10);
+    // DateTime from = DateTime.now();
     DateTime to = DateTime.now();
+
+    print(from.toIso8601String());
+    print(to.toIso8601String());
 
     final banner = await nearpay.getReconciliationsList(
       page: 1,

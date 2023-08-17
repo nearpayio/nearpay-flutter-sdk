@@ -1,17 +1,15 @@
-package io.nearpay.flutter.plugin.util;
+package io.nearpay.flutter.plugin.common.filter;
 
 import android.annotation.SuppressLint;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
 import io.nearpay.sdk.utils.enums.UIPosition;
@@ -234,7 +232,7 @@ public class ArgsFilter {
         String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;
 
         DateTimeFormatter formatter
-                = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+                = DateTimeFormatter.ISO_DATE_TIME;
 
         System.out.println(fieldName + ": " + isoDate);
 

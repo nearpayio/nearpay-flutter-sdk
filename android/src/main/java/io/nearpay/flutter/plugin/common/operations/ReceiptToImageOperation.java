@@ -1,21 +1,17 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 import android.graphics.Bitmap;
-
-import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
-import java.util.Map;
 
-import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.PluginProvider;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+import io.nearpay.flutter.plugin.common.NearpayLib;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
-import io.nearpay.sdk.utils.listeners.BitmapListener;
 
 public class ReceiptToImageOperation extends BaseOperation {
 

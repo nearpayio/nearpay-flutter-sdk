@@ -1,4 +1,4 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 import android.os.Build;
 
@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import io.nearpay.flutter.plugin.NearpayPlugin;
-import io.nearpay.flutter.plugin.PluginProvider;
+import io.nearpay.flutter.plugin.common.PluginProvider;
 
 public class OperatorFactory {
     private PluginProvider provider;

@@ -1,18 +1,18 @@
-package io.nearpay.flutter.plugin.operations;
+package io.nearpay.flutter.plugin.common.operations;
 
 import androidx.annotation.NonNull;
 
 import java.util.Map;
 import java.util.UUID;
 
-import io.nearpay.flutter.plugin.NearpayLib;
-import io.nearpay.flutter.plugin.PluginProvider;
-import io.nearpay.flutter.plugin.sender.NearpaySender;
-import io.nearpay.flutter.plugin.util.ArgsFilter;
+import io.nearpay.flutter.plugin.common.NearpayLib;
+import io.nearpay.flutter.plugin.common.PluginProvider;
+import io.nearpay.flutter.plugin.common.sender.NearpaySender;
+import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.PurchaseListener;
-import io.nearpay.flutter.plugin.ErrorStatus;
+import io.nearpay.flutter.plugin.common.status.ErrorStatus;
 
 public class PurchaseOperation extends BaseOperation {
 
