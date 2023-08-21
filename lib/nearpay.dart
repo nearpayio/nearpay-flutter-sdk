@@ -89,10 +89,14 @@ class Nearpay {
   static Future<dynamic> getTransactionsList({
     int page = 1,
     int limit = 30,
+    DateTime? from,
+    DateTime? to,
   }) async {
     final data = {
       "page": page,
       "limit": limit,
+      "startDate": from?.toIso8601String(),
+      "endDate": to?.toIso8601String()
     };
 
     final response =
@@ -115,10 +119,14 @@ class Nearpay {
   static Future<dynamic> getReconciliationsList({
     int page = 1,
     int limit = 30,
+    DateTime? from,
+    DateTime? to,
   }) async {
     final data = {
       "page": page,
       "limit": limit,
+      "startDate": from?.toIso8601String(),
+      "endDate": to?.toIso8601String()
     };
 
     final response = await methodChannel.invokeMethod<dynamic>(

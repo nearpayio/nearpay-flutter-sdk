@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay();
-  final tokenKey = "<your email here>";
+  final tokenKey = "f.alhajeri@nearpay.io";
   final authType = AuthenticationType.email.value;
   final timeout = 60;
 
@@ -116,7 +116,8 @@ class _MyAppState extends State<MyApp> {
       //     "740dc2a9-125a-4ee4-8739-13670b3cd5cd", // [optional] uuid for referancing transaction
     };
     var jsonResponse = jsonDecode(await Nearpay.purchase(reqData));
-    print('response ${jsonResponse['list'][0]['udid']}');
+    print('=-=-=-=-=-=-=-=-=-=-=-=-=-= $jsonResponse');
+    // print('response ${jsonResponse['list'][0]['udid']}');
   }
 
   refundAction(String uuid) async {
@@ -286,9 +287,14 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
+              DateTime from = DateTime.utc(2023, 0, 0);
+              DateTime to = DateTime.now();
+
               var jsonResponse = await Nearpay.getTransactionsList(
                 page: 1,
                 limit: 30,
+                from: from,
+                to: to,
               );
               print(
                   "=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-===-=-=-=");
@@ -308,9 +314,13 @@ class _MyAppState extends State<MyApp> {
           ),
           TextButton(
             onPressed: () async {
+              DateTime from = DateTime.utc(2023, 0, 0);
+              DateTime to = DateTime.now();
               final response = await Nearpay.getReconciliationsList(
                 page: 1,
                 limit: 30,
+                from: from,
+                to: to,
               );
               print("=-=-=--==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
               print(response);
