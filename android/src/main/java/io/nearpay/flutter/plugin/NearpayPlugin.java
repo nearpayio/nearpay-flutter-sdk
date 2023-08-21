@@ -5,8 +5,13 @@ import static java.util.UUID.randomUUID;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 import java.util.Locale;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import java.util.HashMap;
@@ -28,11 +33,11 @@ import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 import io.nearpay.sdk.utils.enums.GetDataFailure;
-import io.nearpay.sdk.utils.enums.GetTransactionFailure;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.RefundFailure;
 import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.StatusCheckError;
+import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.BitmapListener;
 import io.nearpay.sdk.utils.listeners.GetReconcileListener;
 import io.nearpay.sdk.utils.listeners.GetReconciliationPageListener;
@@ -104,6 +109,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         flutterResult = result;
         String callUUID = UUID.randomUUID().toString();
@@ -144,8 +150,6 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 UUID jobId = call.argument("reconcileId") == null ? randomUUID()
                         : UUID.fromString(call.argument("reconcileId").toString());
 
-
-
                 Long timeout = Long.valueOf(finishTimeout);
                 boolean isAuthValidated = isAuthInputValidation(authType, authvalue);
 
@@ -154,7 +158,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                             "Authentication parameter missing");
                     sendResponse(paramMap, callUUID);
                 } else {
-                    doReconcileAction(callUUID, isEnableUI, authType, authvalue, timeout, adminPin, enableUiDismiss, jobId);
+                    doReconcileAction(callUUID, isEnableUI, authType, authvalue, timeout, adminPin, enableUiDismiss,
+                            jobId);
                 }
 
             } else {
@@ -245,7 +250,14 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                         "Authentication parameter missing");
                 sendResponse(paramMap, callUUID);
             } else {
-                nearPay = new NearPay(this.context, getAuthType(authType, authvalue), locale, env);
+                // nearPay = new NearPay.Builder(this.context, getAuthType(authType, authvalue),
+                // locale, env);
+                nearPay = new NearPay.Builder()
+                        .context(this.context)
+                        .authenticationData(getAuthType(authType, authvalue))
+                        .environment(env)
+                        .locale(locale)
+                        .build();
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.success_code, "NearPay initialized");
                 sendResponse(paramMap, callUUID);
             }
@@ -288,10 +300,15 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         } else if (call.method.equals("getTransactionsList")) {
             int page = call.argument("page") == null ? 1 : (int) call.argument("page");
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
-            // String adminPin = call.argument("adminPin") == null ? null :
-            // call.argument("adminPin").toString();
+            String isoTimeFrom = call.argument("startDate") == null ? null : (String) call.argument("startDate");
+            String isoTimeTo = call.argument("endDate") == null ? null : (String) call.argument("endDate");
 
-            nearPay.getTransactionListPage(page, limit, new GetTransactionPageListener() {
+            LocalDateTime from = isoTimeTo != null ? LocalDateTime.parse(isoTimeFrom, DateTimeFormatter.ISO_DATE_TIME)
+                    : null;
+            LocalDateTime to = isoTimeTo != null ? LocalDateTime.parse(isoTimeTo, DateTimeFormatter.ISO_DATE_TIME)
+                    : null;
+
+            nearPay.getTransactionListPage(page, limit, from, to, new GetTransactionPageListener() {
                 @Override
                 public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -312,24 +329,54 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
             nearPay.getTransactionByUuid(transactionUUID, new GetTransactionListener() {
                 @Override
-                public void onSuccess(@Nullable List<TransactionReceipt> list) {
-                    Map res = commonResponse(ErrorStatus.success_code, "");
-                    res.put("list", classToMap(list));
-                    sendResponse(res, callUUID);
+                public void onSuccess(@NonNull TransactionData transactionData) {
+                    // Map res = commonResponse(ErrorStatus.success_code, "");
+                    // res.put("list", classToMap(list));
+                    // sendResponse(res, callUUID);
+                    List<Map<String, Object>> transactionList = new ArrayList<>();
+                    for (TransactionReceipt transRecipt : transactionData.getReceipts()) {
+                        Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
+                                "");
+                        transactionList.add(responseDict);
+                    }
+                    Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "");
+                    responseDict.put("list", transactionList);
+                    sendResponse(responseDict, callUUID);
+
                 }
 
                 @Override
-                public void onFailure(@NonNull GetTransactionFailure getTransactionFailure) {
+                public void onFailure(@NonNull GetDataFailure getDataFailure) {
                     sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
                 }
+
+                // @Override
+                // public void onSuccess(@Nullable List<TransactionReceipt> list) {
+                // Map res = commonResponse(ErrorStatus.success_code, "");
+                // res.put("list", classToMap(list));
+                // sendResponse(res, callUUID);
+                // }
+
+                // @Override
+                // public void onFailure(@NonNull GetTransactionFailure getTransactionFailure) {
+                // sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
+                // }
             });
         } else if (call.method.equals("getReconciliationsList")) {
             int page = call.argument("page") == null ? 1 : (int) call.argument("page");
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
+            String isoTimeFrom = call.argument("startDate") == null ? null : (String) call.argument("startDate");
+            String isoTimeTo = call.argument("endDate") == null ? null : (String) call.argument("endDate");
+
+            LocalDateTime from = isoTimeTo != null ? LocalDateTime.parse(isoTimeFrom, DateTimeFormatter.ISO_DATE_TIME)
+                    : null;
+            LocalDateTime to = isoTimeTo != null ? LocalDateTime.parse(isoTimeTo, DateTimeFormatter.ISO_DATE_TIME)
+                    : null;
+
             // String adminPin = call.argument("adminPin") == null ? null :
             // call.argument("adminPin").toString();
 
-            nearPay.getReconciliationListPage(page, limit, new GetReconciliationPageListener() {
+            nearPay.getReconciliationListPage(page, limit, from, to, new GetReconciliationPageListener() {
                 @Override
                 public void onSuccess(@Nullable ReconciliationList reconciliationList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -359,7 +406,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 }
 
                 @Override
-                public void onFailure(@NonNull ReconcileFailure reconcileFailure) {
+                public void onFailure(@NonNull GetDataFailure failure) {
                     sendResponse(commonResponse(ErrorStatus.general_failure_code, ""), callUUID);
 
                 }
@@ -455,10 +502,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     }
 
                     @Override
-                    public void onPurchaseApproved(@Nullable List<TransactionReceipt> list) {
+                    public void onPurchaseApproved(@NonNull TransactionData transactionData) {
                         Log.i("onPurchaseApproved", "transactionReceipt,,,444,,");
                         List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transRecipt : list) {
+                        for (TransactionReceipt transRecipt : transactionData.getReceipts()) {
                             Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
                                     "Refund Successfull");
                             transactionList.add(responseDict);
@@ -468,6 +515,22 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                         sendResponse(responseDict, callUUID);
 
                     }
+
+                    // @Override
+                    // public void onPurchaseApproved(@Nullable List<TransactionReceipt> list) {
+                    // Log.i("onPurchaseApproved", "transactionReceipt,,,444,,");
+                    // List<Map<String, Object>> transactionList = new ArrayList<>();
+                    // for (TransactionReceipt transRecipt : list) {
+                    // Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
+                    // "Refund Successfull");
+                    // transactionList.add(responseDict);
+                    // }
+                    // Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code,
+                    // "Payment Success");
+                    // responseDict.put("list", transactionList);
+                    // sendResponse(responseDict, callUUID);
+                    //
+                    // }
                 });
 
     }
@@ -566,9 +629,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     }
 
                     @Override
-                    public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
+                    public void onRefundApproved(@NonNull TransactionData transactionData) {
                         List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transRecipt : list) {
+                        for (TransactionReceipt transRecipt : transactionData.getReceipts()) {
                             Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
                                     "Refund Successfull");
                             transactionList.add(responseDict);
@@ -576,7 +639,22 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                         Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "Refund Success");
                         responseDict.put("list", transactionList);
                         sendResponse(responseDict, callUUID);
+
                     }
+
+                    // @Override
+                    // public void onRefundApproved(@Nullable List<TransactionReceipt> list) {
+                    // List<Map<String, Object>> transactionList = new ArrayList<>();
+                    // for (TransactionReceipt transRecipt : list) {
+                    // Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
+                    // "Refund Successfull");
+                    // transactionList.add(responseDict);
+                    // }
+                    // Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code,
+                    // "Refund Success");
+                    // responseDict.put("list", transactionList);
+                    // sendResponse(responseDict, callUUID);
+                    // }
                 });
 
     }
@@ -752,7 +830,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             long finishTimeOut,
             String adminPin, Boolean isUiDismissible, UUID jobId) {
         Log.i("doReconcile....", "doReconcile.......first....");
-        nearPay.reconcile( enableReceiptUi, adminPin, finishTimeOut, isUiDismissible, new ReconcileListener() {
+        nearPay.reconcile(jobId, enableReceiptUi, adminPin, finishTimeOut, isUiDismissible, new ReconcileListener() {
             @Override
             public void onReconcileFinished(@Nullable ReconciliationReceipt reconciliationReceipt) {
                 // you can use the object to get the reconciliationReceipt data .
@@ -943,12 +1021,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             long finishTimeOut, Boolean isUiDismissible) {
         Log.i("doReverseAction....", "doReverseAction.......first....");
         nearPay.reverse(transactionUuid, enableReceiptUi, finishTimeOut, isUiDismissible, new ReversalListener() {
-
             @Override
-            public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
-                // you can use "transactionReceipt" to get the transactionReceipt data .
+            public void onReversalFinished(@NonNull TransactionData transactionData) {
                 List<Map<String, Object>> transactionList = new ArrayList<>();
-                for (TransactionReceipt transRecipt : list) {
+                for (TransactionReceipt transRecipt : transactionData.getReceipts()) {
                     Map<String, Object> responseDict = getTransactionGetResponse(transRecipt, "Refund Successfull");
                     transactionList.add(responseDict);
                 }
@@ -956,6 +1032,20 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 responseDict.put("list", transactionList);
                 sendResponse(responseDict, callUUID);
             }
+
+            // @Override
+            // public void onReversalFinished(@Nullable List<TransactionReceipt> list) {
+            // // you can use "transactionReceipt" to get the transactionReceipt data .
+            // List<Map<String, Object>> transactionList = new ArrayList<>();
+            // for (TransactionReceipt transRecipt : list) {
+            // Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
+            // "Refund Successfull");
+            // transactionList.add(responseDict);
+            // }
+            // Map<String, Object> responseDict = commonResponse(200, "Payment Success");
+            // responseDict.put("list", transactionList);
+            // sendResponse(responseDict, callUUID);
+            // }
 
             @Override
             public void onReversalFailed(@NonNull ReversalFailure reversalFailure) {
@@ -1079,11 +1169,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     }
 
                     @Override
-                    public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
-                        // when the session is open , you can get the receipt by using
-                        // TransactionReceipt
+                    public void onSessionOpen(@NonNull TransactionData transactionData) {
                         List<Map<String, Object>> transactionList = new ArrayList<>();
-                        for (TransactionReceipt transRecipt : list) {
+                        for (TransactionReceipt transRecipt : transactionData.getReceipts()) {
                             Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
                                     "Session Successfull");
                             transactionList.add(responseDict);
@@ -1091,7 +1179,24 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                         Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code, "Session Success");
                         responseDict.put("list", transactionList);
                         sendResponse(responseDict, callUUID);
+
                     }
+
+                    // @Override
+                    // public void onSessionOpen(@Nullable List<TransactionReceipt> list) {
+                    // // when the session is open , you can get the receipt by using
+                    // // TransactionReceipt
+                    // List<Map<String, Object>> transactionList = new ArrayList<>();
+                    // for (TransactionReceipt transRecipt : list) {
+                    // Map<String, Object> responseDict = getTransactionGetResponse(transRecipt,
+                    // "Session Successfull");
+                    // transactionList.add(responseDict);
+                    // }
+                    // Map<String, Object> responseDict = commonResponse(ErrorStatus.success_code,
+                    // "Session Success");
+                    // responseDict.put("list", transactionList);
+                    // sendResponse(responseDict, callUUID);
+                    // }
 
                     @Override
                     public void onSessionFailed(@NonNull SessionFailure sessionFailure) {
