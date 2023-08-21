@@ -83,7 +83,6 @@ class Nearpay {
       Map<dynamic, dynamic> data) async {
     final response =
         await methodChannel.invokeMethod<dynamic>('updateAuthentication', data);
-
     return response;
   }
 
