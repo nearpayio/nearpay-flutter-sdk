@@ -173,6 +173,8 @@ gets transactions list
 final banner = await nearpay.getTransactionsList(
   page: 1,
   limit: 30,
+  from: DateTime.utc(2023, 0, 0)  // start date of transactions
+  to: DateTime.now()  // end date of transactions
 );
 ```
 
@@ -194,6 +196,8 @@ get reaconciliations
 final banner = await nearpay.getReconciliationsList(
   page: 1,
   limit: 30,
+  from: DateTime.utc(2023, 0, 0)  // start date of reconciliation
+  to: DateTime.now()  // end date of reconciliation
 );
 ```
 
