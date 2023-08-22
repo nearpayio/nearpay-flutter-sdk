@@ -197,6 +197,16 @@ final banner = await nearpay.getReconciliationsList(
 );
 ```
 
+# 14. receiptToImage
+
+```dart
+Uint8List imageBytes = await nearpay.receiptToImage(
+  receipt: transactionReceipt,
+  fontSize: 1,
+  width: 850,
+);
+```
+
 ## Nearpay plugin response will be be in below formats
 
 [Model Response](https://docs.nearpay.io/sdk/sdk-models)

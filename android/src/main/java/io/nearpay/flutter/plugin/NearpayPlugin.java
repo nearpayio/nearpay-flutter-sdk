@@ -42,7 +42,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         ArgsFilter filter = new ArgsFilter(call.arguments());
 
         NearpaySender sender = (toSend) -> {
-            result.success(toSend);
+            try {
+                result.success(toSend);
+            } catch (Exception e) {
+            }
         };
 
         BaseOperation op = operatorFactory.getOperation(call.method)
