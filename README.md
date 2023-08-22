@@ -242,8 +242,8 @@ gets transactions list
 var response = await Nearpay.getTransactionsList(
   page: 1, // [Optopnal] page number , default (1)
   limit: 30, // [Optopnal] page size, default (30)
-  from: DateTime.utc(2023, 0, 0)  // start date of transaction
-  to: DateTime.now()  // end date of transaction
+  from: DateTime.utc(2023, 0, 0)  // start date of transactions
+  to: DateTime.now()  // end date of transactions
 );
 print(response);
 ```

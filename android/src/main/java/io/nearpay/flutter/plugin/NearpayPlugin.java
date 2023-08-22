@@ -661,7 +661,11 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
     private static void sendResponse(Map<String, Object> paramMap, String callUUID) {
         Gson gson = new Gson();
-        callMap.get(callUUID).success(gson.toJson(paramMap));
+        try {
+            callMap.get(callUUID).success(gson.toJson(paramMap));
+        } catch (Exception e) {
+
+        }
         // flutterResult.success(gson.toJson(paramMap));
     }
 
