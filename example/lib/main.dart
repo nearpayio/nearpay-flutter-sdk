@@ -45,10 +45,8 @@ class _MyAppState extends State<MyApp> {
   @override
   initState() {
     super.initState();
-    nearpay.initialize(onInitializeSuccess: () {
-      print("nearpay initialized successfully");
-    }, onInitializeFail: () {
-      print("nearpay initialize failed");
+    nearpay.initialize().catchError((e) {
+      print(e);
     });
   }
 
