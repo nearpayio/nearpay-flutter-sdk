@@ -124,9 +124,7 @@ class Nearpay {
     //     });
   }
 
-  Future<dynamic> initialize(
-      {void Function()? onInitializeSuccess,
-      void Function()? onInitializeFail}) async {
+  Future<dynamic> initialize() async {
     final data = {
       "authtype": _authType.value,
       "authvalue": _authValue,
@@ -145,7 +143,7 @@ class Nearpay {
     if (response["status"] == 200) {
       _initialized = true;
     } else {
-      throw "initialize failed";
+      throw response;
     }
   }
 
@@ -292,7 +290,7 @@ class Nearpay {
     if (response["status"] == 200) {
       // _provider.listener.emitStateChange(NearpayState.notReady);
     } else {
-      throw 'failed to logout';
+      throw response;
     }
   }
 
@@ -305,7 +303,7 @@ class Nearpay {
     if (response["status"] == 200) {
       // _provider.listener.emitStateChange(NearpayState.ready);
     } else {
-      throw 'failed to setup nearpay';
+      throw response;
       // _provider.listener.emitStateChange(NearpayState.notReady);
     }
   }
@@ -377,7 +375,7 @@ class Nearpay {
           TransactionBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw "couldn't get transaction list";
+      throw response;
     }
   }
 
@@ -401,7 +399,7 @@ class Nearpay {
 
       return transactionData;
     } else {
-      throw "couldn't get transaction";
+      throw response;
     }
   }
 
@@ -430,7 +428,7 @@ class Nearpay {
           ReconciliationBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw "couldn't get reconiliations list";
+      throw response;
     }
   }
 
@@ -453,7 +451,7 @@ class Nearpay {
           ReconciliationReceipt.fromJson(response['result']);
       return transactionData;
     } else {
-      throw "couldn't get reconiliation";
+      throw response;
     }
   }
 
@@ -500,7 +498,11 @@ class Nearpay {
     // we need this decode encode to resolve some flutter type issues
     final Map<String, dynamic> response = jsonDecode(jsonEncode(tempResponse));
 
-    return response;
+    if (response['status'] >= 200 && response['status'] <= 200) {
+      return response;
+    } else {
+      throw response;
+    }
   }
 
   // listeners

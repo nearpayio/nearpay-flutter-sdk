@@ -61,11 +61,10 @@ final nearpay = Nearpay(
     locale: Locale.localeDefault, // [Optional] locale reference
   );
 
-nearpay.initialize(onInitializeSuccess: () {
-      print("nearpay initialized successfully");
-    }, onInitializeFail: () {
-      print("nearpay initialize failed");
-    });
+await nearpay.initialize().catchError((e) {
+  print(e);
+});
+
 ```
 
 # 3. Setup (optional)
