@@ -7,7 +7,7 @@ part 'transaction_banner.freezed.dart';
 @Freezed()
 class TransactionBannerList with _$TransactionBannerList {
   const factory TransactionBannerList({
-    @JsonKey(name: "total") required double total,
+    @JsonKey(name: "count") required double count,
     @JsonKey(name: "transactionBanners", defaultValue: [])
         required List<TransactionBanner> transactionBanners,
   }) = _TransactionBannerList;

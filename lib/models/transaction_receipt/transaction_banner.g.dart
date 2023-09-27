@@ -8,7 +8,7 @@ part of 'transaction_banner.dart';
 
 _$_TransactionBannerList _$$_TransactionBannerListFromJson(Map json) =>
     _$_TransactionBannerList(
-      total: (json['total'] as num).toDouble(),
+      count: (json['count'] as num).toDouble(),
       transactionBanners: (json['transactionBanners'] as List<dynamic>?)
               ?.map((e) => TransactionBanner.fromJson(
                   Map<String, dynamic>.from(e as Map)))
@@ -19,7 +19,7 @@ _$_TransactionBannerList _$$_TransactionBannerListFromJson(Map json) =>
 Map<String, dynamic> _$$_TransactionBannerListToJson(
         _$_TransactionBannerList instance) =>
     <String, dynamic>{
-      'total': instance.total,
+      'count': instance.count,
       'transactionBanners':
           instance.transactionBanners.map((e) => e.toJson()).toList(),
     };
