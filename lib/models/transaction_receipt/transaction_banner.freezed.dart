@@ -21,8 +21,8 @@ TransactionBannerList _$TransactionBannerListFromJson(
 
 /// @nodoc
 mixin _$TransactionBannerList {
-  @JsonKey(name: "total")
-  double get total => throw _privateConstructorUsedError;
+  @JsonKey(name: "count")
+  double get count => throw _privateConstructorUsedError;
   @JsonKey(name: "transactionBanners", defaultValue: [])
   List<TransactionBanner> get transactionBanners =>
       throw _privateConstructorUsedError;
@@ -40,8 +40,8 @@ abstract class $TransactionBannerListCopyWith<$Res> {
       _$TransactionBannerListCopyWithImpl<$Res, TransactionBannerList>;
   @useResult
   $Res call(
-      {@JsonKey(name: "total")
-          double total,
+      {@JsonKey(name: "count")
+          double count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
           List<TransactionBanner> transactionBanners});
 }
@@ -60,13 +60,13 @@ class _$TransactionBannerListCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? total = null,
+    Object? count = null,
     Object? transactionBanners = null,
   }) {
     return _then(_value.copyWith(
-      total: null == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
               as double,
       transactionBanners: null == transactionBanners
           ? _value.transactionBanners
@@ -85,8 +85,8 @@ abstract class _$$_TransactionBannerListCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "total")
-          double total,
+      {@JsonKey(name: "count")
+          double count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
           List<TransactionBanner> transactionBanners});
 }
@@ -102,13 +102,13 @@ class __$$_TransactionBannerListCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? total = null,
+    Object? count = null,
     Object? transactionBanners = null,
   }) {
     return _then(_$_TransactionBannerList(
-      total: null == total
-          ? _value.total
-          : total // ignore: cast_nullable_to_non_nullable
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
               as double,
       transactionBanners: null == transactionBanners
           ? _value._transactionBanners
@@ -122,8 +122,8 @@ class __$$_TransactionBannerListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TransactionBannerList implements _TransactionBannerList {
   const _$_TransactionBannerList(
-      {@JsonKey(name: "total")
-          required this.total,
+      {@JsonKey(name: "count")
+          required this.count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
           required final List<TransactionBanner> transactionBanners})
       : _transactionBanners = transactionBanners;
@@ -132,8 +132,8 @@ class _$_TransactionBannerList implements _TransactionBannerList {
       _$$_TransactionBannerListFromJson(json);
 
   @override
-  @JsonKey(name: "total")
-  final double total;
+  @JsonKey(name: "count")
+  final double count;
   final List<TransactionBanner> _transactionBanners;
   @override
   @JsonKey(name: "transactionBanners", defaultValue: [])
@@ -146,7 +146,7 @@ class _$_TransactionBannerList implements _TransactionBannerList {
 
   @override
   String toString() {
-    return 'TransactionBannerList(total: $total, transactionBanners: $transactionBanners)';
+    return 'TransactionBannerList(count: $count, transactionBanners: $transactionBanners)';
   }
 
   @override
@@ -154,14 +154,14 @@ class _$_TransactionBannerList implements _TransactionBannerList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TransactionBannerList &&
-            (identical(other.total, total) || other.total == total) &&
+            (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._transactionBanners, _transactionBanners));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, total,
+  int get hashCode => Object.hash(runtimeType, count,
       const DeepCollectionEquality().hash(_transactionBanners));
 
   @JsonKey(ignore: true)
@@ -181,8 +181,8 @@ class _$_TransactionBannerList implements _TransactionBannerList {
 
 abstract class _TransactionBannerList implements TransactionBannerList {
   const factory _TransactionBannerList(
-          {@JsonKey(name: "total")
-              required final double total,
+          {@JsonKey(name: "count")
+              required final double count,
           @JsonKey(name: "transactionBanners", defaultValue: [])
               required final List<TransactionBanner> transactionBanners}) =
       _$_TransactionBannerList;
@@ -191,8 +191,8 @@ abstract class _TransactionBannerList implements TransactionBannerList {
       _$_TransactionBannerList.fromJson;
 
   @override
-  @JsonKey(name: "total")
-  double get total;
+  @JsonKey(name: "count")
+  double get count;
   @override
   @JsonKey(name: "transactionBanners", defaultValue: [])
   List<TransactionBanner> get transactionBanners;
