@@ -183,7 +183,7 @@ class _MyAppState extends State<MyApp> {
     print("=-=-=-=-= Start Session Action =-=-=-=-=");
     final dio = Dio();
 
-    const terminalId = '12a8abeb-cdf6-4432-a287-2d3a54bc7b88';
+    const terminalId = '3bdef817-0815-4a06-a2b1-14d065c062da';
 
     const apiKey =
         'A221mIWc0ldmrmqkAM3kSITN3i58smLvhpBAP0pOyXxc9mDxphrkqmBKt4HL';
