@@ -369,7 +369,25 @@ class _MyAppState extends State<MyApp> {
                   bytes = imageBytes;
                 });
               },
-              child: const Text("test receipt image"),
+              child: const Text("test transaction receipt image"),
+            ),
+            TextButton(
+              onPressed: () async {
+                final reconcileReceipt = await nearpay.reconcile();
+
+                if (reconcileReceipt == null) return;
+
+                final imageBytes = await nearpay.reconciliationReceiptToImage(
+                  receipt: reconcileReceipt,
+                  fontSize: 1,
+                  width: 850,
+                );
+
+                setState(() {
+                  bytes = imageBytes;
+                });
+              },
+              child: const Text("test reconciliation receipt image"),
             ),
             Padding(
               padding: EdgeInsets.all(10),

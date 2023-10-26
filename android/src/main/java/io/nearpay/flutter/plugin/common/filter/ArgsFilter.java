@@ -43,6 +43,7 @@ public class ArgsFilter {
     }
 
     public String getReceipt() {
+        // this receipt could be a reconciliation or transaction receipt
         return savedArgs.get("receipt") == null ? "" : (String) savedArgs.get("receipt");
     }
 
@@ -181,33 +182,34 @@ public class ArgsFilter {
 
     }
 
-
     @SuppressLint("NewApi")
     public LocalDateTime getStartDate() {
-//        String isoDate = savedArgs.get("start_date") != null ? (String) savedArgs.get("start_date") : null;
-//
-//        System.out.println("from: " + isoDate);
-//
-//        if(isoDate == null) return  null;
-//
-//        return LocalDateTime.parse(isoDate);
-        return  getIsoDate("start_date");
+        // String isoDate = savedArgs.get("start_date") != null ? (String)
+        // savedArgs.get("start_date") : null;
+        //
+        // System.out.println("from: " + isoDate);
+        //
+        // if(isoDate == null) return null;
+        //
+        // return LocalDateTime.parse(isoDate);
+        return getIsoDate("start_date");
     }
 
     @SuppressLint("NewApi")
     public LocalDateTime getEndDate() {
-//        String isoDate = savedArgs.get("end_date") != null ? (String) savedArgs.get("end_date") : null;
-//
-//        DateTimeFormatter formatter
-//                = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-//
-//        System.out.println("to: " + isoDate);
-//
-//        if(isoDate == null) return  null;
-//
-//        return LocalDateTime.parse(isoDate, formatter);
-//
-        return  getIsoDate("end_date");
+        // String isoDate = savedArgs.get("end_date") != null ? (String)
+        // savedArgs.get("end_date") : null;
+        //
+        // DateTimeFormatter formatter
+        // = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        //
+        // System.out.println("to: " + isoDate);
+        //
+        // if(isoDate == null) return null;
+        //
+        // return LocalDateTime.parse(isoDate, formatter);
+        //
+        return getIsoDate("end_date");
 
     }
 
@@ -227,14 +229,15 @@ public class ArgsFilter {
         return savedArgs.get("enableEditableRefundAmountUi") == null ? true
                 : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
     }
+
     @SuppressLint("NewApi")
     private LocalDateTime getIsoDate(String fieldName) {
         String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;
 
-        DateTimeFormatter formatter
-                = DateTimeFormatter.ISO_DATE_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
-        if(isoDate == null) return  null;
+        if (isoDate == null)
+            return null;
 
         return LocalDateTime.parse(isoDate, formatter);
     }

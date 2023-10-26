@@ -483,6 +483,34 @@ class Nearpay {
     return arr;
   }
 
+  Future<Uint8List> reconciliationReceiptToImage({
+    required ReconciliationReceipt receipt,
+    int width = 850,
+    int fontSize = 1,
+  }) async {
+    var data = {
+      "receipt": jsonEncode(receipt), // Required
+      "receipt_width": width,
+      "receipt_font_size": fontSize,
+    };
+
+    final response = await _callAndReturnMapResponse(
+      'reconciliationReceiptToImage',
+      data,
+    );
+
+    if (response['status'] != 200) throw 'failed to print receipt to image';
+
+    List<int> bitmap = List.from(response['result'])
+        .cast<double>()
+        .map((bit) => bit.toInt())
+        .toList();
+
+    final arr = Uint8List.fromList(bitmap);
+
+    return arr;
+  }
+
   /// calls a native method using a name of the method and a data
   /// also handles the error cases of the transaction
   Future<Map<String, dynamic>> _callAndReturnMapResponse(
