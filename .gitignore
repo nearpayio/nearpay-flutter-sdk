@@ -32,3 +32,5 @@ build/
 example/.fvm
 
 /i_example
+
+__ingore__
