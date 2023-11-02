@@ -526,11 +526,7 @@ class Nearpay {
     // we need this decode encode to resolve some flutter type issues
     final Map<String, dynamic> response = jsonDecode(jsonEncode(tempResponse));
 
-    if (response['status'] >= 200 && response['status'] <= 200) {
-      return response;
-    } else {
-      throw response;
-    }
+    return response;
   }
 
   // listeners
