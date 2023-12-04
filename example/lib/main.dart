@@ -33,6 +33,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay(
     authType: AuthenticationType.email,
+    region: Regions.SAUDI,
     authValue: "f.alhajeri@nearpay.io",
     env: Environments.sandbox,
     locale: Locale.localeDefault,
