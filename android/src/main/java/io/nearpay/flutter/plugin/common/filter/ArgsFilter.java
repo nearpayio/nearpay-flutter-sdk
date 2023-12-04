@@ -12,6 +12,7 @@ import java.util.UUID;
 import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
+import io.nearpay.sdk.utils.enums.Region;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
@@ -113,11 +114,20 @@ public class ArgsFilter {
         return locale;
     }
 
-    public Environments getEnviroment() {
+    public Environments getEnvironment() {
+
+        Map<String, Environments> envMap = new HashMap<>();
+
+        envMap.put("sandbox", Environments.SANDBOX);
+        envMap.put("production", Environments.PRODUCTION);
+        envMap.put("testing", Environments.TESTING);
+        envMap.put("staging", Environments.STAGING);
+        
         String environmentStr = savedArgs.get("environment") == null ? "sandbox"
                 : savedArgs.get("environment").toString();
-        Environments env = environmentStr.equals("sandbox") ? Environments.SANDBOX
-                : environmentStr.equals("production") ? Environments.PRODUCTION : Environments.TESTING;
+
+
+        Environments env = envMap.get((environmentStr));
 
         return env;
     }
@@ -173,13 +183,28 @@ public class ArgsFilter {
 
     public String getArabicPaymentText() {
         return savedArgs.get("arabic_payment_text") != null ? (String) savedArgs.get("arabic_payment_text")
-                : "يرجى تمرير الطاقة";
+                : "يرجى تمرير البطاقة";
     }
 
     public String getEnglishPaymentText() {
         return savedArgs.get("english_payment_text") != null ? (String) savedArgs.get("english_payment_text")
                 : "please tap your card";
 
+    }
+
+    public Region getRegion() {
+        Map<String, Region> regionsMap = new HashMap<>();
+
+        regionsMap.put("SAUDI", Region.SAUDI);
+        regionsMap.put("JORDAN", Region.JORDAN);
+        regionsMap.put("AFRICA", Region.AFRICA);
+
+        String regionStr = savedArgs.get("region") != null ? (String) savedArgs.get("region")
+                : "SAUDI";
+
+        Region result = regionsMap.get(regionStr);
+
+        return result;
     }
 
     @SuppressLint("NewApi")

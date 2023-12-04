@@ -23,7 +23,9 @@ import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart'
 
 enum Environments {
   sandbox("sandbox"),
-  production("production");
+  production("production"),
+  testing("testing"),
+  staging("staging");
 
   const Environments(this.value);
   final String value;
@@ -77,6 +79,15 @@ enum UIPosition {
   final String value;
 }
 
+enum Regions {
+  SAUDI("SAUDI"),
+  JORDAN("JORDAN"),
+  AFRICA("AFRICA");
+
+  const Regions(this.value);
+  final String value;
+}
+
 var uuid = Uuid();
 
 class Nearpay {
@@ -87,6 +98,7 @@ class Nearpay {
   final bool _uiLoading;
   final NetworkConfiguration _networkConfig;
   final UIPosition _uiPosition;
+  final Regions _region;
   final String? _arabicPaymentText;
   final String? _englishPaymentText;
   bool _initialized = false;
@@ -101,6 +113,7 @@ class Nearpay {
     required AuthenticationType authType,
     required String authValue,
     required Environments env,
+    required Regions region,
     Locale locale = Locale.localeDefault,
     NetworkConfiguration networkConfig = NetworkConfiguration.DEFAULT,
     bool uiLoading = true,
@@ -109,6 +122,7 @@ class Nearpay {
     String? englishPaymentText,
   })  : _locale = locale,
         _env = env,
+        _region = region,
         _authValue = authValue,
         _authType = authType,
         _networkConfig = networkConfig,
@@ -135,6 +149,7 @@ class Nearpay {
       "loading_ui": _uiLoading,
       "arabic_payment_text": _arabicPaymentText,
       "english_payment_text": _englishPaymentText,
+      "region": _region.value
     };
 
     final response =
