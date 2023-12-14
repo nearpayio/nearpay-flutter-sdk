@@ -369,6 +369,7 @@ class Nearpay {
     int page = 1,
     int limit = 30,
     String? adminPin,
+    String? customerReferenceNumber,
     DateTime? startDate,
     DateTime? endDate,
   }) async {
@@ -378,6 +379,7 @@ class Nearpay {
       "adminPin": adminPin,
       "start_date": startDate?.toIso8601String(),
       "end_date": endDate?.toIso8601String(),
+      "customer_reference_number": customerReferenceNumber
     };
 
     final response = await _callAndReturnMapResponse(

@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
     final refundData = await nearpay.refund(
       amount: 1000, originalTransactionUUID: transactionUuid!,
       transactionId: uuid.v4(), //[Optional] speacify the transaction uuid
-      customerReferenceNumber: '', //[Optional]
+      customerReferenceNumber: 'abcabc', //[Optional]
       enableReceiptUi: true, // [Optional] show the reciept in ui
       enableReversalUi:
           true, //[Optional] enable reversal of transaction from ui
@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
       transactionId: uuid
           .v4(), // [Optional] specefy the transaction uuid for later referance
       customerReferenceNumber:
-          '123', // [Optional] any number you want to add as a refrence Any string as a reference number
+          'abcabc', // [Optional] any number you want to add as a refrence Any string as a reference number
       enableReceiptUi: true, // [Optional] show the reciept in ui
       enableReversalUi:
           true, // [Optional] it will allow you to enable or disable the reverse button
@@ -229,9 +229,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> getTransactions() async {
     final banner = await nearpay.getTransactionsList(
-      page: 1,
-      limit: 30,
-    );
+        page: 1, limit: 30, customerReferenceNumber: 'abcabc');
 
     printJson(banner.toJson());
   }
