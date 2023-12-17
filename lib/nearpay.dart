@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:flutter/services.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
@@ -9,12 +10,15 @@ import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error.dart';
 import 'package:nearpay_flutter_sdk/errors/reverse_error/reversal_error_switch.dart';
 import 'package:nearpay_flutter_sdk/errors/session_error/session_error.dart';
 import 'package:nearpay_flutter_sdk/errors/session_error/session_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/user_session_error/user_session_error.dart';
+import 'package:nearpay_flutter_sdk/errors/user_session_error/user_session_error_switch.dart';
 import 'package:nearpay_flutter_sdk/listeners/listeners.dart';
 import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_banner.dart';
 import 'package:nearpay_flutter_sdk/models/reconcile_receipt/reconcile_receipt.dart';
 import 'package:nearpay_flutter_sdk/models/session/session.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_banner.dart';
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
+import 'package:nearpay_flutter_sdk/models/user_session/user_session.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
 import 'package:nearpay_flutter_sdk/types.dart';
 import 'package:nearpay_flutter_sdk/util/util.dart';
@@ -526,6 +530,37 @@ class Nearpay {
     final arr = Uint8List.fromList(bitmap);
 
     return arr;
+  }
+
+  Future<void> getUserSession({
+    void Function(UserSessionError)? onSessionFailed,
+    void Function()? onSessionFree,
+    void Function(String)? onSessionBusy,
+    void Function(UserSession)? onSessionInfo,
+  }) async {
+    final response = await _callAndReturnMapResponse(
+      'getUserSession',
+      {},
+    );
+
+    final status = response['status'];
+
+    // user session info
+    if (status == 200) {
+      UserSession session = UserSession.fromJson(response['result']);
+      if (onSessionInfo != null) onSessionInfo(session);
+    }
+    // user session free
+    else if (status == 201) {
+      if (onSessionFree != null) onSessionFree();
+    }
+    // user session busy
+    else if (status == 202) {
+      if (onSessionBusy != null) onSessionBusy(response['message']);
+    } else {
+      UserSessionError err = getUserSessionError(response);
+      throw err;
+    }
   }
 
   /// calls a native method using a name of the method and a data

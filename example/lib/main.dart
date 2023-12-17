@@ -242,6 +242,15 @@ class _MyAppState extends State<MyApp> {
     printJson(receipt.toJson());
   }
 
+  Future<dynamic> getUserSession() async {
+    await nearpay.getUserSession(
+      onSessionFree: () => print("session free"),
+      onSessionBusy: (message) => print("session busy: $message"),
+      onSessionInfo: (info) => printJson(info.toJson()),
+      onSessionFailed: (error) => print("session error $error"),
+    );
+  }
+
   Future<dynamic> getReconciliations() async {
     DateTime from = DateTime.utc(2023, 8, 10);
     // DateTime from = DateTime.now();
@@ -266,6 +275,12 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: [
+            TextButton(
+              onPressed: () async {
+                getUserSession();
+              },
+              child: const Text("Get User Session"),
+            ),
             TextButton(
               onPressed: () async {
                 purchaseAction();
