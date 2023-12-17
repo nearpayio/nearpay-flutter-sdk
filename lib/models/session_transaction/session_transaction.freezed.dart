@@ -84,54 +84,35 @@ abstract class $SessionTransactionCopyWith<$Res> {
       _$SessionTransactionCopyWithImpl<$Res, SessionTransaction>;
   @useResult
   $Res call(
-      {@JsonKey(name: "id")
-          String id,
-      @JsonKey(name: "uuid")
-          String uuid,
-      @JsonKey(name: "amount_authorized")
-          String amount_authorized,
+      {@JsonKey(name: "id") String id,
+      @JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "amount_authorized") String amount_authorized,
       @JsonKey(name: "transaction_currency_code")
-          String transaction_currency_code,
+      String transaction_currency_code,
       @JsonKey(name: "cardholder_verification_result")
-          String cardholder_verification_result,
-      @JsonKey(name: "lat")
-          String lat,
-      @JsonKey(name: "lon")
-          String lon,
-      @JsonKey(name: "transaction_type")
-          String transaction_type,
-      @JsonKey(name: "card_scheme_id")
-          String card_scheme_id,
+      String cardholder_verification_result,
+      @JsonKey(name: "lat") String lat,
+      @JsonKey(name: "lon") String lon,
+      @JsonKey(name: "transaction_type") String transaction_type,
+      @JsonKey(name: "card_scheme_id") String card_scheme_id,
       @JsonKey(name: "system_trace_audit_number")
-          String system_trace_audit_number,
-      @JsonKey(name: "is_approved")
-          bool is_approved,
-      @JsonKey(name: "is_reversed")
-          bool is_reversed,
-      @JsonKey(name: "is_reconcilied")
-          bool is_reconcilied,
-      @JsonKey(name: "device_id")
-          String device_id,
-      @JsonKey(name: "user_id")
-          String user_id,
-      @JsonKey(name: "merchant_id")
-          String merchant_id,
+      String system_trace_audit_number,
+      @JsonKey(name: "is_approved") bool is_approved,
+      @JsonKey(name: "is_reversed") bool is_reversed,
+      @JsonKey(name: "is_reconcilied") bool is_reconcilied,
+      @JsonKey(name: "device_id") String device_id,
+      @JsonKey(name: "user_id") String user_id,
+      @JsonKey(name: "merchant_id") String merchant_id,
       @JsonKey(name: "customer_reference_number")
-          String customer_reference_number,
-      @JsonKey(name: "pos_confirmed")
-          bool pos_confirmed,
-      @JsonKey(name: "created_at")
-          String created_at,
-      @JsonKey(name: "updated_at")
-          String updated_at,
-      @JsonKey(name: "receipts")
-          List<TransactionReceipt> receipts,
-      @JsonKey(name: "card_scheme")
-          LocalizationField card_scheme,
-      @JsonKey(name: "type")
-          LocalizationField type,
+      String customer_reference_number,
+      @JsonKey(name: "pos_confirmed") bool pos_confirmed,
+      @JsonKey(name: "created_at") String created_at,
+      @JsonKey(name: "updated_at") String updated_at,
+      @JsonKey(name: "receipts") List<TransactionReceipt> receipts,
+      @JsonKey(name: "card_scheme") LocalizationField card_scheme,
+      @JsonKey(name: "type") LocalizationField type,
       @JsonKey(name: "verification_method")
-          LocalizationField verification_method});
+      LocalizationField verification_method});
 }
 
 /// @nodoc
@@ -282,54 +263,35 @@ abstract class _$$_SessionTransactionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "id")
-          String id,
-      @JsonKey(name: "uuid")
-          String uuid,
-      @JsonKey(name: "amount_authorized")
-          String amount_authorized,
+      {@JsonKey(name: "id") String id,
+      @JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "amount_authorized") String amount_authorized,
       @JsonKey(name: "transaction_currency_code")
-          String transaction_currency_code,
+      String transaction_currency_code,
       @JsonKey(name: "cardholder_verification_result")
-          String cardholder_verification_result,
-      @JsonKey(name: "lat")
-          String lat,
-      @JsonKey(name: "lon")
-          String lon,
-      @JsonKey(name: "transaction_type")
-          String transaction_type,
-      @JsonKey(name: "card_scheme_id")
-          String card_scheme_id,
+      String cardholder_verification_result,
+      @JsonKey(name: "lat") String lat,
+      @JsonKey(name: "lon") String lon,
+      @JsonKey(name: "transaction_type") String transaction_type,
+      @JsonKey(name: "card_scheme_id") String card_scheme_id,
       @JsonKey(name: "system_trace_audit_number")
-          String system_trace_audit_number,
-      @JsonKey(name: "is_approved")
-          bool is_approved,
-      @JsonKey(name: "is_reversed")
-          bool is_reversed,
-      @JsonKey(name: "is_reconcilied")
-          bool is_reconcilied,
-      @JsonKey(name: "device_id")
-          String device_id,
-      @JsonKey(name: "user_id")
-          String user_id,
-      @JsonKey(name: "merchant_id")
-          String merchant_id,
+      String system_trace_audit_number,
+      @JsonKey(name: "is_approved") bool is_approved,
+      @JsonKey(name: "is_reversed") bool is_reversed,
+      @JsonKey(name: "is_reconcilied") bool is_reconcilied,
+      @JsonKey(name: "device_id") String device_id,
+      @JsonKey(name: "user_id") String user_id,
+      @JsonKey(name: "merchant_id") String merchant_id,
       @JsonKey(name: "customer_reference_number")
-          String customer_reference_number,
-      @JsonKey(name: "pos_confirmed")
-          bool pos_confirmed,
-      @JsonKey(name: "created_at")
-          String created_at,
-      @JsonKey(name: "updated_at")
-          String updated_at,
-      @JsonKey(name: "receipts")
-          List<TransactionReceipt> receipts,
-      @JsonKey(name: "card_scheme")
-          LocalizationField card_scheme,
-      @JsonKey(name: "type")
-          LocalizationField type,
+      String customer_reference_number,
+      @JsonKey(name: "pos_confirmed") bool pos_confirmed,
+      @JsonKey(name: "created_at") String created_at,
+      @JsonKey(name: "updated_at") String updated_at,
+      @JsonKey(name: "receipts") List<TransactionReceipt> receipts,
+      @JsonKey(name: "card_scheme") LocalizationField card_scheme,
+      @JsonKey(name: "type") LocalizationField type,
       @JsonKey(name: "verification_method")
-          LocalizationField verification_method});
+      LocalizationField verification_method});
 }
 
 /// @nodoc
@@ -473,54 +435,35 @@ class __$$_SessionTransactionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SessionTransaction implements _SessionTransaction {
   const _$_SessionTransaction(
-      {@JsonKey(name: "id")
-          required this.id,
-      @JsonKey(name: "uuid")
-          required this.uuid,
-      @JsonKey(name: "amount_authorized")
-          required this.amount_authorized,
+      {@JsonKey(name: "id") required this.id,
+      @JsonKey(name: "uuid") required this.uuid,
+      @JsonKey(name: "amount_authorized") required this.amount_authorized,
       @JsonKey(name: "transaction_currency_code")
-          required this.transaction_currency_code,
+      required this.transaction_currency_code,
       @JsonKey(name: "cardholder_verification_result")
-          required this.cardholder_verification_result,
-      @JsonKey(name: "lat")
-          required this.lat,
-      @JsonKey(name: "lon")
-          required this.lon,
-      @JsonKey(name: "transaction_type")
-          required this.transaction_type,
-      @JsonKey(name: "card_scheme_id")
-          required this.card_scheme_id,
+      required this.cardholder_verification_result,
+      @JsonKey(name: "lat") required this.lat,
+      @JsonKey(name: "lon") required this.lon,
+      @JsonKey(name: "transaction_type") required this.transaction_type,
+      @JsonKey(name: "card_scheme_id") required this.card_scheme_id,
       @JsonKey(name: "system_trace_audit_number")
-          required this.system_trace_audit_number,
-      @JsonKey(name: "is_approved")
-          required this.is_approved,
-      @JsonKey(name: "is_reversed")
-          required this.is_reversed,
-      @JsonKey(name: "is_reconcilied")
-          required this.is_reconcilied,
-      @JsonKey(name: "device_id")
-          required this.device_id,
-      @JsonKey(name: "user_id")
-          required this.user_id,
-      @JsonKey(name: "merchant_id")
-          required this.merchant_id,
+      required this.system_trace_audit_number,
+      @JsonKey(name: "is_approved") required this.is_approved,
+      @JsonKey(name: "is_reversed") required this.is_reversed,
+      @JsonKey(name: "is_reconcilied") required this.is_reconcilied,
+      @JsonKey(name: "device_id") required this.device_id,
+      @JsonKey(name: "user_id") required this.user_id,
+      @JsonKey(name: "merchant_id") required this.merchant_id,
       @JsonKey(name: "customer_reference_number")
-          required this.customer_reference_number,
-      @JsonKey(name: "pos_confirmed")
-          required this.pos_confirmed,
-      @JsonKey(name: "created_at")
-          required this.created_at,
-      @JsonKey(name: "updated_at")
-          required this.updated_at,
+      required this.customer_reference_number,
+      @JsonKey(name: "pos_confirmed") required this.pos_confirmed,
+      @JsonKey(name: "created_at") required this.created_at,
+      @JsonKey(name: "updated_at") required this.updated_at,
       @JsonKey(name: "receipts")
-          required final List<TransactionReceipt> receipts,
-      @JsonKey(name: "card_scheme")
-          required this.card_scheme,
-      @JsonKey(name: "type")
-          required this.type,
-      @JsonKey(name: "verification_method")
-          required this.verification_method})
+      required final List<TransactionReceipt> receipts,
+      @JsonKey(name: "card_scheme") required this.card_scheme,
+      @JsonKey(name: "type") required this.type,
+      @JsonKey(name: "verification_method") required this.verification_method})
       : _receipts = receipts;
 
   factory _$_SessionTransaction.fromJson(Map<String, dynamic> json) =>
@@ -709,55 +652,39 @@ class _$_SessionTransaction implements _SessionTransaction {
 
 abstract class _SessionTransaction implements SessionTransaction {
   const factory _SessionTransaction(
-          {@JsonKey(name: "id")
-              required final String id,
-          @JsonKey(name: "uuid")
-              required final String uuid,
-          @JsonKey(name: "amount_authorized")
-              required final String amount_authorized,
-          @JsonKey(name: "transaction_currency_code")
-              required final String transaction_currency_code,
-          @JsonKey(name: "cardholder_verification_result")
-              required final String cardholder_verification_result,
-          @JsonKey(name: "lat")
-              required final String lat,
-          @JsonKey(name: "lon")
-              required final String lon,
-          @JsonKey(name: "transaction_type")
-              required final String transaction_type,
-          @JsonKey(name: "card_scheme_id")
-              required final String card_scheme_id,
-          @JsonKey(name: "system_trace_audit_number")
-              required final String system_trace_audit_number,
-          @JsonKey(name: "is_approved")
-              required final bool is_approved,
-          @JsonKey(name: "is_reversed")
-              required final bool is_reversed,
-          @JsonKey(name: "is_reconcilied")
-              required final bool is_reconcilied,
-          @JsonKey(name: "device_id")
-              required final String device_id,
-          @JsonKey(name: "user_id")
-              required final String user_id,
-          @JsonKey(name: "merchant_id")
-              required final String merchant_id,
-          @JsonKey(name: "customer_reference_number")
-              required final String customer_reference_number,
-          @JsonKey(name: "pos_confirmed")
-              required final bool pos_confirmed,
-          @JsonKey(name: "created_at")
-              required final String created_at,
-          @JsonKey(name: "updated_at")
-              required final String updated_at,
-          @JsonKey(name: "receipts")
-              required final List<TransactionReceipt> receipts,
-          @JsonKey(name: "card_scheme")
-              required final LocalizationField card_scheme,
-          @JsonKey(name: "type")
-              required final LocalizationField type,
-          @JsonKey(name: "verification_method")
-              required final LocalizationField verification_method}) =
-      _$_SessionTransaction;
+      {@JsonKey(name: "id") required final String id,
+      @JsonKey(name: "uuid") required final String uuid,
+      @JsonKey(name: "amount_authorized")
+      required final String amount_authorized,
+      @JsonKey(name: "transaction_currency_code")
+      required final String transaction_currency_code,
+      @JsonKey(name: "cardholder_verification_result")
+      required final String cardholder_verification_result,
+      @JsonKey(name: "lat") required final String lat,
+      @JsonKey(name: "lon") required final String lon,
+      @JsonKey(name: "transaction_type") required final String transaction_type,
+      @JsonKey(name: "card_scheme_id") required final String card_scheme_id,
+      @JsonKey(name: "system_trace_audit_number")
+      required final String system_trace_audit_number,
+      @JsonKey(name: "is_approved") required final bool is_approved,
+      @JsonKey(name: "is_reversed") required final bool is_reversed,
+      @JsonKey(name: "is_reconcilied") required final bool is_reconcilied,
+      @JsonKey(name: "device_id") required final String device_id,
+      @JsonKey(name: "user_id") required final String user_id,
+      @JsonKey(name: "merchant_id") required final String merchant_id,
+      @JsonKey(name: "customer_reference_number")
+      required final String customer_reference_number,
+      @JsonKey(name: "pos_confirmed") required final bool pos_confirmed,
+      @JsonKey(name: "created_at") required final String created_at,
+      @JsonKey(name: "updated_at") required final String updated_at,
+      @JsonKey(name: "receipts")
+      required final List<TransactionReceipt> receipts,
+      @JsonKey(name: "card_scheme")
+      required final LocalizationField card_scheme,
+      @JsonKey(name: "type") required final LocalizationField type,
+      @JsonKey(name: "verification_method")
+      required final LocalizationField
+          verification_method}) = _$_SessionTransaction;
 
   factory _SessionTransaction.fromJson(Map<String, dynamic> json) =
       _$_SessionTransaction.fromJson;
