@@ -38,4 +38,12 @@ public class ErrorStatus {
     public static final int session_opened_code = 200;
 
     public static final int session_closed_code = 210;
+
+
+    //    get user session
+    public static final int user_session_info = 200;
+    public static final int user_session_free = 201;
+    public static final int user_session_busy = 202;
+
+
 }

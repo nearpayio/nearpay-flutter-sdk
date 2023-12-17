@@ -39,9 +39,9 @@ abstract class $TransactionDataCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'receipts', nullable: true)
-          List<TransactionReceipt>? receipts,
+      List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          bool? isNewTransaction});
+      bool? isNewTransaction});
 }
 
 /// @nodoc
@@ -83,9 +83,9 @@ abstract class _$$_TransactionDataCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'receipts', nullable: true)
-          List<TransactionReceipt>? receipts,
+      List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          bool? isNewTransaction});
+      bool? isNewTransaction});
 }
 
 /// @nodoc
@@ -120,9 +120,8 @@ class __$$_TransactionDataCopyWithImpl<$Res>
 class _$_TransactionData implements _TransactionData {
   const _$_TransactionData(
       {@JsonKey(name: 'receipts', nullable: true)
-          final List<TransactionReceipt>? receipts,
-      @JsonKey(name: 'isNewTransaction', nullable: true)
-          this.isNewTransaction})
+      final List<TransactionReceipt>? receipts,
+      @JsonKey(name: 'isNewTransaction', nullable: true) this.isNewTransaction})
       : _receipts = receipts;
 
   factory _$_TransactionData.fromJson(Map<String, dynamic> json) =>
@@ -180,9 +179,9 @@ class _$_TransactionData implements _TransactionData {
 abstract class _TransactionData implements TransactionData {
   const factory _TransactionData(
       {@JsonKey(name: 'receipts', nullable: true)
-          final List<TransactionReceipt>? receipts,
+      final List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-          final bool? isNewTransaction}) = _$_TransactionData;
+      final bool? isNewTransaction}) = _$_TransactionData;
 
   factory _TransactionData.fromJson(Map<String, dynamic> json) =
       _$_TransactionData.fromJson;
@@ -310,92 +309,62 @@ abstract class $TransactionReceiptCopyWith<$Res> {
       _$TransactionReceiptCopyWithImpl<$Res, TransactionReceipt>;
   @useResult
   $Res call(
-      {@JsonKey(name: "receipt_id")
-          String receipt_id,
-      @JsonKey(name: "transaction_uuid")
-          String transaction_uuid,
-      @JsonKey(name: "merchant")
-          Merchant merchant,
-      @JsonKey(name: "start_date")
-          String start_date,
-      @JsonKey(name: "start_time")
-          String start_time,
-      @JsonKey(name: "card_scheme_sponsor")
-          String card_scheme_sponsor,
-      @JsonKey(name: "tid")
-          String tid,
+      {@JsonKey(name: "receipt_id") String receipt_id,
+      @JsonKey(name: "transaction_uuid") String transaction_uuid,
+      @JsonKey(name: "merchant") Merchant merchant,
+      @JsonKey(name: "start_date") String start_date,
+      @JsonKey(name: "start_time") String start_time,
+      @JsonKey(name: "card_scheme_sponsor") String card_scheme_sponsor,
+      @JsonKey(name: "tid") String tid,
       @JsonKey(name: "system_trace_audit_number")
-          String system_trace_audit_number,
+      String system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
-          String pos_software_version_number,
+      String pos_software_version_number,
       @JsonKey(name: "retrieval_reference_number")
-          String retrieval_reference_number,
-      @JsonKey(name: "card_scheme")
-          NameField<String> card_scheme,
-      @JsonKey(name: "transaction_type")
-          NameField<String> transaction_type,
-      @JsonKey(name: "pan")
-          String pan,
-      @JsonKey(name: "card_expiration")
-          String card_expiration,
-      @JsonKey(name: "amount_authorized")
-          LabelField<String> amount_authorized,
-      @JsonKey(name: "amount_other")
-          LabelField<String> amount_other,
-      @JsonKey(name: "currency")
-          LocalizationField currency,
-      @JsonKey(name: "status_message")
-          LocalizationField status_message,
-      @JsonKey(name: "is_approved")
-          bool is_approved,
-      @JsonKey(name: "is_refunded")
-          bool is_refunded,
-      @JsonKey(name: "is_reversed")
-          bool is_reversed,
+      String retrieval_reference_number,
+      @JsonKey(name: "card_scheme") NameField<String> card_scheme,
+      @JsonKey(name: "transaction_type") NameField<String> transaction_type,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "card_expiration") String card_expiration,
+      @JsonKey(name: "amount_authorized") LabelField<String> amount_authorized,
+      @JsonKey(name: "amount_other") LabelField<String> amount_other,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "status_message") LocalizationField status_message,
+      @JsonKey(name: "is_approved") bool is_approved,
+      @JsonKey(name: "is_refunded") bool is_refunded,
+      @JsonKey(name: "is_reversed") bool is_reversed,
       @JsonKey(name: "approval_code", nullable: true)
-          LabelField<String>? approval_code,
+      LabelField<String>? approval_code,
       @JsonKey(name: "verification_method")
-          LocalizationField verification_method,
-      @JsonKey(name: "end_date")
-          String end_date,
-      @JsonKey(name: "end_time")
-          String end_time,
-      @JsonKey(name: "receipt_line_one")
-          LocalizationField receipt_line_one,
-      @JsonKey(name: "receipt_line_two")
-          LocalizationField receipt_line_two,
-      @JsonKey(name: "thanks_message")
-          LocalizationField thanks_message,
+      LocalizationField verification_method,
+      @JsonKey(name: "end_date") String end_date,
+      @JsonKey(name: "end_time") String end_time,
+      @JsonKey(name: "receipt_line_one") LocalizationField receipt_line_one,
+      @JsonKey(name: "receipt_line_two") LocalizationField receipt_line_two,
+      @JsonKey(name: "thanks_message") LocalizationField thanks_message,
       @JsonKey(name: "save_receipt_message")
-          LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode")
-          String entry_mode,
-      @JsonKey(name: "action_code")
-          String action_code,
-      @JsonKey(name: "application_identifier")
-          String application_identifier,
+      LocalizationField save_receipt_message,
+      @JsonKey(name: "entry_mode") String entry_mode,
+      @JsonKey(name: "action_code") String action_code,
+      @JsonKey(name: "application_identifier") String application_identifier,
       @JsonKey(name: "terminal_verification_result")
-          String terminal_verification_result,
+      String terminal_verification_result,
       @JsonKey(name: "transaction_state_information")
-          String transaction_state_information,
+      String transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
-          String cardholader_verfication_result,
+      String cardholader_verfication_result,
       @JsonKey(name: "cryptogram_information_data")
-          String cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram")
-          String application_cryptogram,
-      @JsonKey(name: "kernel_id")
-          String kernel_id,
+      String cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram") String application_cryptogram,
+      @JsonKey(name: "kernel_id") String kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
-          String? payment_account_reference,
-      @JsonKey(name: "pan_suffix", nullable: true)
-          String? pan_suffix,
+      String? payment_account_reference,
+      @JsonKey(name: "pan_suffix", nullable: true) String? pan_suffix,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
-          String? created_at,
+      String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
-          String? updated_at,
-      @JsonKey(name: "qr_code")
-          String qr_code});
+      String? updated_at,
+      @JsonKey(name: "qr_code") String qr_code});
 
   $MerchantCopyWith<$Res> get merchant;
   $NameFieldCopyWith<String, $Res> get card_scheme;
@@ -700,92 +669,62 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "receipt_id")
-          String receipt_id,
-      @JsonKey(name: "transaction_uuid")
-          String transaction_uuid,
-      @JsonKey(name: "merchant")
-          Merchant merchant,
-      @JsonKey(name: "start_date")
-          String start_date,
-      @JsonKey(name: "start_time")
-          String start_time,
-      @JsonKey(name: "card_scheme_sponsor")
-          String card_scheme_sponsor,
-      @JsonKey(name: "tid")
-          String tid,
+      {@JsonKey(name: "receipt_id") String receipt_id,
+      @JsonKey(name: "transaction_uuid") String transaction_uuid,
+      @JsonKey(name: "merchant") Merchant merchant,
+      @JsonKey(name: "start_date") String start_date,
+      @JsonKey(name: "start_time") String start_time,
+      @JsonKey(name: "card_scheme_sponsor") String card_scheme_sponsor,
+      @JsonKey(name: "tid") String tid,
       @JsonKey(name: "system_trace_audit_number")
-          String system_trace_audit_number,
+      String system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
-          String pos_software_version_number,
+      String pos_software_version_number,
       @JsonKey(name: "retrieval_reference_number")
-          String retrieval_reference_number,
-      @JsonKey(name: "card_scheme")
-          NameField<String> card_scheme,
-      @JsonKey(name: "transaction_type")
-          NameField<String> transaction_type,
-      @JsonKey(name: "pan")
-          String pan,
-      @JsonKey(name: "card_expiration")
-          String card_expiration,
-      @JsonKey(name: "amount_authorized")
-          LabelField<String> amount_authorized,
-      @JsonKey(name: "amount_other")
-          LabelField<String> amount_other,
-      @JsonKey(name: "currency")
-          LocalizationField currency,
-      @JsonKey(name: "status_message")
-          LocalizationField status_message,
-      @JsonKey(name: "is_approved")
-          bool is_approved,
-      @JsonKey(name: "is_refunded")
-          bool is_refunded,
-      @JsonKey(name: "is_reversed")
-          bool is_reversed,
+      String retrieval_reference_number,
+      @JsonKey(name: "card_scheme") NameField<String> card_scheme,
+      @JsonKey(name: "transaction_type") NameField<String> transaction_type,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "card_expiration") String card_expiration,
+      @JsonKey(name: "amount_authorized") LabelField<String> amount_authorized,
+      @JsonKey(name: "amount_other") LabelField<String> amount_other,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "status_message") LocalizationField status_message,
+      @JsonKey(name: "is_approved") bool is_approved,
+      @JsonKey(name: "is_refunded") bool is_refunded,
+      @JsonKey(name: "is_reversed") bool is_reversed,
       @JsonKey(name: "approval_code", nullable: true)
-          LabelField<String>? approval_code,
+      LabelField<String>? approval_code,
       @JsonKey(name: "verification_method")
-          LocalizationField verification_method,
-      @JsonKey(name: "end_date")
-          String end_date,
-      @JsonKey(name: "end_time")
-          String end_time,
-      @JsonKey(name: "receipt_line_one")
-          LocalizationField receipt_line_one,
-      @JsonKey(name: "receipt_line_two")
-          LocalizationField receipt_line_two,
-      @JsonKey(name: "thanks_message")
-          LocalizationField thanks_message,
+      LocalizationField verification_method,
+      @JsonKey(name: "end_date") String end_date,
+      @JsonKey(name: "end_time") String end_time,
+      @JsonKey(name: "receipt_line_one") LocalizationField receipt_line_one,
+      @JsonKey(name: "receipt_line_two") LocalizationField receipt_line_two,
+      @JsonKey(name: "thanks_message") LocalizationField thanks_message,
       @JsonKey(name: "save_receipt_message")
-          LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode")
-          String entry_mode,
-      @JsonKey(name: "action_code")
-          String action_code,
-      @JsonKey(name: "application_identifier")
-          String application_identifier,
+      LocalizationField save_receipt_message,
+      @JsonKey(name: "entry_mode") String entry_mode,
+      @JsonKey(name: "action_code") String action_code,
+      @JsonKey(name: "application_identifier") String application_identifier,
       @JsonKey(name: "terminal_verification_result")
-          String terminal_verification_result,
+      String terminal_verification_result,
       @JsonKey(name: "transaction_state_information")
-          String transaction_state_information,
+      String transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
-          String cardholader_verfication_result,
+      String cardholader_verfication_result,
       @JsonKey(name: "cryptogram_information_data")
-          String cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram")
-          String application_cryptogram,
-      @JsonKey(name: "kernel_id")
-          String kernel_id,
+      String cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram") String application_cryptogram,
+      @JsonKey(name: "kernel_id") String kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
-          String? payment_account_reference,
-      @JsonKey(name: "pan_suffix", nullable: true)
-          String? pan_suffix,
+      String? payment_account_reference,
+      @JsonKey(name: "pan_suffix", nullable: true) String? pan_suffix,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
-          String? created_at,
+      String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
-          String? updated_at,
-      @JsonKey(name: "qr_code")
-          String qr_code});
+      String? updated_at,
+      @JsonKey(name: "qr_code") String qr_code});
 
   @override
   $MerchantCopyWith<$Res> get merchant;
@@ -1037,92 +976,61 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TransactionReceipt implements _TransactionReceipt {
   const _$_TransactionReceipt(
-      {@JsonKey(name: "receipt_id")
-          required this.receipt_id,
-      @JsonKey(name: "transaction_uuid")
-          required this.transaction_uuid,
-      @JsonKey(name: "merchant")
-          required this.merchant,
-      @JsonKey(name: "start_date")
-          required this.start_date,
-      @JsonKey(name: "start_time")
-          required this.start_time,
-      @JsonKey(name: "card_scheme_sponsor")
-          required this.card_scheme_sponsor,
-      @JsonKey(name: "tid")
-          required this.tid,
+      {@JsonKey(name: "receipt_id") required this.receipt_id,
+      @JsonKey(name: "transaction_uuid") required this.transaction_uuid,
+      @JsonKey(name: "merchant") required this.merchant,
+      @JsonKey(name: "start_date") required this.start_date,
+      @JsonKey(name: "start_time") required this.start_time,
+      @JsonKey(name: "card_scheme_sponsor") required this.card_scheme_sponsor,
+      @JsonKey(name: "tid") required this.tid,
       @JsonKey(name: "system_trace_audit_number")
-          required this.system_trace_audit_number,
+      required this.system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
-          required this.pos_software_version_number,
+      required this.pos_software_version_number,
       @JsonKey(name: "retrieval_reference_number")
-          required this.retrieval_reference_number,
-      @JsonKey(name: "card_scheme")
-          required this.card_scheme,
-      @JsonKey(name: "transaction_type")
-          required this.transaction_type,
-      @JsonKey(name: "pan")
-          required this.pan,
-      @JsonKey(name: "card_expiration")
-          required this.card_expiration,
-      @JsonKey(name: "amount_authorized")
-          required this.amount_authorized,
-      @JsonKey(name: "amount_other")
-          required this.amount_other,
-      @JsonKey(name: "currency")
-          required this.currency,
-      @JsonKey(name: "status_message")
-          required this.status_message,
-      @JsonKey(name: "is_approved")
-          required this.is_approved,
-      @JsonKey(name: "is_refunded")
-          required this.is_refunded,
-      @JsonKey(name: "is_reversed")
-          required this.is_reversed,
-      @JsonKey(name: "approval_code", nullable: true)
-          this.approval_code,
-      @JsonKey(name: "verification_method")
-          required this.verification_method,
-      @JsonKey(name: "end_date")
-          required this.end_date,
-      @JsonKey(name: "end_time")
-          required this.end_time,
-      @JsonKey(name: "receipt_line_one")
-          required this.receipt_line_one,
-      @JsonKey(name: "receipt_line_two")
-          required this.receipt_line_two,
-      @JsonKey(name: "thanks_message")
-          required this.thanks_message,
-      @JsonKey(name: "save_receipt_message")
-          required this.save_receipt_message,
-      @JsonKey(name: "entry_mode")
-          required this.entry_mode,
-      @JsonKey(name: "action_code")
-          required this.action_code,
+      required this.retrieval_reference_number,
+      @JsonKey(name: "card_scheme") required this.card_scheme,
+      @JsonKey(name: "transaction_type") required this.transaction_type,
+      @JsonKey(name: "pan") required this.pan,
+      @JsonKey(name: "card_expiration") required this.card_expiration,
+      @JsonKey(name: "amount_authorized") required this.amount_authorized,
+      @JsonKey(name: "amount_other") required this.amount_other,
+      @JsonKey(name: "currency") required this.currency,
+      @JsonKey(name: "status_message") required this.status_message,
+      @JsonKey(name: "is_approved") required this.is_approved,
+      @JsonKey(name: "is_refunded") required this.is_refunded,
+      @JsonKey(name: "is_reversed") required this.is_reversed,
+      @JsonKey(name: "approval_code", nullable: true) this.approval_code,
+      @JsonKey(name: "verification_method") required this.verification_method,
+      @JsonKey(name: "end_date") required this.end_date,
+      @JsonKey(name: "end_time") required this.end_time,
+      @JsonKey(name: "receipt_line_one") required this.receipt_line_one,
+      @JsonKey(name: "receipt_line_two") required this.receipt_line_two,
+      @JsonKey(name: "thanks_message") required this.thanks_message,
+      @JsonKey(name: "save_receipt_message") required this.save_receipt_message,
+      @JsonKey(name: "entry_mode") required this.entry_mode,
+      @JsonKey(name: "action_code") required this.action_code,
       @JsonKey(name: "application_identifier")
-          required this.application_identifier,
+      required this.application_identifier,
       @JsonKey(name: "terminal_verification_result")
-          required this.terminal_verification_result,
+      required this.terminal_verification_result,
       @JsonKey(name: "transaction_state_information")
-          required this.transaction_state_information,
+      required this.transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
-          required this.cardholader_verfication_result,
+      required this.cardholader_verfication_result,
       @JsonKey(name: "cryptogram_information_data")
-          required this.cryptogram_information_data,
+      required this.cryptogram_information_data,
       @JsonKey(name: "application_cryptogram")
-          required this.application_cryptogram,
-      @JsonKey(name: "kernel_id")
-          required this.kernel_id,
+      required this.application_cryptogram,
+      @JsonKey(name: "kernel_id") required this.kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
-          this.payment_account_reference,
-      @JsonKey(name: "pan_suffix", nullable: true)
-          this.pan_suffix,
+      this.payment_account_reference,
+      @JsonKey(name: "pan_suffix", nullable: true) this.pan_suffix,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
-          this.created_at,
+      this.created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
-          this.updated_at,
-      @JsonKey(name: "qr_code")
-          required this.qr_code});
+      this.updated_at,
+      @JsonKey(name: "qr_code") required this.qr_code});
 
   factory _$_TransactionReceipt.fromJson(Map<String, dynamic> json) =>
       _$$_TransactionReceiptFromJson(json);
@@ -1405,92 +1313,74 @@ class _$_TransactionReceipt implements _TransactionReceipt {
 
 abstract class _TransactionReceipt implements TransactionReceipt {
   const factory _TransactionReceipt(
-      {@JsonKey(name: "receipt_id")
-          required final String receipt_id,
-      @JsonKey(name: "transaction_uuid")
-          required final String transaction_uuid,
-      @JsonKey(name: "merchant")
-          required final Merchant merchant,
-      @JsonKey(name: "start_date")
-          required final String start_date,
-      @JsonKey(name: "start_time")
-          required final String start_time,
+      {@JsonKey(name: "receipt_id") required final String receipt_id,
+      @JsonKey(name: "transaction_uuid") required final String transaction_uuid,
+      @JsonKey(name: "merchant") required final Merchant merchant,
+      @JsonKey(name: "start_date") required final String start_date,
+      @JsonKey(name: "start_time") required final String start_time,
       @JsonKey(name: "card_scheme_sponsor")
-          required final String card_scheme_sponsor,
-      @JsonKey(name: "tid")
-          required final String tid,
+      required final String card_scheme_sponsor,
+      @JsonKey(name: "tid") required final String tid,
       @JsonKey(name: "system_trace_audit_number")
-          required final String system_trace_audit_number,
+      required final String system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
-          required final String pos_software_version_number,
+      required final String pos_software_version_number,
       @JsonKey(name: "retrieval_reference_number")
-          required final String retrieval_reference_number,
+      required final String retrieval_reference_number,
       @JsonKey(name: "card_scheme")
-          required final NameField<String> card_scheme,
+      required final NameField<String> card_scheme,
       @JsonKey(name: "transaction_type")
-          required final NameField<String> transaction_type,
-      @JsonKey(name: "pan")
-          required final String pan,
-      @JsonKey(name: "card_expiration")
-          required final String card_expiration,
+      required final NameField<String> transaction_type,
+      @JsonKey(name: "pan") required final String pan,
+      @JsonKey(name: "card_expiration") required final String card_expiration,
       @JsonKey(name: "amount_authorized")
-          required final LabelField<String> amount_authorized,
+      required final LabelField<String> amount_authorized,
       @JsonKey(name: "amount_other")
-          required final LabelField<String> amount_other,
-      @JsonKey(name: "currency")
-          required final LocalizationField currency,
+      required final LabelField<String> amount_other,
+      @JsonKey(name: "currency") required final LocalizationField currency,
       @JsonKey(name: "status_message")
-          required final LocalizationField status_message,
-      @JsonKey(name: "is_approved")
-          required final bool is_approved,
-      @JsonKey(name: "is_refunded")
-          required final bool is_refunded,
-      @JsonKey(name: "is_reversed")
-          required final bool is_reversed,
+      required final LocalizationField status_message,
+      @JsonKey(name: "is_approved") required final bool is_approved,
+      @JsonKey(name: "is_refunded") required final bool is_refunded,
+      @JsonKey(name: "is_reversed") required final bool is_reversed,
       @JsonKey(name: "approval_code", nullable: true)
-          final LabelField<String>? approval_code,
+      final LabelField<String>? approval_code,
       @JsonKey(name: "verification_method")
-          required final LocalizationField verification_method,
-      @JsonKey(name: "end_date")
-          required final String end_date,
-      @JsonKey(name: "end_time")
-          required final String end_time,
+      required final LocalizationField verification_method,
+      @JsonKey(name: "end_date") required final String end_date,
+      @JsonKey(name: "end_time") required final String end_time,
       @JsonKey(name: "receipt_line_one")
-          required final LocalizationField receipt_line_one,
+      required final LocalizationField receipt_line_one,
       @JsonKey(name: "receipt_line_two")
-          required final LocalizationField receipt_line_two,
+      required final LocalizationField receipt_line_two,
       @JsonKey(name: "thanks_message")
-          required final LocalizationField thanks_message,
+      required final LocalizationField thanks_message,
       @JsonKey(name: "save_receipt_message")
-          required final LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode")
-          required final String entry_mode,
-      @JsonKey(name: "action_code")
-          required final String action_code,
+      required final LocalizationField save_receipt_message,
+      @JsonKey(name: "entry_mode") required final String entry_mode,
+      @JsonKey(name: "action_code") required final String action_code,
       @JsonKey(name: "application_identifier")
-          required final String application_identifier,
+      required final String application_identifier,
       @JsonKey(name: "terminal_verification_result")
-          required final String terminal_verification_result,
+      required final String terminal_verification_result,
       @JsonKey(name: "transaction_state_information")
-          required final String transaction_state_information,
+      required final String transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
-          required final String cardholader_verfication_result,
+      required final String cardholader_verfication_result,
       @JsonKey(name: "cryptogram_information_data")
-          required final String cryptogram_information_data,
+      required final String cryptogram_information_data,
       @JsonKey(name: "application_cryptogram")
-          required final String application_cryptogram,
-      @JsonKey(name: "kernel_id")
-          required final String kernel_id,
+      required final String application_cryptogram,
+      @JsonKey(name: "kernel_id") required final String kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
-          final String? payment_account_reference,
-      @JsonKey(name: "pan_suffix", nullable: true)
-          final String? pan_suffix,
+      final String? payment_account_reference,
+      @JsonKey(name: "pan_suffix", nullable: true) final String? pan_suffix,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
-          final String? created_at,
+      final String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
-          final String? updated_at,
+      final String? updated_at,
       @JsonKey(name: "qr_code")
-          required final String qr_code}) = _$_TransactionReceipt;
+      required final String qr_code}) = _$_TransactionReceipt;
 
   factory _TransactionReceipt.fromJson(Map<String, dynamic> json) =
       _$_TransactionReceipt.fromJson;

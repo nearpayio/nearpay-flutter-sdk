@@ -27,11 +27,7 @@ public class GetUserSessionOperation extends BaseOperation {
         provider.getNearpayLib().nearpay.getUserSession(new CheckSessionListener() {
             @Override
             public void onSessionFree() {
-                Map<String, Object> data = new HashMap<>();
-                data.put("type" , "free");
-                data.put("data", null);
-
-                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.success_code, null, data);
+                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.user_session_free, null, new ArrayList());
                 sender.send(toSend);
             }
 
@@ -51,29 +47,17 @@ public class GetUserSessionOperation extends BaseOperation {
                 }
                 Map response = NearpayLib.ApiResponse(status, message, new ArrayList());
                 sender.send(response);
-
             }
 
             @Override
             public void onSessionBusy(@NonNull String s) {
-                Map<String, Object> data = new HashMap<>();
-                Map<String, Object> internalData = new HashMap<>();
-                data.put("type" , "busy");
-                data.put("data", internalData );
-
-                internalData.put("message", s);
-                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.success_code, null, data);
+                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.user_session_busy, s, new ArrayList<>());
                 sender.send(toSend);
-
             }
 
             @Override
             public void getSessionInfo(@NonNull SessionInfo sessionInfo) {
-                Map<String, Object> data = new HashMap<>();
-                data.put("type" , "info");
-                data.put("data", sessionInfo );
-
-                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.success_code, null, data);
+                Map<String, Object> toSend = NearpayLib.ApiResponse(ErrorStatus.user_session_info, null, sessionInfo);
                 sender.send(toSend);
             }
         });

@@ -330,26 +330,17 @@ class _$_Session implements _Session {
 
 abstract class _Session implements Session {
   const factory _Session(
-      {@JsonKey(name: "id")
-          required final String id,
-      @JsonKey(name: "status")
-          required final String status,
-      @JsonKey(name: "type")
-          required final String type,
-      @JsonKey(name: "client_id")
-          required final String client_id,
-      @JsonKey(name: "amount")
-          required final String amount,
-      @JsonKey(name: "expired_at")
-          required final String expired_at,
-      @JsonKey(name: "reference_id")
-          required final String reference_id,
-      @JsonKey(name: "created_at")
-          required final String created_at,
-      @JsonKey(name: "updated_at")
-          required final String updated_at,
+      {@JsonKey(name: "id") required final String id,
+      @JsonKey(name: "status") required final String status,
+      @JsonKey(name: "type") required final String type,
+      @JsonKey(name: "client_id") required final String client_id,
+      @JsonKey(name: "amount") required final String amount,
+      @JsonKey(name: "expired_at") required final String expired_at,
+      @JsonKey(name: "reference_id") required final String reference_id,
+      @JsonKey(name: "created_at") required final String created_at,
+      @JsonKey(name: "updated_at") required final String updated_at,
       @JsonKey(name: "transaction")
-          required final SessionTransaction transaction}) = _$_Session;
+      required final SessionTransaction transaction}) = _$_Session;
 
   factory _Session.fromJson(Map<String, dynamic> json) = _$_Session.fromJson;
 
