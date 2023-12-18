@@ -64,23 +64,25 @@ class _$ReconcileFailureMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReconcileFailureMessageCopyWith<$Res>
+abstract class _$$ReconcileFailureMessageImplCopyWith<$Res>
     implements $ReconcileFailureMessageCopyWith<$Res> {
-  factory _$$_ReconcileFailureMessageCopyWith(_$_ReconcileFailureMessage value,
-          $Res Function(_$_ReconcileFailureMessage) then) =
-      __$$_ReconcileFailureMessageCopyWithImpl<$Res>;
+  factory _$$ReconcileFailureMessageImplCopyWith(
+          _$ReconcileFailureMessageImpl value,
+          $Res Function(_$ReconcileFailureMessageImpl) then) =
+      __$$ReconcileFailureMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ReconcileFailureMessageCopyWithImpl<$Res>
+class __$$ReconcileFailureMessageImplCopyWithImpl<$Res>
     extends _$ReconcileFailureMessageCopyWithImpl<$Res,
-        _$_ReconcileFailureMessage>
-    implements _$$_ReconcileFailureMessageCopyWith<$Res> {
-  __$$_ReconcileFailureMessageCopyWithImpl(_$_ReconcileFailureMessage _value,
-      $Res Function(_$_ReconcileFailureMessage) _then)
+        _$ReconcileFailureMessageImpl>
+    implements _$$ReconcileFailureMessageImplCopyWith<$Res> {
+  __$$ReconcileFailureMessageImplCopyWithImpl(
+      _$ReconcileFailureMessageImpl _value,
+      $Res Function(_$ReconcileFailureMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_ReconcileFailureMessageCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_ReconcileFailureMessage(
+    return _then(_$ReconcileFailureMessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -99,11 +101,11 @@ class __$$_ReconcileFailureMessageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileFailureMessage implements _ReconcileFailureMessage {
-  const _$_ReconcileFailureMessage({required this.message});
+class _$ReconcileFailureMessageImpl implements _ReconcileFailureMessage {
+  const _$ReconcileFailureMessageImpl({required this.message});
 
-  factory _$_ReconcileFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileFailureMessageFromJson(json);
+  factory _$ReconcileFailureMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReconcileFailureMessageImplFromJson(json);
 
   @override
   final String message;
@@ -114,10 +116,10 @@ class _$_ReconcileFailureMessage implements _ReconcileFailureMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconcileFailureMessage &&
+            other is _$ReconcileFailureMessageImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -128,14 +130,13 @@ class _$_ReconcileFailureMessage implements _ReconcileFailureMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconcileFailureMessageCopyWith<_$_ReconcileFailureMessage>
-      get copyWith =>
-          __$$_ReconcileFailureMessageCopyWithImpl<_$_ReconcileFailureMessage>(
-              this, _$identity);
+  _$$ReconcileFailureMessageImplCopyWith<_$ReconcileFailureMessageImpl>
+      get copyWith => __$$ReconcileFailureMessageImplCopyWithImpl<
+          _$ReconcileFailureMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconcileFailureMessageToJson(
+    return _$$ReconcileFailureMessageImplToJson(
       this,
     );
   }
@@ -143,16 +144,16 @@ class _$_ReconcileFailureMessage implements _ReconcileFailureMessage {
 
 abstract class _ReconcileFailureMessage implements ReconcileFailureMessage {
   const factory _ReconcileFailureMessage({required final String message}) =
-      _$_ReconcileFailureMessage;
+      _$ReconcileFailureMessageImpl;
 
   factory _ReconcileFailureMessage.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileFailureMessage.fromJson;
+      _$ReconcileFailureMessageImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconcileFailureMessageCopyWith<_$_ReconcileFailureMessage>
+  _$$ReconcileFailureMessageImplCopyWith<_$ReconcileFailureMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -208,25 +209,25 @@ class _$ReconcileAuthenticationFailedCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReconcileAuthenticationFailedCopyWith<$Res>
+abstract class _$$ReconcileAuthenticationFailedImplCopyWith<$Res>
     implements $ReconcileAuthenticationFailedCopyWith<$Res> {
-  factory _$$_ReconcileAuthenticationFailedCopyWith(
-          _$_ReconcileAuthenticationFailed value,
-          $Res Function(_$_ReconcileAuthenticationFailed) then) =
-      __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>;
+  factory _$$ReconcileAuthenticationFailedImplCopyWith(
+          _$ReconcileAuthenticationFailedImpl value,
+          $Res Function(_$ReconcileAuthenticationFailedImpl) then) =
+      __$$ReconcileAuthenticationFailedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>
+class __$$ReconcileAuthenticationFailedImplCopyWithImpl<$Res>
     extends _$ReconcileAuthenticationFailedCopyWithImpl<$Res,
-        _$_ReconcileAuthenticationFailed>
-    implements _$$_ReconcileAuthenticationFailedCopyWith<$Res> {
-  __$$_ReconcileAuthenticationFailedCopyWithImpl(
-      _$_ReconcileAuthenticationFailed _value,
-      $Res Function(_$_ReconcileAuthenticationFailed) _then)
+        _$ReconcileAuthenticationFailedImpl>
+    implements _$$ReconcileAuthenticationFailedImplCopyWith<$Res> {
+  __$$ReconcileAuthenticationFailedImplCopyWithImpl(
+      _$ReconcileAuthenticationFailedImpl _value,
+      $Res Function(_$ReconcileAuthenticationFailedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -234,7 +235,7 @@ class __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_ReconcileAuthenticationFailed(
+    return _then(_$ReconcileAuthenticationFailedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -245,13 +246,13 @@ class __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileAuthenticationFailed
+class _$ReconcileAuthenticationFailedImpl
     implements _ReconcileAuthenticationFailed {
-  const _$_ReconcileAuthenticationFailed({required this.message});
+  const _$ReconcileAuthenticationFailedImpl({required this.message});
 
-  factory _$_ReconcileAuthenticationFailed.fromJson(
+  factory _$ReconcileAuthenticationFailedImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_ReconcileAuthenticationFailedFromJson(json);
+      _$$ReconcileAuthenticationFailedImplFromJson(json);
 
   @override
   final String message;
@@ -262,10 +263,10 @@ class _$_ReconcileAuthenticationFailed
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconcileAuthenticationFailed &&
+            other is _$ReconcileAuthenticationFailedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -276,13 +277,14 @@ class _$_ReconcileAuthenticationFailed
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconcileAuthenticationFailedCopyWith<_$_ReconcileAuthenticationFailed>
-      get copyWith => __$$_ReconcileAuthenticationFailedCopyWithImpl<
-          _$_ReconcileAuthenticationFailed>(this, _$identity);
+  _$$ReconcileAuthenticationFailedImplCopyWith<
+          _$ReconcileAuthenticationFailedImpl>
+      get copyWith => __$$ReconcileAuthenticationFailedImplCopyWithImpl<
+          _$ReconcileAuthenticationFailedImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconcileAuthenticationFailedToJson(
+    return _$$ReconcileAuthenticationFailedImplToJson(
       this,
     );
   }
@@ -291,16 +293,17 @@ class _$_ReconcileAuthenticationFailed
 abstract class _ReconcileAuthenticationFailed
     implements ReconcileAuthenticationFailed {
   const factory _ReconcileAuthenticationFailed(
-      {required final String message}) = _$_ReconcileAuthenticationFailed;
+      {required final String message}) = _$ReconcileAuthenticationFailedImpl;
 
   factory _ReconcileAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileAuthenticationFailed.fromJson;
+      _$ReconcileAuthenticationFailedImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconcileAuthenticationFailedCopyWith<_$_ReconcileAuthenticationFailed>
+  _$$ReconcileAuthenticationFailedImplCopyWith<
+          _$ReconcileAuthenticationFailedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -354,23 +357,25 @@ class _$ReconcileInvalidStatusCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReconcileInvalidStatusCopyWith<$Res>
+abstract class _$$ReconcileInvalidStatusImplCopyWith<$Res>
     implements $ReconcileInvalidStatusCopyWith<$Res> {
-  factory _$$_ReconcileInvalidStatusCopyWith(_$_ReconcileInvalidStatus value,
-          $Res Function(_$_ReconcileInvalidStatus) then) =
-      __$$_ReconcileInvalidStatusCopyWithImpl<$Res>;
+  factory _$$ReconcileInvalidStatusImplCopyWith(
+          _$ReconcileInvalidStatusImpl value,
+          $Res Function(_$ReconcileInvalidStatusImpl) then) =
+      __$$ReconcileInvalidStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_ReconcileInvalidStatusCopyWithImpl<$Res>
+class __$$ReconcileInvalidStatusImplCopyWithImpl<$Res>
     extends _$ReconcileInvalidStatusCopyWithImpl<$Res,
-        _$_ReconcileInvalidStatus>
-    implements _$$_ReconcileInvalidStatusCopyWith<$Res> {
-  __$$_ReconcileInvalidStatusCopyWithImpl(_$_ReconcileInvalidStatus _value,
-      $Res Function(_$_ReconcileInvalidStatus) _then)
+        _$ReconcileInvalidStatusImpl>
+    implements _$$ReconcileInvalidStatusImplCopyWith<$Res> {
+  __$$ReconcileInvalidStatusImplCopyWithImpl(
+      _$ReconcileInvalidStatusImpl _value,
+      $Res Function(_$ReconcileInvalidStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -378,7 +383,7 @@ class __$$_ReconcileInvalidStatusCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_ReconcileInvalidStatus(
+    return _then(_$ReconcileInvalidStatusImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -386,11 +391,11 @@ class __$$_ReconcileInvalidStatusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileInvalidStatus implements _ReconcileInvalidStatus {
-  const _$_ReconcileInvalidStatus({this.required});
+class _$ReconcileInvalidStatusImpl implements _ReconcileInvalidStatus {
+  const _$ReconcileInvalidStatusImpl({this.required});
 
-  factory _$_ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileInvalidStatusFromJson(json);
+  factory _$ReconcileInvalidStatusImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReconcileInvalidStatusImplFromJson(json);
 
   @override
   final dynamic required;
@@ -401,10 +406,10 @@ class _$_ReconcileInvalidStatus implements _ReconcileInvalidStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconcileInvalidStatus &&
+            other is _$ReconcileInvalidStatusImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -416,13 +421,13 @@ class _$_ReconcileInvalidStatus implements _ReconcileInvalidStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconcileInvalidStatusCopyWith<_$_ReconcileInvalidStatus> get copyWith =>
-      __$$_ReconcileInvalidStatusCopyWithImpl<_$_ReconcileInvalidStatus>(
-          this, _$identity);
+  _$$ReconcileInvalidStatusImplCopyWith<_$ReconcileInvalidStatusImpl>
+      get copyWith => __$$ReconcileInvalidStatusImplCopyWithImpl<
+          _$ReconcileInvalidStatusImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconcileInvalidStatusToJson(
+    return _$$ReconcileInvalidStatusImplToJson(
       this,
     );
   }
@@ -430,17 +435,17 @@ class _$_ReconcileInvalidStatus implements _ReconcileInvalidStatus {
 
 abstract class _ReconcileInvalidStatus implements ReconcileInvalidStatus {
   const factory _ReconcileInvalidStatus({final dynamic required}) =
-      _$_ReconcileInvalidStatus;
+      _$ReconcileInvalidStatusImpl;
 
   factory _ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileInvalidStatus.fromJson;
+      _$ReconcileInvalidStatusImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconcileInvalidStatusCopyWith<_$_ReconcileInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReconcileInvalidStatusImplCopyWith<_$ReconcileInvalidStatusImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ReconcileGeneralFailure _$ReconcileGeneralFailureFromJson(
@@ -493,23 +498,25 @@ class _$ReconcileGeneralFailureCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReconcileGeneralFailureCopyWith<$Res>
+abstract class _$$ReconcileGeneralFailureImplCopyWith<$Res>
     implements $ReconcileGeneralFailureCopyWith<$Res> {
-  factory _$$_ReconcileGeneralFailureCopyWith(_$_ReconcileGeneralFailure value,
-          $Res Function(_$_ReconcileGeneralFailure) then) =
-      __$$_ReconcileGeneralFailureCopyWithImpl<$Res>;
+  factory _$$ReconcileGeneralFailureImplCopyWith(
+          _$ReconcileGeneralFailureImpl value,
+          $Res Function(_$ReconcileGeneralFailureImpl) then) =
+      __$$ReconcileGeneralFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_ReconcileGeneralFailureCopyWithImpl<$Res>
+class __$$ReconcileGeneralFailureImplCopyWithImpl<$Res>
     extends _$ReconcileGeneralFailureCopyWithImpl<$Res,
-        _$_ReconcileGeneralFailure>
-    implements _$$_ReconcileGeneralFailureCopyWith<$Res> {
-  __$$_ReconcileGeneralFailureCopyWithImpl(_$_ReconcileGeneralFailure _value,
-      $Res Function(_$_ReconcileGeneralFailure) _then)
+        _$ReconcileGeneralFailureImpl>
+    implements _$$ReconcileGeneralFailureImplCopyWith<$Res> {
+  __$$ReconcileGeneralFailureImplCopyWithImpl(
+      _$ReconcileGeneralFailureImpl _value,
+      $Res Function(_$ReconcileGeneralFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -517,7 +524,7 @@ class __$$_ReconcileGeneralFailureCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_ReconcileGeneralFailure(
+    return _then(_$ReconcileGeneralFailureImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -525,11 +532,11 @@ class __$$_ReconcileGeneralFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileGeneralFailure implements _ReconcileGeneralFailure {
-  const _$_ReconcileGeneralFailure({this.required});
+class _$ReconcileGeneralFailureImpl implements _ReconcileGeneralFailure {
+  const _$ReconcileGeneralFailureImpl({this.required});
 
-  factory _$_ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileGeneralFailureFromJson(json);
+  factory _$ReconcileGeneralFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReconcileGeneralFailureImplFromJson(json);
 
   @override
   final dynamic required;
@@ -540,10 +547,10 @@ class _$_ReconcileGeneralFailure implements _ReconcileGeneralFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconcileGeneralFailure &&
+            other is _$ReconcileGeneralFailureImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -555,14 +562,13 @@ class _$_ReconcileGeneralFailure implements _ReconcileGeneralFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconcileGeneralFailureCopyWith<_$_ReconcileGeneralFailure>
-      get copyWith =>
-          __$$_ReconcileGeneralFailureCopyWithImpl<_$_ReconcileGeneralFailure>(
-              this, _$identity);
+  _$$ReconcileGeneralFailureImplCopyWith<_$ReconcileGeneralFailureImpl>
+      get copyWith => __$$ReconcileGeneralFailureImplCopyWithImpl<
+          _$ReconcileGeneralFailureImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconcileGeneralFailureToJson(
+    return _$$ReconcileGeneralFailureImplToJson(
       this,
     );
   }
@@ -570,15 +576,15 @@ class _$_ReconcileGeneralFailure implements _ReconcileGeneralFailure {
 
 abstract class _ReconcileGeneralFailure implements ReconcileGeneralFailure {
   const factory _ReconcileGeneralFailure({final dynamic required}) =
-      _$_ReconcileGeneralFailure;
+      _$ReconcileGeneralFailureImpl;
 
   factory _ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileGeneralFailure.fromJson;
+      _$ReconcileGeneralFailureImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconcileGeneralFailureCopyWith<_$_ReconcileGeneralFailure>
+  _$$ReconcileGeneralFailureImplCopyWith<_$ReconcileGeneralFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

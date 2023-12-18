@@ -87,10 +87,11 @@ class _$MerchantCopyWithImpl<$Res, $Val extends Merchant>
 }
 
 /// @nodoc
-abstract class _$$_MerchantCopyWith<$Res> implements $MerchantCopyWith<$Res> {
-  factory _$$_MerchantCopyWith(
-          _$_Merchant value, $Res Function(_$_Merchant) then) =
-      __$$_MerchantCopyWithImpl<$Res>;
+abstract class _$$MerchantImplCopyWith<$Res>
+    implements $MerchantCopyWith<$Res> {
+  factory _$$MerchantImplCopyWith(
+          _$MerchantImpl value, $Res Function(_$MerchantImpl) then) =
+      __$$MerchantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -101,11 +102,11 @@ abstract class _$$_MerchantCopyWith<$Res> implements $MerchantCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MerchantCopyWithImpl<$Res>
-    extends _$MerchantCopyWithImpl<$Res, _$_Merchant>
-    implements _$$_MerchantCopyWith<$Res> {
-  __$$_MerchantCopyWithImpl(
-      _$_Merchant _value, $Res Function(_$_Merchant) _then)
+class __$$MerchantImplCopyWithImpl<$Res>
+    extends _$MerchantCopyWithImpl<$Res, _$MerchantImpl>
+    implements _$$MerchantImplCopyWith<$Res> {
+  __$$MerchantImplCopyWithImpl(
+      _$MerchantImpl _value, $Res Function(_$MerchantImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +117,7 @@ class __$$_MerchantCopyWithImpl<$Res>
     Object? address = null,
     Object? categoryCode = null,
   }) {
-    return _then(_$_Merchant(
+    return _then(_$MerchantImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -139,15 +140,15 @@ class __$$_MerchantCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Merchant implements _Merchant {
-  const _$_Merchant(
+class _$MerchantImpl implements _Merchant {
+  const _$MerchantImpl(
       {@JsonKey(name: "id") required this.id,
       @JsonKey(name: "name") required this.name,
       @JsonKey(name: "address") required this.address,
       @JsonKey(name: "category_code") required this.categoryCode});
 
-  factory _$_Merchant.fromJson(Map<String, dynamic> json) =>
-      _$$_MerchantFromJson(json);
+  factory _$MerchantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MerchantImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -168,10 +169,10 @@ class _$_Merchant implements _Merchant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Merchant &&
+            other is _$MerchantImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
@@ -186,12 +187,12 @@ class _$_Merchant implements _Merchant {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MerchantCopyWith<_$_Merchant> get copyWith =>
-      __$$_MerchantCopyWithImpl<_$_Merchant>(this, _$identity);
+  _$$MerchantImplCopyWith<_$MerchantImpl> get copyWith =>
+      __$$MerchantImplCopyWithImpl<_$MerchantImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MerchantToJson(
+    return _$$MerchantImplToJson(
       this,
     );
   }
@@ -203,9 +204,10 @@ abstract class _Merchant implements Merchant {
           @JsonKey(name: "name") required final LocalizationField name,
           @JsonKey(name: "address") required final LocalizationField address,
           @JsonKey(name: "category_code") required final String categoryCode}) =
-      _$_Merchant;
+      _$MerchantImpl;
 
-  factory _Merchant.fromJson(Map<String, dynamic> json) = _$_Merchant.fromJson;
+  factory _Merchant.fromJson(Map<String, dynamic> json) =
+      _$MerchantImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -221,6 +223,6 @@ abstract class _Merchant implements Merchant {
   String get categoryCode;
   @override
   @JsonKey(ignore: true)
-  _$$_MerchantCopyWith<_$_Merchant> get copyWith =>
+  _$$MerchantImplCopyWith<_$MerchantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

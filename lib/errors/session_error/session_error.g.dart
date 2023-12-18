@@ -6,47 +6,47 @@ part of 'session_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SessionAuthenticationFailed _$$_SessionAuthenticationFailedFromJson(
+_$SessionAuthenticationFailedImpl _$$SessionAuthenticationFailedImplFromJson(
         Map json) =>
-    _$_SessionAuthenticationFailed(
+    _$SessionAuthenticationFailedImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_SessionAuthenticationFailedToJson(
-        _$_SessionAuthenticationFailed instance) =>
+Map<String, dynamic> _$$SessionAuthenticationFailedImplToJson(
+        _$SessionAuthenticationFailedImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_SessionFailureMessage _$$_SessionFailureMessageFromJson(Map json) =>
-    _$_SessionFailureMessage(
+_$SessionFailureMessageImpl _$$SessionFailureMessageImplFromJson(Map json) =>
+    _$SessionFailureMessageImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_SessionFailureMessageToJson(
-        _$_SessionFailureMessage instance) =>
+Map<String, dynamic> _$$SessionFailureMessageImplToJson(
+        _$SessionFailureMessageImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_SessionInvalidStatus _$$_SessionInvalidStatusFromJson(Map json) =>
-    _$_SessionInvalidStatus(
+_$SessionInvalidStatusImpl _$$SessionInvalidStatusImplFromJson(Map json) =>
+    _$SessionInvalidStatusImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_SessionInvalidStatusToJson(
-        _$_SessionInvalidStatus instance) =>
+Map<String, dynamic> _$$SessionInvalidStatusImplToJson(
+        _$SessionInvalidStatusImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };
 
-_$_SessionGeneralFailure _$$_SessionGeneralFailureFromJson(Map json) =>
-    _$_SessionGeneralFailure(
+_$SessionGeneralFailureImpl _$$SessionGeneralFailureImplFromJson(Map json) =>
+    _$SessionGeneralFailureImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_SessionGeneralFailureToJson(
-        _$_SessionGeneralFailure instance) =>
+Map<String, dynamic> _$$SessionGeneralFailureImplToJson(
+        _$SessionGeneralFailureImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };

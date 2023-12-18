@@ -255,11 +255,11 @@ class _$SessionTransactionCopyWithImpl<$Res, $Val extends SessionTransaction>
 }
 
 /// @nodoc
-abstract class _$$_SessionTransactionCopyWith<$Res>
+abstract class _$$SessionTransactionImplCopyWith<$Res>
     implements $SessionTransactionCopyWith<$Res> {
-  factory _$$_SessionTransactionCopyWith(_$_SessionTransaction value,
-          $Res Function(_$_SessionTransaction) then) =
-      __$$_SessionTransactionCopyWithImpl<$Res>;
+  factory _$$SessionTransactionImplCopyWith(_$SessionTransactionImpl value,
+          $Res Function(_$SessionTransactionImpl) then) =
+      __$$SessionTransactionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -295,11 +295,11 @@ abstract class _$$_SessionTransactionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SessionTransactionCopyWithImpl<$Res>
-    extends _$SessionTransactionCopyWithImpl<$Res, _$_SessionTransaction>
-    implements _$$_SessionTransactionCopyWith<$Res> {
-  __$$_SessionTransactionCopyWithImpl(
-      _$_SessionTransaction _value, $Res Function(_$_SessionTransaction) _then)
+class __$$SessionTransactionImplCopyWithImpl<$Res>
+    extends _$SessionTransactionCopyWithImpl<$Res, _$SessionTransactionImpl>
+    implements _$$SessionTransactionImplCopyWith<$Res> {
+  __$$SessionTransactionImplCopyWithImpl(_$SessionTransactionImpl _value,
+      $Res Function(_$SessionTransactionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -330,7 +330,7 @@ class __$$_SessionTransactionCopyWithImpl<$Res>
     Object? type = null,
     Object? verification_method = null,
   }) {
-    return _then(_$_SessionTransaction(
+    return _then(_$SessionTransactionImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -433,8 +433,8 @@ class __$$_SessionTransactionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SessionTransaction implements _SessionTransaction {
-  const _$_SessionTransaction(
+class _$SessionTransactionImpl implements _SessionTransaction {
+  const _$SessionTransactionImpl(
       {@JsonKey(name: "id") required this.id,
       @JsonKey(name: "uuid") required this.uuid,
       @JsonKey(name: "amount_authorized") required this.amount_authorized,
@@ -466,8 +466,8 @@ class _$_SessionTransaction implements _SessionTransaction {
       @JsonKey(name: "verification_method") required this.verification_method})
       : _receipts = receipts;
 
-  factory _$_SessionTransaction.fromJson(Map<String, dynamic> json) =>
-      _$$_SessionTransactionFromJson(json);
+  factory _$SessionTransactionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SessionTransactionImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -554,10 +554,10 @@ class _$_SessionTransaction implements _SessionTransaction {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SessionTransaction &&
+            other is _$SessionTransactionImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.amount_authorized, amount_authorized) ||
@@ -638,13 +638,13 @@ class _$_SessionTransaction implements _SessionTransaction {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SessionTransactionCopyWith<_$_SessionTransaction> get copyWith =>
-      __$$_SessionTransactionCopyWithImpl<_$_SessionTransaction>(
+  _$$SessionTransactionImplCopyWith<_$SessionTransactionImpl> get copyWith =>
+      __$$SessionTransactionImplCopyWithImpl<_$SessionTransactionImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SessionTransactionToJson(
+    return _$$SessionTransactionImplToJson(
       this,
     );
   }
@@ -684,10 +684,10 @@ abstract class _SessionTransaction implements SessionTransaction {
       @JsonKey(name: "type") required final LocalizationField type,
       @JsonKey(name: "verification_method")
       required final LocalizationField
-          verification_method}) = _$_SessionTransaction;
+          verification_method}) = _$SessionTransactionImpl;
 
   factory _SessionTransaction.fromJson(Map<String, dynamic> json) =
-      _$_SessionTransaction.fromJson;
+      _$SessionTransactionImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -763,6 +763,6 @@ abstract class _SessionTransaction implements SessionTransaction {
   LocalizationField get verification_method;
   @override
   @JsonKey(ignore: true)
-  _$$_SessionTransactionCopyWith<_$_SessionTransaction> get copyWith =>
+  _$$SessionTransactionImplCopyWith<_$SessionTransactionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

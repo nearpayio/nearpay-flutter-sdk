@@ -6,13 +6,13 @@ part of 'name_field.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NameField<T> _$$_NameFieldFromJson<T>(Map json) => _$_NameField<T>(
+_$NameFieldImpl<T> _$$NameFieldImplFromJson<T>(Map json) => _$NameFieldImpl<T>(
       name: LocalizationField.fromJson(
           Map<String, dynamic>.from(json['name'] as Map)),
       id: json['id'],
     );
 
-Map<String, dynamic> _$$_NameFieldToJson<T>(_$_NameField<T> instance) =>
+Map<String, dynamic> _$$NameFieldImplToJson<T>(_$NameFieldImpl<T> instance) =>
     <String, dynamic>{
       'name': instance.name.toJson(),
       'id': instance.id,

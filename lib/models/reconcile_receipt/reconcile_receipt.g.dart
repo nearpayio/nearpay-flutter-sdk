@@ -6,8 +6,8 @@ part of 'reconcile_receipt.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReconciliationReciept _$$_ReconciliationRecieptFromJson(Map json) =>
-    _$_ReconciliationReciept(
+_$ReconciliationRecieptImpl _$$ReconciliationRecieptImplFromJson(Map json) =>
+    _$ReconciliationRecieptImpl(
       id: json['id'] as String,
       date: json['date'] as String,
       time: json['time'] as String,
@@ -30,8 +30,8 @@ _$_ReconciliationReciept _$$_ReconciliationRecieptFromJson(Map json) =>
           json['pos_software_version_number'] as String,
     );
 
-Map<String, dynamic> _$$_ReconciliationRecieptToJson(
-        _$_ReconciliationReciept instance) =>
+Map<String, dynamic> _$$ReconciliationRecieptImplToJson(
+        _$ReconciliationRecieptImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'date': instance.date,
@@ -47,8 +47,8 @@ Map<String, dynamic> _$$_ReconciliationRecieptToJson(
       'pos_software_version_number': instance.pos_software_version_number,
     };
 
-_$_ReconciliationDetails _$$_ReconciliationDetailsFromJson(Map json) =>
-    _$_ReconciliationDetails(
+_$ReconciliationDetailsImpl _$$ReconciliationDetailsImplFromJson(Map json) =>
+    _$ReconciliationDetailsImpl(
       purchase: ReconciliationLabelField.fromJson(
           Map<String, dynamic>.from(json['purchase'] as Map)),
       refund: ReconciliationLabelField.fromJson(
@@ -61,8 +61,8 @@ _$_ReconciliationDetails _$$_ReconciliationDetailsFromJson(Map json) =>
           Map<String, dynamic>.from(json['total'] as Map)),
     );
 
-Map<String, dynamic> _$$_ReconciliationDetailsToJson(
-        _$_ReconciliationDetails instance) =>
+Map<String, dynamic> _$$ReconciliationDetailsImplToJson(
+        _$ReconciliationDetailsImpl instance) =>
     <String, dynamic>{
       'purchase': instance.purchase.toJson(),
       'refund': instance.refund.toJson(),
@@ -71,8 +71,8 @@ Map<String, dynamic> _$$_ReconciliationDetailsToJson(
       'total': instance.total.toJson(),
     };
 
-_$_ReconciliationSchemes _$$_ReconciliationSchemesFromJson(Map json) =>
-    _$_ReconciliationSchemes(
+_$ReconciliationSchemesImpl _$$ReconciliationSchemesImplFromJson(Map json) =>
+    _$ReconciliationSchemesImpl(
       name: LabelField<String>.fromJson(
           Map<String, dynamic>.from(json['name'] as Map)),
       pos: ReconciliationSchemesDetails.fromJson(
@@ -81,17 +81,17 @@ _$_ReconciliationSchemes _$$_ReconciliationSchemesFromJson(Map json) =>
           Map<String, dynamic>.from(json['host'] as Map)),
     );
 
-Map<String, dynamic> _$$_ReconciliationSchemesToJson(
-        _$_ReconciliationSchemes instance) =>
+Map<String, dynamic> _$$ReconciliationSchemesImplToJson(
+        _$ReconciliationSchemesImpl instance) =>
     <String, dynamic>{
       'name': instance.name.toJson(),
       'pos': instance.pos.toJson(),
       'host': instance.host.toJson(),
     };
 
-_$_ReconciliationSchemesDetails _$$_ReconciliationSchemesDetailsFromJson(
+_$ReconciliationSchemesDetailsImpl _$$ReconciliationSchemesDetailsImplFromJson(
         Map json) =>
-    _$_ReconciliationSchemesDetails(
+    _$ReconciliationSchemesDetailsImpl(
       debit: ReconciliationLabelField.fromJson(
           Map<String, dynamic>.from(json['debit'] as Map)),
       credit: ReconciliationLabelField.fromJson(
@@ -100,24 +100,25 @@ _$_ReconciliationSchemesDetails _$$_ReconciliationSchemesDetailsFromJson(
           Map<String, dynamic>.from(json['total'] as Map)),
     );
 
-Map<String, dynamic> _$$_ReconciliationSchemesDetailsToJson(
-        _$_ReconciliationSchemesDetails instance) =>
+Map<String, dynamic> _$$ReconciliationSchemesDetailsImplToJson(
+        _$ReconciliationSchemesDetailsImpl instance) =>
     <String, dynamic>{
       'debit': instance.debit.toJson(),
       'credit': instance.credit.toJson(),
       'total': instance.total.toJson(),
     };
 
-_$_ReconciliationLabelField _$$_ReconciliationLabelFieldFromJson(Map json) =>
-    _$_ReconciliationLabelField(
+_$ReconciliationLabelFieldImpl _$$ReconciliationLabelFieldImplFromJson(
+        Map json) =>
+    _$ReconciliationLabelFieldImpl(
       label: LocalizationField.fromJson(
           Map<String, dynamic>.from(json['label'] as Map)),
       total: json['total'] as String,
       count: (json['count'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$_ReconciliationLabelFieldToJson(
-        _$_ReconciliationLabelField instance) =>
+Map<String, dynamic> _$$ReconciliationLabelFieldImplToJson(
+        _$ReconciliationLabelFieldImpl instance) =>
     <String, dynamic>{
       'label': instance.label.toJson(),
       'total': instance.total,

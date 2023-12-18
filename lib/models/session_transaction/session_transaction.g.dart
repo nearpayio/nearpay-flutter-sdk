@@ -6,8 +6,8 @@ part of 'session_transaction.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SessionTransaction _$$_SessionTransactionFromJson(Map json) =>
-    _$_SessionTransaction(
+_$SessionTransactionImpl _$$SessionTransactionImplFromJson(Map json) =>
+    _$SessionTransactionImpl(
       id: json['id'] as String,
       uuid: json['uuid'] as String,
       amount_authorized: json['amount_authorized'] as String,
@@ -41,8 +41,8 @@ _$_SessionTransaction _$$_SessionTransactionFromJson(Map json) =>
           Map<String, dynamic>.from(json['verification_method'] as Map)),
     );
 
-Map<String, dynamic> _$$_SessionTransactionToJson(
-        _$_SessionTransaction instance) =>
+Map<String, dynamic> _$$SessionTransactionImplToJson(
+        _$SessionTransactionImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'uuid': instance.uuid,

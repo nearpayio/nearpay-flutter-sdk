@@ -30,7 +30,7 @@ public class GetTransactionPageOperation extends BaseOperation {
         LocalDateTime to = filter.getEndDate();
         String customerReferenceNumber = filter.getCustomerReferenceNumber();
 
-        provider.getNearpayLib().nearpay.getTransactionListPage(page, limit, from, to, customerReferenceNumber,
+        provider.getNearpayLib().nearpay.getTransactionListPage(page, limit, from, to,
                 new GetTransactionPageListener() {
                     @Override
                     public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {

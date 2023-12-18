@@ -40,10 +40,9 @@ abstract class $TransactionBannerListCopyWith<$Res> {
       _$TransactionBannerListCopyWithImpl<$Res, TransactionBannerList>;
   @useResult
   $Res call(
-      {@JsonKey(name: "count")
-          double count,
+      {@JsonKey(name: "count") double count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
-          List<TransactionBanner> transactionBanners});
+      List<TransactionBanner> transactionBanners});
 }
 
 /// @nodoc
@@ -77,26 +76,27 @@ class _$TransactionBannerListCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TransactionBannerListCopyWith<$Res>
+abstract class _$$TransactionBannerListImplCopyWith<$Res>
     implements $TransactionBannerListCopyWith<$Res> {
-  factory _$$_TransactionBannerListCopyWith(_$_TransactionBannerList value,
-          $Res Function(_$_TransactionBannerList) then) =
-      __$$_TransactionBannerListCopyWithImpl<$Res>;
+  factory _$$TransactionBannerListImplCopyWith(
+          _$TransactionBannerListImpl value,
+          $Res Function(_$TransactionBannerListImpl) then) =
+      __$$TransactionBannerListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "count")
-          double count,
+      {@JsonKey(name: "count") double count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
-          List<TransactionBanner> transactionBanners});
+      List<TransactionBanner> transactionBanners});
 }
 
 /// @nodoc
-class __$$_TransactionBannerListCopyWithImpl<$Res>
-    extends _$TransactionBannerListCopyWithImpl<$Res, _$_TransactionBannerList>
-    implements _$$_TransactionBannerListCopyWith<$Res> {
-  __$$_TransactionBannerListCopyWithImpl(_$_TransactionBannerList _value,
-      $Res Function(_$_TransactionBannerList) _then)
+class __$$TransactionBannerListImplCopyWithImpl<$Res>
+    extends _$TransactionBannerListCopyWithImpl<$Res,
+        _$TransactionBannerListImpl>
+    implements _$$TransactionBannerListImplCopyWith<$Res> {
+  __$$TransactionBannerListImplCopyWithImpl(_$TransactionBannerListImpl _value,
+      $Res Function(_$TransactionBannerListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +105,7 @@ class __$$_TransactionBannerListCopyWithImpl<$Res>
     Object? count = null,
     Object? transactionBanners = null,
   }) {
-    return _then(_$_TransactionBannerList(
+    return _then(_$TransactionBannerListImpl(
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -120,16 +120,15 @@ class __$$_TransactionBannerListCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionBannerList implements _TransactionBannerList {
-  const _$_TransactionBannerList(
-      {@JsonKey(name: "count")
-          required this.count,
+class _$TransactionBannerListImpl implements _TransactionBannerList {
+  const _$TransactionBannerListImpl(
+      {@JsonKey(name: "count") required this.count,
       @JsonKey(name: "transactionBanners", defaultValue: [])
-          required final List<TransactionBanner> transactionBanners})
+      required final List<TransactionBanner> transactionBanners})
       : _transactionBanners = transactionBanners;
 
-  factory _$_TransactionBannerList.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionBannerListFromJson(json);
+  factory _$TransactionBannerListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionBannerListImplFromJson(json);
 
   @override
   @JsonKey(name: "count")
@@ -150,10 +149,10 @@ class _$_TransactionBannerList implements _TransactionBannerList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionBannerList &&
+            other is _$TransactionBannerListImpl &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality()
                 .equals(other._transactionBanners, _transactionBanners));
@@ -167,13 +166,13 @@ class _$_TransactionBannerList implements _TransactionBannerList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionBannerListCopyWith<_$_TransactionBannerList> get copyWith =>
-      __$$_TransactionBannerListCopyWithImpl<_$_TransactionBannerList>(
-          this, _$identity);
+  _$$TransactionBannerListImplCopyWith<_$TransactionBannerListImpl>
+      get copyWith => __$$TransactionBannerListImplCopyWithImpl<
+          _$TransactionBannerListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionBannerListToJson(
+    return _$$TransactionBannerListImplToJson(
       this,
     );
   }
@@ -181,14 +180,13 @@ class _$_TransactionBannerList implements _TransactionBannerList {
 
 abstract class _TransactionBannerList implements TransactionBannerList {
   const factory _TransactionBannerList(
-          {@JsonKey(name: "count")
-              required final double count,
+          {@JsonKey(name: "count") required final double count,
           @JsonKey(name: "transactionBanners", defaultValue: [])
-              required final List<TransactionBanner> transactionBanners}) =
-      _$_TransactionBannerList;
+          required final List<TransactionBanner> transactionBanners}) =
+      _$TransactionBannerListImpl;
 
   factory _TransactionBannerList.fromJson(Map<String, dynamic> json) =
-      _$_TransactionBannerList.fromJson;
+      _$TransactionBannerListImpl.fromJson;
 
   @override
   @JsonKey(name: "count")
@@ -198,8 +196,8 @@ abstract class _TransactionBannerList implements TransactionBannerList {
   List<TransactionBanner> get transactionBanners;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionBannerListCopyWith<_$_TransactionBannerList> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TransactionBannerListImplCopyWith<_$TransactionBannerListImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 TransactionBanner _$TransactionBannerFromJson(Map<String, dynamic> json) {
@@ -244,28 +242,18 @@ abstract class $TransactionBannerCopyWith<$Res> {
       _$TransactionBannerCopyWithImpl<$Res, TransactionBanner>;
   @useResult
   $Res call(
-      {@JsonKey(name: "uuid")
-          String uuid,
-      @JsonKey(name: "scheme")
-          String scheme,
-      @JsonKey(name: "pan")
-          String pan,
-      @JsonKey(name: "amount_authorized")
-          String amountAuthorized,
-      @JsonKey(name: "currency")
-          LocalizationField currency,
-      @JsonKey(name: "transaction_type")
-          String transactionType,
-      @JsonKey(name: "is_approved")
-          bool isApproved,
-      @JsonKey(name: "is_reversed")
-          bool isReversed,
-      @JsonKey(name: "start_date")
-          String startDate,
-      @JsonKey(name: "start_time")
-          String startTime,
+      {@JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "scheme") String scheme,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "amount_authorized") String amountAuthorized,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "transaction_type") String transactionType,
+      @JsonKey(name: "is_approved") bool isApproved,
+      @JsonKey(name: "is_reversed") bool isReversed,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "start_time") String startTime,
       @JsonKey(name: "customer_reference_number")
-          String? customer_reference_number});
+      String? customer_reference_number});
 }
 
 /// @nodoc
@@ -343,44 +331,34 @@ class _$TransactionBannerCopyWithImpl<$Res, $Val extends TransactionBanner>
 }
 
 /// @nodoc
-abstract class _$$_TransactionBannerCopyWith<$Res>
+abstract class _$$TransactionBannerImplCopyWith<$Res>
     implements $TransactionBannerCopyWith<$Res> {
-  factory _$$_TransactionBannerCopyWith(_$_TransactionBanner value,
-          $Res Function(_$_TransactionBanner) then) =
-      __$$_TransactionBannerCopyWithImpl<$Res>;
+  factory _$$TransactionBannerImplCopyWith(_$TransactionBannerImpl value,
+          $Res Function(_$TransactionBannerImpl) then) =
+      __$$TransactionBannerImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "uuid")
-          String uuid,
-      @JsonKey(name: "scheme")
-          String scheme,
-      @JsonKey(name: "pan")
-          String pan,
-      @JsonKey(name: "amount_authorized")
-          String amountAuthorized,
-      @JsonKey(name: "currency")
-          LocalizationField currency,
-      @JsonKey(name: "transaction_type")
-          String transactionType,
-      @JsonKey(name: "is_approved")
-          bool isApproved,
-      @JsonKey(name: "is_reversed")
-          bool isReversed,
-      @JsonKey(name: "start_date")
-          String startDate,
-      @JsonKey(name: "start_time")
-          String startTime,
+      {@JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "scheme") String scheme,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "amount_authorized") String amountAuthorized,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "transaction_type") String transactionType,
+      @JsonKey(name: "is_approved") bool isApproved,
+      @JsonKey(name: "is_reversed") bool isReversed,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "start_time") String startTime,
       @JsonKey(name: "customer_reference_number")
-          String? customer_reference_number});
+      String? customer_reference_number});
 }
 
 /// @nodoc
-class __$$_TransactionBannerCopyWithImpl<$Res>
-    extends _$TransactionBannerCopyWithImpl<$Res, _$_TransactionBanner>
-    implements _$$_TransactionBannerCopyWith<$Res> {
-  __$$_TransactionBannerCopyWithImpl(
-      _$_TransactionBanner _value, $Res Function(_$_TransactionBanner) _then)
+class __$$TransactionBannerImplCopyWithImpl<$Res>
+    extends _$TransactionBannerCopyWithImpl<$Res, _$TransactionBannerImpl>
+    implements _$$TransactionBannerImplCopyWith<$Res> {
+  __$$TransactionBannerImplCopyWithImpl(_$TransactionBannerImpl _value,
+      $Res Function(_$TransactionBannerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -398,7 +376,7 @@ class __$$_TransactionBannerCopyWithImpl<$Res>
     Object? startTime = null,
     Object? customer_reference_number = freezed,
   }) {
-    return _then(_$_TransactionBanner(
+    return _then(_$TransactionBannerImpl(
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -449,33 +427,23 @@ class __$$_TransactionBannerCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionBanner implements _TransactionBanner {
-  const _$_TransactionBanner(
-      {@JsonKey(name: "uuid")
-          required this.uuid,
-      @JsonKey(name: "scheme")
-          required this.scheme,
-      @JsonKey(name: "pan")
-          required this.pan,
-      @JsonKey(name: "amount_authorized")
-          required this.amountAuthorized,
-      @JsonKey(name: "currency")
-          required this.currency,
-      @JsonKey(name: "transaction_type")
-          required this.transactionType,
-      @JsonKey(name: "is_approved")
-          required this.isApproved,
-      @JsonKey(name: "is_reversed")
-          required this.isReversed,
-      @JsonKey(name: "start_date")
-          required this.startDate,
-      @JsonKey(name: "start_time")
-          required this.startTime,
+class _$TransactionBannerImpl implements _TransactionBanner {
+  const _$TransactionBannerImpl(
+      {@JsonKey(name: "uuid") required this.uuid,
+      @JsonKey(name: "scheme") required this.scheme,
+      @JsonKey(name: "pan") required this.pan,
+      @JsonKey(name: "amount_authorized") required this.amountAuthorized,
+      @JsonKey(name: "currency") required this.currency,
+      @JsonKey(name: "transaction_type") required this.transactionType,
+      @JsonKey(name: "is_approved") required this.isApproved,
+      @JsonKey(name: "is_reversed") required this.isReversed,
+      @JsonKey(name: "start_date") required this.startDate,
+      @JsonKey(name: "start_time") required this.startTime,
       @JsonKey(name: "customer_reference_number")
-          this.customer_reference_number});
+      this.customer_reference_number});
 
-  factory _$_TransactionBanner.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionBannerFromJson(json);
+  factory _$TransactionBannerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionBannerImplFromJson(json);
 
   @override
   @JsonKey(name: "uuid")
@@ -517,10 +485,10 @@ class _$_TransactionBanner implements _TransactionBanner {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionBanner &&
+            other is _$TransactionBannerImpl &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.scheme, scheme) || other.scheme == scheme) &&
             (identical(other.pan, pan) || other.pan == pan) &&
@@ -562,13 +530,13 @@ class _$_TransactionBanner implements _TransactionBanner {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionBannerCopyWith<_$_TransactionBanner> get copyWith =>
-      __$$_TransactionBannerCopyWithImpl<_$_TransactionBanner>(
+  _$$TransactionBannerImplCopyWith<_$TransactionBannerImpl> get copyWith =>
+      __$$TransactionBannerImplCopyWithImpl<_$TransactionBannerImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionBannerToJson(
+    return _$$TransactionBannerImplToJson(
       this,
     );
   }
@@ -576,31 +544,22 @@ class _$_TransactionBanner implements _TransactionBanner {
 
 abstract class _TransactionBanner implements TransactionBanner {
   const factory _TransactionBanner(
-      {@JsonKey(name: "uuid")
-          required final String uuid,
-      @JsonKey(name: "scheme")
-          required final String scheme,
-      @JsonKey(name: "pan")
-          required final String pan,
+      {@JsonKey(name: "uuid") required final String uuid,
+      @JsonKey(name: "scheme") required final String scheme,
+      @JsonKey(name: "pan") required final String pan,
       @JsonKey(name: "amount_authorized")
-          required final String amountAuthorized,
-      @JsonKey(name: "currency")
-          required final LocalizationField currency,
-      @JsonKey(name: "transaction_type")
-          required final String transactionType,
-      @JsonKey(name: "is_approved")
-          required final bool isApproved,
-      @JsonKey(name: "is_reversed")
-          required final bool isReversed,
-      @JsonKey(name: "start_date")
-          required final String startDate,
-      @JsonKey(name: "start_time")
-          required final String startTime,
+      required final String amountAuthorized,
+      @JsonKey(name: "currency") required final LocalizationField currency,
+      @JsonKey(name: "transaction_type") required final String transactionType,
+      @JsonKey(name: "is_approved") required final bool isApproved,
+      @JsonKey(name: "is_reversed") required final bool isReversed,
+      @JsonKey(name: "start_date") required final String startDate,
+      @JsonKey(name: "start_time") required final String startTime,
       @JsonKey(name: "customer_reference_number")
-          final String? customer_reference_number}) = _$_TransactionBanner;
+      final String? customer_reference_number}) = _$TransactionBannerImpl;
 
   factory _TransactionBanner.fromJson(Map<String, dynamic> json) =
-      _$_TransactionBanner.fromJson;
+      _$TransactionBannerImpl.fromJson;
 
   @override
   @JsonKey(name: "uuid")
@@ -637,6 +596,6 @@ abstract class _TransactionBanner implements TransactionBanner {
   String? get customer_reference_number;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionBannerCopyWith<_$_TransactionBanner> get copyWith =>
+  _$$TransactionBannerImplCopyWith<_$TransactionBannerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

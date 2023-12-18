@@ -36,7 +36,7 @@ android {
     }
 
     dependencies {
-    implementation "io.nearpay:nearpay-sdk:2.1.80"
+    implementation "io.nearpay:nearpay-sdk-store:2.1.77"
     implementation 'com.google.code.gson:gson:2.9.0'
     }
 }

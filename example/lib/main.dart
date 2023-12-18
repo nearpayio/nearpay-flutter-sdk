@@ -32,11 +32,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay(
-    authType: AuthenticationType.email,
+    authType: AuthenticationType.login,
     region: Regions.SAUDI,
-    authValue: "f.alhajeri@nearpay.io",
     env: Environments.sandbox,
-    locale: Locale.localeDefault,
+    locale: Locale.localeDefault, authValue: '',
   );
 
   Uint8List? bytes;

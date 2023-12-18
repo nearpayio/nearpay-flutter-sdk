@@ -36,3 +36,6 @@ class TransactionBanner with _$TransactionBanner {
   factory TransactionBanner.fromJson(Map<String, dynamic> json) =>
       _$TransactionBannerFromJson(json);
 }
+
+
+

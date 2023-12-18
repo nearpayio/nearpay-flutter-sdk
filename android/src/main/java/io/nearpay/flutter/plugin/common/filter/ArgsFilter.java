@@ -12,7 +12,7 @@ import java.util.UUID;
 import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
-//import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.Region;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
@@ -191,21 +191,21 @@ public class ArgsFilter {
                 : "please tap your card";
 
     }
-//
-//    public Region getRegion() {
-//        Map<String, Region> regionsMap = new HashMap<>();
-//
-//        regionsMap.put("SAUDI", Region.SAUDI);
-//        regionsMap.put("JORDAN", Region.JORDAN);
-//        regionsMap.put("AFRICA", Region.AFRICA);
-//
-//        String regionStr = savedArgs.get("region") != null ? (String) savedArgs.get("region")
-//                : "SAUDI";
-//
-//        Region result = regionsMap.get(regionStr);
-//
-//        return result;
-//    }
+
+    public Region getRegion() {
+        Map<String, Region> regionsMap = new HashMap<>();
+
+        regionsMap.put("SAUDI", Region.SAUDI);
+        regionsMap.put("JORDAN", Region.JORDAN);
+        regionsMap.put("AFRICA", Region.AFRICA);
+
+        String regionStr = savedArgs.get("region") != null ? (String) savedArgs.get("region")
+                : "SAUDI";
+
+        Region result = regionsMap.get(regionStr);
+
+        return result;
+    }
 
     @SuppressLint("NewApi")
     public LocalDateTime getStartDate() {

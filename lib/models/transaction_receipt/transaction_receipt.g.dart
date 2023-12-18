@@ -6,7 +6,8 @@ part of 'transaction_receipt.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TransactionData _$$_TransactionDataFromJson(Map json) => _$_TransactionData(
+_$TransactionDataImpl _$$TransactionDataImplFromJson(Map json) =>
+    _$TransactionDataImpl(
       receipts: (json['receipts'] as List<dynamic>?)
           ?.map((e) =>
               TransactionReceipt.fromJson(Map<String, dynamic>.from(e as Map)))
@@ -14,14 +15,15 @@ _$_TransactionData _$$_TransactionDataFromJson(Map json) => _$_TransactionData(
       isNewTransaction: json['isNewTransaction'] as bool?,
     );
 
-Map<String, dynamic> _$$_TransactionDataToJson(_$_TransactionData instance) =>
+Map<String, dynamic> _$$TransactionDataImplToJson(
+        _$TransactionDataImpl instance) =>
     <String, dynamic>{
       'receipts': instance.receipts?.map((e) => e.toJson()).toList(),
       'isNewTransaction': instance.isNewTransaction,
     };
 
-_$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
-    _$_TransactionReceipt(
+_$TransactionReceiptImpl _$$TransactionReceiptImplFromJson(Map json) =>
+    _$TransactionReceiptImpl(
       receipt_id: json['receipt_id'] as String,
       transaction_uuid: json['transaction_uuid'] as String,
       merchant:
@@ -30,20 +32,22 @@ _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
       start_time: json['start_time'] as String,
       card_scheme_sponsor: json['card_scheme_sponsor'] as String,
       tid: json['tid'] as String,
-      system_trace_audit_number: json['system_trace_audit_number'] as String,
+      system_trace_audit_number: json['system_trace_audit_number'] as String?,
       pos_software_version_number:
           json['pos_software_version_number'] as String,
-      retrieval_reference_number: json['retrieval_reference_number'] as String,
+      retrieval_reference_number: json['retrieval_reference_number'] as String?,
       card_scheme: NameField<String>.fromJson(
           Map<String, dynamic>.from(json['card_scheme'] as Map)),
       transaction_type: NameField<String>.fromJson(
           Map<String, dynamic>.from(json['transaction_type'] as Map)),
       pan: json['pan'] as String,
-      card_expiration: json['card_expiration'] as String,
+      card_expiration: json['card_expiration'] as String?,
       amount_authorized: LabelField<String>.fromJson(
           Map<String, dynamic>.from(json['amount_authorized'] as Map)),
-      amount_other: LabelField<String>.fromJson(
-          Map<String, dynamic>.from(json['amount_other'] as Map)),
+      amount_other: json['amount_other'] == null
+          ? null
+          : LabelField<String>.fromJson(
+              Map<String, dynamic>.from(json['amount_other'] as Map)),
       currency: LocalizationField.fromJson(
           Map<String, dynamic>.from(json['currency'] as Map)),
       status_message: LocalizationField.fromJson(
@@ -59,36 +63,53 @@ _$_TransactionReceipt _$$_TransactionReceiptFromJson(Map json) =>
           Map<String, dynamic>.from(json['verification_method'] as Map)),
       end_date: json['end_date'] as String,
       end_time: json['end_time'] as String,
-      receipt_line_one: LocalizationField.fromJson(
-          Map<String, dynamic>.from(json['receipt_line_one'] as Map)),
-      receipt_line_two: LocalizationField.fromJson(
-          Map<String, dynamic>.from(json['receipt_line_two'] as Map)),
-      thanks_message: LocalizationField.fromJson(
-          Map<String, dynamic>.from(json['thanks_message'] as Map)),
-      save_receipt_message: LocalizationField.fromJson(
-          Map<String, dynamic>.from(json['save_receipt_message'] as Map)),
-      entry_mode: json['entry_mode'] as String,
+      receipt_line_one: json['receipt_line_one'] == null
+          ? null
+          : LocalizationField.fromJson(
+              Map<String, dynamic>.from(json['receipt_line_one'] as Map)),
+      thanks_message: json['thanks_message'] == null
+          ? null
+          : LocalizationField.fromJson(
+              Map<String, dynamic>.from(json['thanks_message'] as Map)),
+      save_receipt_message: json['save_receipt_message'] == null
+          ? null
+          : LocalizationField.fromJson(
+              Map<String, dynamic>.from(json['save_receipt_message'] as Map)),
+      entry_mode: json['entry_mode'] as String?,
       action_code: json['action_code'] as String,
       application_identifier: json['application_identifier'] as String,
       terminal_verification_result:
           json['terminal_verification_result'] as String,
       transaction_state_information:
-          json['transaction_state_information'] as String,
+          json['transaction_state_information'] as String?,
       cardholader_verfication_result:
           json['cardholader_verfication_result'] as String,
       cryptogram_information_data:
-          json['cryptogram_information_data'] as String,
-      application_cryptogram: json['application_cryptogram'] as String,
-      kernel_id: json['kernel_id'] as String,
+          json['cryptogram_information_data'] as String?,
+      application_cryptogram: json['application_cryptogram'] as String?,
+      kernel_id: json['kernel_id'] as String?,
       payment_account_reference: json['payment_account_reference'] as String?,
+      receipt_line_two: json['receipt_line_two'] == null
+          ? null
+          : LocalizationField.fromJson(
+              Map<String, dynamic>.from(json['receipt_line_two'] as Map)),
       pan_suffix: json['pan_suffix'] as String?,
+      auth: json['auth'] as String?,
+      serial_num: json['serial_num'] as String?,
+      invoice: json['invoice'] as String?,
+      batch: json['batch'] as String?,
+      bank_net_data: json['bank_net_data'] as String?,
+      vas_data: json['vas_data'] as String?,
+      customer_reference_number:
+          json['customer_reference_number'] as String? ?? '',
       created_at: json['created_at'] as String? ?? '',
       updated_at: json['updated_at'] as String? ?? '',
+      receipt_standard: json['receipt_standard'] as String? ?? '',
       qr_code: json['qr_code'] as String,
     );
 
-Map<String, dynamic> _$$_TransactionReceiptToJson(
-        _$_TransactionReceipt instance) =>
+Map<String, dynamic> _$$TransactionReceiptImplToJson(
+        _$TransactionReceiptImpl instance) =>
     <String, dynamic>{
       'receipt_id': instance.receipt_id,
       'transaction_uuid': instance.transaction_uuid,
@@ -105,7 +126,7 @@ Map<String, dynamic> _$$_TransactionReceiptToJson(
       'pan': instance.pan,
       'card_expiration': instance.card_expiration,
       'amount_authorized': instance.amount_authorized.toJson(),
-      'amount_other': instance.amount_other.toJson(),
+      'amount_other': instance.amount_other?.toJson(),
       'currency': instance.currency.toJson(),
       'status_message': instance.status_message.toJson(),
       'is_approved': instance.is_approved,
@@ -115,10 +136,9 @@ Map<String, dynamic> _$$_TransactionReceiptToJson(
       'verification_method': instance.verification_method.toJson(),
       'end_date': instance.end_date,
       'end_time': instance.end_time,
-      'receipt_line_one': instance.receipt_line_one.toJson(),
-      'receipt_line_two': instance.receipt_line_two.toJson(),
-      'thanks_message': instance.thanks_message.toJson(),
-      'save_receipt_message': instance.save_receipt_message.toJson(),
+      'receipt_line_one': instance.receipt_line_one?.toJson(),
+      'thanks_message': instance.thanks_message?.toJson(),
+      'save_receipt_message': instance.save_receipt_message?.toJson(),
       'entry_mode': instance.entry_mode,
       'action_code': instance.action_code,
       'application_identifier': instance.application_identifier,
@@ -129,8 +149,17 @@ Map<String, dynamic> _$$_TransactionReceiptToJson(
       'application_cryptogram': instance.application_cryptogram,
       'kernel_id': instance.kernel_id,
       'payment_account_reference': instance.payment_account_reference,
+      'receipt_line_two': instance.receipt_line_two?.toJson(),
       'pan_suffix': instance.pan_suffix,
+      'auth': instance.auth,
+      'serial_num': instance.serial_num,
+      'invoice': instance.invoice,
+      'batch': instance.batch,
+      'bank_net_data': instance.bank_net_data,
+      'vas_data': instance.vas_data,
+      'customer_reference_number': instance.customer_reference_number,
       'created_at': instance.created_at,
       'updated_at': instance.updated_at,
+      'receipt_standard': instance.receipt_standard,
       'qr_code': instance.qr_code,
     };

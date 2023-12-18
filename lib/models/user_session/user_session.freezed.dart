@@ -104,11 +104,11 @@ class _$UserSessionCopyWithImpl<$Res, $Val extends UserSession>
 }
 
 /// @nodoc
-abstract class _$$_UserSessionCopyWith<$Res>
+abstract class _$$UserSessionImplCopyWith<$Res>
     implements $UserSessionCopyWith<$Res> {
-  factory _$$_UserSessionCopyWith(
-          _$_UserSession value, $Res Function(_$_UserSession) then) =
-      __$$_UserSessionCopyWithImpl<$Res>;
+  factory _$$UserSessionImplCopyWith(
+          _$UserSessionImpl value, $Res Function(_$UserSessionImpl) then) =
+      __$$UserSessionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -121,11 +121,11 @@ abstract class _$$_UserSessionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserSessionCopyWithImpl<$Res>
-    extends _$UserSessionCopyWithImpl<$Res, _$_UserSession>
-    implements _$$_UserSessionCopyWith<$Res> {
-  __$$_UserSessionCopyWithImpl(
-      _$_UserSession _value, $Res Function(_$_UserSession) _then)
+class __$$UserSessionImplCopyWithImpl<$Res>
+    extends _$UserSessionCopyWithImpl<$Res, _$UserSessionImpl>
+    implements _$$UserSessionImplCopyWith<$Res> {
+  __$$UserSessionImplCopyWithImpl(
+      _$UserSessionImpl _value, $Res Function(_$UserSessionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -138,7 +138,7 @@ class __$$_UserSessionCopyWithImpl<$Res>
     Object? merchantEn = freezed,
     Object? merchantAr = freezed,
   }) {
-    return _then(_$_UserSession(
+    return _then(_$UserSessionImpl(
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -169,8 +169,8 @@ class __$$_UserSessionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserSession implements _UserSession {
-  const _$_UserSession(
+class _$UserSessionImpl implements _UserSession {
+  const _$UserSessionImpl(
       {@JsonKey(name: "userName", defaultValue: null) this.userName,
       @JsonKey(name: "phone", defaultValue: null) this.phone,
       @JsonKey(name: "email", defaultValue: null) this.email,
@@ -178,8 +178,8 @@ class _$_UserSession implements _UserSession {
       @JsonKey(name: "merchantEn", defaultValue: null) this.merchantEn,
       @JsonKey(name: "merchantAr", defaultValue: null) this.merchantAr});
 
-  factory _$_UserSession.fromJson(Map<String, dynamic> json) =>
-      _$$_UserSessionFromJson(json);
+  factory _$UserSessionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserSessionImplFromJson(json);
 
   @override
   @JsonKey(name: "userName", defaultValue: null)
@@ -206,10 +206,10 @@ class _$_UserSession implements _UserSession {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserSession &&
+            other is _$UserSessionImpl &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -229,12 +229,12 @@ class _$_UserSession implements _UserSession {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserSessionCopyWith<_$_UserSession> get copyWith =>
-      __$$_UserSessionCopyWithImpl<_$_UserSession>(this, _$identity);
+  _$$UserSessionImplCopyWith<_$UserSessionImpl> get copyWith =>
+      __$$UserSessionImplCopyWithImpl<_$UserSessionImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserSessionToJson(
+    return _$$UserSessionImplToJson(
       this,
     );
   }
@@ -248,10 +248,10 @@ abstract class _UserSession implements UserSession {
       @JsonKey(name: "tid", defaultValue: null) final String? tid,
       @JsonKey(name: "merchantEn", defaultValue: null) final String? merchantEn,
       @JsonKey(name: "merchantAr", defaultValue: null)
-      final String? merchantAr}) = _$_UserSession;
+      final String? merchantAr}) = _$UserSessionImpl;
 
   factory _UserSession.fromJson(Map<String, dynamic> json) =
-      _$_UserSession.fromJson;
+      _$UserSessionImpl.fromJson;
 
   @override
   @JsonKey(name: "userName", defaultValue: null)
@@ -273,6 +273,6 @@ abstract class _UserSession implements UserSession {
   String? get merchantAr;
   @override
   @JsonKey(ignore: true)
-  _$$_UserSessionCopyWith<_$_UserSession> get copyWith =>
+  _$$UserSessionImplCopyWith<_$UserSessionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -64,23 +64,25 @@ class _$ReversalFailureMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReversalFailureMessageCopyWith<$Res>
+abstract class _$$ReversalFailureMessageImplCopyWith<$Res>
     implements $ReversalFailureMessageCopyWith<$Res> {
-  factory _$$_ReversalFailureMessageCopyWith(_$_ReversalFailureMessage value,
-          $Res Function(_$_ReversalFailureMessage) then) =
-      __$$_ReversalFailureMessageCopyWithImpl<$Res>;
+  factory _$$ReversalFailureMessageImplCopyWith(
+          _$ReversalFailureMessageImpl value,
+          $Res Function(_$ReversalFailureMessageImpl) then) =
+      __$$ReversalFailureMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ReversalFailureMessageCopyWithImpl<$Res>
+class __$$ReversalFailureMessageImplCopyWithImpl<$Res>
     extends _$ReversalFailureMessageCopyWithImpl<$Res,
-        _$_ReversalFailureMessage>
-    implements _$$_ReversalFailureMessageCopyWith<$Res> {
-  __$$_ReversalFailureMessageCopyWithImpl(_$_ReversalFailureMessage _value,
-      $Res Function(_$_ReversalFailureMessage) _then)
+        _$ReversalFailureMessageImpl>
+    implements _$$ReversalFailureMessageImplCopyWith<$Res> {
+  __$$ReversalFailureMessageImplCopyWithImpl(
+      _$ReversalFailureMessageImpl _value,
+      $Res Function(_$ReversalFailureMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_ReversalFailureMessageCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_ReversalFailureMessage(
+    return _then(_$ReversalFailureMessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -99,11 +101,11 @@ class __$$_ReversalFailureMessageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReversalFailureMessage implements _ReversalFailureMessage {
-  const _$_ReversalFailureMessage({required this.message});
+class _$ReversalFailureMessageImpl implements _ReversalFailureMessage {
+  const _$ReversalFailureMessageImpl({required this.message});
 
-  factory _$_ReversalFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_ReversalFailureMessageFromJson(json);
+  factory _$ReversalFailureMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReversalFailureMessageImplFromJson(json);
 
   @override
   final String message;
@@ -114,10 +116,10 @@ class _$_ReversalFailureMessage implements _ReversalFailureMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReversalFailureMessage &&
+            other is _$ReversalFailureMessageImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -128,13 +130,13 @@ class _$_ReversalFailureMessage implements _ReversalFailureMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReversalFailureMessageCopyWith<_$_ReversalFailureMessage> get copyWith =>
-      __$$_ReversalFailureMessageCopyWithImpl<_$_ReversalFailureMessage>(
-          this, _$identity);
+  _$$ReversalFailureMessageImplCopyWith<_$ReversalFailureMessageImpl>
+      get copyWith => __$$ReversalFailureMessageImplCopyWithImpl<
+          _$ReversalFailureMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReversalFailureMessageToJson(
+    return _$$ReversalFailureMessageImplToJson(
       this,
     );
   }
@@ -142,17 +144,17 @@ class _$_ReversalFailureMessage implements _ReversalFailureMessage {
 
 abstract class _ReversalFailureMessage implements ReversalFailureMessage {
   const factory _ReversalFailureMessage({required final String message}) =
-      _$_ReversalFailureMessage;
+      _$ReversalFailureMessageImpl;
 
   factory _ReversalFailureMessage.fromJson(Map<String, dynamic> json) =
-      _$_ReversalFailureMessage.fromJson;
+      _$ReversalFailureMessageImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ReversalFailureMessageCopyWith<_$_ReversalFailureMessage> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReversalFailureMessageImplCopyWith<_$ReversalFailureMessageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ReversalAuthenticationFailed _$ReversalAuthenticationFailedFromJson(
@@ -207,25 +209,25 @@ class _$ReversalAuthenticationFailedCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReversalAuthenticationFailedCopyWith<$Res>
+abstract class _$$ReversalAuthenticationFailedImplCopyWith<$Res>
     implements $ReversalAuthenticationFailedCopyWith<$Res> {
-  factory _$$_ReversalAuthenticationFailedCopyWith(
-          _$_ReversalAuthenticationFailed value,
-          $Res Function(_$_ReversalAuthenticationFailed) then) =
-      __$$_ReversalAuthenticationFailedCopyWithImpl<$Res>;
+  factory _$$ReversalAuthenticationFailedImplCopyWith(
+          _$ReversalAuthenticationFailedImpl value,
+          $Res Function(_$ReversalAuthenticationFailedImpl) then) =
+      __$$ReversalAuthenticationFailedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ReversalAuthenticationFailedCopyWithImpl<$Res>
+class __$$ReversalAuthenticationFailedImplCopyWithImpl<$Res>
     extends _$ReversalAuthenticationFailedCopyWithImpl<$Res,
-        _$_ReversalAuthenticationFailed>
-    implements _$$_ReversalAuthenticationFailedCopyWith<$Res> {
-  __$$_ReversalAuthenticationFailedCopyWithImpl(
-      _$_ReversalAuthenticationFailed _value,
-      $Res Function(_$_ReversalAuthenticationFailed) _then)
+        _$ReversalAuthenticationFailedImpl>
+    implements _$$ReversalAuthenticationFailedImplCopyWith<$Res> {
+  __$$ReversalAuthenticationFailedImplCopyWithImpl(
+      _$ReversalAuthenticationFailedImpl _value,
+      $Res Function(_$ReversalAuthenticationFailedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -233,7 +235,7 @@ class __$$_ReversalAuthenticationFailedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_ReversalAuthenticationFailed(
+    return _then(_$ReversalAuthenticationFailedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -244,11 +246,13 @@ class __$$_ReversalAuthenticationFailedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReversalAuthenticationFailed implements _ReversalAuthenticationFailed {
-  const _$_ReversalAuthenticationFailed({required this.message});
+class _$ReversalAuthenticationFailedImpl
+    implements _ReversalAuthenticationFailed {
+  const _$ReversalAuthenticationFailedImpl({required this.message});
 
-  factory _$_ReversalAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$$_ReversalAuthenticationFailedFromJson(json);
+  factory _$ReversalAuthenticationFailedImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ReversalAuthenticationFailedImplFromJson(json);
 
   @override
   final String message;
@@ -259,10 +263,10 @@ class _$_ReversalAuthenticationFailed implements _ReversalAuthenticationFailed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReversalAuthenticationFailed &&
+            other is _$ReversalAuthenticationFailedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -273,13 +277,14 @@ class _$_ReversalAuthenticationFailed implements _ReversalAuthenticationFailed {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReversalAuthenticationFailedCopyWith<_$_ReversalAuthenticationFailed>
-      get copyWith => __$$_ReversalAuthenticationFailedCopyWithImpl<
-          _$_ReversalAuthenticationFailed>(this, _$identity);
+  _$$ReversalAuthenticationFailedImplCopyWith<
+          _$ReversalAuthenticationFailedImpl>
+      get copyWith => __$$ReversalAuthenticationFailedImplCopyWithImpl<
+          _$ReversalAuthenticationFailedImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReversalAuthenticationFailedToJson(
+    return _$$ReversalAuthenticationFailedImplToJson(
       this,
     );
   }
@@ -288,16 +293,17 @@ class _$_ReversalAuthenticationFailed implements _ReversalAuthenticationFailed {
 abstract class _ReversalAuthenticationFailed
     implements ReversalAuthenticationFailed {
   const factory _ReversalAuthenticationFailed({required final String message}) =
-      _$_ReversalAuthenticationFailed;
+      _$ReversalAuthenticationFailedImpl;
 
   factory _ReversalAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_ReversalAuthenticationFailed.fromJson;
+      _$ReversalAuthenticationFailedImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ReversalAuthenticationFailedCopyWith<_$_ReversalAuthenticationFailed>
+  _$$ReversalAuthenticationFailedImplCopyWith<
+          _$ReversalAuthenticationFailedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -351,22 +357,24 @@ class _$ReversalInvalidStatusCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReversalInvalidStatusCopyWith<$Res>
+abstract class _$$ReversalInvalidStatusImplCopyWith<$Res>
     implements $ReversalInvalidStatusCopyWith<$Res> {
-  factory _$$_ReversalInvalidStatusCopyWith(_$_ReversalInvalidStatus value,
-          $Res Function(_$_ReversalInvalidStatus) then) =
-      __$$_ReversalInvalidStatusCopyWithImpl<$Res>;
+  factory _$$ReversalInvalidStatusImplCopyWith(
+          _$ReversalInvalidStatusImpl value,
+          $Res Function(_$ReversalInvalidStatusImpl) then) =
+      __$$ReversalInvalidStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_ReversalInvalidStatusCopyWithImpl<$Res>
-    extends _$ReversalInvalidStatusCopyWithImpl<$Res, _$_ReversalInvalidStatus>
-    implements _$$_ReversalInvalidStatusCopyWith<$Res> {
-  __$$_ReversalInvalidStatusCopyWithImpl(_$_ReversalInvalidStatus _value,
-      $Res Function(_$_ReversalInvalidStatus) _then)
+class __$$ReversalInvalidStatusImplCopyWithImpl<$Res>
+    extends _$ReversalInvalidStatusCopyWithImpl<$Res,
+        _$ReversalInvalidStatusImpl>
+    implements _$$ReversalInvalidStatusImplCopyWith<$Res> {
+  __$$ReversalInvalidStatusImplCopyWithImpl(_$ReversalInvalidStatusImpl _value,
+      $Res Function(_$ReversalInvalidStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -374,7 +382,7 @@ class __$$_ReversalInvalidStatusCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_ReversalInvalidStatus(
+    return _then(_$ReversalInvalidStatusImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -382,11 +390,11 @@ class __$$_ReversalInvalidStatusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReversalInvalidStatus implements _ReversalInvalidStatus {
-  const _$_ReversalInvalidStatus({this.required});
+class _$ReversalInvalidStatusImpl implements _ReversalInvalidStatus {
+  const _$ReversalInvalidStatusImpl({this.required});
 
-  factory _$_ReversalInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_ReversalInvalidStatusFromJson(json);
+  factory _$ReversalInvalidStatusImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReversalInvalidStatusImplFromJson(json);
 
   @override
   final dynamic required;
@@ -397,10 +405,10 @@ class _$_ReversalInvalidStatus implements _ReversalInvalidStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReversalInvalidStatus &&
+            other is _$ReversalInvalidStatusImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -412,13 +420,13 @@ class _$_ReversalInvalidStatus implements _ReversalInvalidStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReversalInvalidStatusCopyWith<_$_ReversalInvalidStatus> get copyWith =>
-      __$$_ReversalInvalidStatusCopyWithImpl<_$_ReversalInvalidStatus>(
-          this, _$identity);
+  _$$ReversalInvalidStatusImplCopyWith<_$ReversalInvalidStatusImpl>
+      get copyWith => __$$ReversalInvalidStatusImplCopyWithImpl<
+          _$ReversalInvalidStatusImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReversalInvalidStatusToJson(
+    return _$$ReversalInvalidStatusImplToJson(
       this,
     );
   }
@@ -426,17 +434,17 @@ class _$_ReversalInvalidStatus implements _ReversalInvalidStatus {
 
 abstract class _ReversalInvalidStatus implements ReversalInvalidStatus {
   const factory _ReversalInvalidStatus({final dynamic required}) =
-      _$_ReversalInvalidStatus;
+      _$ReversalInvalidStatusImpl;
 
   factory _ReversalInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_ReversalInvalidStatus.fromJson;
+      _$ReversalInvalidStatusImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_ReversalInvalidStatusCopyWith<_$_ReversalInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReversalInvalidStatusImplCopyWith<_$ReversalInvalidStatusImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ReversalGeneralFailure _$ReversalGeneralFailureFromJson(
@@ -489,23 +497,25 @@ class _$ReversalGeneralFailureCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReversalGeneralFailureCopyWith<$Res>
+abstract class _$$ReversalGeneralFailureImplCopyWith<$Res>
     implements $ReversalGeneralFailureCopyWith<$Res> {
-  factory _$$_ReversalGeneralFailureCopyWith(_$_ReversalGeneralFailure value,
-          $Res Function(_$_ReversalGeneralFailure) then) =
-      __$$_ReversalGeneralFailureCopyWithImpl<$Res>;
+  factory _$$ReversalGeneralFailureImplCopyWith(
+          _$ReversalGeneralFailureImpl value,
+          $Res Function(_$ReversalGeneralFailureImpl) then) =
+      __$$ReversalGeneralFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_ReversalGeneralFailureCopyWithImpl<$Res>
+class __$$ReversalGeneralFailureImplCopyWithImpl<$Res>
     extends _$ReversalGeneralFailureCopyWithImpl<$Res,
-        _$_ReversalGeneralFailure>
-    implements _$$_ReversalGeneralFailureCopyWith<$Res> {
-  __$$_ReversalGeneralFailureCopyWithImpl(_$_ReversalGeneralFailure _value,
-      $Res Function(_$_ReversalGeneralFailure) _then)
+        _$ReversalGeneralFailureImpl>
+    implements _$$ReversalGeneralFailureImplCopyWith<$Res> {
+  __$$ReversalGeneralFailureImplCopyWithImpl(
+      _$ReversalGeneralFailureImpl _value,
+      $Res Function(_$ReversalGeneralFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -513,7 +523,7 @@ class __$$_ReversalGeneralFailureCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_ReversalGeneralFailure(
+    return _then(_$ReversalGeneralFailureImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -521,11 +531,11 @@ class __$$_ReversalGeneralFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReversalGeneralFailure implements _ReversalGeneralFailure {
-  const _$_ReversalGeneralFailure({this.required});
+class _$ReversalGeneralFailureImpl implements _ReversalGeneralFailure {
+  const _$ReversalGeneralFailureImpl({this.required});
 
-  factory _$_ReversalGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_ReversalGeneralFailureFromJson(json);
+  factory _$ReversalGeneralFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReversalGeneralFailureImplFromJson(json);
 
   @override
   final dynamic required;
@@ -536,10 +546,10 @@ class _$_ReversalGeneralFailure implements _ReversalGeneralFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReversalGeneralFailure &&
+            other is _$ReversalGeneralFailureImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -551,13 +561,13 @@ class _$_ReversalGeneralFailure implements _ReversalGeneralFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReversalGeneralFailureCopyWith<_$_ReversalGeneralFailure> get copyWith =>
-      __$$_ReversalGeneralFailureCopyWithImpl<_$_ReversalGeneralFailure>(
-          this, _$identity);
+  _$$ReversalGeneralFailureImplCopyWith<_$ReversalGeneralFailureImpl>
+      get copyWith => __$$ReversalGeneralFailureImplCopyWithImpl<
+          _$ReversalGeneralFailureImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReversalGeneralFailureToJson(
+    return _$$ReversalGeneralFailureImplToJson(
       this,
     );
   }
@@ -565,15 +575,15 @@ class _$_ReversalGeneralFailure implements _ReversalGeneralFailure {
 
 abstract class _ReversalGeneralFailure implements ReversalGeneralFailure {
   const factory _ReversalGeneralFailure({final dynamic required}) =
-      _$_ReversalGeneralFailure;
+      _$ReversalGeneralFailureImpl;
 
   factory _ReversalGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_ReversalGeneralFailure.fromJson;
+      _$ReversalGeneralFailureImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_ReversalGeneralFailureCopyWith<_$_ReversalGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReversalGeneralFailureImplCopyWith<_$ReversalGeneralFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

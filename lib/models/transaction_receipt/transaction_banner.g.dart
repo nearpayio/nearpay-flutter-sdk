@@ -6,8 +6,8 @@ part of 'transaction_banner.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TransactionBannerList _$$_TransactionBannerListFromJson(Map json) =>
-    _$_TransactionBannerList(
+_$TransactionBannerListImpl _$$TransactionBannerListImplFromJson(Map json) =>
+    _$TransactionBannerListImpl(
       count: (json['count'] as num).toDouble(),
       transactionBanners: (json['transactionBanners'] as List<dynamic>?)
               ?.map((e) => TransactionBanner.fromJson(
@@ -16,16 +16,16 @@ _$_TransactionBannerList _$$_TransactionBannerListFromJson(Map json) =>
           [],
     );
 
-Map<String, dynamic> _$$_TransactionBannerListToJson(
-        _$_TransactionBannerList instance) =>
+Map<String, dynamic> _$$TransactionBannerListImplToJson(
+        _$TransactionBannerListImpl instance) =>
     <String, dynamic>{
       'count': instance.count,
       'transactionBanners':
           instance.transactionBanners.map((e) => e.toJson()).toList(),
     };
 
-_$_TransactionBanner _$$_TransactionBannerFromJson(Map json) =>
-    _$_TransactionBanner(
+_$TransactionBannerImpl _$$TransactionBannerImplFromJson(Map json) =>
+    _$TransactionBannerImpl(
       uuid: json['uuid'] as String,
       scheme: json['scheme'] as String,
       pan: json['pan'] as String,
@@ -40,8 +40,8 @@ _$_TransactionBanner _$$_TransactionBannerFromJson(Map json) =>
       customer_reference_number: json['customer_reference_number'] as String?,
     );
 
-Map<String, dynamic> _$$_TransactionBannerToJson(
-        _$_TransactionBanner instance) =>
+Map<String, dynamic> _$$TransactionBannerImplToJson(
+        _$TransactionBannerImpl instance) =>
     <String, dynamic>{
       'uuid': instance.uuid,
       'scheme': instance.scheme,

@@ -74,11 +74,11 @@ class _$TransactionDataCopyWithImpl<$Res, $Val extends TransactionData>
 }
 
 /// @nodoc
-abstract class _$$_TransactionDataCopyWith<$Res>
+abstract class _$$TransactionDataImplCopyWith<$Res>
     implements $TransactionDataCopyWith<$Res> {
-  factory _$$_TransactionDataCopyWith(
-          _$_TransactionData value, $Res Function(_$_TransactionData) then) =
-      __$$_TransactionDataCopyWithImpl<$Res>;
+  factory _$$TransactionDataImplCopyWith(_$TransactionDataImpl value,
+          $Res Function(_$TransactionDataImpl) then) =
+      __$$TransactionDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -89,11 +89,11 @@ abstract class _$$_TransactionDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TransactionDataCopyWithImpl<$Res>
-    extends _$TransactionDataCopyWithImpl<$Res, _$_TransactionData>
-    implements _$$_TransactionDataCopyWith<$Res> {
-  __$$_TransactionDataCopyWithImpl(
-      _$_TransactionData _value, $Res Function(_$_TransactionData) _then)
+class __$$TransactionDataImplCopyWithImpl<$Res>
+    extends _$TransactionDataCopyWithImpl<$Res, _$TransactionDataImpl>
+    implements _$$TransactionDataImplCopyWith<$Res> {
+  __$$TransactionDataImplCopyWithImpl(
+      _$TransactionDataImpl _value, $Res Function(_$TransactionDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_TransactionDataCopyWithImpl<$Res>
     Object? receipts = freezed,
     Object? isNewTransaction = freezed,
   }) {
-    return _then(_$_TransactionData(
+    return _then(_$TransactionDataImpl(
       receipts: freezed == receipts
           ? _value._receipts
           : receipts // ignore: cast_nullable_to_non_nullable
@@ -117,15 +117,15 @@ class __$$_TransactionDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionData implements _TransactionData {
-  const _$_TransactionData(
+class _$TransactionDataImpl implements _TransactionData {
+  const _$TransactionDataImpl(
       {@JsonKey(name: 'receipts', nullable: true)
       final List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true) this.isNewTransaction})
       : _receipts = receipts;
 
-  factory _$_TransactionData.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionDataFromJson(json);
+  factory _$TransactionDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionDataImplFromJson(json);
 
   final List<TransactionReceipt>? _receipts;
   @override
@@ -148,10 +148,10 @@ class _$_TransactionData implements _TransactionData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionData &&
+            other is _$TransactionDataImpl &&
             const DeepCollectionEquality().equals(other._receipts, _receipts) &&
             (identical(other.isNewTransaction, isNewTransaction) ||
                 other.isNewTransaction == isNewTransaction));
@@ -165,12 +165,13 @@ class _$_TransactionData implements _TransactionData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionDataCopyWith<_$_TransactionData> get copyWith =>
-      __$$_TransactionDataCopyWithImpl<_$_TransactionData>(this, _$identity);
+  _$$TransactionDataImplCopyWith<_$TransactionDataImpl> get copyWith =>
+      __$$TransactionDataImplCopyWithImpl<_$TransactionDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionDataToJson(
+    return _$$TransactionDataImplToJson(
       this,
     );
   }
@@ -181,10 +182,10 @@ abstract class _TransactionData implements TransactionData {
       {@JsonKey(name: 'receipts', nullable: true)
       final List<TransactionReceipt>? receipts,
       @JsonKey(name: 'isNewTransaction', nullable: true)
-      final bool? isNewTransaction}) = _$_TransactionData;
+      final bool? isNewTransaction}) = _$TransactionDataImpl;
 
   factory _TransactionData.fromJson(Map<String, dynamic> json) =
-      _$_TransactionData.fromJson;
+      _$TransactionDataImpl.fromJson;
 
   @override
   @JsonKey(name: 'receipts', nullable: true)
@@ -194,7 +195,7 @@ abstract class _TransactionData implements TransactionData {
   bool? get isNewTransaction;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionDataCopyWith<_$_TransactionData> get copyWith =>
+  _$$TransactionDataImplCopyWith<_$TransactionDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -218,25 +219,25 @@ mixin _$TransactionReceipt {
   String get card_scheme_sponsor => throw _privateConstructorUsedError;
   @JsonKey(name: "tid")
   String get tid => throw _privateConstructorUsedError;
-  @JsonKey(name: "system_trace_audit_number")
-  String get system_trace_audit_number => throw _privateConstructorUsedError;
+  @JsonKey(name: "system_trace_audit_number", nullable: true)
+  String? get system_trace_audit_number => throw _privateConstructorUsedError;
   @JsonKey(name: "pos_software_version_number")
   String get pos_software_version_number => throw _privateConstructorUsedError;
-  @JsonKey(name: "retrieval_reference_number")
-  String get retrieval_reference_number => throw _privateConstructorUsedError;
+  @JsonKey(name: "retrieval_reference_number", nullable: true)
+  String? get retrieval_reference_number => throw _privateConstructorUsedError;
   @JsonKey(name: "card_scheme")
   NameField<String> get card_scheme => throw _privateConstructorUsedError;
   @JsonKey(name: "transaction_type")
   NameField<String> get transaction_type => throw _privateConstructorUsedError;
   @JsonKey(name: "pan")
   String get pan => throw _privateConstructorUsedError;
-  @JsonKey(name: "card_expiration")
-  String get card_expiration => throw _privateConstructorUsedError;
+  @JsonKey(name: "card_expiration", nullable: true)
+  String? get card_expiration => throw _privateConstructorUsedError;
   @JsonKey(name: "amount_authorized")
   LabelField<String> get amount_authorized =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: "amount_other")
-  LabelField<String> get amount_other => throw _privateConstructorUsedError;
+  @JsonKey(name: "amount_other", nullable: true)
+  LabelField<String>? get amount_other => throw _privateConstructorUsedError;
   @JsonKey(name: "currency")
   LocalizationField get currency => throw _privateConstructorUsedError;
   @JsonKey(name: "status_message")
@@ -256,43 +257,59 @@ mixin _$TransactionReceipt {
   String get end_date => throw _privateConstructorUsedError;
   @JsonKey(name: "end_time")
   String get end_time => throw _privateConstructorUsedError;
-  @JsonKey(name: "receipt_line_one")
-  LocalizationField get receipt_line_one => throw _privateConstructorUsedError;
-  @JsonKey(name: "receipt_line_two")
-  LocalizationField get receipt_line_two => throw _privateConstructorUsedError;
-  @JsonKey(name: "thanks_message")
-  LocalizationField get thanks_message => throw _privateConstructorUsedError;
-  @JsonKey(name: "save_receipt_message")
-  LocalizationField get save_receipt_message =>
+  @JsonKey(name: "receipt_line_one", nullable: true)
+  LocalizationField? get receipt_line_one => throw _privateConstructorUsedError;
+  @JsonKey(name: "thanks_message", nullable: true)
+  LocalizationField? get thanks_message => throw _privateConstructorUsedError;
+  @JsonKey(name: "save_receipt_message", nullable: true)
+  LocalizationField? get save_receipt_message =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: "entry_mode")
-  String get entry_mode => throw _privateConstructorUsedError;
+  @JsonKey(name: "entry_mode", nullable: true)
+  String? get entry_mode => throw _privateConstructorUsedError;
   @JsonKey(name: "action_code")
   String get action_code => throw _privateConstructorUsedError;
   @JsonKey(name: "application_identifier")
   String get application_identifier => throw _privateConstructorUsedError;
   @JsonKey(name: "terminal_verification_result")
   String get terminal_verification_result => throw _privateConstructorUsedError;
-  @JsonKey(name: "transaction_state_information")
-  String get transaction_state_information =>
+  @JsonKey(name: "transaction_state_information", nullable: true)
+  String? get transaction_state_information =>
       throw _privateConstructorUsedError;
   @JsonKey(name: "cardholader_verfication_result")
   String get cardholader_verfication_result =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: "cryptogram_information_data")
-  String get cryptogram_information_data => throw _privateConstructorUsedError;
-  @JsonKey(name: "application_cryptogram")
-  String get application_cryptogram => throw _privateConstructorUsedError;
-  @JsonKey(name: "kernel_id")
-  String get kernel_id => throw _privateConstructorUsedError;
+  @JsonKey(name: "cryptogram_information_data", nullable: true)
+  String? get cryptogram_information_data => throw _privateConstructorUsedError;
+  @JsonKey(name: "application_cryptogram", nullable: true)
+  String? get application_cryptogram => throw _privateConstructorUsedError;
+  @JsonKey(name: "kernel_id", nullable: true)
+  String? get kernel_id => throw _privateConstructorUsedError;
   @JsonKey(name: "payment_account_reference", nullable: true)
   String? get payment_account_reference => throw _privateConstructorUsedError;
+  @JsonKey(name: "receipt_line_two", nullable: true)
+  LocalizationField? get receipt_line_two => throw _privateConstructorUsedError;
   @JsonKey(name: "pan_suffix", nullable: true)
   String? get pan_suffix => throw _privateConstructorUsedError;
+  @JsonKey(name: "auth", nullable: true)
+  String? get auth => throw _privateConstructorUsedError;
+  @JsonKey(name: "serial_num", nullable: true)
+  String? get serial_num => throw _privateConstructorUsedError;
+  @JsonKey(name: "invoice", nullable: true)
+  String? get invoice => throw _privateConstructorUsedError;
+  @JsonKey(name: "batch", nullable: true)
+  String? get batch => throw _privateConstructorUsedError;
+  @JsonKey(name: "bank_net_data", nullable: true)
+  String? get bank_net_data => throw _privateConstructorUsedError;
+  @JsonKey(name: "vas_data", nullable: true)
+  String? get vas_data => throw _privateConstructorUsedError;
+  @JsonKey(name: "customer_reference_number", nullable: true, defaultValue: "")
+  String? get customer_reference_number => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at", nullable: true, defaultValue: "")
   String? get created_at => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
   String? get updated_at => throw _privateConstructorUsedError;
+  @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+  String? get receipt_standard => throw _privateConstructorUsedError;
   @JsonKey(name: "qr_code")
   String get qr_code => throw _privateConstructorUsedError;
 
@@ -316,18 +333,19 @@ abstract class $TransactionReceiptCopyWith<$Res> {
       @JsonKey(name: "start_time") String start_time,
       @JsonKey(name: "card_scheme_sponsor") String card_scheme_sponsor,
       @JsonKey(name: "tid") String tid,
-      @JsonKey(name: "system_trace_audit_number")
-      String system_trace_audit_number,
+      @JsonKey(name: "system_trace_audit_number", nullable: true)
+      String? system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
       String pos_software_version_number,
-      @JsonKey(name: "retrieval_reference_number")
-      String retrieval_reference_number,
+      @JsonKey(name: "retrieval_reference_number", nullable: true)
+      String? retrieval_reference_number,
       @JsonKey(name: "card_scheme") NameField<String> card_scheme,
       @JsonKey(name: "transaction_type") NameField<String> transaction_type,
       @JsonKey(name: "pan") String pan,
-      @JsonKey(name: "card_expiration") String card_expiration,
+      @JsonKey(name: "card_expiration", nullable: true) String? card_expiration,
       @JsonKey(name: "amount_authorized") LabelField<String> amount_authorized,
-      @JsonKey(name: "amount_other") LabelField<String> amount_other,
+      @JsonKey(name: "amount_other", nullable: true)
+      LabelField<String>? amount_other,
       @JsonKey(name: "currency") LocalizationField currency,
       @JsonKey(name: "status_message") LocalizationField status_message,
       @JsonKey(name: "is_approved") bool is_approved,
@@ -339,38 +357,53 @@ abstract class $TransactionReceiptCopyWith<$Res> {
       LocalizationField verification_method,
       @JsonKey(name: "end_date") String end_date,
       @JsonKey(name: "end_time") String end_time,
-      @JsonKey(name: "receipt_line_one") LocalizationField receipt_line_one,
-      @JsonKey(name: "receipt_line_two") LocalizationField receipt_line_two,
-      @JsonKey(name: "thanks_message") LocalizationField thanks_message,
-      @JsonKey(name: "save_receipt_message")
-      LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode") String entry_mode,
+      @JsonKey(name: "receipt_line_one", nullable: true)
+      LocalizationField? receipt_line_one,
+      @JsonKey(name: "thanks_message", nullable: true)
+      LocalizationField? thanks_message,
+      @JsonKey(name: "save_receipt_message", nullable: true)
+      LocalizationField? save_receipt_message,
+      @JsonKey(name: "entry_mode", nullable: true) String? entry_mode,
       @JsonKey(name: "action_code") String action_code,
       @JsonKey(name: "application_identifier") String application_identifier,
       @JsonKey(name: "terminal_verification_result")
       String terminal_verification_result,
-      @JsonKey(name: "transaction_state_information")
-      String transaction_state_information,
+      @JsonKey(name: "transaction_state_information", nullable: true)
+      String? transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
       String cardholader_verfication_result,
-      @JsonKey(name: "cryptogram_information_data")
-      String cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram") String application_cryptogram,
-      @JsonKey(name: "kernel_id") String kernel_id,
+      @JsonKey(name: "cryptogram_information_data", nullable: true)
+      String? cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram", nullable: true)
+      String? application_cryptogram,
+      @JsonKey(name: "kernel_id", nullable: true) String? kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
       String? payment_account_reference,
+      @JsonKey(name: "receipt_line_two", nullable: true)
+      LocalizationField? receipt_line_two,
       @JsonKey(name: "pan_suffix", nullable: true) String? pan_suffix,
+      @JsonKey(name: "auth", nullable: true) String? auth,
+      @JsonKey(name: "serial_num", nullable: true) String? serial_num,
+      @JsonKey(name: "invoice", nullable: true) String? invoice,
+      @JsonKey(name: "batch", nullable: true) String? batch,
+      @JsonKey(name: "bank_net_data", nullable: true) String? bank_net_data,
+      @JsonKey(name: "vas_data", nullable: true) String? vas_data,
+      @JsonKey(
+          name: "customer_reference_number", nullable: true, defaultValue: "")
+      String? customer_reference_number,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
       String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
       String? updated_at,
+      @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+      String? receipt_standard,
       @JsonKey(name: "qr_code") String qr_code});
 
   $MerchantCopyWith<$Res> get merchant;
   $NameFieldCopyWith<String, $Res> get card_scheme;
   $NameFieldCopyWith<String, $Res> get transaction_type;
   $LabelFieldCopyWith<String, $Res> get amount_authorized;
-  $LabelFieldCopyWith<String, $Res> get amount_other;
+  $LabelFieldCopyWith<String, $Res>? get amount_other;
   $LabelFieldCopyWith<String, $Res>? get approval_code;
 }
 
@@ -394,15 +427,15 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
     Object? start_time = null,
     Object? card_scheme_sponsor = null,
     Object? tid = null,
-    Object? system_trace_audit_number = null,
+    Object? system_trace_audit_number = freezed,
     Object? pos_software_version_number = null,
-    Object? retrieval_reference_number = null,
+    Object? retrieval_reference_number = freezed,
     Object? card_scheme = null,
     Object? transaction_type = null,
     Object? pan = null,
-    Object? card_expiration = null,
+    Object? card_expiration = freezed,
     Object? amount_authorized = null,
-    Object? amount_other = null,
+    Object? amount_other = freezed,
     Object? currency = null,
     Object? status_message = null,
     Object? is_approved = null,
@@ -412,23 +445,31 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
     Object? verification_method = null,
     Object? end_date = null,
     Object? end_time = null,
-    Object? receipt_line_one = null,
-    Object? receipt_line_two = null,
-    Object? thanks_message = null,
-    Object? save_receipt_message = null,
-    Object? entry_mode = null,
+    Object? receipt_line_one = freezed,
+    Object? thanks_message = freezed,
+    Object? save_receipt_message = freezed,
+    Object? entry_mode = freezed,
     Object? action_code = null,
     Object? application_identifier = null,
     Object? terminal_verification_result = null,
-    Object? transaction_state_information = null,
+    Object? transaction_state_information = freezed,
     Object? cardholader_verfication_result = null,
-    Object? cryptogram_information_data = null,
-    Object? application_cryptogram = null,
-    Object? kernel_id = null,
+    Object? cryptogram_information_data = freezed,
+    Object? application_cryptogram = freezed,
+    Object? kernel_id = freezed,
     Object? payment_account_reference = freezed,
+    Object? receipt_line_two = freezed,
     Object? pan_suffix = freezed,
+    Object? auth = freezed,
+    Object? serial_num = freezed,
+    Object? invoice = freezed,
+    Object? batch = freezed,
+    Object? bank_net_data = freezed,
+    Object? vas_data = freezed,
+    Object? customer_reference_number = freezed,
     Object? created_at = freezed,
     Object? updated_at = freezed,
+    Object? receipt_standard = freezed,
     Object? qr_code = null,
   }) {
     return _then(_value.copyWith(
@@ -460,18 +501,18 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
           ? _value.tid
           : tid // ignore: cast_nullable_to_non_nullable
               as String,
-      system_trace_audit_number: null == system_trace_audit_number
+      system_trace_audit_number: freezed == system_trace_audit_number
           ? _value.system_trace_audit_number
           : system_trace_audit_number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       pos_software_version_number: null == pos_software_version_number
           ? _value.pos_software_version_number
           : pos_software_version_number // ignore: cast_nullable_to_non_nullable
               as String,
-      retrieval_reference_number: null == retrieval_reference_number
+      retrieval_reference_number: freezed == retrieval_reference_number
           ? _value.retrieval_reference_number
           : retrieval_reference_number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       card_scheme: null == card_scheme
           ? _value.card_scheme
           : card_scheme // ignore: cast_nullable_to_non_nullable
@@ -484,18 +525,18 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
               as String,
-      card_expiration: null == card_expiration
+      card_expiration: freezed == card_expiration
           ? _value.card_expiration
           : card_expiration // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       amount_authorized: null == amount_authorized
           ? _value.amount_authorized
           : amount_authorized // ignore: cast_nullable_to_non_nullable
               as LabelField<String>,
-      amount_other: null == amount_other
+      amount_other: freezed == amount_other
           ? _value.amount_other
           : amount_other // ignore: cast_nullable_to_non_nullable
-              as LabelField<String>,
+              as LabelField<String>?,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -532,26 +573,22 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
           ? _value.end_time
           : end_time // ignore: cast_nullable_to_non_nullable
               as String,
-      receipt_line_one: null == receipt_line_one
+      receipt_line_one: freezed == receipt_line_one
           ? _value.receipt_line_one
           : receipt_line_one // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      receipt_line_two: null == receipt_line_two
-          ? _value.receipt_line_two
-          : receipt_line_two // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      thanks_message: null == thanks_message
+              as LocalizationField?,
+      thanks_message: freezed == thanks_message
           ? _value.thanks_message
           : thanks_message // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      save_receipt_message: null == save_receipt_message
+              as LocalizationField?,
+      save_receipt_message: freezed == save_receipt_message
           ? _value.save_receipt_message
           : save_receipt_message // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      entry_mode: null == entry_mode
+              as LocalizationField?,
+      entry_mode: freezed == entry_mode
           ? _value.entry_mode
           : entry_mode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       action_code: null == action_code
           ? _value.action_code
           : action_code // ignore: cast_nullable_to_non_nullable
@@ -564,33 +601,65 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
           ? _value.terminal_verification_result
           : terminal_verification_result // ignore: cast_nullable_to_non_nullable
               as String,
-      transaction_state_information: null == transaction_state_information
+      transaction_state_information: freezed == transaction_state_information
           ? _value.transaction_state_information
           : transaction_state_information // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       cardholader_verfication_result: null == cardholader_verfication_result
           ? _value.cardholader_verfication_result
           : cardholader_verfication_result // ignore: cast_nullable_to_non_nullable
               as String,
-      cryptogram_information_data: null == cryptogram_information_data
+      cryptogram_information_data: freezed == cryptogram_information_data
           ? _value.cryptogram_information_data
           : cryptogram_information_data // ignore: cast_nullable_to_non_nullable
-              as String,
-      application_cryptogram: null == application_cryptogram
+              as String?,
+      application_cryptogram: freezed == application_cryptogram
           ? _value.application_cryptogram
           : application_cryptogram // ignore: cast_nullable_to_non_nullable
-              as String,
-      kernel_id: null == kernel_id
+              as String?,
+      kernel_id: freezed == kernel_id
           ? _value.kernel_id
           : kernel_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       payment_account_reference: freezed == payment_account_reference
           ? _value.payment_account_reference
           : payment_account_reference // ignore: cast_nullable_to_non_nullable
               as String?,
+      receipt_line_two: freezed == receipt_line_two
+          ? _value.receipt_line_two
+          : receipt_line_two // ignore: cast_nullable_to_non_nullable
+              as LocalizationField?,
       pan_suffix: freezed == pan_suffix
           ? _value.pan_suffix
           : pan_suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      auth: freezed == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serial_num: freezed == serial_num
+          ? _value.serial_num
+          : serial_num // ignore: cast_nullable_to_non_nullable
+              as String?,
+      invoice: freezed == invoice
+          ? _value.invoice
+          : invoice // ignore: cast_nullable_to_non_nullable
+              as String?,
+      batch: freezed == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bank_net_data: freezed == bank_net_data
+          ? _value.bank_net_data
+          : bank_net_data // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vas_data: freezed == vas_data
+          ? _value.vas_data
+          : vas_data // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customer_reference_number: freezed == customer_reference_number
+          ? _value.customer_reference_number
+          : customer_reference_number // ignore: cast_nullable_to_non_nullable
               as String?,
       created_at: freezed == created_at
           ? _value.created_at
@@ -599,6 +668,10 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
       updated_at: freezed == updated_at
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
+              as String?,
+      receipt_standard: freezed == receipt_standard
+          ? _value.receipt_standard
+          : receipt_standard // ignore: cast_nullable_to_non_nullable
               as String?,
       qr_code: null == qr_code
           ? _value.qr_code
@@ -641,8 +714,12 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
 
   @override
   @pragma('vm:prefer-inline')
-  $LabelFieldCopyWith<String, $Res> get amount_other {
-    return $LabelFieldCopyWith<String, $Res>(_value.amount_other, (value) {
+  $LabelFieldCopyWith<String, $Res>? get amount_other {
+    if (_value.amount_other == null) {
+      return null;
+    }
+
+    return $LabelFieldCopyWith<String, $Res>(_value.amount_other!, (value) {
       return _then(_value.copyWith(amount_other: value) as $Val);
     });
   }
@@ -661,11 +738,11 @@ class _$TransactionReceiptCopyWithImpl<$Res, $Val extends TransactionReceipt>
 }
 
 /// @nodoc
-abstract class _$$_TransactionReceiptCopyWith<$Res>
+abstract class _$$TransactionReceiptImplCopyWith<$Res>
     implements $TransactionReceiptCopyWith<$Res> {
-  factory _$$_TransactionReceiptCopyWith(_$_TransactionReceipt value,
-          $Res Function(_$_TransactionReceipt) then) =
-      __$$_TransactionReceiptCopyWithImpl<$Res>;
+  factory _$$TransactionReceiptImplCopyWith(_$TransactionReceiptImpl value,
+          $Res Function(_$TransactionReceiptImpl) then) =
+      __$$TransactionReceiptImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -676,18 +753,19 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
       @JsonKey(name: "start_time") String start_time,
       @JsonKey(name: "card_scheme_sponsor") String card_scheme_sponsor,
       @JsonKey(name: "tid") String tid,
-      @JsonKey(name: "system_trace_audit_number")
-      String system_trace_audit_number,
+      @JsonKey(name: "system_trace_audit_number", nullable: true)
+      String? system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
       String pos_software_version_number,
-      @JsonKey(name: "retrieval_reference_number")
-      String retrieval_reference_number,
+      @JsonKey(name: "retrieval_reference_number", nullable: true)
+      String? retrieval_reference_number,
       @JsonKey(name: "card_scheme") NameField<String> card_scheme,
       @JsonKey(name: "transaction_type") NameField<String> transaction_type,
       @JsonKey(name: "pan") String pan,
-      @JsonKey(name: "card_expiration") String card_expiration,
+      @JsonKey(name: "card_expiration", nullable: true) String? card_expiration,
       @JsonKey(name: "amount_authorized") LabelField<String> amount_authorized,
-      @JsonKey(name: "amount_other") LabelField<String> amount_other,
+      @JsonKey(name: "amount_other", nullable: true)
+      LabelField<String>? amount_other,
       @JsonKey(name: "currency") LocalizationField currency,
       @JsonKey(name: "status_message") LocalizationField status_message,
       @JsonKey(name: "is_approved") bool is_approved,
@@ -699,31 +777,46 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
       LocalizationField verification_method,
       @JsonKey(name: "end_date") String end_date,
       @JsonKey(name: "end_time") String end_time,
-      @JsonKey(name: "receipt_line_one") LocalizationField receipt_line_one,
-      @JsonKey(name: "receipt_line_two") LocalizationField receipt_line_two,
-      @JsonKey(name: "thanks_message") LocalizationField thanks_message,
-      @JsonKey(name: "save_receipt_message")
-      LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode") String entry_mode,
+      @JsonKey(name: "receipt_line_one", nullable: true)
+      LocalizationField? receipt_line_one,
+      @JsonKey(name: "thanks_message", nullable: true)
+      LocalizationField? thanks_message,
+      @JsonKey(name: "save_receipt_message", nullable: true)
+      LocalizationField? save_receipt_message,
+      @JsonKey(name: "entry_mode", nullable: true) String? entry_mode,
       @JsonKey(name: "action_code") String action_code,
       @JsonKey(name: "application_identifier") String application_identifier,
       @JsonKey(name: "terminal_verification_result")
       String terminal_verification_result,
-      @JsonKey(name: "transaction_state_information")
-      String transaction_state_information,
+      @JsonKey(name: "transaction_state_information", nullable: true)
+      String? transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
       String cardholader_verfication_result,
-      @JsonKey(name: "cryptogram_information_data")
-      String cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram") String application_cryptogram,
-      @JsonKey(name: "kernel_id") String kernel_id,
+      @JsonKey(name: "cryptogram_information_data", nullable: true)
+      String? cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram", nullable: true)
+      String? application_cryptogram,
+      @JsonKey(name: "kernel_id", nullable: true) String? kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
       String? payment_account_reference,
+      @JsonKey(name: "receipt_line_two", nullable: true)
+      LocalizationField? receipt_line_two,
       @JsonKey(name: "pan_suffix", nullable: true) String? pan_suffix,
+      @JsonKey(name: "auth", nullable: true) String? auth,
+      @JsonKey(name: "serial_num", nullable: true) String? serial_num,
+      @JsonKey(name: "invoice", nullable: true) String? invoice,
+      @JsonKey(name: "batch", nullable: true) String? batch,
+      @JsonKey(name: "bank_net_data", nullable: true) String? bank_net_data,
+      @JsonKey(name: "vas_data", nullable: true) String? vas_data,
+      @JsonKey(
+          name: "customer_reference_number", nullable: true, defaultValue: "")
+      String? customer_reference_number,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
       String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
       String? updated_at,
+      @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+      String? receipt_standard,
       @JsonKey(name: "qr_code") String qr_code});
 
   @override
@@ -735,17 +828,17 @@ abstract class _$$_TransactionReceiptCopyWith<$Res>
   @override
   $LabelFieldCopyWith<String, $Res> get amount_authorized;
   @override
-  $LabelFieldCopyWith<String, $Res> get amount_other;
+  $LabelFieldCopyWith<String, $Res>? get amount_other;
   @override
   $LabelFieldCopyWith<String, $Res>? get approval_code;
 }
 
 /// @nodoc
-class __$$_TransactionReceiptCopyWithImpl<$Res>
-    extends _$TransactionReceiptCopyWithImpl<$Res, _$_TransactionReceipt>
-    implements _$$_TransactionReceiptCopyWith<$Res> {
-  __$$_TransactionReceiptCopyWithImpl(
-      _$_TransactionReceipt _value, $Res Function(_$_TransactionReceipt) _then)
+class __$$TransactionReceiptImplCopyWithImpl<$Res>
+    extends _$TransactionReceiptCopyWithImpl<$Res, _$TransactionReceiptImpl>
+    implements _$$TransactionReceiptImplCopyWith<$Res> {
+  __$$TransactionReceiptImplCopyWithImpl(_$TransactionReceiptImpl _value,
+      $Res Function(_$TransactionReceiptImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -758,15 +851,15 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
     Object? start_time = null,
     Object? card_scheme_sponsor = null,
     Object? tid = null,
-    Object? system_trace_audit_number = null,
+    Object? system_trace_audit_number = freezed,
     Object? pos_software_version_number = null,
-    Object? retrieval_reference_number = null,
+    Object? retrieval_reference_number = freezed,
     Object? card_scheme = null,
     Object? transaction_type = null,
     Object? pan = null,
-    Object? card_expiration = null,
+    Object? card_expiration = freezed,
     Object? amount_authorized = null,
-    Object? amount_other = null,
+    Object? amount_other = freezed,
     Object? currency = null,
     Object? status_message = null,
     Object? is_approved = null,
@@ -776,26 +869,34 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
     Object? verification_method = null,
     Object? end_date = null,
     Object? end_time = null,
-    Object? receipt_line_one = null,
-    Object? receipt_line_two = null,
-    Object? thanks_message = null,
-    Object? save_receipt_message = null,
-    Object? entry_mode = null,
+    Object? receipt_line_one = freezed,
+    Object? thanks_message = freezed,
+    Object? save_receipt_message = freezed,
+    Object? entry_mode = freezed,
     Object? action_code = null,
     Object? application_identifier = null,
     Object? terminal_verification_result = null,
-    Object? transaction_state_information = null,
+    Object? transaction_state_information = freezed,
     Object? cardholader_verfication_result = null,
-    Object? cryptogram_information_data = null,
-    Object? application_cryptogram = null,
-    Object? kernel_id = null,
+    Object? cryptogram_information_data = freezed,
+    Object? application_cryptogram = freezed,
+    Object? kernel_id = freezed,
     Object? payment_account_reference = freezed,
+    Object? receipt_line_two = freezed,
     Object? pan_suffix = freezed,
+    Object? auth = freezed,
+    Object? serial_num = freezed,
+    Object? invoice = freezed,
+    Object? batch = freezed,
+    Object? bank_net_data = freezed,
+    Object? vas_data = freezed,
+    Object? customer_reference_number = freezed,
     Object? created_at = freezed,
     Object? updated_at = freezed,
+    Object? receipt_standard = freezed,
     Object? qr_code = null,
   }) {
-    return _then(_$_TransactionReceipt(
+    return _then(_$TransactionReceiptImpl(
       receipt_id: null == receipt_id
           ? _value.receipt_id
           : receipt_id // ignore: cast_nullable_to_non_nullable
@@ -824,18 +925,18 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
           ? _value.tid
           : tid // ignore: cast_nullable_to_non_nullable
               as String,
-      system_trace_audit_number: null == system_trace_audit_number
+      system_trace_audit_number: freezed == system_trace_audit_number
           ? _value.system_trace_audit_number
           : system_trace_audit_number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       pos_software_version_number: null == pos_software_version_number
           ? _value.pos_software_version_number
           : pos_software_version_number // ignore: cast_nullable_to_non_nullable
               as String,
-      retrieval_reference_number: null == retrieval_reference_number
+      retrieval_reference_number: freezed == retrieval_reference_number
           ? _value.retrieval_reference_number
           : retrieval_reference_number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       card_scheme: null == card_scheme
           ? _value.card_scheme
           : card_scheme // ignore: cast_nullable_to_non_nullable
@@ -848,18 +949,18 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
           ? _value.pan
           : pan // ignore: cast_nullable_to_non_nullable
               as String,
-      card_expiration: null == card_expiration
+      card_expiration: freezed == card_expiration
           ? _value.card_expiration
           : card_expiration // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       amount_authorized: null == amount_authorized
           ? _value.amount_authorized
           : amount_authorized // ignore: cast_nullable_to_non_nullable
               as LabelField<String>,
-      amount_other: null == amount_other
+      amount_other: freezed == amount_other
           ? _value.amount_other
           : amount_other // ignore: cast_nullable_to_non_nullable
-              as LabelField<String>,
+              as LabelField<String>?,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -896,26 +997,22 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
           ? _value.end_time
           : end_time // ignore: cast_nullable_to_non_nullable
               as String,
-      receipt_line_one: null == receipt_line_one
+      receipt_line_one: freezed == receipt_line_one
           ? _value.receipt_line_one
           : receipt_line_one // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      receipt_line_two: null == receipt_line_two
-          ? _value.receipt_line_two
-          : receipt_line_two // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      thanks_message: null == thanks_message
+              as LocalizationField?,
+      thanks_message: freezed == thanks_message
           ? _value.thanks_message
           : thanks_message // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      save_receipt_message: null == save_receipt_message
+              as LocalizationField?,
+      save_receipt_message: freezed == save_receipt_message
           ? _value.save_receipt_message
           : save_receipt_message // ignore: cast_nullable_to_non_nullable
-              as LocalizationField,
-      entry_mode: null == entry_mode
+              as LocalizationField?,
+      entry_mode: freezed == entry_mode
           ? _value.entry_mode
           : entry_mode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       action_code: null == action_code
           ? _value.action_code
           : action_code // ignore: cast_nullable_to_non_nullable
@@ -928,33 +1025,65 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
           ? _value.terminal_verification_result
           : terminal_verification_result // ignore: cast_nullable_to_non_nullable
               as String,
-      transaction_state_information: null == transaction_state_information
+      transaction_state_information: freezed == transaction_state_information
           ? _value.transaction_state_information
           : transaction_state_information // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       cardholader_verfication_result: null == cardholader_verfication_result
           ? _value.cardholader_verfication_result
           : cardholader_verfication_result // ignore: cast_nullable_to_non_nullable
               as String,
-      cryptogram_information_data: null == cryptogram_information_data
+      cryptogram_information_data: freezed == cryptogram_information_data
           ? _value.cryptogram_information_data
           : cryptogram_information_data // ignore: cast_nullable_to_non_nullable
-              as String,
-      application_cryptogram: null == application_cryptogram
+              as String?,
+      application_cryptogram: freezed == application_cryptogram
           ? _value.application_cryptogram
           : application_cryptogram // ignore: cast_nullable_to_non_nullable
-              as String,
-      kernel_id: null == kernel_id
+              as String?,
+      kernel_id: freezed == kernel_id
           ? _value.kernel_id
           : kernel_id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       payment_account_reference: freezed == payment_account_reference
           ? _value.payment_account_reference
           : payment_account_reference // ignore: cast_nullable_to_non_nullable
               as String?,
+      receipt_line_two: freezed == receipt_line_two
+          ? _value.receipt_line_two
+          : receipt_line_two // ignore: cast_nullable_to_non_nullable
+              as LocalizationField?,
       pan_suffix: freezed == pan_suffix
           ? _value.pan_suffix
           : pan_suffix // ignore: cast_nullable_to_non_nullable
+              as String?,
+      auth: freezed == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as String?,
+      serial_num: freezed == serial_num
+          ? _value.serial_num
+          : serial_num // ignore: cast_nullable_to_non_nullable
+              as String?,
+      invoice: freezed == invoice
+          ? _value.invoice
+          : invoice // ignore: cast_nullable_to_non_nullable
+              as String?,
+      batch: freezed == batch
+          ? _value.batch
+          : batch // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bank_net_data: freezed == bank_net_data
+          ? _value.bank_net_data
+          : bank_net_data // ignore: cast_nullable_to_non_nullable
+              as String?,
+      vas_data: freezed == vas_data
+          ? _value.vas_data
+          : vas_data // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customer_reference_number: freezed == customer_reference_number
+          ? _value.customer_reference_number
+          : customer_reference_number // ignore: cast_nullable_to_non_nullable
               as String?,
       created_at: freezed == created_at
           ? _value.created_at
@@ -963,6 +1092,10 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
       updated_at: freezed == updated_at
           ? _value.updated_at
           : updated_at // ignore: cast_nullable_to_non_nullable
+              as String?,
+      receipt_standard: freezed == receipt_standard
+          ? _value.receipt_standard
+          : receipt_standard // ignore: cast_nullable_to_non_nullable
               as String?,
       qr_code: null == qr_code
           ? _value.qr_code
@@ -974,8 +1107,8 @@ class __$$_TransactionReceiptCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TransactionReceipt implements _TransactionReceipt {
-  const _$_TransactionReceipt(
+class _$TransactionReceiptImpl implements _TransactionReceipt {
+  const _$TransactionReceiptImpl(
       {@JsonKey(name: "receipt_id") required this.receipt_id,
       @JsonKey(name: "transaction_uuid") required this.transaction_uuid,
       @JsonKey(name: "merchant") required this.merchant,
@@ -983,18 +1116,18 @@ class _$_TransactionReceipt implements _TransactionReceipt {
       @JsonKey(name: "start_time") required this.start_time,
       @JsonKey(name: "card_scheme_sponsor") required this.card_scheme_sponsor,
       @JsonKey(name: "tid") required this.tid,
-      @JsonKey(name: "system_trace_audit_number")
-      required this.system_trace_audit_number,
+      @JsonKey(name: "system_trace_audit_number", nullable: true)
+      this.system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
       required this.pos_software_version_number,
-      @JsonKey(name: "retrieval_reference_number")
-      required this.retrieval_reference_number,
+      @JsonKey(name: "retrieval_reference_number", nullable: true)
+      this.retrieval_reference_number,
       @JsonKey(name: "card_scheme") required this.card_scheme,
       @JsonKey(name: "transaction_type") required this.transaction_type,
       @JsonKey(name: "pan") required this.pan,
-      @JsonKey(name: "card_expiration") required this.card_expiration,
+      @JsonKey(name: "card_expiration", nullable: true) this.card_expiration,
       @JsonKey(name: "amount_authorized") required this.amount_authorized,
-      @JsonKey(name: "amount_other") required this.amount_other,
+      @JsonKey(name: "amount_other", nullable: true) this.amount_other,
       @JsonKey(name: "currency") required this.currency,
       @JsonKey(name: "status_message") required this.status_message,
       @JsonKey(name: "is_approved") required this.is_approved,
@@ -1004,36 +1137,48 @@ class _$_TransactionReceipt implements _TransactionReceipt {
       @JsonKey(name: "verification_method") required this.verification_method,
       @JsonKey(name: "end_date") required this.end_date,
       @JsonKey(name: "end_time") required this.end_time,
-      @JsonKey(name: "receipt_line_one") required this.receipt_line_one,
-      @JsonKey(name: "receipt_line_two") required this.receipt_line_two,
-      @JsonKey(name: "thanks_message") required this.thanks_message,
-      @JsonKey(name: "save_receipt_message") required this.save_receipt_message,
-      @JsonKey(name: "entry_mode") required this.entry_mode,
+      @JsonKey(name: "receipt_line_one", nullable: true) this.receipt_line_one,
+      @JsonKey(name: "thanks_message", nullable: true) this.thanks_message,
+      @JsonKey(name: "save_receipt_message", nullable: true)
+      this.save_receipt_message,
+      @JsonKey(name: "entry_mode", nullable: true) this.entry_mode,
       @JsonKey(name: "action_code") required this.action_code,
       @JsonKey(name: "application_identifier")
       required this.application_identifier,
       @JsonKey(name: "terminal_verification_result")
       required this.terminal_verification_result,
-      @JsonKey(name: "transaction_state_information")
-      required this.transaction_state_information,
+      @JsonKey(name: "transaction_state_information", nullable: true)
+      this.transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
       required this.cardholader_verfication_result,
-      @JsonKey(name: "cryptogram_information_data")
-      required this.cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram")
-      required this.application_cryptogram,
-      @JsonKey(name: "kernel_id") required this.kernel_id,
+      @JsonKey(name: "cryptogram_information_data", nullable: true)
+      this.cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram", nullable: true)
+      this.application_cryptogram,
+      @JsonKey(name: "kernel_id", nullable: true) this.kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
       this.payment_account_reference,
+      @JsonKey(name: "receipt_line_two", nullable: true) this.receipt_line_two,
       @JsonKey(name: "pan_suffix", nullable: true) this.pan_suffix,
+      @JsonKey(name: "auth", nullable: true) this.auth,
+      @JsonKey(name: "serial_num", nullable: true) this.serial_num,
+      @JsonKey(name: "invoice", nullable: true) this.invoice,
+      @JsonKey(name: "batch", nullable: true) this.batch,
+      @JsonKey(name: "bank_net_data", nullable: true) this.bank_net_data,
+      @JsonKey(name: "vas_data", nullable: true) this.vas_data,
+      @JsonKey(
+          name: "customer_reference_number", nullable: true, defaultValue: "")
+      this.customer_reference_number,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
       this.created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
       this.updated_at,
+      @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+      this.receipt_standard,
       @JsonKey(name: "qr_code") required this.qr_code});
 
-  factory _$_TransactionReceipt.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionReceiptFromJson(json);
+  factory _$TransactionReceiptImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionReceiptImplFromJson(json);
 
   @override
   @JsonKey(name: "receipt_id")
@@ -1057,14 +1202,14 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @JsonKey(name: "tid")
   final String tid;
   @override
-  @JsonKey(name: "system_trace_audit_number")
-  final String system_trace_audit_number;
+  @JsonKey(name: "system_trace_audit_number", nullable: true)
+  final String? system_trace_audit_number;
   @override
   @JsonKey(name: "pos_software_version_number")
   final String pos_software_version_number;
   @override
-  @JsonKey(name: "retrieval_reference_number")
-  final String retrieval_reference_number;
+  @JsonKey(name: "retrieval_reference_number", nullable: true)
+  final String? retrieval_reference_number;
   @override
   @JsonKey(name: "card_scheme")
   final NameField<String> card_scheme;
@@ -1075,14 +1220,14 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @JsonKey(name: "pan")
   final String pan;
   @override
-  @JsonKey(name: "card_expiration")
-  final String card_expiration;
+  @JsonKey(name: "card_expiration", nullable: true)
+  final String? card_expiration;
   @override
   @JsonKey(name: "amount_authorized")
   final LabelField<String> amount_authorized;
   @override
-  @JsonKey(name: "amount_other")
-  final LabelField<String> amount_other;
+  @JsonKey(name: "amount_other", nullable: true)
+  final LabelField<String>? amount_other;
   @override
   @JsonKey(name: "currency")
   final LocalizationField currency;
@@ -1111,20 +1256,17 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @JsonKey(name: "end_time")
   final String end_time;
   @override
-  @JsonKey(name: "receipt_line_one")
-  final LocalizationField receipt_line_one;
+  @JsonKey(name: "receipt_line_one", nullable: true)
+  final LocalizationField? receipt_line_one;
   @override
-  @JsonKey(name: "receipt_line_two")
-  final LocalizationField receipt_line_two;
+  @JsonKey(name: "thanks_message", nullable: true)
+  final LocalizationField? thanks_message;
   @override
-  @JsonKey(name: "thanks_message")
-  final LocalizationField thanks_message;
+  @JsonKey(name: "save_receipt_message", nullable: true)
+  final LocalizationField? save_receipt_message;
   @override
-  @JsonKey(name: "save_receipt_message")
-  final LocalizationField save_receipt_message;
-  @override
-  @JsonKey(name: "entry_mode")
-  final String entry_mode;
+  @JsonKey(name: "entry_mode", nullable: true)
+  final String? entry_mode;
   @override
   @JsonKey(name: "action_code")
   final String action_code;
@@ -1135,26 +1277,50 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @JsonKey(name: "terminal_verification_result")
   final String terminal_verification_result;
   @override
-  @JsonKey(name: "transaction_state_information")
-  final String transaction_state_information;
+  @JsonKey(name: "transaction_state_information", nullable: true)
+  final String? transaction_state_information;
   @override
   @JsonKey(name: "cardholader_verfication_result")
   final String cardholader_verfication_result;
   @override
-  @JsonKey(name: "cryptogram_information_data")
-  final String cryptogram_information_data;
+  @JsonKey(name: "cryptogram_information_data", nullable: true)
+  final String? cryptogram_information_data;
   @override
-  @JsonKey(name: "application_cryptogram")
-  final String application_cryptogram;
+  @JsonKey(name: "application_cryptogram", nullable: true)
+  final String? application_cryptogram;
   @override
-  @JsonKey(name: "kernel_id")
-  final String kernel_id;
+  @JsonKey(name: "kernel_id", nullable: true)
+  final String? kernel_id;
   @override
   @JsonKey(name: "payment_account_reference", nullable: true)
   final String? payment_account_reference;
   @override
+  @JsonKey(name: "receipt_line_two", nullable: true)
+  final LocalizationField? receipt_line_two;
+  @override
   @JsonKey(name: "pan_suffix", nullable: true)
   final String? pan_suffix;
+  @override
+  @JsonKey(name: "auth", nullable: true)
+  final String? auth;
+  @override
+  @JsonKey(name: "serial_num", nullable: true)
+  final String? serial_num;
+  @override
+  @JsonKey(name: "invoice", nullable: true)
+  final String? invoice;
+  @override
+  @JsonKey(name: "batch", nullable: true)
+  final String? batch;
+  @override
+  @JsonKey(name: "bank_net_data", nullable: true)
+  final String? bank_net_data;
+  @override
+  @JsonKey(name: "vas_data", nullable: true)
+  final String? vas_data;
+  @override
+  @JsonKey(name: "customer_reference_number", nullable: true, defaultValue: "")
+  final String? customer_reference_number;
   @override
   @JsonKey(name: "created_at", nullable: true, defaultValue: "")
   final String? created_at;
@@ -1162,19 +1328,22 @@ class _$_TransactionReceipt implements _TransactionReceipt {
   @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
   final String? updated_at;
   @override
+  @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+  final String? receipt_standard;
+  @override
   @JsonKey(name: "qr_code")
   final String qr_code;
 
   @override
   String toString() {
-    return 'TransactionReceipt(receipt_id: $receipt_id, transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, receipt_line_two: $receipt_line_two, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, pan_suffix: $pan_suffix, created_at: $created_at, updated_at: $updated_at, qr_code: $qr_code)';
+    return 'TransactionReceipt(receipt_id: $receipt_id, transaction_uuid: $transaction_uuid, merchant: $merchant, start_date: $start_date, start_time: $start_time, card_scheme_sponsor: $card_scheme_sponsor, tid: $tid, system_trace_audit_number: $system_trace_audit_number, pos_software_version_number: $pos_software_version_number, retrieval_reference_number: $retrieval_reference_number, card_scheme: $card_scheme, transaction_type: $transaction_type, pan: $pan, card_expiration: $card_expiration, amount_authorized: $amount_authorized, amount_other: $amount_other, currency: $currency, status_message: $status_message, is_approved: $is_approved, is_refunded: $is_refunded, is_reversed: $is_reversed, approval_code: $approval_code, verification_method: $verification_method, end_date: $end_date, end_time: $end_time, receipt_line_one: $receipt_line_one, thanks_message: $thanks_message, save_receipt_message: $save_receipt_message, entry_mode: $entry_mode, action_code: $action_code, application_identifier: $application_identifier, terminal_verification_result: $terminal_verification_result, transaction_state_information: $transaction_state_information, cardholader_verfication_result: $cardholader_verfication_result, cryptogram_information_data: $cryptogram_information_data, application_cryptogram: $application_cryptogram, kernel_id: $kernel_id, payment_account_reference: $payment_account_reference, receipt_line_two: $receipt_line_two, pan_suffix: $pan_suffix, auth: $auth, serial_num: $serial_num, invoice: $invoice, batch: $batch, bank_net_data: $bank_net_data, vas_data: $vas_data, customer_reference_number: $customer_reference_number, created_at: $created_at, updated_at: $updated_at, receipt_standard: $receipt_standard, qr_code: $qr_code)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TransactionReceipt &&
+            other is _$TransactionReceiptImpl &&
             (identical(other.receipt_id, receipt_id) ||
                 other.receipt_id == receipt_id) &&
             (identical(other.transaction_uuid, transaction_uuid) ||
@@ -1227,9 +1396,8 @@ class _$_TransactionReceipt implements _TransactionReceipt {
                 other.end_time == end_time) &&
             (identical(other.receipt_line_one, receipt_line_one) ||
                 other.receipt_line_one == receipt_line_one) &&
-            (identical(other.receipt_line_two, receipt_line_two) ||
-                other.receipt_line_two == receipt_line_two) &&
-            (identical(other.thanks_message, thanks_message) || other.thanks_message == thanks_message) &&
+            (identical(other.thanks_message, thanks_message) ||
+                other.thanks_message == thanks_message) &&
             (identical(other.save_receipt_message, save_receipt_message) || other.save_receipt_message == save_receipt_message) &&
             (identical(other.entry_mode, entry_mode) || other.entry_mode == entry_mode) &&
             (identical(other.action_code, action_code) || other.action_code == action_code) &&
@@ -1241,9 +1409,18 @@ class _$_TransactionReceipt implements _TransactionReceipt {
             (identical(other.application_cryptogram, application_cryptogram) || other.application_cryptogram == application_cryptogram) &&
             (identical(other.kernel_id, kernel_id) || other.kernel_id == kernel_id) &&
             (identical(other.payment_account_reference, payment_account_reference) || other.payment_account_reference == payment_account_reference) &&
+            (identical(other.receipt_line_two, receipt_line_two) || other.receipt_line_two == receipt_line_two) &&
             (identical(other.pan_suffix, pan_suffix) || other.pan_suffix == pan_suffix) &&
+            (identical(other.auth, auth) || other.auth == auth) &&
+            (identical(other.serial_num, serial_num) || other.serial_num == serial_num) &&
+            (identical(other.invoice, invoice) || other.invoice == invoice) &&
+            (identical(other.batch, batch) || other.batch == batch) &&
+            (identical(other.bank_net_data, bank_net_data) || other.bank_net_data == bank_net_data) &&
+            (identical(other.vas_data, vas_data) || other.vas_data == vas_data) &&
+            (identical(other.customer_reference_number, customer_reference_number) || other.customer_reference_number == customer_reference_number) &&
             (identical(other.created_at, created_at) || other.created_at == created_at) &&
             (identical(other.updated_at, updated_at) || other.updated_at == updated_at) &&
+            (identical(other.receipt_standard, receipt_standard) || other.receipt_standard == receipt_standard) &&
             (identical(other.qr_code, qr_code) || other.qr_code == qr_code));
   }
 
@@ -1277,7 +1454,6 @@ class _$_TransactionReceipt implements _TransactionReceipt {
         end_date,
         end_time,
         receipt_line_one,
-        receipt_line_two,
         thanks_message,
         save_receipt_message,
         entry_mode,
@@ -1290,22 +1466,31 @@ class _$_TransactionReceipt implements _TransactionReceipt {
         application_cryptogram,
         kernel_id,
         payment_account_reference,
+        receipt_line_two,
         pan_suffix,
+        auth,
+        serial_num,
+        invoice,
+        batch,
+        bank_net_data,
+        vas_data,
+        customer_reference_number,
         created_at,
         updated_at,
+        receipt_standard,
         qr_code
       ]);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TransactionReceiptCopyWith<_$_TransactionReceipt> get copyWith =>
-      __$$_TransactionReceiptCopyWithImpl<_$_TransactionReceipt>(
+  _$$TransactionReceiptImplCopyWith<_$TransactionReceiptImpl> get copyWith =>
+      __$$TransactionReceiptImplCopyWithImpl<_$TransactionReceiptImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransactionReceiptToJson(
+    return _$$TransactionReceiptImplToJson(
       this,
     );
   }
@@ -1321,22 +1506,23 @@ abstract class _TransactionReceipt implements TransactionReceipt {
       @JsonKey(name: "card_scheme_sponsor")
       required final String card_scheme_sponsor,
       @JsonKey(name: "tid") required final String tid,
-      @JsonKey(name: "system_trace_audit_number")
-      required final String system_trace_audit_number,
+      @JsonKey(name: "system_trace_audit_number", nullable: true)
+      final String? system_trace_audit_number,
       @JsonKey(name: "pos_software_version_number")
       required final String pos_software_version_number,
-      @JsonKey(name: "retrieval_reference_number")
-      required final String retrieval_reference_number,
+      @JsonKey(name: "retrieval_reference_number", nullable: true)
+      final String? retrieval_reference_number,
       @JsonKey(name: "card_scheme")
       required final NameField<String> card_scheme,
       @JsonKey(name: "transaction_type")
       required final NameField<String> transaction_type,
       @JsonKey(name: "pan") required final String pan,
-      @JsonKey(name: "card_expiration") required final String card_expiration,
+      @JsonKey(name: "card_expiration", nullable: true)
+      final String? card_expiration,
       @JsonKey(name: "amount_authorized")
       required final LabelField<String> amount_authorized,
-      @JsonKey(name: "amount_other")
-      required final LabelField<String> amount_other,
+      @JsonKey(name: "amount_other", nullable: true)
+      final LabelField<String>? amount_other,
       @JsonKey(name: "currency") required final LocalizationField currency,
       @JsonKey(name: "status_message")
       required final LocalizationField status_message,
@@ -1349,41 +1535,53 @@ abstract class _TransactionReceipt implements TransactionReceipt {
       required final LocalizationField verification_method,
       @JsonKey(name: "end_date") required final String end_date,
       @JsonKey(name: "end_time") required final String end_time,
-      @JsonKey(name: "receipt_line_one")
-      required final LocalizationField receipt_line_one,
-      @JsonKey(name: "receipt_line_two")
-      required final LocalizationField receipt_line_two,
-      @JsonKey(name: "thanks_message")
-      required final LocalizationField thanks_message,
-      @JsonKey(name: "save_receipt_message")
-      required final LocalizationField save_receipt_message,
-      @JsonKey(name: "entry_mode") required final String entry_mode,
+      @JsonKey(name: "receipt_line_one", nullable: true)
+      final LocalizationField? receipt_line_one,
+      @JsonKey(name: "thanks_message", nullable: true)
+      final LocalizationField? thanks_message,
+      @JsonKey(name: "save_receipt_message", nullable: true)
+      final LocalizationField? save_receipt_message,
+      @JsonKey(name: "entry_mode", nullable: true) final String? entry_mode,
       @JsonKey(name: "action_code") required final String action_code,
       @JsonKey(name: "application_identifier")
       required final String application_identifier,
       @JsonKey(name: "terminal_verification_result")
       required final String terminal_verification_result,
-      @JsonKey(name: "transaction_state_information")
-      required final String transaction_state_information,
+      @JsonKey(name: "transaction_state_information", nullable: true)
+      final String? transaction_state_information,
       @JsonKey(name: "cardholader_verfication_result")
       required final String cardholader_verfication_result,
-      @JsonKey(name: "cryptogram_information_data")
-      required final String cryptogram_information_data,
-      @JsonKey(name: "application_cryptogram")
-      required final String application_cryptogram,
-      @JsonKey(name: "kernel_id") required final String kernel_id,
+      @JsonKey(name: "cryptogram_information_data", nullable: true)
+      final String? cryptogram_information_data,
+      @JsonKey(name: "application_cryptogram", nullable: true)
+      final String? application_cryptogram,
+      @JsonKey(name: "kernel_id", nullable: true) final String? kernel_id,
       @JsonKey(name: "payment_account_reference", nullable: true)
       final String? payment_account_reference,
+      @JsonKey(name: "receipt_line_two", nullable: true)
+      final LocalizationField? receipt_line_two,
       @JsonKey(name: "pan_suffix", nullable: true) final String? pan_suffix,
+      @JsonKey(name: "auth", nullable: true) final String? auth,
+      @JsonKey(name: "serial_num", nullable: true) final String? serial_num,
+      @JsonKey(name: "invoice", nullable: true) final String? invoice,
+      @JsonKey(name: "batch", nullable: true) final String? batch,
+      @JsonKey(name: "bank_net_data", nullable: true)
+      final String? bank_net_data,
+      @JsonKey(name: "vas_data", nullable: true) final String? vas_data,
+      @JsonKey(
+          name: "customer_reference_number", nullable: true, defaultValue: "")
+      final String? customer_reference_number,
       @JsonKey(name: "created_at", nullable: true, defaultValue: "")
       final String? created_at,
       @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
       final String? updated_at,
+      @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+      final String? receipt_standard,
       @JsonKey(name: "qr_code")
-      required final String qr_code}) = _$_TransactionReceipt;
+      required final String qr_code}) = _$TransactionReceiptImpl;
 
   factory _TransactionReceipt.fromJson(Map<String, dynamic> json) =
-      _$_TransactionReceipt.fromJson;
+      _$TransactionReceiptImpl.fromJson;
 
   @override
   @JsonKey(name: "receipt_id")
@@ -1407,14 +1605,14 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   @JsonKey(name: "tid")
   String get tid;
   @override
-  @JsonKey(name: "system_trace_audit_number")
-  String get system_trace_audit_number;
+  @JsonKey(name: "system_trace_audit_number", nullable: true)
+  String? get system_trace_audit_number;
   @override
   @JsonKey(name: "pos_software_version_number")
   String get pos_software_version_number;
   @override
-  @JsonKey(name: "retrieval_reference_number")
-  String get retrieval_reference_number;
+  @JsonKey(name: "retrieval_reference_number", nullable: true)
+  String? get retrieval_reference_number;
   @override
   @JsonKey(name: "card_scheme")
   NameField<String> get card_scheme;
@@ -1425,14 +1623,14 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   @JsonKey(name: "pan")
   String get pan;
   @override
-  @JsonKey(name: "card_expiration")
-  String get card_expiration;
+  @JsonKey(name: "card_expiration", nullable: true)
+  String? get card_expiration;
   @override
   @JsonKey(name: "amount_authorized")
   LabelField<String> get amount_authorized;
   @override
-  @JsonKey(name: "amount_other")
-  LabelField<String> get amount_other;
+  @JsonKey(name: "amount_other", nullable: true)
+  LabelField<String>? get amount_other;
   @override
   @JsonKey(name: "currency")
   LocalizationField get currency;
@@ -1461,20 +1659,17 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   @JsonKey(name: "end_time")
   String get end_time;
   @override
-  @JsonKey(name: "receipt_line_one")
-  LocalizationField get receipt_line_one;
+  @JsonKey(name: "receipt_line_one", nullable: true)
+  LocalizationField? get receipt_line_one;
   @override
-  @JsonKey(name: "receipt_line_two")
-  LocalizationField get receipt_line_two;
+  @JsonKey(name: "thanks_message", nullable: true)
+  LocalizationField? get thanks_message;
   @override
-  @JsonKey(name: "thanks_message")
-  LocalizationField get thanks_message;
+  @JsonKey(name: "save_receipt_message", nullable: true)
+  LocalizationField? get save_receipt_message;
   @override
-  @JsonKey(name: "save_receipt_message")
-  LocalizationField get save_receipt_message;
-  @override
-  @JsonKey(name: "entry_mode")
-  String get entry_mode;
+  @JsonKey(name: "entry_mode", nullable: true)
+  String? get entry_mode;
   @override
   @JsonKey(name: "action_code")
   String get action_code;
@@ -1485,26 +1680,50 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   @JsonKey(name: "terminal_verification_result")
   String get terminal_verification_result;
   @override
-  @JsonKey(name: "transaction_state_information")
-  String get transaction_state_information;
+  @JsonKey(name: "transaction_state_information", nullable: true)
+  String? get transaction_state_information;
   @override
   @JsonKey(name: "cardholader_verfication_result")
   String get cardholader_verfication_result;
   @override
-  @JsonKey(name: "cryptogram_information_data")
-  String get cryptogram_information_data;
+  @JsonKey(name: "cryptogram_information_data", nullable: true)
+  String? get cryptogram_information_data;
   @override
-  @JsonKey(name: "application_cryptogram")
-  String get application_cryptogram;
+  @JsonKey(name: "application_cryptogram", nullable: true)
+  String? get application_cryptogram;
   @override
-  @JsonKey(name: "kernel_id")
-  String get kernel_id;
+  @JsonKey(name: "kernel_id", nullable: true)
+  String? get kernel_id;
   @override
   @JsonKey(name: "payment_account_reference", nullable: true)
   String? get payment_account_reference;
   @override
+  @JsonKey(name: "receipt_line_two", nullable: true)
+  LocalizationField? get receipt_line_two;
+  @override
   @JsonKey(name: "pan_suffix", nullable: true)
   String? get pan_suffix;
+  @override
+  @JsonKey(name: "auth", nullable: true)
+  String? get auth;
+  @override
+  @JsonKey(name: "serial_num", nullable: true)
+  String? get serial_num;
+  @override
+  @JsonKey(name: "invoice", nullable: true)
+  String? get invoice;
+  @override
+  @JsonKey(name: "batch", nullable: true)
+  String? get batch;
+  @override
+  @JsonKey(name: "bank_net_data", nullable: true)
+  String? get bank_net_data;
+  @override
+  @JsonKey(name: "vas_data", nullable: true)
+  String? get vas_data;
+  @override
+  @JsonKey(name: "customer_reference_number", nullable: true, defaultValue: "")
+  String? get customer_reference_number;
   @override
   @JsonKey(name: "created_at", nullable: true, defaultValue: "")
   String? get created_at;
@@ -1512,10 +1731,13 @@ abstract class _TransactionReceipt implements TransactionReceipt {
   @JsonKey(name: "updated_at", nullable: true, defaultValue: "")
   String? get updated_at;
   @override
+  @JsonKey(name: "receipt_standard", nullable: true, defaultValue: "")
+  String? get receipt_standard;
+  @override
   @JsonKey(name: "qr_code")
   String get qr_code;
   @override
   @JsonKey(ignore: true)
-  _$$_TransactionReceiptCopyWith<_$_TransactionReceipt> get copyWith =>
+  _$$TransactionReceiptImplCopyWith<_$TransactionReceiptImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

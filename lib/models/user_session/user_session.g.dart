@@ -6,7 +6,7 @@ part of 'user_session.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserSession _$$_UserSessionFromJson(Map json) => _$_UserSession(
+_$UserSessionImpl _$$UserSessionImplFromJson(Map json) => _$UserSessionImpl(
       userName: json['userName'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
@@ -15,7 +15,7 @@ _$_UserSession _$$_UserSessionFromJson(Map json) => _$_UserSession(
       merchantAr: json['merchantAr'] as String?,
     );
 
-Map<String, dynamic> _$$_UserSessionToJson(_$_UserSession instance) =>
+Map<String, dynamic> _$$UserSessionImplToJson(_$UserSessionImpl instance) =>
     <String, dynamic>{
       'userName': instance.userName,
       'phone': instance.phone,

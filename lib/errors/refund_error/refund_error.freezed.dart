@@ -62,22 +62,22 @@ class _$RefundRejectedCopyWithImpl<$Res, $Val extends RefundRejected>
 }
 
 /// @nodoc
-abstract class _$$_RefundRejectedCopyWith<$Res>
+abstract class _$$RefundRejectedImplCopyWith<$Res>
     implements $RefundRejectedCopyWith<$Res> {
-  factory _$$_RefundRejectedCopyWith(
-          _$_RefundRejected value, $Res Function(_$_RefundRejected) then) =
-      __$$_RefundRejectedCopyWithImpl<$Res>;
+  factory _$$RefundRejectedImplCopyWith(_$RefundRejectedImpl value,
+          $Res Function(_$RefundRejectedImpl) then) =
+      __$$RefundRejectedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_RefundRejectedCopyWithImpl<$Res>
-    extends _$RefundRejectedCopyWithImpl<$Res, _$_RefundRejected>
-    implements _$$_RefundRejectedCopyWith<$Res> {
-  __$$_RefundRejectedCopyWithImpl(
-      _$_RefundRejected _value, $Res Function(_$_RefundRejected) _then)
+class __$$RefundRejectedImplCopyWithImpl<$Res>
+    extends _$RefundRejectedCopyWithImpl<$Res, _$RefundRejectedImpl>
+    implements _$$RefundRejectedImplCopyWith<$Res> {
+  __$$RefundRejectedImplCopyWithImpl(
+      _$RefundRejectedImpl _value, $Res Function(_$RefundRejectedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_RefundRejectedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_RefundRejected(
+    return _then(_$RefundRejectedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_RefundRejectedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundRejected implements _RefundRejected {
-  const _$_RefundRejected({required this.message});
+class _$RefundRejectedImpl implements _RefundRejected {
+  const _$RefundRejectedImpl({required this.message});
 
-  factory _$_RefundRejected.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundRejectedFromJson(json);
+  factory _$RefundRejectedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RefundRejectedImplFromJson(json);
 
   @override
   final String message;
@@ -111,10 +111,10 @@ class _$_RefundRejected implements _RefundRejected {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RefundRejected &&
+            other is _$RefundRejectedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -125,12 +125,13 @@ class _$_RefundRejected implements _RefundRejected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RefundRejectedCopyWith<_$_RefundRejected> get copyWith =>
-      __$$_RefundRejectedCopyWithImpl<_$_RefundRejected>(this, _$identity);
+  _$$RefundRejectedImplCopyWith<_$RefundRejectedImpl> get copyWith =>
+      __$$RefundRejectedImplCopyWithImpl<_$RefundRejectedImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RefundRejectedToJson(
+    return _$$RefundRejectedImplToJson(
       this,
     );
   }
@@ -138,16 +139,16 @@ class _$_RefundRejected implements _RefundRejected {
 
 abstract class _RefundRejected implements RefundRejected {
   const factory _RefundRejected({required final String message}) =
-      _$_RefundRejected;
+      _$RefundRejectedImpl;
 
   factory _RefundRejected.fromJson(Map<String, dynamic> json) =
-      _$_RefundRejected.fromJson;
+      _$RefundRejectedImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_RefundRejectedCopyWith<_$_RefundRejected> get copyWith =>
+  _$$RefundRejectedImplCopyWith<_$RefundRejectedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -199,22 +200,22 @@ class _$RefundDeclinedCopyWithImpl<$Res, $Val extends RefundDeclined>
 }
 
 /// @nodoc
-abstract class _$$_RefundDeclinedCopyWith<$Res>
+abstract class _$$RefundDeclinedImplCopyWith<$Res>
     implements $RefundDeclinedCopyWith<$Res> {
-  factory _$$_RefundDeclinedCopyWith(
-          _$_RefundDeclined value, $Res Function(_$_RefundDeclined) then) =
-      __$$_RefundDeclinedCopyWithImpl<$Res>;
+  factory _$$RefundDeclinedImplCopyWith(_$RefundDeclinedImpl value,
+          $Res Function(_$RefundDeclinedImpl) then) =
+      __$$RefundDeclinedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<TransactionReceipt> receipts});
 }
 
 /// @nodoc
-class __$$_RefundDeclinedCopyWithImpl<$Res>
-    extends _$RefundDeclinedCopyWithImpl<$Res, _$_RefundDeclined>
-    implements _$$_RefundDeclinedCopyWith<$Res> {
-  __$$_RefundDeclinedCopyWithImpl(
-      _$_RefundDeclined _value, $Res Function(_$_RefundDeclined) _then)
+class __$$RefundDeclinedImplCopyWithImpl<$Res>
+    extends _$RefundDeclinedCopyWithImpl<$Res, _$RefundDeclinedImpl>
+    implements _$$RefundDeclinedImplCopyWith<$Res> {
+  __$$RefundDeclinedImplCopyWithImpl(
+      _$RefundDeclinedImpl _value, $Res Function(_$RefundDeclinedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -222,7 +223,7 @@ class __$$_RefundDeclinedCopyWithImpl<$Res>
   $Res call({
     Object? receipts = null,
   }) {
-    return _then(_$_RefundDeclined(
+    return _then(_$RefundDeclinedImpl(
       receipts: null == receipts
           ? _value._receipts
           : receipts // ignore: cast_nullable_to_non_nullable
@@ -233,12 +234,12 @@ class __$$_RefundDeclinedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundDeclined implements _RefundDeclined {
-  const _$_RefundDeclined({required final List<TransactionReceipt> receipts})
+class _$RefundDeclinedImpl implements _RefundDeclined {
+  const _$RefundDeclinedImpl({required final List<TransactionReceipt> receipts})
       : _receipts = receipts;
 
-  factory _$_RefundDeclined.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundDeclinedFromJson(json);
+  factory _$RefundDeclinedImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RefundDeclinedImplFromJson(json);
 
   final List<TransactionReceipt> _receipts;
   @override
@@ -254,10 +255,10 @@ class _$_RefundDeclined implements _RefundDeclined {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RefundDeclined &&
+            other is _$RefundDeclinedImpl &&
             const DeepCollectionEquality().equals(other._receipts, _receipts));
   }
 
@@ -269,12 +270,13 @@ class _$_RefundDeclined implements _RefundDeclined {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RefundDeclinedCopyWith<_$_RefundDeclined> get copyWith =>
-      __$$_RefundDeclinedCopyWithImpl<_$_RefundDeclined>(this, _$identity);
+  _$$RefundDeclinedImplCopyWith<_$RefundDeclinedImpl> get copyWith =>
+      __$$RefundDeclinedImplCopyWithImpl<_$RefundDeclinedImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RefundDeclinedToJson(
+    return _$$RefundDeclinedImplToJson(
       this,
     );
   }
@@ -282,16 +284,17 @@ class _$_RefundDeclined implements _RefundDeclined {
 
 abstract class _RefundDeclined implements RefundDeclined {
   const factory _RefundDeclined(
-      {required final List<TransactionReceipt> receipts}) = _$_RefundDeclined;
+          {required final List<TransactionReceipt> receipts}) =
+      _$RefundDeclinedImpl;
 
   factory _RefundDeclined.fromJson(Map<String, dynamic> json) =
-      _$_RefundDeclined.fromJson;
+      _$RefundDeclinedImpl.fromJson;
 
   @override
   List<TransactionReceipt> get receipts;
   @override
   @JsonKey(ignore: true)
-  _$$_RefundDeclinedCopyWith<_$_RefundDeclined> get copyWith =>
+  _$$RefundDeclinedImplCopyWith<_$RefundDeclinedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -346,25 +349,25 @@ class _$RefundAuthenticationFailedCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RefundAuthenticationFailedCopyWith<$Res>
+abstract class _$$RefundAuthenticationFailedImplCopyWith<$Res>
     implements $RefundAuthenticationFailedCopyWith<$Res> {
-  factory _$$_RefundAuthenticationFailedCopyWith(
-          _$_RefundAuthenticationFailed value,
-          $Res Function(_$_RefundAuthenticationFailed) then) =
-      __$$_RefundAuthenticationFailedCopyWithImpl<$Res>;
+  factory _$$RefundAuthenticationFailedImplCopyWith(
+          _$RefundAuthenticationFailedImpl value,
+          $Res Function(_$RefundAuthenticationFailedImpl) then) =
+      __$$RefundAuthenticationFailedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_RefundAuthenticationFailedCopyWithImpl<$Res>
+class __$$RefundAuthenticationFailedImplCopyWithImpl<$Res>
     extends _$RefundAuthenticationFailedCopyWithImpl<$Res,
-        _$_RefundAuthenticationFailed>
-    implements _$$_RefundAuthenticationFailedCopyWith<$Res> {
-  __$$_RefundAuthenticationFailedCopyWithImpl(
-      _$_RefundAuthenticationFailed _value,
-      $Res Function(_$_RefundAuthenticationFailed) _then)
+        _$RefundAuthenticationFailedImpl>
+    implements _$$RefundAuthenticationFailedImplCopyWith<$Res> {
+  __$$RefundAuthenticationFailedImplCopyWithImpl(
+      _$RefundAuthenticationFailedImpl _value,
+      $Res Function(_$RefundAuthenticationFailedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -372,7 +375,7 @@ class __$$_RefundAuthenticationFailedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_RefundAuthenticationFailed(
+    return _then(_$RefundAuthenticationFailedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -383,11 +386,12 @@ class __$$_RefundAuthenticationFailedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundAuthenticationFailed implements _RefundAuthenticationFailed {
-  const _$_RefundAuthenticationFailed({required this.message});
+class _$RefundAuthenticationFailedImpl implements _RefundAuthenticationFailed {
+  const _$RefundAuthenticationFailedImpl({required this.message});
 
-  factory _$_RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundAuthenticationFailedFromJson(json);
+  factory _$RefundAuthenticationFailedImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$RefundAuthenticationFailedImplFromJson(json);
 
   @override
   final String message;
@@ -398,10 +402,10 @@ class _$_RefundAuthenticationFailed implements _RefundAuthenticationFailed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RefundAuthenticationFailed &&
+            other is _$RefundAuthenticationFailedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -412,13 +416,13 @@ class _$_RefundAuthenticationFailed implements _RefundAuthenticationFailed {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RefundAuthenticationFailedCopyWith<_$_RefundAuthenticationFailed>
-      get copyWith => __$$_RefundAuthenticationFailedCopyWithImpl<
-          _$_RefundAuthenticationFailed>(this, _$identity);
+  _$$RefundAuthenticationFailedImplCopyWith<_$RefundAuthenticationFailedImpl>
+      get copyWith => __$$RefundAuthenticationFailedImplCopyWithImpl<
+          _$RefundAuthenticationFailedImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RefundAuthenticationFailedToJson(
+    return _$$RefundAuthenticationFailedImplToJson(
       this,
     );
   }
@@ -427,16 +431,16 @@ class _$_RefundAuthenticationFailed implements _RefundAuthenticationFailed {
 abstract class _RefundAuthenticationFailed
     implements RefundAuthenticationFailed {
   const factory _RefundAuthenticationFailed({required final String message}) =
-      _$_RefundAuthenticationFailed;
+      _$RefundAuthenticationFailedImpl;
 
   factory _RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_RefundAuthenticationFailed.fromJson;
+      _$RefundAuthenticationFailedImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_RefundAuthenticationFailedCopyWith<_$_RefundAuthenticationFailed>
+  _$$RefundAuthenticationFailedImplCopyWith<_$RefundAuthenticationFailedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -488,22 +492,22 @@ class _$RefundInvalidStatusCopyWithImpl<$Res, $Val extends RefundInvalidStatus>
 }
 
 /// @nodoc
-abstract class _$$_RefundInvalidStatusCopyWith<$Res>
+abstract class _$$RefundInvalidStatusImplCopyWith<$Res>
     implements $RefundInvalidStatusCopyWith<$Res> {
-  factory _$$_RefundInvalidStatusCopyWith(_$_RefundInvalidStatus value,
-          $Res Function(_$_RefundInvalidStatus) then) =
-      __$$_RefundInvalidStatusCopyWithImpl<$Res>;
+  factory _$$RefundInvalidStatusImplCopyWith(_$RefundInvalidStatusImpl value,
+          $Res Function(_$RefundInvalidStatusImpl) then) =
+      __$$RefundInvalidStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_RefundInvalidStatusCopyWithImpl<$Res>
-    extends _$RefundInvalidStatusCopyWithImpl<$Res, _$_RefundInvalidStatus>
-    implements _$$_RefundInvalidStatusCopyWith<$Res> {
-  __$$_RefundInvalidStatusCopyWithImpl(_$_RefundInvalidStatus _value,
-      $Res Function(_$_RefundInvalidStatus) _then)
+class __$$RefundInvalidStatusImplCopyWithImpl<$Res>
+    extends _$RefundInvalidStatusCopyWithImpl<$Res, _$RefundInvalidStatusImpl>
+    implements _$$RefundInvalidStatusImplCopyWith<$Res> {
+  __$$RefundInvalidStatusImplCopyWithImpl(_$RefundInvalidStatusImpl _value,
+      $Res Function(_$RefundInvalidStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -511,7 +515,7 @@ class __$$_RefundInvalidStatusCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_RefundInvalidStatus(
+    return _then(_$RefundInvalidStatusImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -519,11 +523,11 @@ class __$$_RefundInvalidStatusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundInvalidStatus implements _RefundInvalidStatus {
-  const _$_RefundInvalidStatus({this.required});
+class _$RefundInvalidStatusImpl implements _RefundInvalidStatus {
+  const _$RefundInvalidStatusImpl({this.required});
 
-  factory _$_RefundInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundInvalidStatusFromJson(json);
+  factory _$RefundInvalidStatusImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RefundInvalidStatusImplFromJson(json);
 
   @override
   final dynamic required;
@@ -534,10 +538,10 @@ class _$_RefundInvalidStatus implements _RefundInvalidStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RefundInvalidStatus &&
+            other is _$RefundInvalidStatusImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -549,13 +553,13 @@ class _$_RefundInvalidStatus implements _RefundInvalidStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RefundInvalidStatusCopyWith<_$_RefundInvalidStatus> get copyWith =>
-      __$$_RefundInvalidStatusCopyWithImpl<_$_RefundInvalidStatus>(
+  _$$RefundInvalidStatusImplCopyWith<_$RefundInvalidStatusImpl> get copyWith =>
+      __$$RefundInvalidStatusImplCopyWithImpl<_$RefundInvalidStatusImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RefundInvalidStatusToJson(
+    return _$$RefundInvalidStatusImplToJson(
       this,
     );
   }
@@ -563,16 +567,16 @@ class _$_RefundInvalidStatus implements _RefundInvalidStatus {
 
 abstract class _RefundInvalidStatus implements RefundInvalidStatus {
   const factory _RefundInvalidStatus({final dynamic required}) =
-      _$_RefundInvalidStatus;
+      _$RefundInvalidStatusImpl;
 
   factory _RefundInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_RefundInvalidStatus.fromJson;
+      _$RefundInvalidStatusImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_RefundInvalidStatusCopyWith<_$_RefundInvalidStatus> get copyWith =>
+  _$$RefundInvalidStatusImplCopyWith<_$RefundInvalidStatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -625,22 +629,22 @@ class _$RefundGeneralFailureCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_RefundGeneralFailureCopyWith<$Res>
+abstract class _$$RefundGeneralFailureImplCopyWith<$Res>
     implements $RefundGeneralFailureCopyWith<$Res> {
-  factory _$$_RefundGeneralFailureCopyWith(_$_RefundGeneralFailure value,
-          $Res Function(_$_RefundGeneralFailure) then) =
-      __$$_RefundGeneralFailureCopyWithImpl<$Res>;
+  factory _$$RefundGeneralFailureImplCopyWith(_$RefundGeneralFailureImpl value,
+          $Res Function(_$RefundGeneralFailureImpl) then) =
+      __$$RefundGeneralFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_RefundGeneralFailureCopyWithImpl<$Res>
-    extends _$RefundGeneralFailureCopyWithImpl<$Res, _$_RefundGeneralFailure>
-    implements _$$_RefundGeneralFailureCopyWith<$Res> {
-  __$$_RefundGeneralFailureCopyWithImpl(_$_RefundGeneralFailure _value,
-      $Res Function(_$_RefundGeneralFailure) _then)
+class __$$RefundGeneralFailureImplCopyWithImpl<$Res>
+    extends _$RefundGeneralFailureCopyWithImpl<$Res, _$RefundGeneralFailureImpl>
+    implements _$$RefundGeneralFailureImplCopyWith<$Res> {
+  __$$RefundGeneralFailureImplCopyWithImpl(_$RefundGeneralFailureImpl _value,
+      $Res Function(_$RefundGeneralFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -648,7 +652,7 @@ class __$$_RefundGeneralFailureCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_RefundGeneralFailure(
+    return _then(_$RefundGeneralFailureImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -656,11 +660,11 @@ class __$$_RefundGeneralFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundGeneralFailure implements _RefundGeneralFailure {
-  const _$_RefundGeneralFailure({this.required});
+class _$RefundGeneralFailureImpl implements _RefundGeneralFailure {
+  const _$RefundGeneralFailureImpl({this.required});
 
-  factory _$_RefundGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundGeneralFailureFromJson(json);
+  factory _$RefundGeneralFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RefundGeneralFailureImplFromJson(json);
 
   @override
   final dynamic required;
@@ -671,10 +675,10 @@ class _$_RefundGeneralFailure implements _RefundGeneralFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RefundGeneralFailure &&
+            other is _$RefundGeneralFailureImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -686,13 +690,14 @@ class _$_RefundGeneralFailure implements _RefundGeneralFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RefundGeneralFailureCopyWith<_$_RefundGeneralFailure> get copyWith =>
-      __$$_RefundGeneralFailureCopyWithImpl<_$_RefundGeneralFailure>(
-          this, _$identity);
+  _$$RefundGeneralFailureImplCopyWith<_$RefundGeneralFailureImpl>
+      get copyWith =>
+          __$$RefundGeneralFailureImplCopyWithImpl<_$RefundGeneralFailureImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RefundGeneralFailureToJson(
+    return _$$RefundGeneralFailureImplToJson(
       this,
     );
   }
@@ -700,15 +705,15 @@ class _$_RefundGeneralFailure implements _RefundGeneralFailure {
 
 abstract class _RefundGeneralFailure implements RefundGeneralFailure {
   const factory _RefundGeneralFailure({final dynamic required}) =
-      _$_RefundGeneralFailure;
+      _$RefundGeneralFailureImpl;
 
   factory _RefundGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_RefundGeneralFailure.fromJson;
+      _$RefundGeneralFailureImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_RefundGeneralFailureCopyWith<_$_RefundGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$RefundGeneralFailureImplCopyWith<_$RefundGeneralFailureImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

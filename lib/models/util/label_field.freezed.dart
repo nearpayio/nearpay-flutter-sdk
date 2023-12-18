@@ -72,11 +72,11 @@ class _$LabelFieldCopyWithImpl<T, $Res, $Val extends LabelField<T>>
 }
 
 /// @nodoc
-abstract class _$$_LabelFieldCopyWith<T, $Res>
+abstract class _$$LabelFieldImplCopyWith<T, $Res>
     implements $LabelFieldCopyWith<T, $Res> {
-  factory _$$_LabelFieldCopyWith(
-          _$_LabelField<T> value, $Res Function(_$_LabelField<T>) then) =
-      __$$_LabelFieldCopyWithImpl<T, $Res>;
+  factory _$$LabelFieldImplCopyWith(
+          _$LabelFieldImpl<T> value, $Res Function(_$LabelFieldImpl<T>) then) =
+      __$$LabelFieldImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_LabelFieldCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_LabelFieldCopyWithImpl<T, $Res>
-    extends _$LabelFieldCopyWithImpl<T, $Res, _$_LabelField<T>>
-    implements _$$_LabelFieldCopyWith<T, $Res> {
-  __$$_LabelFieldCopyWithImpl(
-      _$_LabelField<T> _value, $Res Function(_$_LabelField<T>) _then)
+class __$$LabelFieldImplCopyWithImpl<T, $Res>
+    extends _$LabelFieldCopyWithImpl<T, $Res, _$LabelFieldImpl<T>>
+    implements _$$LabelFieldImplCopyWith<T, $Res> {
+  __$$LabelFieldImplCopyWithImpl(
+      _$LabelFieldImpl<T> _value, $Res Function(_$LabelFieldImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_LabelFieldCopyWithImpl<T, $Res>
     Object? label = null,
     Object? value = freezed,
   }) {
-    return _then(_$_LabelField<T>(
+    return _then(_$LabelFieldImpl<T>(
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -113,13 +113,13 @@ class __$$_LabelFieldCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LabelField<T> implements _LabelField<T> {
-  const _$_LabelField(
+class _$LabelFieldImpl<T> implements _LabelField<T> {
+  const _$LabelFieldImpl(
       {@JsonKey(name: "label") required this.label,
       @JsonKey(name: "value") required this.value});
 
-  factory _$_LabelField.fromJson(Map<String, dynamic> json) =>
-      _$$_LabelFieldFromJson(json);
+  factory _$LabelFieldImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LabelFieldImplFromJson(json);
 
   @override
   @JsonKey(name: "label")
@@ -134,10 +134,10 @@ class _$_LabelField<T> implements _LabelField<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LabelField<T> &&
+            other is _$LabelFieldImpl<T> &&
             (identical(other.label, label) || other.label == label) &&
             const DeepCollectionEquality().equals(other.value, value));
   }
@@ -150,12 +150,12 @@ class _$_LabelField<T> implements _LabelField<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LabelFieldCopyWith<T, _$_LabelField<T>> get copyWith =>
-      __$$_LabelFieldCopyWithImpl<T, _$_LabelField<T>>(this, _$identity);
+  _$$LabelFieldImplCopyWith<T, _$LabelFieldImpl<T>> get copyWith =>
+      __$$LabelFieldImplCopyWithImpl<T, _$LabelFieldImpl<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LabelFieldToJson<T>(
+    return _$$LabelFieldImplToJson<T>(
       this,
     );
   }
@@ -163,11 +163,12 @@ class _$_LabelField<T> implements _LabelField<T> {
 
 abstract class _LabelField<T> implements LabelField<T> {
   const factory _LabelField(
-      {@JsonKey(name: "label") required final LocalizationField label,
-      @JsonKey(name: "value") required final dynamic value}) = _$_LabelField<T>;
+          {@JsonKey(name: "label") required final LocalizationField label,
+          @JsonKey(name: "value") required final dynamic value}) =
+      _$LabelFieldImpl<T>;
 
   factory _LabelField.fromJson(Map<String, dynamic> json) =
-      _$_LabelField<T>.fromJson;
+      _$LabelFieldImpl<T>.fromJson;
 
   @override
   @JsonKey(name: "label")
@@ -177,6 +178,6 @@ abstract class _LabelField<T> implements LabelField<T> {
   dynamic get value;
   @override
   @JsonKey(ignore: true)
-  _$$_LabelFieldCopyWith<T, _$_LabelField<T>> get copyWith =>
+  _$$LabelFieldImplCopyWith<T, _$LabelFieldImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

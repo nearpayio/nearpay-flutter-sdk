@@ -6,8 +6,8 @@ part of 'reconcile_banner.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReconciliationReciept _$$_ReconciliationRecieptFromJson(Map json) =>
-    _$_ReconciliationReciept(
+_$ReconciliationRecieptImpl _$$ReconciliationRecieptImplFromJson(Map json) =>
+    _$ReconciliationRecieptImpl(
       total: (json['total'] as num).toDouble(),
       reconciliations: (json['reconciliations'] as List<dynamic>?)
               ?.map((e) => ReconciliationItem.fromJson(
@@ -16,16 +16,16 @@ _$_ReconciliationReciept _$$_ReconciliationRecieptFromJson(Map json) =>
           [],
     );
 
-Map<String, dynamic> _$$_ReconciliationRecieptToJson(
-        _$_ReconciliationReciept instance) =>
+Map<String, dynamic> _$$ReconciliationRecieptImplToJson(
+        _$ReconciliationRecieptImpl instance) =>
     <String, dynamic>{
       'total': instance.total,
       'reconciliations':
           instance.reconciliations?.map((e) => e.toJson()).toList(),
     };
 
-_$_ReconciliationItem _$$_ReconciliationItemFromJson(Map json) =>
-    _$_ReconciliationItem(
+_$ReconciliationItemImpl _$$ReconciliationItemImplFromJson(Map json) =>
+    _$ReconciliationItemImpl(
       id: json['id'] as String,
       date: json['date'] as String,
       time: json['time'] as String,
@@ -36,8 +36,8 @@ _$_ReconciliationItem _$$_ReconciliationItemFromJson(Map json) =>
           Map<String, dynamic>.from(json['currency'] as Map)),
     );
 
-Map<String, dynamic> _$$_ReconciliationItemToJson(
-        _$_ReconciliationItem instance) =>
+Map<String, dynamic> _$$ReconciliationItemImplToJson(
+        _$ReconciliationItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'date': instance.date,

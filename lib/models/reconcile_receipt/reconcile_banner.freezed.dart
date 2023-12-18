@@ -40,10 +40,9 @@ abstract class $ReconciliationBannerListCopyWith<$Res> {
       _$ReconciliationBannerListCopyWithImpl<$Res, ReconciliationBannerList>;
   @useResult
   $Res call(
-      {@JsonKey(name: "total")
-          double total,
+      {@JsonKey(name: "total") double total,
       @JsonKey(name: "reconciliations", defaultValue: [])
-          List<ReconciliationItem>? reconciliations});
+      List<ReconciliationItem>? reconciliations});
 }
 
 /// @nodoc
@@ -77,27 +76,27 @@ class _$ReconciliationBannerListCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_ReconciliationRecieptCopyWith<$Res>
+abstract class _$$ReconciliationRecieptImplCopyWith<$Res>
     implements $ReconciliationBannerListCopyWith<$Res> {
-  factory _$$_ReconciliationRecieptCopyWith(_$_ReconciliationReciept value,
-          $Res Function(_$_ReconciliationReciept) then) =
-      __$$_ReconciliationRecieptCopyWithImpl<$Res>;
+  factory _$$ReconciliationRecieptImplCopyWith(
+          _$ReconciliationRecieptImpl value,
+          $Res Function(_$ReconciliationRecieptImpl) then) =
+      __$$ReconciliationRecieptImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "total")
-          double total,
+      {@JsonKey(name: "total") double total,
       @JsonKey(name: "reconciliations", defaultValue: [])
-          List<ReconciliationItem>? reconciliations});
+      List<ReconciliationItem>? reconciliations});
 }
 
 /// @nodoc
-class __$$_ReconciliationRecieptCopyWithImpl<$Res>
+class __$$ReconciliationRecieptImplCopyWithImpl<$Res>
     extends _$ReconciliationBannerListCopyWithImpl<$Res,
-        _$_ReconciliationReciept>
-    implements _$$_ReconciliationRecieptCopyWith<$Res> {
-  __$$_ReconciliationRecieptCopyWithImpl(_$_ReconciliationReciept _value,
-      $Res Function(_$_ReconciliationReciept) _then)
+        _$ReconciliationRecieptImpl>
+    implements _$$ReconciliationRecieptImplCopyWith<$Res> {
+  __$$ReconciliationRecieptImplCopyWithImpl(_$ReconciliationRecieptImpl _value,
+      $Res Function(_$ReconciliationRecieptImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +105,7 @@ class __$$_ReconciliationRecieptCopyWithImpl<$Res>
     Object? total = null,
     Object? reconciliations = freezed,
   }) {
-    return _then(_$_ReconciliationReciept(
+    return _then(_$ReconciliationRecieptImpl(
       total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -121,16 +120,15 @@ class __$$_ReconciliationRecieptCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconciliationReciept implements _ReconciliationReciept {
-  const _$_ReconciliationReciept(
-      {@JsonKey(name: "total")
-          required this.total,
+class _$ReconciliationRecieptImpl implements _ReconciliationReciept {
+  const _$ReconciliationRecieptImpl(
+      {@JsonKey(name: "total") required this.total,
       @JsonKey(name: "reconciliations", defaultValue: [])
-          final List<ReconciliationItem>? reconciliations})
+      final List<ReconciliationItem>? reconciliations})
       : _reconciliations = reconciliations;
 
-  factory _$_ReconciliationReciept.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconciliationRecieptFromJson(json);
+  factory _$ReconciliationRecieptImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReconciliationRecieptImplFromJson(json);
 
   @override
   @JsonKey(name: "total")
@@ -152,10 +150,10 @@ class _$_ReconciliationReciept implements _ReconciliationReciept {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconciliationReciept &&
+            other is _$ReconciliationRecieptImpl &&
             (identical(other.total, total) || other.total == total) &&
             const DeepCollectionEquality()
                 .equals(other._reconciliations, _reconciliations));
@@ -169,13 +167,13 @@ class _$_ReconciliationReciept implements _ReconciliationReciept {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconciliationRecieptCopyWith<_$_ReconciliationReciept> get copyWith =>
-      __$$_ReconciliationRecieptCopyWithImpl<_$_ReconciliationReciept>(
-          this, _$identity);
+  _$$ReconciliationRecieptImplCopyWith<_$ReconciliationRecieptImpl>
+      get copyWith => __$$ReconciliationRecieptImplCopyWithImpl<
+          _$ReconciliationRecieptImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconciliationRecieptToJson(
+    return _$$ReconciliationRecieptImplToJson(
       this,
     );
   }
@@ -183,14 +181,13 @@ class _$_ReconciliationReciept implements _ReconciliationReciept {
 
 abstract class _ReconciliationReciept implements ReconciliationBannerList {
   const factory _ReconciliationReciept(
-          {@JsonKey(name: "total")
-              required final double total,
+          {@JsonKey(name: "total") required final double total,
           @JsonKey(name: "reconciliations", defaultValue: [])
-              final List<ReconciliationItem>? reconciliations}) =
-      _$_ReconciliationReciept;
+          final List<ReconciliationItem>? reconciliations}) =
+      _$ReconciliationRecieptImpl;
 
   factory _ReconciliationReciept.fromJson(Map<String, dynamic> json) =
-      _$_ReconciliationReciept.fromJson;
+      _$ReconciliationRecieptImpl.fromJson;
 
   @override
   @JsonKey(name: "total")
@@ -200,8 +197,8 @@ abstract class _ReconciliationReciept implements ReconciliationBannerList {
   List<ReconciliationItem>? get reconciliations;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconciliationRecieptCopyWith<_$_ReconciliationReciept> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ReconciliationRecieptImplCopyWith<_$ReconciliationRecieptImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 ReconciliationItem _$ReconciliationItemFromJson(Map<String, dynamic> json) {
@@ -304,11 +301,11 @@ class _$ReconciliationItemCopyWithImpl<$Res, $Val extends ReconciliationItem>
 }
 
 /// @nodoc
-abstract class _$$_ReconciliationItemCopyWith<$Res>
+abstract class _$$ReconciliationItemImplCopyWith<$Res>
     implements $ReconciliationItemCopyWith<$Res> {
-  factory _$$_ReconciliationItemCopyWith(_$_ReconciliationItem value,
-          $Res Function(_$_ReconciliationItem) then) =
-      __$$_ReconciliationItemCopyWithImpl<$Res>;
+  factory _$$ReconciliationItemImplCopyWith(_$ReconciliationItemImpl value,
+          $Res Function(_$ReconciliationItemImpl) then) =
+      __$$ReconciliationItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -324,11 +321,11 @@ abstract class _$$_ReconciliationItemCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReconciliationItemCopyWithImpl<$Res>
-    extends _$ReconciliationItemCopyWithImpl<$Res, _$_ReconciliationItem>
-    implements _$$_ReconciliationItemCopyWith<$Res> {
-  __$$_ReconciliationItemCopyWithImpl(
-      _$_ReconciliationItem _value, $Res Function(_$_ReconciliationItem) _then)
+class __$$ReconciliationItemImplCopyWithImpl<$Res>
+    extends _$ReconciliationItemCopyWithImpl<$Res, _$ReconciliationItemImpl>
+    implements _$$ReconciliationItemImplCopyWith<$Res> {
+  __$$ReconciliationItemImplCopyWithImpl(_$ReconciliationItemImpl _value,
+      $Res Function(_$ReconciliationItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -341,7 +338,7 @@ class __$$_ReconciliationItemCopyWithImpl<$Res>
     Object? total = null,
     Object? currency = null,
   }) {
-    return _then(_$_ReconciliationItem(
+    return _then(_$ReconciliationItemImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -372,8 +369,8 @@ class __$$_ReconciliationItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconciliationItem implements _ReconciliationItem {
-  const _$_ReconciliationItem(
+class _$ReconciliationItemImpl implements _ReconciliationItem {
+  const _$ReconciliationItemImpl(
       {@JsonKey(name: "id") required this.id,
       @JsonKey(name: "date") required this.date,
       @JsonKey(name: "time") required this.time,
@@ -381,8 +378,8 @@ class _$_ReconciliationItem implements _ReconciliationItem {
       @JsonKey(name: "total") required this.total,
       @JsonKey(name: "currency") required this.currency});
 
-  factory _$_ReconciliationItem.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconciliationItemFromJson(json);
+  factory _$ReconciliationItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReconciliationItemImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -409,10 +406,10 @@ class _$_ReconciliationItem implements _ReconciliationItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReconciliationItem &&
+            other is _$ReconciliationItemImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.time, time) || other.time == time) &&
@@ -431,13 +428,13 @@ class _$_ReconciliationItem implements _ReconciliationItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReconciliationItemCopyWith<_$_ReconciliationItem> get copyWith =>
-      __$$_ReconciliationItemCopyWithImpl<_$_ReconciliationItem>(
+  _$$ReconciliationItemImplCopyWith<_$ReconciliationItemImpl> get copyWith =>
+      __$$ReconciliationItemImplCopyWithImpl<_$ReconciliationItemImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReconciliationItemToJson(
+    return _$$ReconciliationItemImplToJson(
       this,
     );
   }
@@ -445,21 +442,16 @@ class _$_ReconciliationItem implements _ReconciliationItem {
 
 abstract class _ReconciliationItem implements ReconciliationItem {
   const factory _ReconciliationItem(
-      {@JsonKey(name: "id")
-          required final String id,
-      @JsonKey(name: "date")
-          required final String date,
-      @JsonKey(name: "time")
-          required final String time,
-      @JsonKey(name: "is_balanced")
-          required final LabelField<bool> isBalanced,
-      @JsonKey(name: "total")
-          required final String total,
+      {@JsonKey(name: "id") required final String id,
+      @JsonKey(name: "date") required final String date,
+      @JsonKey(name: "time") required final String time,
+      @JsonKey(name: "is_balanced") required final LabelField<bool> isBalanced,
+      @JsonKey(name: "total") required final String total,
       @JsonKey(name: "currency")
-          required final LocalizationField currency}) = _$_ReconciliationItem;
+      required final LocalizationField currency}) = _$ReconciliationItemImpl;
 
   factory _ReconciliationItem.fromJson(Map<String, dynamic> json) =
-      _$_ReconciliationItem.fromJson;
+      _$ReconciliationItemImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -481,6 +473,6 @@ abstract class _ReconciliationItem implements ReconciliationItem {
   LocalizationField get currency;
   @override
   @JsonKey(ignore: true)
-  _$$_ReconciliationItemCopyWith<_$_ReconciliationItem> get copyWith =>
+  _$$ReconciliationItemImplCopyWith<_$ReconciliationItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

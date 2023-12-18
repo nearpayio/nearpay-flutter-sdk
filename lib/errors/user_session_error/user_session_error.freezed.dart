@@ -66,25 +66,25 @@ class _$UserSessionAuthenticationFailedCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserSessionAuthenticationFailedCopyWith<$Res>
+abstract class _$$UserSessionAuthenticationFailedImplCopyWith<$Res>
     implements $UserSessionAuthenticationFailedCopyWith<$Res> {
-  factory _$$_UserSessionAuthenticationFailedCopyWith(
-          _$_UserSessionAuthenticationFailed value,
-          $Res Function(_$_UserSessionAuthenticationFailed) then) =
-      __$$_UserSessionAuthenticationFailedCopyWithImpl<$Res>;
+  factory _$$UserSessionAuthenticationFailedImplCopyWith(
+          _$UserSessionAuthenticationFailedImpl value,
+          $Res Function(_$UserSessionAuthenticationFailedImpl) then) =
+      __$$UserSessionAuthenticationFailedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_UserSessionAuthenticationFailedCopyWithImpl<$Res>
+class __$$UserSessionAuthenticationFailedImplCopyWithImpl<$Res>
     extends _$UserSessionAuthenticationFailedCopyWithImpl<$Res,
-        _$_UserSessionAuthenticationFailed>
-    implements _$$_UserSessionAuthenticationFailedCopyWith<$Res> {
-  __$$_UserSessionAuthenticationFailedCopyWithImpl(
-      _$_UserSessionAuthenticationFailed _value,
-      $Res Function(_$_UserSessionAuthenticationFailed) _then)
+        _$UserSessionAuthenticationFailedImpl>
+    implements _$$UserSessionAuthenticationFailedImplCopyWith<$Res> {
+  __$$UserSessionAuthenticationFailedImplCopyWithImpl(
+      _$UserSessionAuthenticationFailedImpl _value,
+      $Res Function(_$UserSessionAuthenticationFailedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_UserSessionAuthenticationFailedCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_UserSessionAuthenticationFailed(
+    return _then(_$UserSessionAuthenticationFailedImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -103,13 +103,13 @@ class __$$_UserSessionAuthenticationFailedCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserSessionAuthenticationFailed
+class _$UserSessionAuthenticationFailedImpl
     implements _UserSessionAuthenticationFailed {
-  const _$_UserSessionAuthenticationFailed({required this.message});
+  const _$UserSessionAuthenticationFailedImpl({required this.message});
 
-  factory _$_UserSessionAuthenticationFailed.fromJson(
+  factory _$UserSessionAuthenticationFailedImpl.fromJson(
           Map<String, dynamic> json) =>
-      _$$_UserSessionAuthenticationFailedFromJson(json);
+      _$$UserSessionAuthenticationFailedImplFromJson(json);
 
   @override
   final String message;
@@ -120,10 +120,10 @@ class _$_UserSessionAuthenticationFailed
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserSessionAuthenticationFailed &&
+            other is _$UserSessionAuthenticationFailedImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -134,14 +134,14 @@ class _$_UserSessionAuthenticationFailed
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserSessionAuthenticationFailedCopyWith<
-          _$_UserSessionAuthenticationFailed>
-      get copyWith => __$$_UserSessionAuthenticationFailedCopyWithImpl<
-          _$_UserSessionAuthenticationFailed>(this, _$identity);
+  _$$UserSessionAuthenticationFailedImplCopyWith<
+          _$UserSessionAuthenticationFailedImpl>
+      get copyWith => __$$UserSessionAuthenticationFailedImplCopyWithImpl<
+          _$UserSessionAuthenticationFailedImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserSessionAuthenticationFailedToJson(
+    return _$$UserSessionAuthenticationFailedImplToJson(
       this,
     );
   }
@@ -150,17 +150,17 @@ class _$_UserSessionAuthenticationFailed
 abstract class _UserSessionAuthenticationFailed
     implements UserSessionAuthenticationFailed {
   const factory _UserSessionAuthenticationFailed(
-      {required final String message}) = _$_UserSessionAuthenticationFailed;
+      {required final String message}) = _$UserSessionAuthenticationFailedImpl;
 
   factory _UserSessionAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_UserSessionAuthenticationFailed.fromJson;
+      _$UserSessionAuthenticationFailedImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_UserSessionAuthenticationFailedCopyWith<
-          _$_UserSessionAuthenticationFailed>
+  _$$UserSessionAuthenticationFailedImplCopyWith<
+          _$UserSessionAuthenticationFailedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -214,25 +214,25 @@ class _$UserSessionFailureMessageCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserSessionFailureMessageCopyWith<$Res>
+abstract class _$$UserSessionFailureMessageImplCopyWith<$Res>
     implements $UserSessionFailureMessageCopyWith<$Res> {
-  factory _$$_UserSessionFailureMessageCopyWith(
-          _$_UserSessionFailureMessage value,
-          $Res Function(_$_UserSessionFailureMessage) then) =
-      __$$_UserSessionFailureMessageCopyWithImpl<$Res>;
+  factory _$$UserSessionFailureMessageImplCopyWith(
+          _$UserSessionFailureMessageImpl value,
+          $Res Function(_$UserSessionFailureMessageImpl) then) =
+      __$$UserSessionFailureMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_UserSessionFailureMessageCopyWithImpl<$Res>
+class __$$UserSessionFailureMessageImplCopyWithImpl<$Res>
     extends _$UserSessionFailureMessageCopyWithImpl<$Res,
-        _$_UserSessionFailureMessage>
-    implements _$$_UserSessionFailureMessageCopyWith<$Res> {
-  __$$_UserSessionFailureMessageCopyWithImpl(
-      _$_UserSessionFailureMessage _value,
-      $Res Function(_$_UserSessionFailureMessage) _then)
+        _$UserSessionFailureMessageImpl>
+    implements _$$UserSessionFailureMessageImplCopyWith<$Res> {
+  __$$UserSessionFailureMessageImplCopyWithImpl(
+      _$UserSessionFailureMessageImpl _value,
+      $Res Function(_$UserSessionFailureMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -240,7 +240,7 @@ class __$$_UserSessionFailureMessageCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_UserSessionFailureMessage(
+    return _then(_$UserSessionFailureMessageImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -251,11 +251,11 @@ class __$$_UserSessionFailureMessageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserSessionFailureMessage implements _UserSessionFailureMessage {
-  const _$_UserSessionFailureMessage({required this.message});
+class _$UserSessionFailureMessageImpl implements _UserSessionFailureMessage {
+  const _$UserSessionFailureMessageImpl({required this.message});
 
-  factory _$_UserSessionFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_UserSessionFailureMessageFromJson(json);
+  factory _$UserSessionFailureMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserSessionFailureMessageImplFromJson(json);
 
   @override
   final String message;
@@ -266,10 +266,10 @@ class _$_UserSessionFailureMessage implements _UserSessionFailureMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserSessionFailureMessage &&
+            other is _$UserSessionFailureMessageImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -280,13 +280,13 @@ class _$_UserSessionFailureMessage implements _UserSessionFailureMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserSessionFailureMessageCopyWith<_$_UserSessionFailureMessage>
-      get copyWith => __$$_UserSessionFailureMessageCopyWithImpl<
-          _$_UserSessionFailureMessage>(this, _$identity);
+  _$$UserSessionFailureMessageImplCopyWith<_$UserSessionFailureMessageImpl>
+      get copyWith => __$$UserSessionFailureMessageImplCopyWithImpl<
+          _$UserSessionFailureMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserSessionFailureMessageToJson(
+    return _$$UserSessionFailureMessageImplToJson(
       this,
     );
   }
@@ -294,16 +294,16 @@ class _$_UserSessionFailureMessage implements _UserSessionFailureMessage {
 
 abstract class _UserSessionFailureMessage implements UserSessionFailureMessage {
   const factory _UserSessionFailureMessage({required final String message}) =
-      _$_UserSessionFailureMessage;
+      _$UserSessionFailureMessageImpl;
 
   factory _UserSessionFailureMessage.fromJson(Map<String, dynamic> json) =
-      _$_UserSessionFailureMessage.fromJson;
+      _$UserSessionFailureMessageImpl.fromJson;
 
   @override
   String get message;
   @override
   @JsonKey(ignore: true)
-  _$$_UserSessionFailureMessageCopyWith<_$_UserSessionFailureMessage>
+  _$$UserSessionFailureMessageImplCopyWith<_$UserSessionFailureMessageImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -357,24 +357,25 @@ class _$UserSessionInvalidStatusCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserSessionInvalidStatusCopyWith<$Res>
+abstract class _$$UserSessionInvalidStatusImplCopyWith<$Res>
     implements $UserSessionInvalidStatusCopyWith<$Res> {
-  factory _$$_UserSessionInvalidStatusCopyWith(
-          _$_UserSessionInvalidStatus value,
-          $Res Function(_$_UserSessionInvalidStatus) then) =
-      __$$_UserSessionInvalidStatusCopyWithImpl<$Res>;
+  factory _$$UserSessionInvalidStatusImplCopyWith(
+          _$UserSessionInvalidStatusImpl value,
+          $Res Function(_$UserSessionInvalidStatusImpl) then) =
+      __$$UserSessionInvalidStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_UserSessionInvalidStatusCopyWithImpl<$Res>
+class __$$UserSessionInvalidStatusImplCopyWithImpl<$Res>
     extends _$UserSessionInvalidStatusCopyWithImpl<$Res,
-        _$_UserSessionInvalidStatus>
-    implements _$$_UserSessionInvalidStatusCopyWith<$Res> {
-  __$$_UserSessionInvalidStatusCopyWithImpl(_$_UserSessionInvalidStatus _value,
-      $Res Function(_$_UserSessionInvalidStatus) _then)
+        _$UserSessionInvalidStatusImpl>
+    implements _$$UserSessionInvalidStatusImplCopyWith<$Res> {
+  __$$UserSessionInvalidStatusImplCopyWithImpl(
+      _$UserSessionInvalidStatusImpl _value,
+      $Res Function(_$UserSessionInvalidStatusImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -382,7 +383,7 @@ class __$$_UserSessionInvalidStatusCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_UserSessionInvalidStatus(
+    return _then(_$UserSessionInvalidStatusImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -390,11 +391,11 @@ class __$$_UserSessionInvalidStatusCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserSessionInvalidStatus implements _UserSessionInvalidStatus {
-  const _$_UserSessionInvalidStatus({this.required});
+class _$UserSessionInvalidStatusImpl implements _UserSessionInvalidStatus {
+  const _$UserSessionInvalidStatusImpl({this.required});
 
-  factory _$_UserSessionInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_UserSessionInvalidStatusFromJson(json);
+  factory _$UserSessionInvalidStatusImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserSessionInvalidStatusImplFromJson(json);
 
   @override
   final dynamic required;
@@ -405,10 +406,10 @@ class _$_UserSessionInvalidStatus implements _UserSessionInvalidStatus {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserSessionInvalidStatus &&
+            other is _$UserSessionInvalidStatusImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -420,13 +421,13 @@ class _$_UserSessionInvalidStatus implements _UserSessionInvalidStatus {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserSessionInvalidStatusCopyWith<_$_UserSessionInvalidStatus>
-      get copyWith => __$$_UserSessionInvalidStatusCopyWithImpl<
-          _$_UserSessionInvalidStatus>(this, _$identity);
+  _$$UserSessionInvalidStatusImplCopyWith<_$UserSessionInvalidStatusImpl>
+      get copyWith => __$$UserSessionInvalidStatusImplCopyWithImpl<
+          _$UserSessionInvalidStatusImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserSessionInvalidStatusToJson(
+    return _$$UserSessionInvalidStatusImplToJson(
       this,
     );
   }
@@ -434,16 +435,16 @@ class _$_UserSessionInvalidStatus implements _UserSessionInvalidStatus {
 
 abstract class _UserSessionInvalidStatus implements UserSessionInvalidStatus {
   const factory _UserSessionInvalidStatus({final dynamic required}) =
-      _$_UserSessionInvalidStatus;
+      _$UserSessionInvalidStatusImpl;
 
   factory _UserSessionInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_UserSessionInvalidStatus.fromJson;
+      _$UserSessionInvalidStatusImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_UserSessionInvalidStatusCopyWith<_$_UserSessionInvalidStatus>
+  _$$UserSessionInvalidStatusImplCopyWith<_$UserSessionInvalidStatusImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -497,25 +498,25 @@ class _$UserSessionGeneralFailureCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_UserSessionGeneralFailureCopyWith<$Res>
+abstract class _$$UserSessionGeneralFailureImplCopyWith<$Res>
     implements $UserSessionGeneralFailureCopyWith<$Res> {
-  factory _$$_UserSessionGeneralFailureCopyWith(
-          _$_UserSessionGeneralFailure value,
-          $Res Function(_$_UserSessionGeneralFailure) then) =
-      __$$_UserSessionGeneralFailureCopyWithImpl<$Res>;
+  factory _$$UserSessionGeneralFailureImplCopyWith(
+          _$UserSessionGeneralFailureImpl value,
+          $Res Function(_$UserSessionGeneralFailureImpl) then) =
+      __$$UserSessionGeneralFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({dynamic required});
 }
 
 /// @nodoc
-class __$$_UserSessionGeneralFailureCopyWithImpl<$Res>
+class __$$UserSessionGeneralFailureImplCopyWithImpl<$Res>
     extends _$UserSessionGeneralFailureCopyWithImpl<$Res,
-        _$_UserSessionGeneralFailure>
-    implements _$$_UserSessionGeneralFailureCopyWith<$Res> {
-  __$$_UserSessionGeneralFailureCopyWithImpl(
-      _$_UserSessionGeneralFailure _value,
-      $Res Function(_$_UserSessionGeneralFailure) _then)
+        _$UserSessionGeneralFailureImpl>
+    implements _$$UserSessionGeneralFailureImplCopyWith<$Res> {
+  __$$UserSessionGeneralFailureImplCopyWithImpl(
+      _$UserSessionGeneralFailureImpl _value,
+      $Res Function(_$UserSessionGeneralFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -523,7 +524,7 @@ class __$$_UserSessionGeneralFailureCopyWithImpl<$Res>
   $Res call({
     Object? required = freezed,
   }) {
-    return _then(_$_UserSessionGeneralFailure(
+    return _then(_$UserSessionGeneralFailureImpl(
       required: freezed == required ? _value.required! : required,
     ));
   }
@@ -531,11 +532,11 @@ class __$$_UserSessionGeneralFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserSessionGeneralFailure implements _UserSessionGeneralFailure {
-  const _$_UserSessionGeneralFailure({this.required});
+class _$UserSessionGeneralFailureImpl implements _UserSessionGeneralFailure {
+  const _$UserSessionGeneralFailureImpl({this.required});
 
-  factory _$_UserSessionGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_UserSessionGeneralFailureFromJson(json);
+  factory _$UserSessionGeneralFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserSessionGeneralFailureImplFromJson(json);
 
   @override
   final dynamic required;
@@ -546,10 +547,10 @@ class _$_UserSessionGeneralFailure implements _UserSessionGeneralFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserSessionGeneralFailure &&
+            other is _$UserSessionGeneralFailureImpl &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
@@ -561,13 +562,13 @@ class _$_UserSessionGeneralFailure implements _UserSessionGeneralFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserSessionGeneralFailureCopyWith<_$_UserSessionGeneralFailure>
-      get copyWith => __$$_UserSessionGeneralFailureCopyWithImpl<
-          _$_UserSessionGeneralFailure>(this, _$identity);
+  _$$UserSessionGeneralFailureImplCopyWith<_$UserSessionGeneralFailureImpl>
+      get copyWith => __$$UserSessionGeneralFailureImplCopyWithImpl<
+          _$UserSessionGeneralFailureImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserSessionGeneralFailureToJson(
+    return _$$UserSessionGeneralFailureImplToJson(
       this,
     );
   }
@@ -575,15 +576,15 @@ class _$_UserSessionGeneralFailure implements _UserSessionGeneralFailure {
 
 abstract class _UserSessionGeneralFailure implements UserSessionGeneralFailure {
   const factory _UserSessionGeneralFailure({final dynamic required}) =
-      _$_UserSessionGeneralFailure;
+      _$UserSessionGeneralFailureImpl;
 
   factory _UserSessionGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_UserSessionGeneralFailure.fromJson;
+      _$UserSessionGeneralFailureImpl.fromJson;
 
   @override
   dynamic get required;
   @override
   @JsonKey(ignore: true)
-  _$$_UserSessionGeneralFailureCopyWith<_$_UserSessionGeneralFailure>
+  _$$UserSessionGeneralFailureImplCopyWith<_$UserSessionGeneralFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

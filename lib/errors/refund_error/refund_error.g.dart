@@ -6,57 +6,61 @@ part of 'refund_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RefundRejected _$$_RefundRejectedFromJson(Map json) => _$_RefundRejected(
+_$RefundRejectedImpl _$$RefundRejectedImplFromJson(Map json) =>
+    _$RefundRejectedImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_RefundRejectedToJson(_$_RefundRejected instance) =>
+Map<String, dynamic> _$$RefundRejectedImplToJson(
+        _$RefundRejectedImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_RefundDeclined _$$_RefundDeclinedFromJson(Map json) => _$_RefundDeclined(
+_$RefundDeclinedImpl _$$RefundDeclinedImplFromJson(Map json) =>
+    _$RefundDeclinedImpl(
       receipts: (json['receipts'] as List<dynamic>)
           .map((e) =>
               TransactionReceipt.fromJson(Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
-Map<String, dynamic> _$$_RefundDeclinedToJson(_$_RefundDeclined instance) =>
+Map<String, dynamic> _$$RefundDeclinedImplToJson(
+        _$RefundDeclinedImpl instance) =>
     <String, dynamic>{
       'receipts': instance.receipts.map((e) => e.toJson()).toList(),
     };
 
-_$_RefundAuthenticationFailed _$$_RefundAuthenticationFailedFromJson(
+_$RefundAuthenticationFailedImpl _$$RefundAuthenticationFailedImplFromJson(
         Map json) =>
-    _$_RefundAuthenticationFailed(
+    _$RefundAuthenticationFailedImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_RefundAuthenticationFailedToJson(
-        _$_RefundAuthenticationFailed instance) =>
+Map<String, dynamic> _$$RefundAuthenticationFailedImplToJson(
+        _$RefundAuthenticationFailedImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_RefundInvalidStatus _$$_RefundInvalidStatusFromJson(Map json) =>
-    _$_RefundInvalidStatus(
+_$RefundInvalidStatusImpl _$$RefundInvalidStatusImplFromJson(Map json) =>
+    _$RefundInvalidStatusImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_RefundInvalidStatusToJson(
-        _$_RefundInvalidStatus instance) =>
+Map<String, dynamic> _$$RefundInvalidStatusImplToJson(
+        _$RefundInvalidStatusImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };
 
-_$_RefundGeneralFailure _$$_RefundGeneralFailureFromJson(Map json) =>
-    _$_RefundGeneralFailure(
+_$RefundGeneralFailureImpl _$$RefundGeneralFailureImplFromJson(Map json) =>
+    _$RefundGeneralFailureImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_RefundGeneralFailureToJson(
-        _$_RefundGeneralFailure instance) =>
+Map<String, dynamic> _$$RefundGeneralFailureImplToJson(
+        _$RefundGeneralFailureImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };

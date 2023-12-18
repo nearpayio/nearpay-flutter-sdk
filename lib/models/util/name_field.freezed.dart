@@ -72,11 +72,11 @@ class _$NameFieldCopyWithImpl<T, $Res, $Val extends NameField<T>>
 }
 
 /// @nodoc
-abstract class _$$_NameFieldCopyWith<T, $Res>
+abstract class _$$NameFieldImplCopyWith<T, $Res>
     implements $NameFieldCopyWith<T, $Res> {
-  factory _$$_NameFieldCopyWith(
-          _$_NameField<T> value, $Res Function(_$_NameField<T>) then) =
-      __$$_NameFieldCopyWithImpl<T, $Res>;
+  factory _$$NameFieldImplCopyWith(
+          _$NameFieldImpl<T> value, $Res Function(_$NameFieldImpl<T>) then) =
+      __$$NameFieldImplCopyWithImpl<T, $Res>;
   @override
   @useResult
   $Res call(
@@ -85,11 +85,11 @@ abstract class _$$_NameFieldCopyWith<T, $Res>
 }
 
 /// @nodoc
-class __$$_NameFieldCopyWithImpl<T, $Res>
-    extends _$NameFieldCopyWithImpl<T, $Res, _$_NameField<T>>
-    implements _$$_NameFieldCopyWith<T, $Res> {
-  __$$_NameFieldCopyWithImpl(
-      _$_NameField<T> _value, $Res Function(_$_NameField<T>) _then)
+class __$$NameFieldImplCopyWithImpl<T, $Res>
+    extends _$NameFieldCopyWithImpl<T, $Res, _$NameFieldImpl<T>>
+    implements _$$NameFieldImplCopyWith<T, $Res> {
+  __$$NameFieldImplCopyWithImpl(
+      _$NameFieldImpl<T> _value, $Res Function(_$NameFieldImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -98,7 +98,7 @@ class __$$_NameFieldCopyWithImpl<T, $Res>
     Object? name = null,
     Object? id = freezed,
   }) {
-    return _then(_$_NameField<T>(
+    return _then(_$NameFieldImpl<T>(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -113,13 +113,13 @@ class __$$_NameFieldCopyWithImpl<T, $Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NameField<T> implements _NameField<T> {
-  const _$_NameField(
+class _$NameFieldImpl<T> implements _NameField<T> {
+  const _$NameFieldImpl(
       {@JsonKey(name: "name") required this.name,
       @JsonKey(name: "id") required this.id});
 
-  factory _$_NameField.fromJson(Map<String, dynamic> json) =>
-      _$$_NameFieldFromJson(json);
+  factory _$NameFieldImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NameFieldImplFromJson(json);
 
   @override
   @JsonKey(name: "name")
@@ -134,10 +134,10 @@ class _$_NameField<T> implements _NameField<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NameField<T> &&
+            other is _$NameFieldImpl<T> &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other.id, id));
   }
@@ -150,12 +150,12 @@ class _$_NameField<T> implements _NameField<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NameFieldCopyWith<T, _$_NameField<T>> get copyWith =>
-      __$$_NameFieldCopyWithImpl<T, _$_NameField<T>>(this, _$identity);
+  _$$NameFieldImplCopyWith<T, _$NameFieldImpl<T>> get copyWith =>
+      __$$NameFieldImplCopyWithImpl<T, _$NameFieldImpl<T>>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NameFieldToJson<T>(
+    return _$$NameFieldImplToJson<T>(
       this,
     );
   }
@@ -164,10 +164,10 @@ class _$_NameField<T> implements _NameField<T> {
 abstract class _NameField<T> implements NameField<T> {
   const factory _NameField(
       {@JsonKey(name: "name") required final LocalizationField name,
-      @JsonKey(name: "id") required final dynamic id}) = _$_NameField<T>;
+      @JsonKey(name: "id") required final dynamic id}) = _$NameFieldImpl<T>;
 
   factory _NameField.fromJson(Map<String, dynamic> json) =
-      _$_NameField<T>.fromJson;
+      _$NameFieldImpl<T>.fromJson;
 
   @override
   @JsonKey(name: "name")
@@ -177,6 +177,6 @@ abstract class _NameField<T> implements NameField<T> {
   dynamic get id;
   @override
   @JsonKey(ignore: true)
-  _$$_NameFieldCopyWith<T, _$_NameField<T>> get copyWith =>
+  _$$NameFieldImplCopyWith<T, _$NameFieldImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,7 +6,7 @@ part of 'session.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Session _$$_SessionFromJson(Map json) => _$_Session(
+_$SessionImpl _$$SessionImplFromJson(Map json) => _$SessionImpl(
       id: json['id'] as String,
       status: json['status'] as String,
       type: json['type'] as String,
@@ -20,7 +20,7 @@ _$_Session _$$_SessionFromJson(Map json) => _$_Session(
           Map<String, dynamic>.from(json['transaction'] as Map)),
     );
 
-Map<String, dynamic> _$$_SessionToJson(_$_Session instance) =>
+Map<String, dynamic> _$$SessionImplToJson(_$SessionImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'status': instance.status,

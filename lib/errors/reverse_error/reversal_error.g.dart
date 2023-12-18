@@ -6,47 +6,47 @@ part of 'reversal_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReversalFailureMessage _$$_ReversalFailureMessageFromJson(Map json) =>
-    _$_ReversalFailureMessage(
+_$ReversalFailureMessageImpl _$$ReversalFailureMessageImplFromJson(Map json) =>
+    _$ReversalFailureMessageImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_ReversalFailureMessageToJson(
-        _$_ReversalFailureMessage instance) =>
+Map<String, dynamic> _$$ReversalFailureMessageImplToJson(
+        _$ReversalFailureMessageImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_ReversalAuthenticationFailed _$$_ReversalAuthenticationFailedFromJson(
+_$ReversalAuthenticationFailedImpl _$$ReversalAuthenticationFailedImplFromJson(
         Map json) =>
-    _$_ReversalAuthenticationFailed(
+    _$ReversalAuthenticationFailedImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_ReversalAuthenticationFailedToJson(
-        _$_ReversalAuthenticationFailed instance) =>
+Map<String, dynamic> _$$ReversalAuthenticationFailedImplToJson(
+        _$ReversalAuthenticationFailedImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_ReversalInvalidStatus _$$_ReversalInvalidStatusFromJson(Map json) =>
-    _$_ReversalInvalidStatus(
+_$ReversalInvalidStatusImpl _$$ReversalInvalidStatusImplFromJson(Map json) =>
+    _$ReversalInvalidStatusImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_ReversalInvalidStatusToJson(
-        _$_ReversalInvalidStatus instance) =>
+Map<String, dynamic> _$$ReversalInvalidStatusImplToJson(
+        _$ReversalInvalidStatusImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };
 
-_$_ReversalGeneralFailure _$$_ReversalGeneralFailureFromJson(Map json) =>
-    _$_ReversalGeneralFailure(
+_$ReversalGeneralFailureImpl _$$ReversalGeneralFailureImplFromJson(Map json) =>
+    _$ReversalGeneralFailureImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_ReversalGeneralFailureToJson(
-        _$_ReversalGeneralFailure instance) =>
+Map<String, dynamic> _$$ReversalGeneralFailureImplToJson(
+        _$ReversalGeneralFailureImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };

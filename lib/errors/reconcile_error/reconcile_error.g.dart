@@ -6,47 +6,49 @@ part of 'reconcile_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReconcileFailureMessage _$$_ReconcileFailureMessageFromJson(Map json) =>
-    _$_ReconcileFailureMessage(
-      message: json['message'] as String,
-    );
-
-Map<String, dynamic> _$$_ReconcileFailureMessageToJson(
-        _$_ReconcileFailureMessage instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
-
-_$_ReconcileAuthenticationFailed _$$_ReconcileAuthenticationFailedFromJson(
+_$ReconcileFailureMessageImpl _$$ReconcileFailureMessageImplFromJson(
         Map json) =>
-    _$_ReconcileAuthenticationFailed(
+    _$ReconcileFailureMessageImpl(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$$_ReconcileAuthenticationFailedToJson(
-        _$_ReconcileAuthenticationFailed instance) =>
+Map<String, dynamic> _$$ReconcileFailureMessageImplToJson(
+        _$ReconcileFailureMessageImpl instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
 
-_$_ReconcileInvalidStatus _$$_ReconcileInvalidStatusFromJson(Map json) =>
-    _$_ReconcileInvalidStatus(
+_$ReconcileAuthenticationFailedImpl
+    _$$ReconcileAuthenticationFailedImplFromJson(Map json) =>
+        _$ReconcileAuthenticationFailedImpl(
+          message: json['message'] as String,
+        );
+
+Map<String, dynamic> _$$ReconcileAuthenticationFailedImplToJson(
+        _$ReconcileAuthenticationFailedImpl instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+    };
+
+_$ReconcileInvalidStatusImpl _$$ReconcileInvalidStatusImplFromJson(Map json) =>
+    _$ReconcileInvalidStatusImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_ReconcileInvalidStatusToJson(
-        _$_ReconcileInvalidStatus instance) =>
+Map<String, dynamic> _$$ReconcileInvalidStatusImplToJson(
+        _$ReconcileInvalidStatusImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };
 
-_$_ReconcileGeneralFailure _$$_ReconcileGeneralFailureFromJson(Map json) =>
-    _$_ReconcileGeneralFailure(
+_$ReconcileGeneralFailureImpl _$$ReconcileGeneralFailureImplFromJson(
+        Map json) =>
+    _$ReconcileGeneralFailureImpl(
       required: json['required'],
     );
 
-Map<String, dynamic> _$$_ReconcileGeneralFailureToJson(
-        _$_ReconcileGeneralFailure instance) =>
+Map<String, dynamic> _$$ReconcileGeneralFailureImplToJson(
+        _$ReconcileGeneralFailureImpl instance) =>
     <String, dynamic>{
       'required': instance.required,
     };
