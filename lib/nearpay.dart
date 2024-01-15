@@ -91,12 +91,14 @@ class Nearpay {
     int limit = 30,
     DateTime? from,
     DateTime? to,
+    String? customerReferenceNumber,
   }) async {
     final data = {
       "page": page,
       "limit": limit,
       "startDate": from?.toIso8601String(),
-      "endDate": to?.toIso8601String()
+      "endDate": to?.toIso8601String(),
+      "customerReferenceNumber": customerReferenceNumber,
     };
 
     final response =
@@ -106,9 +108,13 @@ class Nearpay {
 
   static Future<dynamic> getTransaction({
     required String transactionUuid,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     final data = {
       "transactionUuid": transactionUuid,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response =
@@ -136,9 +142,13 @@ class Nearpay {
 
   static Future<dynamic> getReconciliation({
     required String reconciliationUuid,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     final data = {
       "reconciliationUuid": reconciliationUuid,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response =
