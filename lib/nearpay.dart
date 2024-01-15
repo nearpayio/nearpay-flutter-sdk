@@ -403,10 +403,14 @@ class Nearpay {
   Future<TransactionData> getTransaction({
     required String transactionUUID,
     String? adminPin,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     var data = {
       "transaction_uuid": transactionUUID, // Required
       "adminPin": adminPin,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response = await _callAndReturnMapResponse(
@@ -456,10 +460,14 @@ class Nearpay {
   Future<ReconciliationReceipt> getReconciliation({
     required String reconciliationUUID,
     String? adminPin,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     var data = {
       "reconciliation_uuid": reconciliationUUID, // Required
       "adminPin": adminPin,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response = await _callAndReturnMapResponse(
