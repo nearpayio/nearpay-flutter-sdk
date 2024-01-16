@@ -307,8 +307,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                     : null;
             LocalDateTime to = isoTimeTo != null ? LocalDateTime.parse(isoTimeTo, DateTimeFormatter.ISO_DATE_TIME)
                     : null;
-
-            nearPay.getTransactionListPage(page, limit, from, to, new GetTransactionPageListener() {
+            String customerReferenceNumber = call.argument("customerReferenceNumber") == null ? null : (String) call.argument("customerReferenceNumber");
+            nearPay.getTransactionListPage(page, limit, from, to, customerReferenceNumber, new GetTransactionPageListener() {
                 @Override
                 public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
@@ -326,8 +326,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             // call.argument("adminPin").toString();
             String transactionUUID = call.argument("transactionUuid") == null ? null
                     : call.argument("transactionUuid").toString();
-
-            nearPay.getTransactionByUuid(transactionUUID, new GetTransactionListener() {
+            boolean enableReceiptUi = call.argument("enableReceiptUi") != null && (boolean) call.argument("enableReceiptUi");
+            long finishTimeOut = call.argument("finishTimeOut") == null ? 30
+                    : (long)call.argument("finishTimeOut");
+            nearPay.getTransactionByUuid(transactionUUID, enableReceiptUi,  finishTimeOut, new GetTransactionListener() {
                 @Override
                 public void onSuccess(@NonNull TransactionData transactionData) {
                     // Map res = commonResponse(ErrorStatus.success_code, "");
@@ -395,8 +397,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             // call.argument("adminPin").toString();
             String reconciliationUUID = call.argument("reconciliationUuid") == null ? null
                     : call.argument("reconciliationUuid").toString();
-
-            nearPay.getReconciliationByUuid(reconciliationUUID, new GetReconcileListener() {
+            boolean enableReceiptUi = call.argument("enableReceiptUi") != null && (boolean) call.argument("enableReceiptUi");
+            long finishTimeOut = call.argument("finishTimeOut") == null ? 30
+                    : (long)call.argument("finishTimeOut");
+            nearPay.getReconciliationByUuid(reconciliationUUID, enableReceiptUi, finishTimeOut, new GetReconcileListener() {
                 @Override
                 public void onSuccess(@Nullable ReconciliationReceipt reconciliationReceipt) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
