@@ -24,6 +24,10 @@ import 'package:nearpay_flutter_sdk/types.dart';
 import 'package:nearpay_flutter_sdk/util/util.dart';
 import 'package:uuid/uuid.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
+import 'package:nearpay_flutter_sdk/errors/query_error/query_error.dart';
+import 'package:nearpay_flutter_sdk/errors/query_error/query_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/logout_error/logout_error.dart';
+import 'package:nearpay_flutter_sdk/errors/logout_error/logout_error_switch.dart';
 
 enum Environments {
   sandbox("sandbox"),
@@ -305,7 +309,8 @@ class Nearpay {
     if (response["status"] == 200) {
       // _provider.listener.emitStateChange(NearpayState.notReady);
     } else {
-      throw response;
+      LogoutError err = getLogoutError(response);
+      throw err;
     }
   }
 
@@ -392,7 +397,8 @@ class Nearpay {
           TransactionBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
@@ -420,7 +426,8 @@ class Nearpay {
 
       return transactionData;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
@@ -449,7 +456,8 @@ class Nearpay {
           ReconciliationBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
@@ -476,7 +484,8 @@ class Nearpay {
           ReconciliationReceipt.fromJson(response['result']);
       return transactionData;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
