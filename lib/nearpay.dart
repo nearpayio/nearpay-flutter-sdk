@@ -314,6 +314,13 @@ class Nearpay {
     }
   }
 
+  Future<dynamic> close() async {
+    final _ = await _callAndReturnMapResponse(
+      'close',
+      {},
+    );
+  }
+
   Future<dynamic> setup() async {
     final response = await _callAndReturnMapResponse(
       'setup',
