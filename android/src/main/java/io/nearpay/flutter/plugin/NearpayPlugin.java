@@ -415,7 +415,9 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
 
                 }
             });
-        } else {
+        } else if (call.method.equals("close")) {
+          nearPay.close();
+        }else {
             result.notImplemented();
         }
     }
