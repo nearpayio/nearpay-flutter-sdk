@@ -108,7 +108,7 @@ public class ArgsFilter {
     }
 
     public boolean getEnableReceiptUi() {
-     return savedArgs.get("enableReceiptUi") != null && (boolean) savedArgs.get("enableReceiptUi");
+        return savedArgs.get("enableReceiptUi") != null && (boolean) savedArgs.get("enableReceiptUi");
     }
 
     public long getFinishTimeOut() {

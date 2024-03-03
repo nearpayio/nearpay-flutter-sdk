@@ -19,6 +19,4 @@ public class CloseOperation extends BaseOperation {
     public void run(ArgsFilter filter, NearpaySender sender) {
         provider.getNearpayLib().nearpay.close();
     }
-
 }
-

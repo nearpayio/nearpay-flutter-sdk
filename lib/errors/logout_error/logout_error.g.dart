@@ -61,5 +61,3 @@ Map<String, dynamic> _$$AlreadyLogoutFailureImplToJson(
     <String, dynamic>{
       'required': instance.required,
     };
-
-
