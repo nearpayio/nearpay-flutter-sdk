@@ -43,8 +43,6 @@ flutter:
       android:
         package: io.nearpay.flutter.plugin
         pluginClass: NearpayPlugin
-      ios:
-        pluginClass: NearpayPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

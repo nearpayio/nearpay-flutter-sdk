@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:flutter/services.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
