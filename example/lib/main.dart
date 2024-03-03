@@ -220,8 +220,8 @@ class _MyAppState extends State<MyApp> {
   // =-=-=- Queries -=-=-=
   Future<dynamic> getTransaction() async {
     final transaction = await nearpay.getTransaction(
-      transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
-    );
+        transactionUUID: "b62dc4af-7e51-4b57-8cba-76f29fcba588",
+        enableReceiptUi: true);
 
     printJson(transaction.receipts![0].toJson());
   }
