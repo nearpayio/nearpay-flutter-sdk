@@ -26,8 +26,8 @@ public class GetTransactionOperation extends BaseOperation {
   @Override
   public void run(ArgsFilter filter, NearpaySender sender) {
     String trUuid = filter.getTransactionUuid();
-    boolean enableReceiptUi = filter.getEnableReceiptUi();
-    long finishTimeOut = filter.getFinishTimeOut();
+    long finishTimeOut = filter.getTimeout();
+    boolean enableReceiptUi = filter.isEnableReceiptUi();
 
     provider.getNearpayLib().nearpay.getTransactionByUuid(trUuid, enableReceiptUi, finishTimeOut, new GetTransactionListener() {
       @Override

@@ -23,8 +23,9 @@ public class GetReconciliationOperation extends BaseOperation {
   @Override
   public void run(ArgsFilter filter, NearpaySender sender) {
     String reconUuid = filter.getReconciliationUuid();
-    boolean enableReceiptUi = filter.getEnableReceiptUi();
-    long finishTimeOut = filter.getFinishTimeOut();
+    long finishTimeOut = filter.getTimeout();
+    boolean enableReceiptUi = filter.isEnableReceiptUi();
+
     provider.getNearpayLib().nearpay.getReconciliationByUuid(reconUuid, enableReceiptUi, finishTimeOut,  new GetReconcileListener() {
 
       @Override
