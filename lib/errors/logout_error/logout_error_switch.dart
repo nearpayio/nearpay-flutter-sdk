@@ -20,4 +20,3 @@ LogoutError getLogoutError(Map<String, dynamic> nativeResponse) {
 
   throw "no Error with status ${status}";
 }
-

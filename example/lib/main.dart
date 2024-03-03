@@ -220,8 +220,8 @@ class _MyAppState extends State<MyApp> {
   // =-=-=- Queries -=-=-=
   Future<dynamic> getTransaction() async {
     final transaction = await nearpay.getTransaction(
-      transactionUUID: "a2fd6519-2b37-4336-be6d-5520bb3b6427",
-    );
+        transactionUUID: "b62dc4af-7e51-4b57-8cba-76f29fcba588",
+        enableReceiptUi: true);
 
     printJson(transaction.receipts![0].toJson());
   }
@@ -235,7 +235,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> getReconciliation() async {
     final receipt = await nearpay.getReconciliation(
-      reconciliationUUID: "6d4a48b8-d194-4aad-92c9-a77606758799",
+      reconciliationUUID: "fd705f25-6f37-4a65-89be-843f4f84898d",
     );
 
     printJson(receipt.toJson());

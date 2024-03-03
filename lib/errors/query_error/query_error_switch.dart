@@ -18,4 +18,3 @@ QueryError getQueryError(Map<String, dynamic> nativeResponse) {
 
   throw "no Error with status ${status}";
 }
-
