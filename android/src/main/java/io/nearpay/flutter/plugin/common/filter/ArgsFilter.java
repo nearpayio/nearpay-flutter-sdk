@@ -107,14 +107,6 @@ public class ArgsFilter {
         return savedArgs.get("original_transaction_uuid").toString();
     }
 
-    public boolean getEnableReceiptUi() {
-        return savedArgs.get("enableReceiptUi") != null && (boolean) savedArgs.get("enableReceiptUi");
-    }
-
-    public long getFinishTimeOut() {
-        return savedArgs.get("finishTimeOut") == null ? 30
-                : (long)savedArgs.get("finishTimeOut");
-    }
     public Locale getLocale() {
         String localeStr = savedArgs.get("locale") != null ? savedArgs.get("locale").toString() : "default";
         Locale locale = localeStr.equals("default") ? Locale.getDefault() : Locale.getDefault();
