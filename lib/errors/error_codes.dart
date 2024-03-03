@@ -10,4 +10,5 @@ class ErrorCodes {
   static const int purchaseRejectedCode = 406;
   static const int refundDeclinedCode = 407;
   static const int refundRejectedCode = 408;
+  static const int alreadyLogoutCode = 409;
 }

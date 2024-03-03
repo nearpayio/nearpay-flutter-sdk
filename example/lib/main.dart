@@ -33,7 +33,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay(
     authType: AuthenticationType.email,
-    region: Regions.SAUDI,
     authValue: "f.alhajeri@nearpay.io",
     env: Environments.sandbox,
     locale: Locale.localeDefault,
@@ -236,7 +235,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> getReconciliation() async {
     final receipt = await nearpay.getReconciliation(
-      reconciliationUUID: "6d4a48b8-d194-4aad-92c9-a77606758799",
+      reconciliationUUID: "fd705f25-6f37-4a65-89be-843f4f84898d",
     );
 
     printJson(receipt.toJson());

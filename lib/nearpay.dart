@@ -24,6 +24,10 @@ import 'package:nearpay_flutter_sdk/types.dart';
 import 'package:nearpay_flutter_sdk/util/util.dart';
 import 'package:uuid/uuid.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
+import 'package:nearpay_flutter_sdk/errors/query_error/query_error.dart';
+import 'package:nearpay_flutter_sdk/errors/query_error/query_error_switch.dart';
+import 'package:nearpay_flutter_sdk/errors/logout_error/logout_error.dart';
+import 'package:nearpay_flutter_sdk/errors/logout_error/logout_error_switch.dart';
 
 enum Environments {
   sandbox("sandbox"),
@@ -102,7 +106,6 @@ class Nearpay {
   final bool _uiLoading;
   final NetworkConfiguration _networkConfig;
   final UIPosition _uiPosition;
-  final Regions _region;
   final String? _arabicPaymentText;
   final String? _englishPaymentText;
   bool _initialized = false;
@@ -117,7 +120,6 @@ class Nearpay {
     required AuthenticationType authType,
     required String authValue,
     required Environments env,
-    required Regions region,
     Locale locale = Locale.localeDefault,
     NetworkConfiguration networkConfig = NetworkConfiguration.DEFAULT,
     bool uiLoading = true,
@@ -126,7 +128,6 @@ class Nearpay {
     String? englishPaymentText,
   })  : _locale = locale,
         _env = env,
-        _region = region,
         _authValue = authValue,
         _authType = authType,
         _networkConfig = networkConfig,
@@ -153,7 +154,6 @@ class Nearpay {
       "loading_ui": _uiLoading,
       "arabic_payment_text": _arabicPaymentText,
       "english_payment_text": _englishPaymentText,
-      "region": _region.value
     };
 
     final response =
@@ -309,8 +309,16 @@ class Nearpay {
     if (response["status"] == 200) {
       // _provider.listener.emitStateChange(NearpayState.notReady);
     } else {
-      throw response;
+      LogoutError err = getLogoutError(response);
+      throw err;
     }
+  }
+
+  Future<dynamic> close() async {
+    final _ = await _callAndReturnMapResponse(
+      'close',
+      {},
+    );
   }
 
   Future<dynamic> setup() async {
@@ -396,17 +404,22 @@ class Nearpay {
           TransactionBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
   Future<TransactionData> getTransaction({
     required String transactionUUID,
     String? adminPin,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     var data = {
       "transaction_uuid": transactionUUID, // Required
       "adminPin": adminPin,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response = await _callAndReturnMapResponse(
@@ -420,7 +433,8 @@ class Nearpay {
 
       return transactionData;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
@@ -449,17 +463,22 @@ class Nearpay {
           ReconciliationBannerList.fromJson(response['result']);
       return banner;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
   Future<ReconciliationReceipt> getReconciliation({
     required String reconciliationUUID,
     String? adminPin,
+    bool? enableReceiptUi,
+    num? finishTimeOut,
   }) async {
     var data = {
       "reconciliation_uuid": reconciliationUUID, // Required
       "adminPin": adminPin,
+      "enableReceiptUi": enableReceiptUi,
+      "finishTimeOut": finishTimeOut,
     };
 
     final response = await _callAndReturnMapResponse(
@@ -472,7 +491,8 @@ class Nearpay {
           ReconciliationReceipt.fromJson(response['result']);
       return transactionData;
     } else {
-      throw response;
+      QueryError err = getQueryError(response);
+      throw err;
     }
   }
 
