@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nfc_compatibility/flutter_nfc_compatibility.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error_switch.dart';
@@ -162,6 +164,17 @@ class Nearpay {
       _initialized = true;
     } else {
       throw response;
+    }
+  }
+
+  Future<bool> checkCompatibility() async {
+    var nfcCompatibility = await FlutterNfcCompatibility.checkNFCAvailability();
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (nfcCompatibility == NFCAvailability.Enabled && androidInfo.version.sdkInt > 8) {
+      return true;
+    } else {
+      return false;
     }
   }
 
