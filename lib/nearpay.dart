@@ -1,4 +1,6 @@
+import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nfc_compatibility/flutter_nfc_compatibility.dart';
 
 enum Environments {
   sandbox("sandbox"),
@@ -87,6 +89,17 @@ class Nearpay {
     final response =
         await methodChannel.invokeMethod<dynamic>('updateAuthentication', data);
     return response;
+  }
+
+  static Future<bool> checkCompatibility() async {
+    var nfcCompatibility = await FlutterNfcCompatibility.checkNFCAvailability();
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (nfcCompatibility == NFCAvailability.Enabled && androidInfo.version.sdkInt > 8) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   static Future<dynamic> getTransactionsList({

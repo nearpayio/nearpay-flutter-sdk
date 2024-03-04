@@ -8,8 +8,10 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  device_info: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_nfc_compatibility: ^0.0.4
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
@@ -37,8 +39,7 @@ flutter:
       android:
         package: io.nearpay.flutter.plugin
         pluginClass: NearpayPlugin
-      ios:
-        pluginClass: NearpayPlugin
+
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
