@@ -48,6 +48,16 @@ class _MyAppState extends State<MyApp> {
     nearpay.initialize().catchError((e) {
       print(e);
     });
+    checkCompatibility();
+  }
+
+  Future<void> checkCompatibility() async {
+    var isCompatible = await nearpay.checkCompatibility();
+    if(isCompatible) {
+       print('Device compatible');
+    } else {
+      print('Device not compatible');
+    }
   }
 
   Future<dynamic> purchaseWithRefund() async {
