@@ -121,10 +121,11 @@ packages:
   flutter_nfc_compatibility:
     dependency: transitive
     description:
-      path: "../flutter-nfc-compatibility-main"
-      relative: true
-    source: path
-    version: "0.0.2"
+      name: flutter_nfc_compatibility
+      sha256: "64e3a24b54867174bd3978536c8f63e764a527f16d3a482767cc876ce9061ab6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
