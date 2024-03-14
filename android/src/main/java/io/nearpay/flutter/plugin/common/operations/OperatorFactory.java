@@ -37,7 +37,7 @@ public class OperatorFactory {
         map.put("receiptToImage", new ReceiptToImageOperation(provider));
         map.put("reconciliationReceiptToImage", new ReconciliationReceiptToImageOperation(provider));
         map.put("getUserSession", new GetUserSessionOperation(provider));
-
+        map.put("CompatibilityOperation", new CompatibilityOperation(provider));
         return map;
     }
 

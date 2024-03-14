@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 // import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_nfc_compatibility/flutter_nfc_compatibility.dart';
@@ -167,17 +168,6 @@ class Nearpay {
     }
   }
 
-  // Future<bool> checkCompatibility() async {
-  //   var nfcCompatibility = await FlutterNfcCompatibility.checkNFCAvailability();
-  //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  //   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  //   if (nfcCompatibility == NFCAvailability.Enabled && androidInfo.version.sdkInt > 8) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   Future<TransactionData> purchase({
     required int amount,
     String? transactionId,
@@ -211,6 +201,19 @@ class Nearpay {
       throw err;
     }
   }
+Future<bool> checkCompatibility() async {
+  final response = await _callAndReturnMapResponse(
+    'CompatibilityOperation',
+    {}
+  );
+print("CompatibilityOperation");
+  if (response["status"] == 200) {
+    return true;
+  } else {
+    throw false;
+  }
+}
+
 
   Future<TransactionData> refund({
     required int amount,

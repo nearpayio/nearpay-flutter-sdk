@@ -50,18 +50,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // Future<void> checkCompatibility() async {
-  //   var isCompatible = await nearpay.checkCompatibility();
-  //   if(isCompatible) {
-  //     print('Device compatible');
-  //   } else {
-  //     print('Device not compatible');
-  //   }
-  // }
-
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
-
     final transactionData = await nearpay
         .purchase(
       amount: 1000,
