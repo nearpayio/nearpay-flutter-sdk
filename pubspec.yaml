@@ -4,14 +4,14 @@ version: 0.0.4
 
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=2.17.0'
   flutter: ">=2.5.0"
 
 dependencies:
   device_info: ^2.0.3
   flutter:
     sdk: flutter
-  flutter_nfc_compatibility: ^0.0.4
+  nfc_manager: ^3.4.0
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
