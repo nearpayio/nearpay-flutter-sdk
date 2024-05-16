@@ -1,7 +1,7 @@
 import 'dart:convert';
-// import 'package:device_info/device_info.dart';
+import 'package:device_info/device_info.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_nfc_compatibility/flutter_nfc_compatibility.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error_switch.dart';
@@ -21,8 +21,6 @@ import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_banne
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/models/user_session/user_session.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
-import 'package:nearpay_flutter_sdk/types.dart';
-import 'package:nearpay_flutter_sdk/util/util.dart';
 import 'package:uuid/uuid.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
 import 'package:nearpay_flutter_sdk/errors/query_error/query_error.dart';
@@ -167,16 +165,17 @@ class Nearpay {
     }
   }
 
-  // Future<bool> checkCompatibility() async {
-  //   var nfcCompatibility = await FlutterNfcCompatibility.checkNFCAvailability();
-  //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  //   AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  //   if (nfcCompatibility == NFCAvailability.Enabled && androidInfo.version.sdkInt > 8) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  static Future<bool> checkCompatibility() async {
+    bool isAvailable = await NfcManager.instance.isAvailable();
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    if (isAvailable == true && androidInfo.version.sdkInt > 8) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
   Future<TransactionData> purchase({
     required int amount,

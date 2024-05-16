@@ -33,7 +33,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final nearpay = Nearpay(
     authType: AuthenticationType.email,
-    authValue: "f.alhajeri@nearpay.io",
+    authValue: "a.khalifa@nearpay.io",
     env: Environments.sandbox,
     locale: Locale.localeDefault,
   );
@@ -49,15 +49,6 @@ class _MyAppState extends State<MyApp> {
       print(e);
     });
   }
-
-  // Future<void> checkCompatibility() async {
-  //   var isCompatible = await nearpay.checkCompatibility();
-  //   if(isCompatible) {
-  //     print('Device compatible');
-  //   } else {
-  //     print('Device not compatible');
-  //   }
-  // }
 
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
