@@ -163,6 +163,15 @@ class Nearpay {
     }
   }
 
+  Future<bool> checkCompatibility() async {
+    final response = await _callAndReturnMapResponse('checkCompatibility',{});
+    if (response["status"] == 200) {
+       return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<TransactionData> purchase({
     required int amount,
     String? transactionId,
