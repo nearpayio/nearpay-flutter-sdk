@@ -30,14 +30,6 @@ class _MyAppState extends State<MyApp> {
     sdkInitialize();
   }
 
-  Future<void> checkCompatibility() async {
-    var isCompatible = await Nearpay.checkCompatibility();
-    if(isCompatible) {
-      print('Device compatible');
-    } else {
-      print('Device not compatible');
-    }
-  }
   sdkInitialize() async {
     var reqData = {
       "authtype": authType,

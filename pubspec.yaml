@@ -8,10 +8,8 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
-  device_info: ^2.0.3
   flutter:
     sdk: flutter
-  nfc_manager: ^3.4.0
   plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
