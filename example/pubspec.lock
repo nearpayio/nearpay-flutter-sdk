@@ -57,22 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  device_info:
-    dependency: transitive
-    description:
-      name: device_info
-      sha256: f4a8156cb7b7480d969cb734907d18b333c8f0bc0b1ad0b342cdcecf30d62c48
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
-  device_info_platform_interface:
-    dependency: transitive
-    description:
-      name: device_info_platform_interface
-      sha256: b148e0bf9640145d09a4f8dea96614076f889e7f7f8b5ecab1c7e5c2dbc73c1b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   dio:
     dependency: "direct main"
     description:
@@ -223,14 +207,6 @@ packages:
       relative: true
     source: path
     version: "0.0.4"
-  nfc_manager:
-    dependency: transitive
-    description:
-      name: nfc_manager
-      sha256: "25b3ed2a3806619e9a44416964b29db178f94bd22651941fd99cbc15687f08c5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.4.0"
   path:
     dependency: transitive
     description:

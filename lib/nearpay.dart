@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:device_info/device_info.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 import 'package:flutter/services.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error.dart';
 import 'package:nearpay_flutter_sdk/errors/purchase_error/purchase_error_switch.dart';
@@ -164,18 +162,6 @@ class Nearpay {
       throw response;
     }
   }
-
-  static Future<bool> checkCompatibility() async {
-    bool isAvailable = await NfcManager.instance.isAvailable();
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    if (isAvailable == true && androidInfo.version.sdkInt > 8) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 
   Future<TransactionData> purchase({
     required int amount,
