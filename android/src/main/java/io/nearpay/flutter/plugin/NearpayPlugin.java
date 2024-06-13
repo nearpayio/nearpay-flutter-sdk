@@ -32,6 +32,7 @@ import io.nearpay.sdk.data.models.TransactionBannerList;
 import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
+import io.nearpay.sdk.utils.enums.CancelFailure;
 import io.nearpay.sdk.utils.enums.GetDataFailure;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.RefundFailure;
@@ -39,6 +40,7 @@ import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.StatusCheckError;
 import io.nearpay.sdk.utils.enums.TransactionData;
 import io.nearpay.sdk.utils.listeners.BitmapListener;
+import io.nearpay.sdk.utils.listeners.DismissListener;
 import io.nearpay.sdk.utils.listeners.GetReconcileListener;
 import io.nearpay.sdk.utils.listeners.GetReconciliationPageListener;
 import io.nearpay.sdk.utils.listeners.GetTransactionListener;
@@ -133,7 +135,16 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                         "Plugin Initialise missing, please initialise");
                 sendResponse(paramMap, callUUID);
             }
-        } else if (call.method.equals("reconcile")) {
+        } else if (call.method.equals("dismiss")) {
+            if (nearPay != null) {
+                dismiss(callUUID);
+            } else {
+                Log.i("dismiss....", "initialise nil");
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
+                        "Plugin Initialise missing, please initialise");
+                sendResponse(paramMap, callUUID);
+            }
+        }else if (call.method.equals("reconcile")) {
             if (nearPay != null) {
                 Boolean isEnableUI = call.argument("isEnableUI") == null ? true : call.argument("isEnableUI");
                 String authvalue = call.argument("authvalue") == null ? this.authValueShared
@@ -1091,7 +1102,25 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             }
         });
     }
+    private void dismiss(String callUUID) {
+        nearPay.dismiss(new DismissListener() {
+            @Override
+            public void onDismiss(boolean b) {
+                Map<String, Object> toSend = commonResponse(ErrorStatus.success_code, null);
+                sendResponse(toSend, callUUID);
+            }
 
+            @Override
+            public void onDismissFailure(@NonNull CancelFailure cancelFailure) {
+                if (cancelFailure instanceof CancelFailure.GeneralFailure) {
+                    int status = ErrorStatus.auth_failed_code;
+                    String message = ((CancelFailure.GeneralFailure) cancelFailure).getMessage();
+                    Map<String, Object> response = commonResponse(status, message);
+                    sendResponse(response, callUUID);
+                }
+            }
+        });
+    }
     private void doLogoutAction(String callUUID) {
         nearPay.logout(new LogoutListener() {
             @Override

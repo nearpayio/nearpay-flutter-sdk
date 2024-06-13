@@ -72,6 +72,11 @@ class Nearpay {
     return response;
   }
 
+  static Future<bool> dismiss() async {
+    final response = await methodChannel.invokeMethod<dynamic>('dismiss');
+    return response;
+  }
+
   static Future<dynamic> session(Map<dynamic, dynamic> data) async {
     final response = await methodChannel.invokeMethod<dynamic>('session', data);
     return response;
