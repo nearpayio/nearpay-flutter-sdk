@@ -11,7 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  uuid: ^3.0.7
   event_listener: ^0.2.0
   json_annotation: ^4.8.1
   freezed_annotation: ^2.4.1

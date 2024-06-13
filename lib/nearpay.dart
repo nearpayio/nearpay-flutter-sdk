@@ -19,7 +19,6 @@ import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_banne
 import 'package:nearpay_flutter_sdk/models/transaction_receipt/transaction_receipt.dart';
 import 'package:nearpay_flutter_sdk/models/user_session/user_session.dart';
 import 'package:nearpay_flutter_sdk/nearpay_provider.dart';
-import 'package:uuid/uuid.dart';
 import 'package:nearpay_flutter_sdk/errors/reconcile_error/reconcile_error.dart';
 import 'package:nearpay_flutter_sdk/errors/query_error/query_error.dart';
 import 'package:nearpay_flutter_sdk/errors/query_error/query_error_switch.dart';
@@ -93,7 +92,6 @@ enum Regions {
   final String value;
 }
 
-var uuid = Uuid();
 
 class Nearpay {
   final AuthenticationType _authType;
@@ -167,6 +165,19 @@ class Nearpay {
     final response = await _callAndReturnMapResponse('checkCompatibility',{});
     if (response["status"] == 200) {
        return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> dismiss() async {
+    final response = await _callAndReturnMapResponse(
+      'dismissOperation',
+      {},
+    );
+    if (response["status"] == 200) {
+      // _provider.listener.emitStateChange(NearpayState.notReady);
+      return true;
     } else {
       return false;
     }
