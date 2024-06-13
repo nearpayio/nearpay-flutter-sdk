@@ -316,6 +316,19 @@ class Nearpay {
     );
   }
 
+  Future<bool> dismiss() async {
+    final response = await _callAndReturnMapResponse(
+      'dismissOperation',
+      {},
+    );
+    if (response["status"] == 200) {
+      // _provider.listener.emitStateChange(NearpayState.notReady);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<dynamic> setup() async {
     final response = await _callAndReturnMapResponse(
       'setup',

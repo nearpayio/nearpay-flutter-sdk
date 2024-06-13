@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -118,6 +119,10 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> purchaseAction() async {
     print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
+    Timer(const Duration(seconds: 3), () async {
+      bool dismissed = await nearpay.dismiss();
+      print("Dismissed $dismissed");
+    });
     final transactionData = await nearpay
         .purchase(
       amount: 0001, // [Required] ammount you want to set .
