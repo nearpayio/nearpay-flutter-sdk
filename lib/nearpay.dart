@@ -383,6 +383,19 @@ class Nearpay {
   //   }
   // }
 
+  Future<bool> dismiss() async {
+    final response = await _callAndReturnMapResponse(
+      'dismissOperation',
+      {},
+    );
+    if (response["status"] == 200) {
+      // _provider.listener.emitStateChange(NearpayState.notReady);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // =-=-=- Queries -=-=-=
   Future<TransactionBannerList> getTransactionsList({
     int page = 1,
