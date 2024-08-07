@@ -272,13 +272,14 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Boolean enableUiDismiss = call.argument("isUiDismissible") != null
                     ? (Boolean) call.argument("isUiDismissible")
                     : true;// [optional] it will allow you to control dismissing the UI
+            UUID requestID = call.argument("requestId") == null ? null :  UUID.fromString((String) call.argument("requestId"));
 
             if (sessionID == "") {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
                         "SessionID parameter missing");
                 sendResponse(paramMap, callUUID);
             } else {
-                setSession(callUUID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
+                setSession(callUUID, requestID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
             }
         } else if (call.method.equals("receiptToImage")) {
             // String transactionJson = call.argument("receipt") != null
@@ -1169,10 +1170,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         });
     }
 
-    private void setSession(String callUUID, String sessionID, Boolean enableReceiptUi, Boolean enableReversal,
+    private void setSession(String callUUID,UUID requestID, String sessionID, Boolean enableReceiptUi, Boolean enableReversal,
             Long finishTimeOut,
             Boolean isUiDismissible) {
-        nearPay.session(sessionID, enableReceiptUi, enableReversal, finishTimeOut, isUiDismissible,
+        nearPay.session(sessionID, requestID, enableReceiptUi, enableReversal, finishTimeOut, isUiDismissible,
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {
