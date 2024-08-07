@@ -10,6 +10,7 @@ import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.flutter.plugin.common.sender.NearpaySender;
 import io.nearpay.flutter.plugin.common.status.ErrorStatus;
 import io.nearpay.sdk.utils.enums.CancelFailure;
+import io.nearpay.sdk.utils.enums.DismissFailure;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.SessionFailure;
 import io.nearpay.sdk.utils.enums.SetupFailure;
@@ -31,10 +32,10 @@ public class DismissOperation extends BaseOperation {
             }
 
             @Override
-            public void onDismissFailure(@NonNull CancelFailure cancelFailure) {
-                if (cancelFailure instanceof CancelFailure.GeneralFailure) {
+            public void onDismissFailure(@NonNull DismissFailure dismissFailure) {
+                if (dismissFailure instanceof DismissFailure.GeneralFailure) {
                     int status = ErrorStatus.auth_failed_code;
-                    String message = ((CancelFailure.GeneralFailure) cancelFailure).getMessage();
+                    String message = ((DismissFailure.GeneralFailure) dismissFailure).getMessage();
                     Map response = NearpayLib.ApiResponse(status, message, null);
                     sender.send(response);
                 }

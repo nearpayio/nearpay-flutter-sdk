@@ -250,6 +250,10 @@ public class ArgsFilter {
         return savedArgs.get("enableReversal") == null ? true : (Boolean) savedArgs.get("enableReversal");
     }
 
+    public UUID getRequestId() {
+       return savedArgs.get("requestId") == null ? null :  UUID.fromString((String) savedArgs.get("requestId"));
+    }
+
     public Boolean isEnableEditableRefundAmountUi() {
         return savedArgs.get("enableEditableRefundAmountUi") == null ? true
                 : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
