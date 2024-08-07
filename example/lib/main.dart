@@ -118,18 +118,17 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> purchaseAction() async {
     print("=-=-=-=-= Start Purchase Action =-=-=-=-=");
+
     final transactionData = await nearpay
         .purchase(
-      amount: 0001, // [Required] ammount you want to set .
-      transactionId: uuid
-          .v4(), // [Optional] specefy the transaction uuid for later referance
+      amount: 1000, // [Required] ammount you want to set .
+      transactionId: uuid.v4(), // [Optional] specefy the transaction uuid for later referance
       customerReferenceNumber:
-          'abcabc', // [Optional] any number you want to add as a refrence Any string as a reference number
+          '400124', // [Optional] any number you want to add as a refrence Any string as a reference number
       enableReceiptUi: true, // [Optional] show the reciept in ui
-      enableReversalUi:
-          true, // [Optional] it will allow you to enable or disable the reverse button
+      enableReversalUi:true, // [Optional] it will allow you to enable or disable the reverse button
       enableUiDismiss: true, // [Optional] the ui is dimissible
-      finishTimeout: 60, // [Optional] finish timeout in seconds
+      finishTimeout: 5000, // [Optional] finish timeout in seconds
       // onPurchaseApproved: (receipts) {
 
       // },
