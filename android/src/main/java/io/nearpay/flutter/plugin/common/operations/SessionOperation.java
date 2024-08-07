@@ -31,7 +31,7 @@ public class SessionOperation extends BaseOperation {
         Boolean enableUiDismiss = filter.isEnableUiDismiss();
         UUID requestId = filter.getRequestId();
 
-        provider.getNearpayLib().nearpay.session(sessionID, requestId, enableReceiptUi, enableReversal,
+        provider.getNearpayLib().nearpay.session(sessionID, enableReceiptUi, enableReversal,
                 finishTimeout, enableUiDismiss,
                 new SessionListener() {
                     @Override
