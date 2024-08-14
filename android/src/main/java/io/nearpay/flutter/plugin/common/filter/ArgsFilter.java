@@ -255,6 +255,11 @@ public class ArgsFilter {
                 : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
     }
 
+    public UUID getRequestId() {
+        return savedArgs.get("requestId") == null ? null :  UUID.fromString((String) savedArgs.get("requestId"));
+    }
+
+
     @SuppressLint("NewApi")
     private LocalDateTime getIsoDate(String fieldName) {
         String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;

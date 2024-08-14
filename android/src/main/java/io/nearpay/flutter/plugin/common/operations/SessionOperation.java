@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Map;
+import java.util.UUID;
 
 import io.nearpay.flutter.plugin.common.status.ErrorStatus;
 import io.nearpay.flutter.plugin.common.NearpayLib;
@@ -28,8 +29,9 @@ public class SessionOperation extends BaseOperation {
         Boolean enableReceiptUi = filter.isEnableReceiptUi();
         Boolean enableReversal = filter.isEnableReversal();
         Boolean enableUiDismiss = filter.isEnableUiDismiss();
+        UUID requestId = filter.getRequestId();
 
-        provider.getNearpayLib().nearpay.session(sessionID, enableReceiptUi, enableReversal,
+        provider.getNearpayLib().nearpay.session(sessionID, requestId, enableReceiptUi, enableReversal,
                 finishTimeout, enableUiDismiss,
                 new SessionListener() {
                     @Override
