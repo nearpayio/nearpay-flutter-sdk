@@ -33,6 +33,7 @@ import io.nearpay.sdk.data.models.TransactionReceipt;
 import io.nearpay.sdk.utils.ReceiptUtilsKt;
 import io.nearpay.sdk.utils.enums.AuthenticationData;
 import io.nearpay.sdk.utils.enums.CancelFailure;
+import io.nearpay.sdk.utils.enums.DismissFailure;
 import io.nearpay.sdk.utils.enums.GetDataFailure;
 import io.nearpay.sdk.utils.enums.PurchaseFailure;
 import io.nearpay.sdk.utils.enums.RefundFailure;
@@ -283,13 +284,13 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             Boolean enableUiDismiss = call.argument("isUiDismissible") != null
                     ? (Boolean) call.argument("isUiDismissible")
                     : true;// [optional] it will allow you to control dismissing the UI
-
+            UUID requestId = call.argument("requestId") == null ? null: UUID.fromString(call.argument("requestId"));
             if (sessionID == "") {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.invalid_argument_code,
                         "SessionID parameter missing");
                 sendResponse(paramMap, callUUID);
             } else {
-                setSession(callUUID, sessionID, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
+                setSession(callUUID, sessionID, requestId, isEnableUI, isEnableReverse, timeout, enableUiDismiss);
             }
         } else if (call.method.equals("receiptToImage")) {
             // String transactionJson = call.argument("receipt") != null
@@ -1111,10 +1112,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             }
 
             @Override
-            public void onDismissFailure(@NonNull CancelFailure cancelFailure) {
-                if (cancelFailure instanceof CancelFailure.GeneralFailure) {
+            public void onDismissFailure(@NonNull DismissFailure dismissFailure) {
+                if (dismissFailure instanceof DismissFailure.GeneralFailure) {
                     int status = ErrorStatus.auth_failed_code;
-                    String message = ((CancelFailure.GeneralFailure) cancelFailure).getMessage();
+                    String message = ((DismissFailure.GeneralFailure) dismissFailure).getMessage();
                     Map<String, Object> response = commonResponse(status, message);
                     sendResponse(response, callUUID);
                 }
@@ -1195,10 +1196,10 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
         });
     }
 
-    private void setSession(String callUUID, String sessionID, Boolean enableReceiptUi, Boolean enableReversal,
+    private void setSession(String callUUID, String sessionID, UUID requestId, Boolean enableReceiptUi, Boolean enableReversal,
             Long finishTimeOut,
             Boolean isUiDismissible) {
-        nearPay.session(sessionID, enableReceiptUi, enableReversal, finishTimeOut, isUiDismissible,
+        nearPay.session(sessionID, requestId, enableReceiptUi, enableReversal, finishTimeOut, isUiDismissible,
                 new SessionListener() {
                     @Override
                     public void onSessionClosed(@Nullable Session session) {
