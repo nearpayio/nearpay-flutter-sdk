@@ -25,6 +25,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 33
+    namespace("io.nearpay.flutter.plugin")
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
