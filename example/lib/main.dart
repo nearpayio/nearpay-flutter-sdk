@@ -179,8 +179,8 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> logoutAction() async {
     print("=-=-=-=-= Start Logout Action =-=-=-=-=");
-
-    return nearpay.logout();
+    final response = await nearpay.logout();
+    print('${response}');
   }
 
   Future<dynamic> setupAction() async {
