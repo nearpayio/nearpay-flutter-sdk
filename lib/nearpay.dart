@@ -303,6 +303,7 @@ class Nearpay {
 
     if (response["status"] == 200) {
       // _provider.listener.emitStateChange(NearpayState.notReady);
+      return response;
     } else {
       LogoutError err = getLogoutError(response);
       throw err;
