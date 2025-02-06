@@ -303,7 +303,8 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             int limit = call.argument("limit") == null ? 30 : (int) call.argument("limit");
             String isoTimeFrom = call.argument("startDate") == null ? null : (String) call.argument("startDate");
             String isoTimeTo = call.argument("endDate") == null ? null : (String) call.argument("endDate");
-
+            Boolean isReconciled = call.argument("isReconciled") == null ? null
+                    : call.argument("isReconciled");
             LocalDateTime from = isoTimeTo != null ? LocalDateTime.parse(isoTimeFrom, DateTimeFormatter.ISO_DATE_TIME)
                     : null;
             LocalDateTime to = isoTimeTo != null ? LocalDateTime.parse(isoTimeTo, DateTimeFormatter.ISO_DATE_TIME)
@@ -311,7 +312,7 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
             String customerReferenceNumber = call.argument("customerReferenceNumber") == null ? null : (String) call.argument("customerReferenceNumber");
 
 
-            nearPay.getTransactionListPage(page, limit, from, to, customerReferenceNumber, new GetTransactionPageListener() {
+            nearPay.getTransactionListPage(page, limit, from, to, customerReferenceNumber, isReconciled, new GetTransactionPageListener() {
                 @Override
                 public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {
                     Map res = commonResponse(ErrorStatus.success_code, "");
