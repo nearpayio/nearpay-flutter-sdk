@@ -29,8 +29,8 @@ public class GetTransactionPageOperation extends BaseOperation {
         LocalDateTime from = filter.getStartDate();
         LocalDateTime to = filter.getEndDate();
         String customerReferenceNumber = filter.getCustomerReferenceNumber();
-
-        provider.getNearpayLib().nearpay.getTransactionListPage(page, limit, from, to, customerReferenceNumber,
+        Boolean isReconciled = filter.isReconciled();
+        provider.getNearpayLib().nearpay.getTransactionListPage(page, limit, from, to, customerReferenceNumber , isReconciled,
                 new GetTransactionPageListener() {
                     @Override
                     public void onSuccess(@Nullable TransactionBannerList transactionBannerList) {

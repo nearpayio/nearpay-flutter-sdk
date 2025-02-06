@@ -259,6 +259,9 @@ public class ArgsFilter {
         return savedArgs.get("requestId") == null ? null :  UUID.fromString((String) savedArgs.get("requestId"));
     }
 
+    public Boolean isReconciled() {
+        return savedArgs.get("isReconciled") == null ? null : (Boolean) savedArgs.get("isReconciled");
+    }
 
     @SuppressLint("NewApi")
     private LocalDateTime getIsoDate(String fieldName) {

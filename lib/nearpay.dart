@@ -401,6 +401,7 @@ class Nearpay {
     String? customerReferenceNumber,
     DateTime? startDate,
     DateTime? endDate,
+    bool? isReconciled,
   }) async {
     var data = {
       "page": page,
@@ -408,7 +409,8 @@ class Nearpay {
       "adminPin": adminPin,
       "start_date": startDate?.toIso8601String(),
       "end_date": endDate?.toIso8601String(),
-      "customer_reference_number": customerReferenceNumber
+      "customer_reference_number": customerReferenceNumber,
+      "isReconciled": isReconciled
     };
 
     final response = await _callAndReturnMapResponse(
