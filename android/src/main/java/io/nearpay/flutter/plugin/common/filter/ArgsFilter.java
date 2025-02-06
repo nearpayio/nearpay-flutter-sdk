@@ -259,6 +259,10 @@ public class ArgsFilter {
                 : (Boolean) savedArgs.get("enableEditableRefundAmountUi");
     }
 
+    public Boolean isReconciled() {
+        return savedArgs.get("isReconciled") == null ? null : (Boolean) savedArgs.get("isReconciled");
+    }
+
     @SuppressLint("NewApi")
     private LocalDateTime getIsoDate(String fieldName) {
         String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;
