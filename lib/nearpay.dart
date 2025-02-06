@@ -101,6 +101,7 @@ class Nearpay {
     DateTime? from,
     DateTime? to,
     String? customerReferenceNumber,
+    bool? isReconciled,
   }) async {
     final data = {
       "page": page,
@@ -108,6 +109,7 @@ class Nearpay {
       "startDate": from?.toIso8601String(),
       "endDate": to?.toIso8601String(),
       "customerReferenceNumber": customerReferenceNumber,
+      "isReconciled": isReconciled
     };
 
     final response =
