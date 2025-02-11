@@ -31,7 +31,9 @@ class TransactionBanner with _$TransactionBanner {
     @JsonKey(name: "start_time") required String startTime,
     @JsonKey(name: "customer_reference_number")
         String? customer_reference_number,
-  }) = _TransactionBanner;
+    @JsonKey(name: "retrieval_reference_number") String? retrieval_reference_number,
+
+}) = _TransactionBanner;
 
   factory TransactionBanner.fromJson(Map<String, dynamic> json) =>
       _$TransactionBannerFromJson(json);
