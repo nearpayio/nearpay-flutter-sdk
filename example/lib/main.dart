@@ -36,6 +36,9 @@ class _MyAppState extends State<MyApp> {
     authValue: "a.khalifa@nearpay.io",
     env: Environments.sandbox,
     locale: Locale.localeDefault,
+    supportSecondDisplay: SupportSecondDisplay.Enable,
+    secondDisplayUIPosition: UIPosition.CENTER,
+    pinPosition: PinPosition.SECONDARY_SCREEN,
   );
 
   Uint8List? bytes;

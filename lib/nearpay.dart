@@ -83,6 +83,22 @@ enum UIPosition {
   final String value;
 }
 
+enum SupportSecondDisplay {
+  Enable("Enable"),
+  Disable("Disable");
+
+  const SupportSecondDisplay(this.value);
+  final String value;
+}
+
+enum PinPosition {
+  PRIMARY_SCREEN("PRIMARY_SCREEN"),
+  SECONDARY_SCREEN("SECONDARY_SCREEN");
+
+  const PinPosition(this.value);
+  final String value;
+}
+
 enum Regions {
   SAUDI("SAUDI"),
   JORDAN("JORDAN"),
@@ -104,6 +120,9 @@ class Nearpay {
   final String? _arabicPaymentText;
   final String? _englishPaymentText;
   bool _initialized = false;
+  final SupportSecondDisplay? _supportSecondDisplay;
+  final UIPosition? _secondDisplayUIPosition;
+  final PinPosition? _pinPosition;
 
   // NearpayState state = NearpayState.notReady;
 
@@ -121,6 +140,9 @@ class Nearpay {
     UIPosition uiPosition = UIPosition.DEFAULT,
     String? arabicPaymentText,
     String? englishPaymentText,
+    SupportSecondDisplay? supportSecondDisplay,
+    UIPosition? secondDisplayUIPosition,
+    PinPosition? pinPosition,
   })  : _locale = locale,
         _env = env,
         _authValue = authValue,
@@ -129,14 +151,10 @@ class Nearpay {
         _uiLoading = uiLoading,
         _uiPosition = uiPosition,
         _arabicPaymentText = arabicPaymentText,
-        _englishPaymentText = englishPaymentText {
-    // _addEventListener(
-    //     evnetName: NearpayEvent.stateChange,
-    //     callback: (args) {
-    //       NearpayState newState = args['state'];
-    //       state = newState;
-    //     });
-  }
+        _englishPaymentText = englishPaymentText,
+        _supportSecondDisplay = supportSecondDisplay,
+        _secondDisplayUIPosition = secondDisplayUIPosition,
+        _pinPosition = pinPosition;
 
   Future<dynamic> initialize() async {
     final data = {
@@ -151,6 +169,16 @@ class Nearpay {
       "english_payment_text": _englishPaymentText,
     };
 
+    if (_supportSecondDisplay != null) {
+      data["support_second_display"] = _supportSecondDisplay!.value;
+      // Only add configuration if support is enabled and both configuration values are provided
+      if (_supportSecondDisplay == SupportSecondDisplay.Enable &&
+          _secondDisplayUIPosition != null &&
+          _pinPosition != null) {
+        data["second_display_ui_position"] = _secondDisplayUIPosition!.value;
+        data["pin_position"] = _pinPosition!.value;
+      }
+    }
     final response =
         await _callAndReturnMapResponse('initialize', data, safe: true);
 

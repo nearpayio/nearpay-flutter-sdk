@@ -13,6 +13,8 @@ import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
 //import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.PinPosition;
+import io.nearpay.sdk.utils.enums.SupportSecondDisplay;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
@@ -23,6 +25,62 @@ public class ArgsFilter {
         savedArgs = args;
     }
 
+    // Check if supportSecondDisplay is provided
+    public boolean hasSupportSecondDisplay() {
+        return savedArgs.containsKey("support_second_display");
+    }
+
+    // Retrieve supportSecondDisplay enum from the argument, defaulting to Enable if needed
+    public SupportSecondDisplay getSupportSecondDisplay() {
+        String supportValue = savedArgs.get("support_second_display") != null
+                ? savedArgs.get("support_second_display").toString()
+                : "Enable";
+        return supportValue.equalsIgnoreCase("Disable")
+                ? SupportSecondDisplay.Disable
+                : SupportSecondDisplay.Enable;
+    }
+
+    // Check if second display configuration is provided (both UI position and pin position)
+    public boolean hasSecondDisplayConfiguration() {
+        return savedArgs.containsKey("second_display_ui_position") && savedArgs.containsKey("pin_position");
+    }
+
+    // Retrieve the UIPosition for the second display from the argument, defaulting to CENTER if not provided
+    public UIPosition getSecondDisplayUiPosition() {
+        String posValue = savedArgs.get("second_display_ui_position") != null
+                ? savedArgs.get("second_display_ui_position").toString()
+                : "CENTER";
+        Map<String, UIPosition> posMap = new HashMap<>();
+        posMap.put("CENTER", UIPosition.CENTER);
+        posMap.put("CENTER_LEFT", UIPosition.CENTER_LEFT);
+        posMap.put("CENTER_START", UIPosition.CENTER_START);
+        posMap.put("CENTER_RIGHT", UIPosition.CENTER_RIGHT);
+        posMap.put("CENTER_END", UIPosition.CENTER_END);
+        posMap.put("CENTER_TOP", UIPosition.CENTER_TOP);
+        posMap.put("CENTER_BOTTOM", UIPosition.CENTER_BOTTOM);
+        posMap.put("TOP_LEFT", UIPosition.TOP_LEFT);
+        posMap.put("TOP_START", UIPosition.TOP_START);
+        posMap.put("TOP_RIGHT", UIPosition.TOP_RIGHT);
+        posMap.put("TOP_END", UIPosition.TOP_END);
+        posMap.put("BOTTOM_LEFT", UIPosition.BOTTOM_LEFT);
+        posMap.put("BOTTOM_START", UIPosition.BOTTOM_START);
+        posMap.put("BOTTOM_RIGHT", UIPosition.BOTTOM_RIGHT);
+        posMap.put("BOTTOM_END", UIPosition.BOTTOM_END);
+        posMap.put("DEFAULT", UIPosition.DEFAULT);
+
+        UIPosition position = posMap.get(posValue);
+        return position != null ? position : UIPosition.CENTER;
+    }
+
+    // Retrieve the PinPosition from the argument, defaulting to SECONDARY_SCREEN if not provided
+    public PinPosition getPinPosition() {
+        String pinValue = savedArgs.get("pin_position") != null
+                ? savedArgs.get("pin_position").toString()
+                : "SECONDARY_SCREEN";
+        return pinValue.equalsIgnoreCase("PRIMARY_SCREEN")
+                ? PinPosition.PRIMARY_SCREEN
+                : PinPosition.SECONDARY_SCREEN;
+    }
     public String getTransactionUuid() {
         return savedArgs.get("transaction_uuid").toString();
     }

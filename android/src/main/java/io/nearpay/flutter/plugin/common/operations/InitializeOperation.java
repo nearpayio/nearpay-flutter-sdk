@@ -11,8 +11,11 @@ import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 import io.nearpay.sdk.utils.PaymentText;
+import io.nearpay.sdk.utils.SecondDisplayConfiguration;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
 //import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.PinPosition;
+import io.nearpay.sdk.utils.enums.SupportSecondDisplay;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class InitializeOperation extends BaseOperation {
@@ -54,6 +57,18 @@ public class InitializeOperation extends BaseOperation {
                     .loadingUi(loadingUI);
 //                    .setRegion(region)
 
+            if (filter.hasSupportSecondDisplay()) {
+                SupportSecondDisplay support = filter.getSupportSecondDisplay();
+                builder.supportSecondDisplay(support);
+                // Only add second display configuration if support is enabled and configuration parameters exist
+                if (support == SupportSecondDisplay.Enable && filter.hasSecondDisplayConfiguration()) {
+                    UIPosition secondDisplayUI = filter.getSecondDisplayUiPosition();
+                    PinPosition pinPos = filter.getPinPosition();
+                    builder.secondDisplayConfiguration(
+                            new SecondDisplayConfiguration(secondDisplayUI, pinPos)
+                    );
+                }
+            }
             this.provider.getNearpayLib().nearpay = builder.build();
             //
             // new NearPay.Builder()(
