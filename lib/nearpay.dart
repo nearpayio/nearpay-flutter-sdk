@@ -63,6 +63,11 @@ class Nearpay {
     return response;
   }
 
+  static Future<dynamic> close() async {
+    final response = await methodChannel.invokeMethod<dynamic>('close');
+    return response;
+  }
+
   static Future<dynamic> setup() async {
     final response = await methodChannel.invokeMethod<dynamic>('setup');
     return response;

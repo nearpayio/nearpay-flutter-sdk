@@ -214,7 +214,16 @@ public class NearpayPlugin implements FlutterPlugin, MethodCallHandler {
                 Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
                         "Plugin Initialise missing, please initialise");
             }
-        } else if (call.method.equals("setup")) {
+        } else if (call.method.equals("close")) {
+            if (nearPay != null) {
+                doLogoutAction(callUUID);
+                nearPay.close();
+            } else {
+                Log.i("purchase....", "initialise nil");
+                Map<String, Object> paramMap = commonResponse(ErrorStatus.initialise_failed_code,
+                        "Plugin Initialise missing, please initialise");
+            }
+        }   else if (call.method.equals("setup")) {
             if (nearPay != null) {
                 String authvalue = this.authValueShared;
                 String authType = this.authTypeShared;
