@@ -456,6 +456,24 @@ class Nearpay {
       throw err;
     }
   }
+  Future<void> updateAuthentication({
+    required String jwt,
+  }) async {
+    final data = {
+      "authtype": AuthenticationType.jwt.value,
+      "authvalue": jwt,  // Passing the JWT directly
+    };
+
+    final response = await _callAndReturnMapResponse(
+      'updateAuthentication',
+      data,
+      safe: true,
+    );
+
+    if (response["status"] != 200) {
+      throw "Failed to update authentication: ${response['message'] ?? 'Unknown error'}";
+    }
+  }
 
   Future<ReconciliationBannerList> getReconciliationsList({
     int page = 1,

@@ -50,6 +50,20 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  // Method to update authentication dynamically
+  Future<void> updateAuthentication() async {
+    print("=-=-=-=-= Update Authentication Action =-=-=-=-=");
+    try {
+      await nearpay.updateAuthentication(
+        jwt: "your_new_token",
+      );
+      print("Authentication updated successfully");
+    } catch (e) {
+      print("Failed to update authentication: $e");
+    }
+  }
+
+
   Future<dynamic> purchaseWithRefund() async {
     print("=-=-=-=-= Start Purchase with Refund Action =-=-=-=-=");
 
@@ -146,6 +160,7 @@ class _MyAppState extends State<MyApp> {
       printJson(receipt.toJson());
     });
   }
+
 
   Future<dynamic> reconcileAction() async {
     print("=-=-=-=-= Start Reconcile Action =-=-=-=-=");
@@ -330,6 +345,15 @@ class _MyAppState extends State<MyApp> {
                 logoutAction();
               },
               child: const Text("Logout"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () async {
+                updateAuthentication();
+              },
+              child: const Text("Update Authentication"),
             ),
             const SizedBox(
               height: 20,
