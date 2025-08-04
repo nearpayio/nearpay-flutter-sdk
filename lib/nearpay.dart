@@ -102,6 +102,7 @@ class Nearpay {
     DateTime? to,
     String? customerReferenceNumber,
     bool? isReconciled,
+    bool? isApproved,
   }) async {
     final data = {
       "page": page,
@@ -109,9 +110,9 @@ class Nearpay {
       "startDate": from?.toIso8601String(),
       "endDate": to?.toIso8601String(),
       "customerReferenceNumber": customerReferenceNumber,
-      "isReconciled": isReconciled
+      "isReconciled": isReconciled,
+      "isApproved": isApproved
     };
-
     final response =
         await methodChannel.invokeMethod<dynamic>('getTransactionsList', data);
     return response;
