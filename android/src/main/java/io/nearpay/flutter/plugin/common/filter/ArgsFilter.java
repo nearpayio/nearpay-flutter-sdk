@@ -263,6 +263,10 @@ public class ArgsFilter {
         return savedArgs.get("isReconciled") == null ? null : (Boolean) savedArgs.get("isReconciled");
     }
 
+    public Boolean isApproved() {
+        return savedArgs.get("isApproved") == null ? null : (Boolean) savedArgs.get("isApproved");
+    }
+
     @SuppressLint("NewApi")
     private LocalDateTime getIsoDate(String fieldName) {
         String isoDate = savedArgs.get(fieldName) != null ? (String) savedArgs.get(fieldName) : null;
