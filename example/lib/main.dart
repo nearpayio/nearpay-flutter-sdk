@@ -243,7 +243,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<dynamic> getTransactions() async {
     final banner = await nearpay.getTransactionsList(
-        page: 1, limit: 30, customerReferenceNumber: 'abcabc',isReconciled: true);
+        page: 1, limit: 30, customerReferenceNumber: 'abcabc',isReconciled: true, isApproved: true);
 
     printJson(banner.toJson());
   }
