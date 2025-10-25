@@ -6,59 +6,43 @@ part of 'purchase_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PurchaseRejected _$$_PurchaseRejectedFromJson(Map json) =>
-    _$_PurchaseRejected(
-      message: json['message'] as String,
-    );
+_PurchaseRejected _$PurchaseRejectedFromJson(Map json) =>
+    _PurchaseRejected(message: json['message'] as String);
 
-Map<String, dynamic> _$$_PurchaseRejectedToJson(_$_PurchaseRejected instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$PurchaseRejectedToJson(_PurchaseRejected instance) =>
+    <String, dynamic>{'message': instance.message};
 
-_$_PurchaseDeclined _$$_PurchaseDeclinedFromJson(Map json) =>
-    _$_PurchaseDeclined(
-      receipts: (json['receipts'] as List<dynamic>)
-          .map((e) =>
-              TransactionReceipt.fromJson(Map<String, dynamic>.from(e as Map)))
-          .toList(),
-    );
+_PurchaseDeclined _$PurchaseDeclinedFromJson(Map json) => _PurchaseDeclined(
+  receipts: (json['receipts'] as List<dynamic>)
+      .map(
+        (e) => TransactionReceipt.fromJson(Map<String, dynamic>.from(e as Map)),
+      )
+      .toList(),
+);
 
-Map<String, dynamic> _$$_PurchaseDeclinedToJson(_$_PurchaseDeclined instance) =>
+Map<String, dynamic> _$PurchaseDeclinedToJson(_PurchaseDeclined instance) =>
     <String, dynamic>{
       'receipts': instance.receipts.map((e) => e.toJson()).toList(),
     };
 
-_$_PurchaseAuthenticationFailed _$$_PurchaseAuthenticationFailedFromJson(
-        Map json) =>
-    _$_PurchaseAuthenticationFailed(
-      message: json['message'] as String,
-    );
+_PurchaseAuthenticationFailed _$PurchaseAuthenticationFailedFromJson(
+  Map json,
+) => _PurchaseAuthenticationFailed(message: json['message'] as String);
 
-Map<String, dynamic> _$$_PurchaseAuthenticationFailedToJson(
-        _$_PurchaseAuthenticationFailed instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$PurchaseAuthenticationFailedToJson(
+  _PurchaseAuthenticationFailed instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$_PurchaseInvalidStatus _$$_PurchaseInvalidStatusFromJson(Map json) =>
-    _$_PurchaseInvalidStatus(
-      required: json['required'],
-    );
+_PurchaseInvalidStatus _$PurchaseInvalidStatusFromJson(Map json) =>
+    _PurchaseInvalidStatus(required: json['required']);
 
-Map<String, dynamic> _$$_PurchaseInvalidStatusToJson(
-        _$_PurchaseInvalidStatus instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$PurchaseInvalidStatusToJson(
+  _PurchaseInvalidStatus instance,
+) => <String, dynamic>{'required': instance.required};
 
-_$_PurchaseGeneralFailure _$$_PurchaseGeneralFailureFromJson(Map json) =>
-    _$_PurchaseGeneralFailure(
-      required: json['required'],
-    );
+_PurchaseGeneralFailure _$PurchaseGeneralFailureFromJson(Map json) =>
+    _PurchaseGeneralFailure(required: json['required']);
 
-Map<String, dynamic> _$$_PurchaseGeneralFailureToJson(
-        _$_PurchaseGeneralFailure instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$PurchaseGeneralFailureToJson(
+  _PurchaseGeneralFailure instance,
+) => <String, dynamic>{'required': instance.required};

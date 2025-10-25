@@ -6,58 +6,37 @@ part of 'logout_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LogoutAuthenticationFailedImpl _$$LogoutAuthenticationFailedImplFromJson(
-        Map json) =>
-    _$LogoutAuthenticationFailedImpl(
-      message: json['message'] as String,
-    );
+_LogoutAuthenticationFailed _$LogoutAuthenticationFailedFromJson(Map json) =>
+    _LogoutAuthenticationFailed(message: json['message'] as String);
 
-Map<String, dynamic> _$$LogoutAuthenticationFailedImplToJson(
-        _$LogoutAuthenticationFailedImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$LogoutAuthenticationFailedToJson(
+  _LogoutAuthenticationFailed instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$LogoutFailureMessageImpl _$$LogoutFailureMessageImplFromJson(Map json) =>
-    _$LogoutFailureMessageImpl(
-      message: json['message'] as String,
-    );
+_LogoutFailureMessage _$LogoutFailureMessageFromJson(Map json) =>
+    _LogoutFailureMessage(message: json['message'] as String);
 
-Map<String, dynamic> _$$LogoutFailureMessageImplToJson(
-        _$LogoutFailureMessageImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$LogoutFailureMessageToJson(
+  _LogoutFailureMessage instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$LogoutInvalidStatusImpl _$$LogoutInvalidStatusImplFromJson(Map json) =>
-    _$LogoutInvalidStatusImpl(
-      required: json['required'],
-    );
+_LogoutInvalidStatus _$LogoutInvalidStatusFromJson(Map json) =>
+    _LogoutInvalidStatus(required: json['required']);
 
-Map<String, dynamic> _$$LogoutInvalidStatusImplToJson(
-        _$LogoutInvalidStatusImpl instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$LogoutInvalidStatusToJson(
+  _LogoutInvalidStatus instance,
+) => <String, dynamic>{'required': instance.required};
 
-_$LogoutGeneralFailureImpl _$$LogoutGeneralFailureImplFromJson(Map json) =>
-    _$LogoutGeneralFailureImpl(
-      required: json['required'],
-    );
+_LogoutGeneralFailure _$LogoutGeneralFailureFromJson(Map json) =>
+    _LogoutGeneralFailure(required: json['required']);
 
-Map<String, dynamic> _$$LogoutGeneralFailureImplToJson(
-        _$LogoutGeneralFailureImpl instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$LogoutGeneralFailureToJson(
+  _LogoutGeneralFailure instance,
+) => <String, dynamic>{'required': instance.required};
 
-_$AlreadyLogoutFailureImpl _$$AlreadyLogoutFailureImplFromJson(Map json) =>
-    _$AlreadyLogoutFailureImpl(
-      required: json['required'],
-    );
+_AlreadyLogoutFailure _$AlreadyLogoutFailureFromJson(Map json) =>
+    _AlreadyLogoutFailure(required: json['required']);
 
-Map<String, dynamic> _$$AlreadyLogoutFailureImplToJson(
-        _$AlreadyLogoutFailureImpl instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$AlreadyLogoutFailureToJson(
+  _AlreadyLogoutFailure instance,
+) => <String, dynamic>{'required': instance.required};

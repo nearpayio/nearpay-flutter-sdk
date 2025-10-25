@@ -6,47 +6,31 @@ part of 'user_session_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserSessionAuthenticationFailed _$$_UserSessionAuthenticationFailedFromJson(
-        Map json) =>
-    _$_UserSessionAuthenticationFailed(
-      message: json['message'] as String,
-    );
+_UserSessionAuthenticationFailed _$UserSessionAuthenticationFailedFromJson(
+  Map json,
+) => _UserSessionAuthenticationFailed(message: json['message'] as String);
 
-Map<String, dynamic> _$$_UserSessionAuthenticationFailedToJson(
-        _$_UserSessionAuthenticationFailed instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$UserSessionAuthenticationFailedToJson(
+  _UserSessionAuthenticationFailed instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$_UserSessionFailureMessage _$$_UserSessionFailureMessageFromJson(Map json) =>
-    _$_UserSessionFailureMessage(
-      message: json['message'] as String,
-    );
+_UserSessionFailureMessage _$UserSessionFailureMessageFromJson(Map json) =>
+    _UserSessionFailureMessage(message: json['message'] as String);
 
-Map<String, dynamic> _$$_UserSessionFailureMessageToJson(
-        _$_UserSessionFailureMessage instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$UserSessionFailureMessageToJson(
+  _UserSessionFailureMessage instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$_UserSessionInvalidStatus _$$_UserSessionInvalidStatusFromJson(Map json) =>
-    _$_UserSessionInvalidStatus(
-      required: json['required'],
-    );
+_UserSessionInvalidStatus _$UserSessionInvalidStatusFromJson(Map json) =>
+    _UserSessionInvalidStatus(required: json['required']);
 
-Map<String, dynamic> _$$_UserSessionInvalidStatusToJson(
-        _$_UserSessionInvalidStatus instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$UserSessionInvalidStatusToJson(
+  _UserSessionInvalidStatus instance,
+) => <String, dynamic>{'required': instance.required};
 
-_$_UserSessionGeneralFailure _$$_UserSessionGeneralFailureFromJson(Map json) =>
-    _$_UserSessionGeneralFailure(
-      required: json['required'],
-    );
+_UserSessionGeneralFailure _$UserSessionGeneralFailureFromJson(Map json) =>
+    _UserSessionGeneralFailure(required: json['required']);
 
-Map<String, dynamic> _$$_UserSessionGeneralFailureToJson(
-        _$_UserSessionGeneralFailure instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$UserSessionGeneralFailureToJson(
+  _UserSessionGeneralFailure instance,
+) => <String, dynamic>{'required': instance.required};

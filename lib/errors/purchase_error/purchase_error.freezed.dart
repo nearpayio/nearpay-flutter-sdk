@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,711 +9,1327 @@ part of 'purchase_error.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-PurchaseRejected _$PurchaseRejectedFromJson(Map<String, dynamic> json) {
-  return _PurchaseRejected.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PurchaseRejected {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseRejectedCopyWith<PurchaseRejected> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of PurchaseRejected
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PurchaseRejectedCopyWith<PurchaseRejected> get copyWith => _$PurchaseRejectedCopyWithImpl<PurchaseRejected>(this as PurchaseRejected, _$identity);
+
+  /// Serializes this PurchaseRejected to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseRejected&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'PurchaseRejected(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PurchaseRejectedCopyWith<$Res> {
-  factory $PurchaseRejectedCopyWith(
-          PurchaseRejected value, $Res Function(PurchaseRejected) then) =
-      _$PurchaseRejectedCopyWithImpl<$Res, PurchaseRejected>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $PurchaseRejectedCopyWith<$Res>  {
+  factory $PurchaseRejectedCopyWith(PurchaseRejected value, $Res Function(PurchaseRejected) _then) = _$PurchaseRejectedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$PurchaseRejectedCopyWithImpl<$Res, $Val extends PurchaseRejected>
+class _$PurchaseRejectedCopyWithImpl<$Res>
     implements $PurchaseRejectedCopyWith<$Res> {
-  _$PurchaseRejectedCopyWithImpl(this._value, this._then);
+  _$PurchaseRejectedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PurchaseRejected _self;
+  final $Res Function(PurchaseRejected) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of PurchaseRejected
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_PurchaseRejectedCopyWith<$Res>
-    implements $PurchaseRejectedCopyWith<$Res> {
-  factory _$$_PurchaseRejectedCopyWith(
-          _$_PurchaseRejected value, $Res Function(_$_PurchaseRejected) then) =
-      __$$_PurchaseRejectedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_PurchaseRejectedCopyWithImpl<$Res>
-    extends _$PurchaseRejectedCopyWithImpl<$Res, _$_PurchaseRejected>
-    implements _$$_PurchaseRejectedCopyWith<$Res> {
-  __$$_PurchaseRejectedCopyWithImpl(
-      _$_PurchaseRejected _value, $Res Function(_$_PurchaseRejected) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_PurchaseRejected(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [PurchaseRejected].
+extension PurchaseRejectedPatterns on PurchaseRejected {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PurchaseRejected value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PurchaseRejected() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PurchaseRejected value)  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseRejected():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PurchaseRejected value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseRejected() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PurchaseRejected() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseRejected():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseRejected() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PurchaseRejected implements _PurchaseRejected {
-  const _$_PurchaseRejected({required this.message});
 
-  factory _$_PurchaseRejected.fromJson(Map<String, dynamic> json) =>
-      _$$_PurchaseRejectedFromJson(json);
+class _PurchaseRejected extends PurchaseRejected {
+  const _PurchaseRejected({required this.message}): super._();
+  factory _PurchaseRejected.fromJson(Map<String, dynamic> json) => _$PurchaseRejectedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'PurchaseRejected(message: $message)';
-  }
+/// Create a copy of PurchaseRejected
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PurchaseRejectedCopyWith<_PurchaseRejected> get copyWith => __$PurchaseRejectedCopyWithImpl<_PurchaseRejected>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PurchaseRejected &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PurchaseRejectedCopyWith<_$_PurchaseRejected> get copyWith =>
-      __$$_PurchaseRejectedCopyWithImpl<_$_PurchaseRejected>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PurchaseRejectedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$PurchaseRejectedToJson(this, );
 }
 
-abstract class _PurchaseRejected implements PurchaseRejected {
-  const factory _PurchaseRejected({required final String message}) =
-      _$_PurchaseRejected;
-
-  factory _PurchaseRejected.fromJson(Map<String, dynamic> json) =
-      _$_PurchaseRejected.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PurchaseRejectedCopyWith<_$_PurchaseRejected> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseRejected&&(identical(other.message, message) || other.message == message));
 }
 
-PurchaseDeclined _$PurchaseDeclinedFromJson(Map<String, dynamic> json) {
-  return _PurchaseDeclined.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'PurchaseRejected(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PurchaseRejectedCopyWith<$Res> implements $PurchaseRejectedCopyWith<$Res> {
+  factory _$PurchaseRejectedCopyWith(_PurchaseRejected value, $Res Function(_PurchaseRejected) _then) = __$PurchaseRejectedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$PurchaseRejectedCopyWithImpl<$Res>
+    implements _$PurchaseRejectedCopyWith<$Res> {
+  __$PurchaseRejectedCopyWithImpl(this._self, this._then);
+
+  final _PurchaseRejected _self;
+  final $Res Function(_PurchaseRejected) _then;
+
+/// Create a copy of PurchaseRejected
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_PurchaseRejected(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$PurchaseDeclined {
-  List<TransactionReceipt> get receipts => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseDeclinedCopyWith<PurchaseDeclined> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<TransactionReceipt> get receipts;
+/// Create a copy of PurchaseDeclined
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PurchaseDeclinedCopyWith<PurchaseDeclined> get copyWith => _$PurchaseDeclinedCopyWithImpl<PurchaseDeclined>(this as PurchaseDeclined, _$identity);
+
+  /// Serializes this PurchaseDeclined to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseDeclined&&const DeepCollectionEquality().equals(other.receipts, receipts));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(receipts));
+
+@override
+String toString() {
+  return 'PurchaseDeclined(receipts: $receipts)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PurchaseDeclinedCopyWith<$Res> {
-  factory $PurchaseDeclinedCopyWith(
-          PurchaseDeclined value, $Res Function(PurchaseDeclined) then) =
-      _$PurchaseDeclinedCopyWithImpl<$Res, PurchaseDeclined>;
-  @useResult
-  $Res call({List<TransactionReceipt> receipts});
-}
+abstract mixin class $PurchaseDeclinedCopyWith<$Res>  {
+  factory $PurchaseDeclinedCopyWith(PurchaseDeclined value, $Res Function(PurchaseDeclined) _then) = _$PurchaseDeclinedCopyWithImpl;
+@useResult
+$Res call({
+ List<TransactionReceipt> receipts
+});
 
+
+
+
+}
 /// @nodoc
-class _$PurchaseDeclinedCopyWithImpl<$Res, $Val extends PurchaseDeclined>
+class _$PurchaseDeclinedCopyWithImpl<$Res>
     implements $PurchaseDeclinedCopyWith<$Res> {
-  _$PurchaseDeclinedCopyWithImpl(this._value, this._then);
+  _$PurchaseDeclinedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PurchaseDeclined _self;
+  final $Res Function(PurchaseDeclined) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? receipts = null,
-  }) {
-    return _then(_value.copyWith(
-      receipts: null == receipts
-          ? _value.receipts
-          : receipts // ignore: cast_nullable_to_non_nullable
-              as List<TransactionReceipt>,
-    ) as $Val);
-  }
+/// Create a copy of PurchaseDeclined
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? receipts = null,}) {
+  return _then(_self.copyWith(
+receipts: null == receipts ? _self.receipts : receipts // ignore: cast_nullable_to_non_nullable
+as List<TransactionReceipt>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_PurchaseDeclinedCopyWith<$Res>
-    implements $PurchaseDeclinedCopyWith<$Res> {
-  factory _$$_PurchaseDeclinedCopyWith(
-          _$_PurchaseDeclined value, $Res Function(_$_PurchaseDeclined) then) =
-      __$$_PurchaseDeclinedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<TransactionReceipt> receipts});
 }
 
-/// @nodoc
-class __$$_PurchaseDeclinedCopyWithImpl<$Res>
-    extends _$PurchaseDeclinedCopyWithImpl<$Res, _$_PurchaseDeclined>
-    implements _$$_PurchaseDeclinedCopyWith<$Res> {
-  __$$_PurchaseDeclinedCopyWithImpl(
-      _$_PurchaseDeclined _value, $Res Function(_$_PurchaseDeclined) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? receipts = null,
-  }) {
-    return _then(_$_PurchaseDeclined(
-      receipts: null == receipts
-          ? _value._receipts
-          : receipts // ignore: cast_nullable_to_non_nullable
-              as List<TransactionReceipt>,
-    ));
-  }
+/// Adds pattern-matching-related methods to [PurchaseDeclined].
+extension PurchaseDeclinedPatterns on PurchaseDeclined {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PurchaseDeclined value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PurchaseDeclined() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PurchaseDeclined value)  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseDeclined():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PurchaseDeclined value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseDeclined() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<TransactionReceipt> receipts)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PurchaseDeclined() when $default != null:
+return $default(_that.receipts);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<TransactionReceipt> receipts)  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseDeclined():
+return $default(_that.receipts);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<TransactionReceipt> receipts)?  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseDeclined() when $default != null:
+return $default(_that.receipts);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PurchaseDeclined implements _PurchaseDeclined {
-  const _$_PurchaseDeclined({required final List<TransactionReceipt> receipts})
-      : _receipts = receipts;
 
-  factory _$_PurchaseDeclined.fromJson(Map<String, dynamic> json) =>
-      _$$_PurchaseDeclinedFromJson(json);
+class _PurchaseDeclined extends PurchaseDeclined {
+  const _PurchaseDeclined({required final  List<TransactionReceipt> receipts}): _receipts = receipts,super._();
+  factory _PurchaseDeclined.fromJson(Map<String, dynamic> json) => _$PurchaseDeclinedFromJson(json);
 
-  final List<TransactionReceipt> _receipts;
-  @override
-  List<TransactionReceipt> get receipts {
-    if (_receipts is EqualUnmodifiableListView) return _receipts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_receipts);
-  }
-
-  @override
-  String toString() {
-    return 'PurchaseDeclined(receipts: $receipts)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PurchaseDeclined &&
-            const DeepCollectionEquality().equals(other._receipts, _receipts));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_receipts));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PurchaseDeclinedCopyWith<_$_PurchaseDeclined> get copyWith =>
-      __$$_PurchaseDeclinedCopyWithImpl<_$_PurchaseDeclined>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PurchaseDeclinedToJson(
-      this,
-    );
-  }
+ final  List<TransactionReceipt> _receipts;
+@override List<TransactionReceipt> get receipts {
+  if (_receipts is EqualUnmodifiableListView) return _receipts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_receipts);
 }
 
-abstract class _PurchaseDeclined implements PurchaseDeclined {
-  const factory _PurchaseDeclined(
-      {required final List<TransactionReceipt> receipts}) = _$_PurchaseDeclined;
 
-  factory _PurchaseDeclined.fromJson(Map<String, dynamic> json) =
-      _$_PurchaseDeclined.fromJson;
+/// Create a copy of PurchaseDeclined
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PurchaseDeclinedCopyWith<_PurchaseDeclined> get copyWith => __$PurchaseDeclinedCopyWithImpl<_PurchaseDeclined>(this, _$identity);
 
-  @override
-  List<TransactionReceipt> get receipts;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PurchaseDeclinedCopyWith<_$_PurchaseDeclined> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$PurchaseDeclinedToJson(this, );
 }
 
-PurchaseAuthenticationFailed _$PurchaseAuthenticationFailedFromJson(
-    Map<String, dynamic> json) {
-  return _PurchaseAuthenticationFailed.fromJson(json);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseDeclined&&const DeepCollectionEquality().equals(other._receipts, _receipts));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_receipts));
+
+@override
+String toString() {
+  return 'PurchaseDeclined(receipts: $receipts)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PurchaseDeclinedCopyWith<$Res> implements $PurchaseDeclinedCopyWith<$Res> {
+  factory _$PurchaseDeclinedCopyWith(_PurchaseDeclined value, $Res Function(_PurchaseDeclined) _then) = __$PurchaseDeclinedCopyWithImpl;
+@override @useResult
+$Res call({
+ List<TransactionReceipt> receipts
+});
+
+
+
+
+}
+/// @nodoc
+class __$PurchaseDeclinedCopyWithImpl<$Res>
+    implements _$PurchaseDeclinedCopyWith<$Res> {
+  __$PurchaseDeclinedCopyWithImpl(this._self, this._then);
+
+  final _PurchaseDeclined _self;
+  final $Res Function(_PurchaseDeclined) _then;
+
+/// Create a copy of PurchaseDeclined
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? receipts = null,}) {
+  return _then(_PurchaseDeclined(
+receipts: null == receipts ? _self._receipts : receipts // ignore: cast_nullable_to_non_nullable
+as List<TransactionReceipt>,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$PurchaseAuthenticationFailed {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseAuthenticationFailedCopyWith<PurchaseAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of PurchaseAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PurchaseAuthenticationFailedCopyWith<PurchaseAuthenticationFailed> get copyWith => _$PurchaseAuthenticationFailedCopyWithImpl<PurchaseAuthenticationFailed>(this as PurchaseAuthenticationFailed, _$identity);
+
+  /// Serializes this PurchaseAuthenticationFailed to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseAuthenticationFailed&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'PurchaseAuthenticationFailed(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PurchaseAuthenticationFailedCopyWith<$Res> {
-  factory $PurchaseAuthenticationFailedCopyWith(
-          PurchaseAuthenticationFailed value,
-          $Res Function(PurchaseAuthenticationFailed) then) =
-      _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
-          PurchaseAuthenticationFailed>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $PurchaseAuthenticationFailedCopyWith<$Res>  {
+  factory $PurchaseAuthenticationFailedCopyWith(PurchaseAuthenticationFailed value, $Res Function(PurchaseAuthenticationFailed) _then) = _$PurchaseAuthenticationFailedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
-        $Val extends PurchaseAuthenticationFailed>
+class _$PurchaseAuthenticationFailedCopyWithImpl<$Res>
     implements $PurchaseAuthenticationFailedCopyWith<$Res> {
-  _$PurchaseAuthenticationFailedCopyWithImpl(this._value, this._then);
+  _$PurchaseAuthenticationFailedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PurchaseAuthenticationFailed _self;
+  final $Res Function(PurchaseAuthenticationFailed) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of PurchaseAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_PurchaseAuthenticationFailedCopyWith<$Res>
-    implements $PurchaseAuthenticationFailedCopyWith<$Res> {
-  factory _$$_PurchaseAuthenticationFailedCopyWith(
-          _$_PurchaseAuthenticationFailed value,
-          $Res Function(_$_PurchaseAuthenticationFailed) then) =
-      __$$_PurchaseAuthenticationFailedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_PurchaseAuthenticationFailedCopyWithImpl<$Res>
-    extends _$PurchaseAuthenticationFailedCopyWithImpl<$Res,
-        _$_PurchaseAuthenticationFailed>
-    implements _$$_PurchaseAuthenticationFailedCopyWith<$Res> {
-  __$$_PurchaseAuthenticationFailedCopyWithImpl(
-      _$_PurchaseAuthenticationFailed _value,
-      $Res Function(_$_PurchaseAuthenticationFailed) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_PurchaseAuthenticationFailed(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [PurchaseAuthenticationFailed].
+extension PurchaseAuthenticationFailedPatterns on PurchaseAuthenticationFailed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PurchaseAuthenticationFailed value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PurchaseAuthenticationFailed value)  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PurchaseAuthenticationFailed value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PurchaseAuthenticationFailed implements _PurchaseAuthenticationFailed {
-  const _$_PurchaseAuthenticationFailed({required this.message});
 
-  factory _$_PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$$_PurchaseAuthenticationFailedFromJson(json);
+class _PurchaseAuthenticationFailed extends PurchaseAuthenticationFailed {
+  const _PurchaseAuthenticationFailed({required this.message}): super._();
+  factory _PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$PurchaseAuthenticationFailedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'PurchaseAuthenticationFailed(message: $message)';
-  }
+/// Create a copy of PurchaseAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PurchaseAuthenticationFailedCopyWith<_PurchaseAuthenticationFailed> get copyWith => __$PurchaseAuthenticationFailedCopyWithImpl<_PurchaseAuthenticationFailed>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PurchaseAuthenticationFailed &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PurchaseAuthenticationFailedCopyWith<_$_PurchaseAuthenticationFailed>
-      get copyWith => __$$_PurchaseAuthenticationFailedCopyWithImpl<
-          _$_PurchaseAuthenticationFailed>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PurchaseAuthenticationFailedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$PurchaseAuthenticationFailedToJson(this, );
 }
 
-abstract class _PurchaseAuthenticationFailed
-    implements PurchaseAuthenticationFailed {
-  const factory _PurchaseAuthenticationFailed({required final String message}) =
-      _$_PurchaseAuthenticationFailed;
-
-  factory _PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_PurchaseAuthenticationFailed.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PurchaseAuthenticationFailedCopyWith<_$_PurchaseAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseAuthenticationFailed&&(identical(other.message, message) || other.message == message));
 }
 
-PurchaseInvalidStatus _$PurchaseInvalidStatusFromJson(
-    Map<String, dynamic> json) {
-  return _PurchaseInvalidStatus.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'PurchaseAuthenticationFailed(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PurchaseAuthenticationFailedCopyWith<$Res> implements $PurchaseAuthenticationFailedCopyWith<$Res> {
+  factory _$PurchaseAuthenticationFailedCopyWith(_PurchaseAuthenticationFailed value, $Res Function(_PurchaseAuthenticationFailed) _then) = __$PurchaseAuthenticationFailedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$PurchaseAuthenticationFailedCopyWithImpl<$Res>
+    implements _$PurchaseAuthenticationFailedCopyWith<$Res> {
+  __$PurchaseAuthenticationFailedCopyWithImpl(this._self, this._then);
+
+  final _PurchaseAuthenticationFailed _self;
+  final $Res Function(_PurchaseAuthenticationFailed) _then;
+
+/// Create a copy of PurchaseAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_PurchaseAuthenticationFailed(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$PurchaseInvalidStatus {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseInvalidStatusCopyWith<PurchaseInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of PurchaseInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PurchaseInvalidStatusCopyWith<PurchaseInvalidStatus> get copyWith => _$PurchaseInvalidStatusCopyWithImpl<PurchaseInvalidStatus>(this as PurchaseInvalidStatus, _$identity);
+
+  /// Serializes this PurchaseInvalidStatus to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'PurchaseInvalidStatus(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PurchaseInvalidStatusCopyWith<$Res> {
-  factory $PurchaseInvalidStatusCopyWith(PurchaseInvalidStatus value,
-          $Res Function(PurchaseInvalidStatus) then) =
-      _$PurchaseInvalidStatusCopyWithImpl<$Res, PurchaseInvalidStatus>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $PurchaseInvalidStatusCopyWith<$Res>  {
+  factory $PurchaseInvalidStatusCopyWith(PurchaseInvalidStatus value, $Res Function(PurchaseInvalidStatus) _then) = _$PurchaseInvalidStatusCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$PurchaseInvalidStatusCopyWithImpl<$Res,
-        $Val extends PurchaseInvalidStatus>
+class _$PurchaseInvalidStatusCopyWithImpl<$Res>
     implements $PurchaseInvalidStatusCopyWith<$Res> {
-  _$PurchaseInvalidStatusCopyWithImpl(this._value, this._then);
+  _$PurchaseInvalidStatusCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PurchaseInvalidStatus _self;
+  final $Res Function(PurchaseInvalidStatus) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of PurchaseInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_PurchaseInvalidStatusCopyWith<$Res>
-    implements $PurchaseInvalidStatusCopyWith<$Res> {
-  factory _$$_PurchaseInvalidStatusCopyWith(_$_PurchaseInvalidStatus value,
-          $Res Function(_$_PurchaseInvalidStatus) then) =
-      __$$_PurchaseInvalidStatusCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_PurchaseInvalidStatusCopyWithImpl<$Res>
-    extends _$PurchaseInvalidStatusCopyWithImpl<$Res, _$_PurchaseInvalidStatus>
-    implements _$$_PurchaseInvalidStatusCopyWith<$Res> {
-  __$$_PurchaseInvalidStatusCopyWithImpl(_$_PurchaseInvalidStatus _value,
-      $Res Function(_$_PurchaseInvalidStatus) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_PurchaseInvalidStatus(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [PurchaseInvalidStatus].
+extension PurchaseInvalidStatusPatterns on PurchaseInvalidStatus {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PurchaseInvalidStatus value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PurchaseInvalidStatus value)  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PurchaseInvalidStatus value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PurchaseInvalidStatus implements _PurchaseInvalidStatus {
-  const _$_PurchaseInvalidStatus({this.required});
 
-  factory _$_PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_PurchaseInvalidStatusFromJson(json);
+class _PurchaseInvalidStatus extends PurchaseInvalidStatus {
+  const _PurchaseInvalidStatus({this.required}): super._();
+  factory _PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) => _$PurchaseInvalidStatusFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'PurchaseInvalidStatus(required: $required)';
-  }
+/// Create a copy of PurchaseInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PurchaseInvalidStatusCopyWith<_PurchaseInvalidStatus> get copyWith => __$PurchaseInvalidStatusCopyWithImpl<_PurchaseInvalidStatus>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PurchaseInvalidStatus &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PurchaseInvalidStatusCopyWith<_$_PurchaseInvalidStatus> get copyWith =>
-      __$$_PurchaseInvalidStatusCopyWithImpl<_$_PurchaseInvalidStatus>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PurchaseInvalidStatusToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$PurchaseInvalidStatusToJson(this, );
 }
 
-abstract class _PurchaseInvalidStatus implements PurchaseInvalidStatus {
-  const factory _PurchaseInvalidStatus({final dynamic required}) =
-      _$_PurchaseInvalidStatus;
-
-  factory _PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_PurchaseInvalidStatus.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PurchaseInvalidStatusCopyWith<_$_PurchaseInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
 }
 
-PurchaseGeneralFailure _$PurchaseGeneralFailureFromJson(
-    Map<String, dynamic> json) {
-  return _PurchaseGeneralFailure.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'PurchaseInvalidStatus(required: $required)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PurchaseInvalidStatusCopyWith<$Res> implements $PurchaseInvalidStatusCopyWith<$Res> {
+  factory _$PurchaseInvalidStatusCopyWith(_PurchaseInvalidStatus value, $Res Function(_PurchaseInvalidStatus) _then) = __$PurchaseInvalidStatusCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$PurchaseInvalidStatusCopyWithImpl<$Res>
+    implements _$PurchaseInvalidStatusCopyWith<$Res> {
+  __$PurchaseInvalidStatusCopyWithImpl(this._self, this._then);
+
+  final _PurchaseInvalidStatus _self;
+  final $Res Function(_PurchaseInvalidStatus) _then;
+
+/// Create a copy of PurchaseInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_PurchaseInvalidStatus(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$PurchaseGeneralFailure {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PurchaseGeneralFailureCopyWith<PurchaseGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of PurchaseGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PurchaseGeneralFailureCopyWith<PurchaseGeneralFailure> get copyWith => _$PurchaseGeneralFailureCopyWithImpl<PurchaseGeneralFailure>(this as PurchaseGeneralFailure, _$identity);
+
+  /// Serializes this PurchaseGeneralFailure to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PurchaseGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'PurchaseGeneralFailure(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PurchaseGeneralFailureCopyWith<$Res> {
-  factory $PurchaseGeneralFailureCopyWith(PurchaseGeneralFailure value,
-          $Res Function(PurchaseGeneralFailure) then) =
-      _$PurchaseGeneralFailureCopyWithImpl<$Res, PurchaseGeneralFailure>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $PurchaseGeneralFailureCopyWith<$Res>  {
+  factory $PurchaseGeneralFailureCopyWith(PurchaseGeneralFailure value, $Res Function(PurchaseGeneralFailure) _then) = _$PurchaseGeneralFailureCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$PurchaseGeneralFailureCopyWithImpl<$Res,
-        $Val extends PurchaseGeneralFailure>
+class _$PurchaseGeneralFailureCopyWithImpl<$Res>
     implements $PurchaseGeneralFailureCopyWith<$Res> {
-  _$PurchaseGeneralFailureCopyWithImpl(this._value, this._then);
+  _$PurchaseGeneralFailureCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PurchaseGeneralFailure _self;
+  final $Res Function(PurchaseGeneralFailure) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of PurchaseGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_PurchaseGeneralFailureCopyWith<$Res>
-    implements $PurchaseGeneralFailureCopyWith<$Res> {
-  factory _$$_PurchaseGeneralFailureCopyWith(_$_PurchaseGeneralFailure value,
-          $Res Function(_$_PurchaseGeneralFailure) then) =
-      __$$_PurchaseGeneralFailureCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_PurchaseGeneralFailureCopyWithImpl<$Res>
-    extends _$PurchaseGeneralFailureCopyWithImpl<$Res,
-        _$_PurchaseGeneralFailure>
-    implements _$$_PurchaseGeneralFailureCopyWith<$Res> {
-  __$$_PurchaseGeneralFailureCopyWithImpl(_$_PurchaseGeneralFailure _value,
-      $Res Function(_$_PurchaseGeneralFailure) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_PurchaseGeneralFailure(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [PurchaseGeneralFailure].
+extension PurchaseGeneralFailurePatterns on PurchaseGeneralFailure {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _PurchaseGeneralFailure value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _PurchaseGeneralFailure value)  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _PurchaseGeneralFailure value)?  $default,){
+final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _PurchaseGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PurchaseGeneralFailure implements _PurchaseGeneralFailure {
-  const _$_PurchaseGeneralFailure({this.required});
 
-  factory _$_PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_PurchaseGeneralFailureFromJson(json);
+class _PurchaseGeneralFailure extends PurchaseGeneralFailure {
+  const _PurchaseGeneralFailure({this.required}): super._();
+  factory _PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) => _$PurchaseGeneralFailureFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'PurchaseGeneralFailure(required: $required)';
-  }
+/// Create a copy of PurchaseGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PurchaseGeneralFailureCopyWith<_PurchaseGeneralFailure> get copyWith => __$PurchaseGeneralFailureCopyWithImpl<_PurchaseGeneralFailure>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_PurchaseGeneralFailure &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_PurchaseGeneralFailureCopyWith<_$_PurchaseGeneralFailure> get copyWith =>
-      __$$_PurchaseGeneralFailureCopyWithImpl<_$_PurchaseGeneralFailure>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PurchaseGeneralFailureToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$PurchaseGeneralFailureToJson(this, );
 }
 
-abstract class _PurchaseGeneralFailure implements PurchaseGeneralFailure {
-  const factory _PurchaseGeneralFailure({final dynamic required}) =
-      _$_PurchaseGeneralFailure;
-
-  factory _PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_PurchaseGeneralFailure.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_PurchaseGeneralFailureCopyWith<_$_PurchaseGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PurchaseGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'PurchaseGeneralFailure(required: $required)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PurchaseGeneralFailureCopyWith<$Res> implements $PurchaseGeneralFailureCopyWith<$Res> {
+  factory _$PurchaseGeneralFailureCopyWith(_PurchaseGeneralFailure value, $Res Function(_PurchaseGeneralFailure) _then) = __$PurchaseGeneralFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$PurchaseGeneralFailureCopyWithImpl<$Res>
+    implements _$PurchaseGeneralFailureCopyWith<$Res> {
+  __$PurchaseGeneralFailureCopyWithImpl(this._self, this._then);
+
+  final _PurchaseGeneralFailure _self;
+  final $Res Function(_PurchaseGeneralFailure) _then;
+
+/// Create a copy of PurchaseGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_PurchaseGeneralFailure(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
+// dart format on

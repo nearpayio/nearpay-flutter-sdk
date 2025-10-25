@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,568 +9,1058 @@ part of 'session_error.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-SessionAuthenticationFailed _$SessionAuthenticationFailedFromJson(
-    Map<String, dynamic> json) {
-  return _SessionAuthenticationFailed.fromJson(json);
-}
 
 /// @nodoc
 mixin _$SessionAuthenticationFailed {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SessionAuthenticationFailedCopyWith<SessionAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of SessionAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionAuthenticationFailedCopyWith<SessionAuthenticationFailed> get copyWith => _$SessionAuthenticationFailedCopyWithImpl<SessionAuthenticationFailed>(this as SessionAuthenticationFailed, _$identity);
+
+  /// Serializes this SessionAuthenticationFailed to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionAuthenticationFailed&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'SessionAuthenticationFailed(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SessionAuthenticationFailedCopyWith<$Res> {
-  factory $SessionAuthenticationFailedCopyWith(
-          SessionAuthenticationFailed value,
-          $Res Function(SessionAuthenticationFailed) then) =
-      _$SessionAuthenticationFailedCopyWithImpl<$Res,
-          SessionAuthenticationFailed>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $SessionAuthenticationFailedCopyWith<$Res>  {
+  factory $SessionAuthenticationFailedCopyWith(SessionAuthenticationFailed value, $Res Function(SessionAuthenticationFailed) _then) = _$SessionAuthenticationFailedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$SessionAuthenticationFailedCopyWithImpl<$Res,
-        $Val extends SessionAuthenticationFailed>
+class _$SessionAuthenticationFailedCopyWithImpl<$Res>
     implements $SessionAuthenticationFailedCopyWith<$Res> {
-  _$SessionAuthenticationFailedCopyWithImpl(this._value, this._then);
+  _$SessionAuthenticationFailedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SessionAuthenticationFailed _self;
+  final $Res Function(SessionAuthenticationFailed) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of SessionAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_SessionAuthenticationFailedCopyWith<$Res>
-    implements $SessionAuthenticationFailedCopyWith<$Res> {
-  factory _$$_SessionAuthenticationFailedCopyWith(
-          _$_SessionAuthenticationFailed value,
-          $Res Function(_$_SessionAuthenticationFailed) then) =
-      __$$_SessionAuthenticationFailedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_SessionAuthenticationFailedCopyWithImpl<$Res>
-    extends _$SessionAuthenticationFailedCopyWithImpl<$Res,
-        _$_SessionAuthenticationFailed>
-    implements _$$_SessionAuthenticationFailedCopyWith<$Res> {
-  __$$_SessionAuthenticationFailedCopyWithImpl(
-      _$_SessionAuthenticationFailed _value,
-      $Res Function(_$_SessionAuthenticationFailed) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_SessionAuthenticationFailed(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [SessionAuthenticationFailed].
+extension SessionAuthenticationFailedPatterns on SessionAuthenticationFailed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionAuthenticationFailed value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionAuthenticationFailed value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionAuthenticationFailed value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_SessionAuthenticationFailed implements _SessionAuthenticationFailed {
-  const _$_SessionAuthenticationFailed({required this.message});
 
-  factory _$_SessionAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$$_SessionAuthenticationFailedFromJson(json);
+class _SessionAuthenticationFailed extends SessionAuthenticationFailed {
+  const _SessionAuthenticationFailed({required this.message}): super._();
+  factory _SessionAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$SessionAuthenticationFailedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'SessionAuthenticationFailed(message: $message)';
-  }
+/// Create a copy of SessionAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionAuthenticationFailedCopyWith<_SessionAuthenticationFailed> get copyWith => __$SessionAuthenticationFailedCopyWithImpl<_SessionAuthenticationFailed>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SessionAuthenticationFailed &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SessionAuthenticationFailedCopyWith<_$_SessionAuthenticationFailed>
-      get copyWith => __$$_SessionAuthenticationFailedCopyWithImpl<
-          _$_SessionAuthenticationFailed>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SessionAuthenticationFailedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionAuthenticationFailedToJson(this, );
 }
 
-abstract class _SessionAuthenticationFailed
-    implements SessionAuthenticationFailed {
-  const factory _SessionAuthenticationFailed({required final String message}) =
-      _$_SessionAuthenticationFailed;
-
-  factory _SessionAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_SessionAuthenticationFailed.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SessionAuthenticationFailedCopyWith<_$_SessionAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionAuthenticationFailed&&(identical(other.message, message) || other.message == message));
 }
 
-SessionFailureMessage _$SessionFailureMessageFromJson(
-    Map<String, dynamic> json) {
-  return _SessionFailureMessage.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'SessionAuthenticationFailed(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionAuthenticationFailedCopyWith<$Res> implements $SessionAuthenticationFailedCopyWith<$Res> {
+  factory _$SessionAuthenticationFailedCopyWith(_SessionAuthenticationFailed value, $Res Function(_SessionAuthenticationFailed) _then) = __$SessionAuthenticationFailedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionAuthenticationFailedCopyWithImpl<$Res>
+    implements _$SessionAuthenticationFailedCopyWith<$Res> {
+  __$SessionAuthenticationFailedCopyWithImpl(this._self, this._then);
+
+  final _SessionAuthenticationFailed _self;
+  final $Res Function(_SessionAuthenticationFailed) _then;
+
+/// Create a copy of SessionAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_SessionAuthenticationFailed(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$SessionFailureMessage {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SessionFailureMessageCopyWith<SessionFailureMessage> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of SessionFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionFailureMessageCopyWith<SessionFailureMessage> get copyWith => _$SessionFailureMessageCopyWithImpl<SessionFailureMessage>(this as SessionFailureMessage, _$identity);
+
+  /// Serializes this SessionFailureMessage to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionFailureMessage&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'SessionFailureMessage(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SessionFailureMessageCopyWith<$Res> {
-  factory $SessionFailureMessageCopyWith(SessionFailureMessage value,
-          $Res Function(SessionFailureMessage) then) =
-      _$SessionFailureMessageCopyWithImpl<$Res, SessionFailureMessage>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $SessionFailureMessageCopyWith<$Res>  {
+  factory $SessionFailureMessageCopyWith(SessionFailureMessage value, $Res Function(SessionFailureMessage) _then) = _$SessionFailureMessageCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$SessionFailureMessageCopyWithImpl<$Res,
-        $Val extends SessionFailureMessage>
+class _$SessionFailureMessageCopyWithImpl<$Res>
     implements $SessionFailureMessageCopyWith<$Res> {
-  _$SessionFailureMessageCopyWithImpl(this._value, this._then);
+  _$SessionFailureMessageCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SessionFailureMessage _self;
+  final $Res Function(SessionFailureMessage) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of SessionFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_SessionFailureMessageCopyWith<$Res>
-    implements $SessionFailureMessageCopyWith<$Res> {
-  factory _$$_SessionFailureMessageCopyWith(_$_SessionFailureMessage value,
-          $Res Function(_$_SessionFailureMessage) then) =
-      __$$_SessionFailureMessageCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_SessionFailureMessageCopyWithImpl<$Res>
-    extends _$SessionFailureMessageCopyWithImpl<$Res, _$_SessionFailureMessage>
-    implements _$$_SessionFailureMessageCopyWith<$Res> {
-  __$$_SessionFailureMessageCopyWithImpl(_$_SessionFailureMessage _value,
-      $Res Function(_$_SessionFailureMessage) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_SessionFailureMessage(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [SessionFailureMessage].
+extension SessionFailureMessagePatterns on SessionFailureMessage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionFailureMessage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionFailureMessage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionFailureMessage value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionFailureMessage():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionFailureMessage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionFailureMessage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionFailureMessage() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _SessionFailureMessage():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionFailureMessage() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_SessionFailureMessage implements _SessionFailureMessage {
-  const _$_SessionFailureMessage({required this.message});
 
-  factory _$_SessionFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_SessionFailureMessageFromJson(json);
+class _SessionFailureMessage extends SessionFailureMessage {
+  const _SessionFailureMessage({required this.message}): super._();
+  factory _SessionFailureMessage.fromJson(Map<String, dynamic> json) => _$SessionFailureMessageFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'SessionFailureMessage(message: $message)';
-  }
+/// Create a copy of SessionFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionFailureMessageCopyWith<_SessionFailureMessage> get copyWith => __$SessionFailureMessageCopyWithImpl<_SessionFailureMessage>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SessionFailureMessage &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SessionFailureMessageCopyWith<_$_SessionFailureMessage> get copyWith =>
-      __$$_SessionFailureMessageCopyWithImpl<_$_SessionFailureMessage>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SessionFailureMessageToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionFailureMessageToJson(this, );
 }
 
-abstract class _SessionFailureMessage implements SessionFailureMessage {
-  const factory _SessionFailureMessage({required final String message}) =
-      _$_SessionFailureMessage;
-
-  factory _SessionFailureMessage.fromJson(Map<String, dynamic> json) =
-      _$_SessionFailureMessage.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SessionFailureMessageCopyWith<_$_SessionFailureMessage> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionFailureMessage&&(identical(other.message, message) || other.message == message));
 }
 
-SessionInvalidStatus _$SessionInvalidStatusFromJson(Map<String, dynamic> json) {
-  return _SessionInvalidStatus.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'SessionFailureMessage(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionFailureMessageCopyWith<$Res> implements $SessionFailureMessageCopyWith<$Res> {
+  factory _$SessionFailureMessageCopyWith(_SessionFailureMessage value, $Res Function(_SessionFailureMessage) _then) = __$SessionFailureMessageCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionFailureMessageCopyWithImpl<$Res>
+    implements _$SessionFailureMessageCopyWith<$Res> {
+  __$SessionFailureMessageCopyWithImpl(this._self, this._then);
+
+  final _SessionFailureMessage _self;
+  final $Res Function(_SessionFailureMessage) _then;
+
+/// Create a copy of SessionFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_SessionFailureMessage(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$SessionInvalidStatus {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SessionInvalidStatusCopyWith<SessionInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of SessionInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionInvalidStatusCopyWith<SessionInvalidStatus> get copyWith => _$SessionInvalidStatusCopyWithImpl<SessionInvalidStatus>(this as SessionInvalidStatus, _$identity);
+
+  /// Serializes this SessionInvalidStatus to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'SessionInvalidStatus(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SessionInvalidStatusCopyWith<$Res> {
-  factory $SessionInvalidStatusCopyWith(SessionInvalidStatus value,
-          $Res Function(SessionInvalidStatus) then) =
-      _$SessionInvalidStatusCopyWithImpl<$Res, SessionInvalidStatus>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $SessionInvalidStatusCopyWith<$Res>  {
+  factory $SessionInvalidStatusCopyWith(SessionInvalidStatus value, $Res Function(SessionInvalidStatus) _then) = _$SessionInvalidStatusCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$SessionInvalidStatusCopyWithImpl<$Res,
-        $Val extends SessionInvalidStatus>
+class _$SessionInvalidStatusCopyWithImpl<$Res>
     implements $SessionInvalidStatusCopyWith<$Res> {
-  _$SessionInvalidStatusCopyWithImpl(this._value, this._then);
+  _$SessionInvalidStatusCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SessionInvalidStatus _self;
+  final $Res Function(SessionInvalidStatus) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of SessionInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_SessionInvalidStatusCopyWith<$Res>
-    implements $SessionInvalidStatusCopyWith<$Res> {
-  factory _$$_SessionInvalidStatusCopyWith(_$_SessionInvalidStatus value,
-          $Res Function(_$_SessionInvalidStatus) then) =
-      __$$_SessionInvalidStatusCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_SessionInvalidStatusCopyWithImpl<$Res>
-    extends _$SessionInvalidStatusCopyWithImpl<$Res, _$_SessionInvalidStatus>
-    implements _$$_SessionInvalidStatusCopyWith<$Res> {
-  __$$_SessionInvalidStatusCopyWithImpl(_$_SessionInvalidStatus _value,
-      $Res Function(_$_SessionInvalidStatus) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_SessionInvalidStatus(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [SessionInvalidStatus].
+extension SessionInvalidStatusPatterns on SessionInvalidStatus {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionInvalidStatus value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionInvalidStatus value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionInvalidStatus():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionInvalidStatus value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _SessionInvalidStatus():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_SessionInvalidStatus implements _SessionInvalidStatus {
-  const _$_SessionInvalidStatus({this.required});
 
-  factory _$_SessionInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_SessionInvalidStatusFromJson(json);
+class _SessionInvalidStatus extends SessionInvalidStatus {
+  const _SessionInvalidStatus({this.required}): super._();
+  factory _SessionInvalidStatus.fromJson(Map<String, dynamic> json) => _$SessionInvalidStatusFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'SessionInvalidStatus(required: $required)';
-  }
+/// Create a copy of SessionInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionInvalidStatusCopyWith<_SessionInvalidStatus> get copyWith => __$SessionInvalidStatusCopyWithImpl<_SessionInvalidStatus>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SessionInvalidStatus &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SessionInvalidStatusCopyWith<_$_SessionInvalidStatus> get copyWith =>
-      __$$_SessionInvalidStatusCopyWithImpl<_$_SessionInvalidStatus>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SessionInvalidStatusToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionInvalidStatusToJson(this, );
 }
 
-abstract class _SessionInvalidStatus implements SessionInvalidStatus {
-  const factory _SessionInvalidStatus({final dynamic required}) =
-      _$_SessionInvalidStatus;
-
-  factory _SessionInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_SessionInvalidStatus.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SessionInvalidStatusCopyWith<_$_SessionInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
 }
 
-SessionGeneralFailure _$SessionGeneralFailureFromJson(
-    Map<String, dynamic> json) {
-  return _SessionGeneralFailure.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'SessionInvalidStatus(required: $required)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionInvalidStatusCopyWith<$Res> implements $SessionInvalidStatusCopyWith<$Res> {
+  factory _$SessionInvalidStatusCopyWith(_SessionInvalidStatus value, $Res Function(_SessionInvalidStatus) _then) = __$SessionInvalidStatusCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionInvalidStatusCopyWithImpl<$Res>
+    implements _$SessionInvalidStatusCopyWith<$Res> {
+  __$SessionInvalidStatusCopyWithImpl(this._self, this._then);
+
+  final _SessionInvalidStatus _self;
+  final $Res Function(_SessionInvalidStatus) _then;
+
+/// Create a copy of SessionInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_SessionInvalidStatus(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$SessionGeneralFailure {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SessionGeneralFailureCopyWith<SessionGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of SessionGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionGeneralFailureCopyWith<SessionGeneralFailure> get copyWith => _$SessionGeneralFailureCopyWithImpl<SessionGeneralFailure>(this as SessionGeneralFailure, _$identity);
+
+  /// Serializes this SessionGeneralFailure to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'SessionGeneralFailure(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $SessionGeneralFailureCopyWith<$Res> {
-  factory $SessionGeneralFailureCopyWith(SessionGeneralFailure value,
-          $Res Function(SessionGeneralFailure) then) =
-      _$SessionGeneralFailureCopyWithImpl<$Res, SessionGeneralFailure>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $SessionGeneralFailureCopyWith<$Res>  {
+  factory $SessionGeneralFailureCopyWith(SessionGeneralFailure value, $Res Function(SessionGeneralFailure) _then) = _$SessionGeneralFailureCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$SessionGeneralFailureCopyWithImpl<$Res,
-        $Val extends SessionGeneralFailure>
+class _$SessionGeneralFailureCopyWithImpl<$Res>
     implements $SessionGeneralFailureCopyWith<$Res> {
-  _$SessionGeneralFailureCopyWithImpl(this._value, this._then);
+  _$SessionGeneralFailureCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final SessionGeneralFailure _self;
+  final $Res Function(SessionGeneralFailure) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of SessionGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_SessionGeneralFailureCopyWith<$Res>
-    implements $SessionGeneralFailureCopyWith<$Res> {
-  factory _$$_SessionGeneralFailureCopyWith(_$_SessionGeneralFailure value,
-          $Res Function(_$_SessionGeneralFailure) then) =
-      __$$_SessionGeneralFailureCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_SessionGeneralFailureCopyWithImpl<$Res>
-    extends _$SessionGeneralFailureCopyWithImpl<$Res, _$_SessionGeneralFailure>
-    implements _$$_SessionGeneralFailureCopyWith<$Res> {
-  __$$_SessionGeneralFailureCopyWithImpl(_$_SessionGeneralFailure _value,
-      $Res Function(_$_SessionGeneralFailure) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_SessionGeneralFailure(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [SessionGeneralFailure].
+extension SessionGeneralFailurePatterns on SessionGeneralFailure {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionGeneralFailure value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionGeneralFailure value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionGeneralFailure():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionGeneralFailure value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _SessionGeneralFailure():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_SessionGeneralFailure implements _SessionGeneralFailure {
-  const _$_SessionGeneralFailure({this.required});
 
-  factory _$_SessionGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_SessionGeneralFailureFromJson(json);
+class _SessionGeneralFailure extends SessionGeneralFailure {
+  const _SessionGeneralFailure({this.required}): super._();
+  factory _SessionGeneralFailure.fromJson(Map<String, dynamic> json) => _$SessionGeneralFailureFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'SessionGeneralFailure(required: $required)';
-  }
+/// Create a copy of SessionGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionGeneralFailureCopyWith<_SessionGeneralFailure> get copyWith => __$SessionGeneralFailureCopyWithImpl<_SessionGeneralFailure>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SessionGeneralFailure &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SessionGeneralFailureCopyWith<_$_SessionGeneralFailure> get copyWith =>
-      __$$_SessionGeneralFailureCopyWithImpl<_$_SessionGeneralFailure>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_SessionGeneralFailureToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionGeneralFailureToJson(this, );
 }
 
-abstract class _SessionGeneralFailure implements SessionGeneralFailure {
-  const factory _SessionGeneralFailure({final dynamic required}) =
-      _$_SessionGeneralFailure;
-
-  factory _SessionGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_SessionGeneralFailure.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_SessionGeneralFailureCopyWith<_$_SessionGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'SessionGeneralFailure(required: $required)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionGeneralFailureCopyWith<$Res> implements $SessionGeneralFailureCopyWith<$Res> {
+  factory _$SessionGeneralFailureCopyWith(_SessionGeneralFailure value, $Res Function(_SessionGeneralFailure) _then) = __$SessionGeneralFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionGeneralFailureCopyWithImpl<$Res>
+    implements _$SessionGeneralFailureCopyWith<$Res> {
+  __$SessionGeneralFailureCopyWithImpl(this._self, this._then);
+
+  final _SessionGeneralFailure _self;
+  final $Res Function(_SessionGeneralFailure) _then;
+
+/// Create a copy of SessionGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_SessionGeneralFailure(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
+// dart format on

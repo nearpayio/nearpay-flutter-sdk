@@ -6,7 +6,7 @@ part 'refund_error.g.dart';
 part 'refund_error.freezed.dart';
 
 abstract class RefundError {
-  RefundError() {}
+  const RefundError();
 
   factory RefundError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,56 +14,53 @@ abstract class RefundError {
 }
 
 @Freezed()
-class RefundRejected extends RefundError with _$RefundRejected {
+abstract class RefundRejected extends RefundError with _$RefundRejected {
   const factory RefundRejected({required String message}) = _RefundRejected;
 
   // RefundRejected({required this.message});
 
   // String message;
+  const RefundRejected._();
 
-  factory RefundRejected.fromJson(Map<String, dynamic> json) =>
-      _$RefundRejectedFromJson(json);
+  factory RefundRejected.fromJson(Map<String, dynamic> json) => _$RefundRejectedFromJson(json);
 }
 
 @Freezed()
-class RefundDeclined extends RefundError with _$RefundDeclined {
-  const factory RefundDeclined({required List<TransactionReceipt> receipts}) =
-      _RefundDeclined;
+abstract class RefundDeclined extends RefundError with _$RefundDeclined {
+  const factory RefundDeclined({required List<TransactionReceipt> receipts}) = _RefundDeclined;
+  const RefundDeclined._();
 
-  factory RefundDeclined.fromJson(Map<String, dynamic> json) =>
-      _$RefundDeclinedFromJson(json);
+  factory RefundDeclined.fromJson(Map<String, dynamic> json) => _$RefundDeclinedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$RefundDeclinedToJson(this);
 }
 
 @Freezed()
-class RefundAuthenticationFailed extends RefundError
-    with _$RefundAuthenticationFailed {
-  const factory RefundAuthenticationFailed({required String message}) =
-      _RefundAuthenticationFailed;
+abstract class RefundAuthenticationFailed extends RefundError with _$RefundAuthenticationFailed {
+  const factory RefundAuthenticationFailed({required String message}) = _RefundAuthenticationFailed;
+  const RefundAuthenticationFailed._();
 
-  factory RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$RefundAuthenticationFailedFromJson(json);
+  factory RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$RefundAuthenticationFailedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$RefundDeclinedToJson(this);
 }
 
 @Freezed()
-class RefundInvalidStatus extends RefundError with _$RefundInvalidStatus {
+abstract class RefundInvalidStatus extends RefundError with _$RefundInvalidStatus {
   const factory RefundInvalidStatus({required}) = _RefundInvalidStatus;
+  const RefundInvalidStatus._();
 
-  factory RefundInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$RefundInvalidStatusFromJson(json);
+  factory RefundInvalidStatus.fromJson(Map<String, dynamic> json) => _$RefundInvalidStatusFromJson(json);
 
   // Map<String, dynamic> toJson() => _$RefundDeclinedToJson(this);
 }
 
 @Freezed()
-class RefundGeneralFailure extends RefundError with _$RefundGeneralFailure {
+abstract class RefundGeneralFailure extends RefundError with _$RefundGeneralFailure {
   const factory RefundGeneralFailure({required}) = _RefundGeneralFailure;
+  const RefundGeneralFailure._();
 
-  factory RefundGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$RefundGeneralFailureFromJson(json);
+  factory RefundGeneralFailure.fromJson(Map<String, dynamic> json) => _$RefundGeneralFailureFromJson(json);
 
   // Map<String, dynamic> toJson() => _$RefundDeclinedToJson(this);
 }

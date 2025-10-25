@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,576 +9,1058 @@ part of 'reconcile_error.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-ReconcileFailureMessage _$ReconcileFailureMessageFromJson(
-    Map<String, dynamic> json) {
-  return _ReconcileFailureMessage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ReconcileFailureMessage {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ReconcileFailureMessageCopyWith<ReconcileFailureMessage> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of ReconcileFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReconcileFailureMessageCopyWith<ReconcileFailureMessage> get copyWith => _$ReconcileFailureMessageCopyWithImpl<ReconcileFailureMessage>(this as ReconcileFailureMessage, _$identity);
+
+  /// Serializes this ReconcileFailureMessage to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReconcileFailureMessage&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ReconcileFailureMessage(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ReconcileFailureMessageCopyWith<$Res> {
-  factory $ReconcileFailureMessageCopyWith(ReconcileFailureMessage value,
-          $Res Function(ReconcileFailureMessage) then) =
-      _$ReconcileFailureMessageCopyWithImpl<$Res, ReconcileFailureMessage>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $ReconcileFailureMessageCopyWith<$Res>  {
+  factory $ReconcileFailureMessageCopyWith(ReconcileFailureMessage value, $Res Function(ReconcileFailureMessage) _then) = _$ReconcileFailureMessageCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$ReconcileFailureMessageCopyWithImpl<$Res,
-        $Val extends ReconcileFailureMessage>
+class _$ReconcileFailureMessageCopyWithImpl<$Res>
     implements $ReconcileFailureMessageCopyWith<$Res> {
-  _$ReconcileFailureMessageCopyWithImpl(this._value, this._then);
+  _$ReconcileFailureMessageCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ReconcileFailureMessage _self;
+  final $Res Function(ReconcileFailureMessage) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of ReconcileFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_ReconcileFailureMessageCopyWith<$Res>
-    implements $ReconcileFailureMessageCopyWith<$Res> {
-  factory _$$_ReconcileFailureMessageCopyWith(_$_ReconcileFailureMessage value,
-          $Res Function(_$_ReconcileFailureMessage) then) =
-      __$$_ReconcileFailureMessageCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_ReconcileFailureMessageCopyWithImpl<$Res>
-    extends _$ReconcileFailureMessageCopyWithImpl<$Res,
-        _$_ReconcileFailureMessage>
-    implements _$$_ReconcileFailureMessageCopyWith<$Res> {
-  __$$_ReconcileFailureMessageCopyWithImpl(_$_ReconcileFailureMessage _value,
-      $Res Function(_$_ReconcileFailureMessage) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_ReconcileFailureMessage(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [ReconcileFailureMessage].
+extension ReconcileFailureMessagePatterns on ReconcileFailureMessage {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReconcileFailureMessage value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReconcileFailureMessage value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReconcileFailureMessage value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileFailureMessage() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileFailureMessage implements _ReconcileFailureMessage {
-  const _$_ReconcileFailureMessage({required this.message});
 
-  factory _$_ReconcileFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileFailureMessageFromJson(json);
+class _ReconcileFailureMessage extends ReconcileFailureMessage {
+  const _ReconcileFailureMessage({required this.message}): super._();
+  factory _ReconcileFailureMessage.fromJson(Map<String, dynamic> json) => _$ReconcileFailureMessageFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'ReconcileFailureMessage(message: $message)';
-  }
+/// Create a copy of ReconcileFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReconcileFailureMessageCopyWith<_ReconcileFailureMessage> get copyWith => __$ReconcileFailureMessageCopyWithImpl<_ReconcileFailureMessage>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ReconcileFailureMessage &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ReconcileFailureMessageCopyWith<_$_ReconcileFailureMessage>
-      get copyWith =>
-          __$$_ReconcileFailureMessageCopyWithImpl<_$_ReconcileFailureMessage>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ReconcileFailureMessageToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ReconcileFailureMessageToJson(this, );
 }
 
-abstract class _ReconcileFailureMessage implements ReconcileFailureMessage {
-  const factory _ReconcileFailureMessage({required final String message}) =
-      _$_ReconcileFailureMessage;
-
-  factory _ReconcileFailureMessage.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileFailureMessage.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ReconcileFailureMessageCopyWith<_$_ReconcileFailureMessage>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReconcileFailureMessage&&(identical(other.message, message) || other.message == message));
 }
 
-ReconcileAuthenticationFailed _$ReconcileAuthenticationFailedFromJson(
-    Map<String, dynamic> json) {
-  return _ReconcileAuthenticationFailed.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ReconcileFailureMessage(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReconcileFailureMessageCopyWith<$Res> implements $ReconcileFailureMessageCopyWith<$Res> {
+  factory _$ReconcileFailureMessageCopyWith(_ReconcileFailureMessage value, $Res Function(_ReconcileFailureMessage) _then) = __$ReconcileFailureMessageCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReconcileFailureMessageCopyWithImpl<$Res>
+    implements _$ReconcileFailureMessageCopyWith<$Res> {
+  __$ReconcileFailureMessageCopyWithImpl(this._self, this._then);
+
+  final _ReconcileFailureMessage _self;
+  final $Res Function(_ReconcileFailureMessage) _then;
+
+/// Create a copy of ReconcileFailureMessage
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_ReconcileFailureMessage(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$ReconcileAuthenticationFailed {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ReconcileAuthenticationFailedCopyWith<ReconcileAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of ReconcileAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReconcileAuthenticationFailedCopyWith<ReconcileAuthenticationFailed> get copyWith => _$ReconcileAuthenticationFailedCopyWithImpl<ReconcileAuthenticationFailed>(this as ReconcileAuthenticationFailed, _$identity);
+
+  /// Serializes this ReconcileAuthenticationFailed to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReconcileAuthenticationFailed&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ReconcileAuthenticationFailed(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ReconcileAuthenticationFailedCopyWith<$Res> {
-  factory $ReconcileAuthenticationFailedCopyWith(
-          ReconcileAuthenticationFailed value,
-          $Res Function(ReconcileAuthenticationFailed) then) =
-      _$ReconcileAuthenticationFailedCopyWithImpl<$Res,
-          ReconcileAuthenticationFailed>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $ReconcileAuthenticationFailedCopyWith<$Res>  {
+  factory $ReconcileAuthenticationFailedCopyWith(ReconcileAuthenticationFailed value, $Res Function(ReconcileAuthenticationFailed) _then) = _$ReconcileAuthenticationFailedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$ReconcileAuthenticationFailedCopyWithImpl<$Res,
-        $Val extends ReconcileAuthenticationFailed>
+class _$ReconcileAuthenticationFailedCopyWithImpl<$Res>
     implements $ReconcileAuthenticationFailedCopyWith<$Res> {
-  _$ReconcileAuthenticationFailedCopyWithImpl(this._value, this._then);
+  _$ReconcileAuthenticationFailedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ReconcileAuthenticationFailed _self;
+  final $Res Function(ReconcileAuthenticationFailed) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of ReconcileAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_ReconcileAuthenticationFailedCopyWith<$Res>
-    implements $ReconcileAuthenticationFailedCopyWith<$Res> {
-  factory _$$_ReconcileAuthenticationFailedCopyWith(
-          _$_ReconcileAuthenticationFailed value,
-          $Res Function(_$_ReconcileAuthenticationFailed) then) =
-      __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_ReconcileAuthenticationFailedCopyWithImpl<$Res>
-    extends _$ReconcileAuthenticationFailedCopyWithImpl<$Res,
-        _$_ReconcileAuthenticationFailed>
-    implements _$$_ReconcileAuthenticationFailedCopyWith<$Res> {
-  __$$_ReconcileAuthenticationFailedCopyWithImpl(
-      _$_ReconcileAuthenticationFailed _value,
-      $Res Function(_$_ReconcileAuthenticationFailed) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_ReconcileAuthenticationFailed(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [ReconcileAuthenticationFailed].
+extension ReconcileAuthenticationFailedPatterns on ReconcileAuthenticationFailed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReconcileAuthenticationFailed value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReconcileAuthenticationFailed value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReconcileAuthenticationFailed value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileAuthenticationFailed
-    implements _ReconcileAuthenticationFailed {
-  const _$_ReconcileAuthenticationFailed({required this.message});
 
-  factory _$_ReconcileAuthenticationFailed.fromJson(
-          Map<String, dynamic> json) =>
-      _$$_ReconcileAuthenticationFailedFromJson(json);
+class _ReconcileAuthenticationFailed extends ReconcileAuthenticationFailed {
+  const _ReconcileAuthenticationFailed({required this.message}): super._();
+  factory _ReconcileAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$ReconcileAuthenticationFailedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'ReconcileAuthenticationFailed(message: $message)';
-  }
+/// Create a copy of ReconcileAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReconcileAuthenticationFailedCopyWith<_ReconcileAuthenticationFailed> get copyWith => __$ReconcileAuthenticationFailedCopyWithImpl<_ReconcileAuthenticationFailed>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ReconcileAuthenticationFailed &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ReconcileAuthenticationFailedCopyWith<_$_ReconcileAuthenticationFailed>
-      get copyWith => __$$_ReconcileAuthenticationFailedCopyWithImpl<
-          _$_ReconcileAuthenticationFailed>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ReconcileAuthenticationFailedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ReconcileAuthenticationFailedToJson(this, );
 }
 
-abstract class _ReconcileAuthenticationFailed
-    implements ReconcileAuthenticationFailed {
-  const factory _ReconcileAuthenticationFailed(
-      {required final String message}) = _$_ReconcileAuthenticationFailed;
-
-  factory _ReconcileAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileAuthenticationFailed.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ReconcileAuthenticationFailedCopyWith<_$_ReconcileAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReconcileAuthenticationFailed&&(identical(other.message, message) || other.message == message));
 }
 
-ReconcileInvalidStatus _$ReconcileInvalidStatusFromJson(
-    Map<String, dynamic> json) {
-  return _ReconcileInvalidStatus.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'ReconcileAuthenticationFailed(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReconcileAuthenticationFailedCopyWith<$Res> implements $ReconcileAuthenticationFailedCopyWith<$Res> {
+  factory _$ReconcileAuthenticationFailedCopyWith(_ReconcileAuthenticationFailed value, $Res Function(_ReconcileAuthenticationFailed) _then) = __$ReconcileAuthenticationFailedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReconcileAuthenticationFailedCopyWithImpl<$Res>
+    implements _$ReconcileAuthenticationFailedCopyWith<$Res> {
+  __$ReconcileAuthenticationFailedCopyWithImpl(this._self, this._then);
+
+  final _ReconcileAuthenticationFailed _self;
+  final $Res Function(_ReconcileAuthenticationFailed) _then;
+
+/// Create a copy of ReconcileAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_ReconcileAuthenticationFailed(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$ReconcileInvalidStatus {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ReconcileInvalidStatusCopyWith<ReconcileInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of ReconcileInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReconcileInvalidStatusCopyWith<ReconcileInvalidStatus> get copyWith => _$ReconcileInvalidStatusCopyWithImpl<ReconcileInvalidStatus>(this as ReconcileInvalidStatus, _$identity);
+
+  /// Serializes this ReconcileInvalidStatus to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReconcileInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'ReconcileInvalidStatus(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ReconcileInvalidStatusCopyWith<$Res> {
-  factory $ReconcileInvalidStatusCopyWith(ReconcileInvalidStatus value,
-          $Res Function(ReconcileInvalidStatus) then) =
-      _$ReconcileInvalidStatusCopyWithImpl<$Res, ReconcileInvalidStatus>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $ReconcileInvalidStatusCopyWith<$Res>  {
+  factory $ReconcileInvalidStatusCopyWith(ReconcileInvalidStatus value, $Res Function(ReconcileInvalidStatus) _then) = _$ReconcileInvalidStatusCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$ReconcileInvalidStatusCopyWithImpl<$Res,
-        $Val extends ReconcileInvalidStatus>
+class _$ReconcileInvalidStatusCopyWithImpl<$Res>
     implements $ReconcileInvalidStatusCopyWith<$Res> {
-  _$ReconcileInvalidStatusCopyWithImpl(this._value, this._then);
+  _$ReconcileInvalidStatusCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ReconcileInvalidStatus _self;
+  final $Res Function(ReconcileInvalidStatus) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of ReconcileInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_ReconcileInvalidStatusCopyWith<$Res>
-    implements $ReconcileInvalidStatusCopyWith<$Res> {
-  factory _$$_ReconcileInvalidStatusCopyWith(_$_ReconcileInvalidStatus value,
-          $Res Function(_$_ReconcileInvalidStatus) then) =
-      __$$_ReconcileInvalidStatusCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_ReconcileInvalidStatusCopyWithImpl<$Res>
-    extends _$ReconcileInvalidStatusCopyWithImpl<$Res,
-        _$_ReconcileInvalidStatus>
-    implements _$$_ReconcileInvalidStatusCopyWith<$Res> {
-  __$$_ReconcileInvalidStatusCopyWithImpl(_$_ReconcileInvalidStatus _value,
-      $Res Function(_$_ReconcileInvalidStatus) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_ReconcileInvalidStatus(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [ReconcileInvalidStatus].
+extension ReconcileInvalidStatusPatterns on ReconcileInvalidStatus {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReconcileInvalidStatus value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReconcileInvalidStatus value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReconcileInvalidStatus value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileInvalidStatus implements _ReconcileInvalidStatus {
-  const _$_ReconcileInvalidStatus({this.required});
 
-  factory _$_ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileInvalidStatusFromJson(json);
+class _ReconcileInvalidStatus extends ReconcileInvalidStatus {
+  const _ReconcileInvalidStatus({this.required}): super._();
+  factory _ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) => _$ReconcileInvalidStatusFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'ReconcileInvalidStatus(required: $required)';
-  }
+/// Create a copy of ReconcileInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReconcileInvalidStatusCopyWith<_ReconcileInvalidStatus> get copyWith => __$ReconcileInvalidStatusCopyWithImpl<_ReconcileInvalidStatus>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ReconcileInvalidStatus &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ReconcileInvalidStatusCopyWith<_$_ReconcileInvalidStatus> get copyWith =>
-      __$$_ReconcileInvalidStatusCopyWithImpl<_$_ReconcileInvalidStatus>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ReconcileInvalidStatusToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ReconcileInvalidStatusToJson(this, );
 }
 
-abstract class _ReconcileInvalidStatus implements ReconcileInvalidStatus {
-  const factory _ReconcileInvalidStatus({final dynamic required}) =
-      _$_ReconcileInvalidStatus;
-
-  factory _ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileInvalidStatus.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ReconcileInvalidStatusCopyWith<_$_ReconcileInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReconcileInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
 }
 
-ReconcileGeneralFailure _$ReconcileGeneralFailureFromJson(
-    Map<String, dynamic> json) {
-  return _ReconcileGeneralFailure.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'ReconcileInvalidStatus(required: $required)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReconcileInvalidStatusCopyWith<$Res> implements $ReconcileInvalidStatusCopyWith<$Res> {
+  factory _$ReconcileInvalidStatusCopyWith(_ReconcileInvalidStatus value, $Res Function(_ReconcileInvalidStatus) _then) = __$ReconcileInvalidStatusCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReconcileInvalidStatusCopyWithImpl<$Res>
+    implements _$ReconcileInvalidStatusCopyWith<$Res> {
+  __$ReconcileInvalidStatusCopyWithImpl(this._self, this._then);
+
+  final _ReconcileInvalidStatus _self;
+  final $Res Function(_ReconcileInvalidStatus) _then;
+
+/// Create a copy of ReconcileInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_ReconcileInvalidStatus(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$ReconcileGeneralFailure {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ReconcileGeneralFailureCopyWith<ReconcileGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of ReconcileGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ReconcileGeneralFailureCopyWith<ReconcileGeneralFailure> get copyWith => _$ReconcileGeneralFailureCopyWithImpl<ReconcileGeneralFailure>(this as ReconcileGeneralFailure, _$identity);
+
+  /// Serializes this ReconcileGeneralFailure to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReconcileGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'ReconcileGeneralFailure(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ReconcileGeneralFailureCopyWith<$Res> {
-  factory $ReconcileGeneralFailureCopyWith(ReconcileGeneralFailure value,
-          $Res Function(ReconcileGeneralFailure) then) =
-      _$ReconcileGeneralFailureCopyWithImpl<$Res, ReconcileGeneralFailure>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $ReconcileGeneralFailureCopyWith<$Res>  {
+  factory $ReconcileGeneralFailureCopyWith(ReconcileGeneralFailure value, $Res Function(ReconcileGeneralFailure) _then) = _$ReconcileGeneralFailureCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$ReconcileGeneralFailureCopyWithImpl<$Res,
-        $Val extends ReconcileGeneralFailure>
+class _$ReconcileGeneralFailureCopyWithImpl<$Res>
     implements $ReconcileGeneralFailureCopyWith<$Res> {
-  _$ReconcileGeneralFailureCopyWithImpl(this._value, this._then);
+  _$ReconcileGeneralFailureCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ReconcileGeneralFailure _self;
+  final $Res Function(ReconcileGeneralFailure) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of ReconcileGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_ReconcileGeneralFailureCopyWith<$Res>
-    implements $ReconcileGeneralFailureCopyWith<$Res> {
-  factory _$$_ReconcileGeneralFailureCopyWith(_$_ReconcileGeneralFailure value,
-          $Res Function(_$_ReconcileGeneralFailure) then) =
-      __$$_ReconcileGeneralFailureCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_ReconcileGeneralFailureCopyWithImpl<$Res>
-    extends _$ReconcileGeneralFailureCopyWithImpl<$Res,
-        _$_ReconcileGeneralFailure>
-    implements _$$_ReconcileGeneralFailureCopyWith<$Res> {
-  __$$_ReconcileGeneralFailureCopyWithImpl(_$_ReconcileGeneralFailure _value,
-      $Res Function(_$_ReconcileGeneralFailure) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_ReconcileGeneralFailure(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [ReconcileGeneralFailure].
+extension ReconcileGeneralFailurePatterns on ReconcileGeneralFailure {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ReconcileGeneralFailure value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ReconcileGeneralFailure value)  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ReconcileGeneralFailure value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _ReconcileGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReconcileGeneralFailure implements _ReconcileGeneralFailure {
-  const _$_ReconcileGeneralFailure({this.required});
 
-  factory _$_ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_ReconcileGeneralFailureFromJson(json);
+class _ReconcileGeneralFailure extends ReconcileGeneralFailure {
+  const _ReconcileGeneralFailure({this.required}): super._();
+  factory _ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) => _$ReconcileGeneralFailureFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'ReconcileGeneralFailure(required: $required)';
-  }
+/// Create a copy of ReconcileGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ReconcileGeneralFailureCopyWith<_ReconcileGeneralFailure> get copyWith => __$ReconcileGeneralFailureCopyWithImpl<_ReconcileGeneralFailure>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_ReconcileGeneralFailure &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ReconcileGeneralFailureCopyWith<_$_ReconcileGeneralFailure>
-      get copyWith =>
-          __$$_ReconcileGeneralFailureCopyWithImpl<_$_ReconcileGeneralFailure>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ReconcileGeneralFailureToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$ReconcileGeneralFailureToJson(this, );
 }
 
-abstract class _ReconcileGeneralFailure implements ReconcileGeneralFailure {
-  const factory _ReconcileGeneralFailure({final dynamic required}) =
-      _$_ReconcileGeneralFailure;
-
-  factory _ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_ReconcileGeneralFailure.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_ReconcileGeneralFailureCopyWith<_$_ReconcileGeneralFailure>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReconcileGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'ReconcileGeneralFailure(required: $required)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ReconcileGeneralFailureCopyWith<$Res> implements $ReconcileGeneralFailureCopyWith<$Res> {
+  factory _$ReconcileGeneralFailureCopyWith(_ReconcileGeneralFailure value, $Res Function(_ReconcileGeneralFailure) _then) = __$ReconcileGeneralFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$ReconcileGeneralFailureCopyWithImpl<$Res>
+    implements _$ReconcileGeneralFailureCopyWith<$Res> {
+  __$ReconcileGeneralFailureCopyWithImpl(this._self, this._then);
+
+  final _ReconcileGeneralFailure _self;
+  final $Res Function(_ReconcileGeneralFailure) _then;
+
+/// Create a copy of ReconcileGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_ReconcileGeneralFailure(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
+// dart format on
