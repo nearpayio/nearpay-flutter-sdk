@@ -11,8 +11,11 @@ import java.util.UUID;
 
 import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
+import io.nearpay.sdk.utils.SecondDisplayConfiguration;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
+import io.nearpay.sdk.utils.enums.PinPosition;
 //import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.SupportSecondDisplay;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
@@ -144,6 +147,14 @@ public class ArgsFilter {
     }
 
     public UIPosition getUiPosition() {
+        String uiPosStr = savedArgs.get("ui_position") == null ? "DEFAULT"
+                : savedArgs.get("ui_position").toString();
+
+        return parseUiPosition(uiPosStr, UIPosition.DEFAULT);
+    }
+
+    private static UIPosition parseUiPosition(String value, UIPosition fallback) {
+        if (value == null) return fallback;
 
         Map<String, UIPosition> uiPosMap = new HashMap<>();
 
@@ -167,14 +178,45 @@ public class ArgsFilter {
 
         uiPosMap.put("DEFAULT", UIPosition.DEFAULT);
 
-        String uiPosStr = savedArgs.get("ui_position") == null ? "DEFAULT"
-                : savedArgs.get("ui_position").toString();
+        UIPosition uiPos = uiPosMap.get(value);
+        return uiPos != null ? uiPos : fallback;
+    }
 
-        UIPosition uiPos = uiPosMap.get(uiPosStr);
+    public SupportSecondDisplay getSupportSecondDisplay() {
+        String value = savedArgs.get("support_second_display") == null ? "Disable"
+                : savedArgs.get("support_second_display").toString();
 
-        if (uiPos != null)
-            return uiPos;
-        return UIPosition.DEFAULT;
+        if ("Enable".equalsIgnoreCase(value)) {
+            return SupportSecondDisplay.Enable;
+        }
+        return SupportSecondDisplay.Disable;
+    }
+
+    public SecondDisplayConfiguration getSecondDisplayConfiguration() {
+        Object raw = savedArgs.get("second_display_configuration");
+        if (!(raw instanceof Map)) {
+            return null;
+        }
+
+        Map<?, ?> config = (Map<?, ?>) raw;
+
+        String uiPositionStr = config.get("ui_position") != null
+                ? config.get("ui_position").toString()
+                : "CENTER";
+        String pinPositionStr = config.get("pin_position") != null
+                ? config.get("pin_position").toString()
+                : "SECONDARY_SCREEN";
+
+        UIPosition uiPosition = parseUiPosition(uiPositionStr, UIPosition.CENTER);
+
+        PinPosition pinPosition;
+        if ("PRIMARY_SCREEN".equalsIgnoreCase(pinPositionStr)) {
+            pinPosition = PinPosition.PRIMARY_SCREEN;
+        } else {
+            pinPosition = PinPosition.SECONDARY_SCREEN;
+        }
+
+        return new SecondDisplayConfiguration(uiPosition, pinPosition);
     }
 
     public Boolean getLoadingUi() {

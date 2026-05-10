@@ -11,8 +11,10 @@ import io.nearpay.flutter.plugin.common.filter.ArgsFilter;
 import io.nearpay.sdk.Environments;
 import io.nearpay.sdk.NearPay;
 import io.nearpay.sdk.utils.PaymentText;
+import io.nearpay.sdk.utils.SecondDisplayConfiguration;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
 //import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.SupportSecondDisplay;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class InitializeOperation extends BaseOperation {
@@ -32,6 +34,8 @@ public class InitializeOperation extends BaseOperation {
         Boolean loadingUI = filter.getLoadingUi();
         String arabicPaymentText = filter.getArabicPaymentText();
         String englishPaymentText = filter.getEnglishPaymentText();
+        SupportSecondDisplay supportSecondDisplay = filter.getSupportSecondDisplay();
+        SecondDisplayConfiguration secondDisplayConfiguration = filter.getSecondDisplayConfiguration();
 //        Region region = filter.getRegion();
         this.provider.getNearpayLib().authTypeShared = authType;
         this.provider.getNearpayLib().authValueShared = authValue;
@@ -51,8 +55,13 @@ public class InitializeOperation extends BaseOperation {
                     .networkConfiguration(networkConfig)
                     .paymentText(new PaymentText(arabicPaymentText, englishPaymentText))
                     .uiPosition(uiPosition)
+                    .supportSecondDisplay(supportSecondDisplay)
                     .loadingUi(loadingUI);
 //                    .setRegion(region)
+
+            if (secondDisplayConfiguration != null) {
+                builder.secondDisplayConfiguration(secondDisplayConfiguration);
+            }
 
             this.provider.getNearpayLib().nearpay = builder.build();
             //

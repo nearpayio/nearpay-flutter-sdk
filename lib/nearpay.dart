@@ -92,6 +92,40 @@ enum Regions {
   final String value;
 }
 
+enum SupportSecondDisplay {
+  enable('Enable'),
+  disable('Disable');
+
+  const SupportSecondDisplay(this.value);
+  final String value;
+}
+
+enum PinPosition {
+  PRIMARY_SCREEN('PRIMARY_SCREEN'),
+  SECONDARY_SCREEN('SECONDARY_SCREEN');
+
+  const PinPosition(this.value);
+  final String value;
+}
+
+/// Mirrors `io.nearpay.sdk.utils.SecondDisplayConfiguration`.
+/// Used to describe where the customer-facing UI and PIN pad should be
+/// rendered when a Dual Screen device is in use.
+class SecondDisplayConfiguration {
+  final UIPosition uiPosition;
+  final PinPosition pinPosition;
+
+  const SecondDisplayConfiguration({
+    this.uiPosition = UIPosition.CENTER,
+    this.pinPosition = PinPosition.SECONDARY_SCREEN,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'ui_position': uiPosition.value,
+        'pin_position': pinPosition.value,
+      };
+}
+
 
 class Nearpay {
   final AuthenticationType _authType;
@@ -103,6 +137,8 @@ class Nearpay {
   final UIPosition _uiPosition;
   final String? _arabicPaymentText;
   final String? _englishPaymentText;
+  final SupportSecondDisplay _supportSecondDisplay;
+  final SecondDisplayConfiguration? _secondDisplayConfiguration;
   bool _initialized = false;
 
   // NearpayState state = NearpayState.notReady;
@@ -121,6 +157,8 @@ class Nearpay {
     UIPosition uiPosition = UIPosition.DEFAULT,
     String? arabicPaymentText,
     String? englishPaymentText,
+    SupportSecondDisplay supportSecondDisplay = SupportSecondDisplay.disable,
+    SecondDisplayConfiguration? secondDisplayConfiguration,
   })  : _locale = locale,
         _env = env,
         _authValue = authValue,
@@ -129,7 +167,9 @@ class Nearpay {
         _uiLoading = uiLoading,
         _uiPosition = uiPosition,
         _arabicPaymentText = arabicPaymentText,
-        _englishPaymentText = englishPaymentText {
+        _englishPaymentText = englishPaymentText,
+        _supportSecondDisplay = supportSecondDisplay,
+        _secondDisplayConfiguration = secondDisplayConfiguration {
     // _addEventListener(
     //     evnetName: NearpayEvent.stateChange,
     //     callback: (args) {
@@ -149,6 +189,8 @@ class Nearpay {
       "loading_ui": _uiLoading,
       "arabic_payment_text": _arabicPaymentText,
       "english_payment_text": _englishPaymentText,
+      "support_second_display": _supportSecondDisplay.value,
+      "second_display_configuration": _secondDisplayConfiguration?.toJson(),
     };
 
     final response =
