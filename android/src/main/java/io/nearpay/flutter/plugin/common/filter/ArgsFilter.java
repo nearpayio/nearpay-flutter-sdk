@@ -11,13 +11,44 @@ import java.util.UUID;
 
 import io.nearpay.flutter.plugin.common.PluginProvider;
 import io.nearpay.sdk.Environments;
+import io.nearpay.sdk.utils.SecondDisplayConfiguration;
 import io.nearpay.sdk.utils.enums.NetworkConfiguration;
+import io.nearpay.sdk.utils.enums.PinPosition;
 //import io.nearpay.sdk.utils.enums.Region;
+import io.nearpay.sdk.utils.enums.SupportSecondDisplay;
 import io.nearpay.sdk.utils.enums.UIPosition;
 
 public class ArgsFilter {
     private PluginProvider provider;
     private Map savedArgs;
+
+    private static final Map<String, UIPosition> UI_POSITION_MAP = buildUiPositionMap();
+
+    private static Map<String, UIPosition> buildUiPositionMap() {
+        Map<String, UIPosition> map = new HashMap<>();
+
+        map.put("TOP_START", UIPosition.TOP_START);
+        map.put("TOP_END", UIPosition.TOP_END);
+        map.put("TOP_RIGHT", UIPosition.TOP_RIGHT);
+        map.put("TOP_LEFT", UIPosition.TOP_LEFT);
+
+        map.put("BOTTOM_START", UIPosition.BOTTOM_START);
+        map.put("BOTTOM_END", UIPosition.BOTTOM_END);
+        map.put("BOTTOM_RIGHT", UIPosition.BOTTOM_RIGHT);
+        map.put("BOTTOM_LEFT", UIPosition.BOTTOM_LEFT);
+
+        map.put("CENTER_START", UIPosition.CENTER_START);
+        map.put("CENTER_END", UIPosition.CENTER_END);
+        map.put("CENTER_RIGHT", UIPosition.CENTER_RIGHT);
+        map.put("CENTER_LEFT", UIPosition.CENTER_LEFT);
+        map.put("CENTER_TOP", UIPosition.CENTER_TOP);
+        map.put("CENTER_BOTTOM", UIPosition.CENTER_BOTTOM);
+        map.put("CENTER", UIPosition.CENTER);
+
+        map.put("DEFAULT", UIPosition.DEFAULT);
+
+        return map;
+    }
 
     public ArgsFilter(Map args) {
         savedArgs = args;
@@ -144,37 +175,53 @@ public class ArgsFilter {
     }
 
     public UIPosition getUiPosition() {
-
-        Map<String, UIPosition> uiPosMap = new HashMap<>();
-
-        uiPosMap.put("TOP_START", UIPosition.TOP_START);
-        uiPosMap.put("TOP_END", UIPosition.TOP_END);
-        uiPosMap.put("TOP_RIGHT", UIPosition.TOP_RIGHT);
-        uiPosMap.put("TOP_LEFT", UIPosition.TOP_LEFT);
-
-        uiPosMap.put("BOTTOM_START", UIPosition.BOTTOM_START);
-        uiPosMap.put("BOTTOM_END", UIPosition.BOTTOM_END);
-        uiPosMap.put("BOTTOM_RIGHT", UIPosition.BOTTOM_RIGHT);
-        uiPosMap.put("BOTTOM_LEFT", UIPosition.BOTTOM_LEFT);
-
-        uiPosMap.put("CENTER_START", UIPosition.CENTER_START);
-        uiPosMap.put("CENTER_END", UIPosition.CENTER_END);
-        uiPosMap.put("CENTER_RIGHT", UIPosition.CENTER_RIGHT);
-        uiPosMap.put("CENTER_LEFT", UIPosition.CENTER_LEFT);
-        uiPosMap.put("CENTER_TOP", UIPosition.CENTER_TOP);
-        uiPosMap.put("CENTER_BOTTOM", UIPosition.CENTER_BOTTOM);
-        uiPosMap.put("CENTER", UIPosition.CENTER);
-
-        uiPosMap.put("DEFAULT", UIPosition.DEFAULT);
-
         String uiPosStr = savedArgs.get("ui_position") == null ? "DEFAULT"
                 : savedArgs.get("ui_position").toString();
 
-        UIPosition uiPos = uiPosMap.get(uiPosStr);
+        return parseUiPosition(uiPosStr, UIPosition.DEFAULT);
+    }
 
-        if (uiPos != null)
-            return uiPos;
-        return UIPosition.DEFAULT;
+    private static UIPosition parseUiPosition(String value, UIPosition fallback) {
+        if (value == null) return fallback;
+        UIPosition uiPos = UI_POSITION_MAP.get(value);
+        return uiPos != null ? uiPos : fallback;
+    }
+
+    public SupportSecondDisplay getSupportSecondDisplay() {
+        String value = savedArgs.get("support_second_display") == null ? "Disable"
+                : savedArgs.get("support_second_display").toString();
+
+        if ("Enable".equalsIgnoreCase(value)) {
+            return SupportSecondDisplay.Enable;
+        }
+        return SupportSecondDisplay.Disable;
+    }
+
+    public SecondDisplayConfiguration getSecondDisplayConfiguration() {
+        Object raw = savedArgs.get("second_display_configuration");
+        if (!(raw instanceof Map)) {
+            return null;
+        }
+
+        Map<?, ?> config = (Map<?, ?>) raw;
+
+        String uiPositionStr = config.get("ui_position") != null
+                ? config.get("ui_position").toString()
+                : "CENTER";
+        String pinPositionStr = config.get("pin_position") != null
+                ? config.get("pin_position").toString()
+                : "SECONDARY_SCREEN";
+
+        UIPosition uiPosition = parseUiPosition(uiPositionStr, UIPosition.CENTER);
+
+        PinPosition pinPosition;
+        if ("PRIMARY_SCREEN".equalsIgnoreCase(pinPositionStr)) {
+            pinPosition = PinPosition.PRIMARY_SCREEN;
+        } else {
+            pinPosition = PinPosition.SECONDARY_SCREEN;
+        }
+
+        return new SecondDisplayConfiguration(uiPosition, pinPosition);
     }
 
     public Boolean getLoadingUi() {

@@ -36,6 +36,11 @@ class _MyAppState extends State<MyApp> {
     authValue: "a.khalifa@nearpay.io",
     env: Environments.sandbox,
     locale: Locale.localeDefault,
+    supportSecondDisplay: SupportSecondDisplay.enable,
+    secondDisplayConfiguration: const SecondDisplayConfiguration(
+      uiPosition: UIPosition.CENTER,
+      pinPosition: PinPosition.SECONDARY_SCREEN,
+    ),
   );
 
   Uint8List? bytes;
@@ -114,6 +119,33 @@ class _MyAppState extends State<MyApp> {
     );
 
     printJson(reverseData.toJson());
+  }
+
+  Future<dynamic> dualScreenPurchaseAction() async {
+    print("=-=-=-=-= Start Dual-Screen Purchase Action =-=-=-=-=");
+    Fluttertoast.showToast(
+      msg: "Dual-screen enabled: UI on second display, PIN on secondary screen",
+    );
+
+    try {
+      final transactionData = await nearpay.purchase(
+        amount: 1500,
+        transactionId: uuid.v4(),
+        enableReceiptUi: true,
+        enableReversalUi: true,
+        enableUiDismiss: true,
+        finishTimeout: 60,
+      );
+
+      print("=-=-=-=-= Dual-Screen Purchase Approved =-=-=-=-=");
+      transactionData.receipts?.forEach((receipt) {
+        printJson(receipt.toJson());
+      });
+    } catch (err) {
+      print("=-=-=-=-= Dual-Screen Purchase Failed =-=-=-=-=");
+      print(err);
+      Fluttertoast.showToast(msg: "Dual-screen purchase failed: $err");
+    }
   }
 
   Future<dynamic> purchaseAction() async {
@@ -284,6 +316,38 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: [
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.indigo.shade50,
+                border: Border.all(color: Colors.indigo.shade200),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dual-Screen Configuration",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4),
+                  Text("supportSecondDisplay: Enable"),
+                  Text("uiPosition: CENTER"),
+                  Text("pinPosition: SECONDARY_SCREEN"),
+                ],
+              ),
+            ),
+            TextButton(
+              onPressed: () async {
+                dualScreenPurchaseAction();
+              },
+              child: const Text("Purchase (Dual Screen)"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             TextButton(
               onPressed: () async {
                 getUserSession();
