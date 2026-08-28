@@ -6,7 +6,7 @@ part 'query_error.g.dart';
 part 'query_error.freezed.dart';
 
 abstract class QueryError {
-  QueryError() {}
+  const QueryError();
 
   factory QueryError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,36 +14,33 @@ abstract class QueryError {
 }
 
 @Freezed()
-class QueryAuthenticationFailed extends QueryError
-    with _$QueryAuthenticationFailed {
-  const factory QueryAuthenticationFailed({required String message}) =
-      _QueryAuthenticationFailed;
+abstract class QueryAuthenticationFailed extends QueryError with _$QueryAuthenticationFailed {
+  const factory QueryAuthenticationFailed({required String message}) = _QueryAuthenticationFailed;
+  const QueryAuthenticationFailed._();
 
-  factory QueryAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$QueryAuthenticationFailedFromJson(json);
+  factory QueryAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$QueryAuthenticationFailedFromJson(json);
 }
 
 @Freezed()
-class QueryFailureMessage extends QueryError with _$QueryFailureMessage {
-  const factory QueryFailureMessage({required String message}) =
-      _QueryFailureMessage;
+abstract class QueryFailureMessage extends QueryError with _$QueryFailureMessage {
+  const factory QueryFailureMessage({required String message}) = _QueryFailureMessage;
+  const QueryFailureMessage._();
 
-  factory QueryFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$QueryFailureMessageFromJson(json);
+  factory QueryFailureMessage.fromJson(Map<String, dynamic> json) => _$QueryFailureMessageFromJson(json);
 }
 
 @Freezed()
-class QueryInvalidStatus extends QueryError with _$QueryInvalidStatus {
+abstract class QueryInvalidStatus extends QueryError with _$QueryInvalidStatus {
   const factory QueryInvalidStatus({required}) = _QueryInvalidStatus;
+  const QueryInvalidStatus._();
 
-  factory QueryInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$QueryInvalidStatusFromJson(json);
+  factory QueryInvalidStatus.fromJson(Map<String, dynamic> json) => _$QueryInvalidStatusFromJson(json);
 }
 
 @Freezed()
-class QueryGeneralFailure extends QueryError with _$QueryGeneralFailure {
+abstract class QueryGeneralFailure extends QueryError with _$QueryGeneralFailure {
   const factory QueryGeneralFailure({required}) = _QueryGeneralFailure;
+  const QueryGeneralFailure._();
 
-  factory QueryGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$QueryGeneralFailureFromJson(json);
+  factory QueryGeneralFailure.fromJson(Map<String, dynamic> json) => _$QueryGeneralFailureFromJson(json);
 }

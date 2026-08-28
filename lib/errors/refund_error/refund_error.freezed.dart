@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,706 +9,1327 @@ part of 'refund_error.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-RefundRejected _$RefundRejectedFromJson(Map<String, dynamic> json) {
-  return _RefundRejected.fromJson(json);
-}
 
 /// @nodoc
 mixin _$RefundRejected {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RefundRejectedCopyWith<RefundRejected> get copyWith =>
-      throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of RefundRejected
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefundRejectedCopyWith<RefundRejected> get copyWith => _$RefundRejectedCopyWithImpl<RefundRejected>(this as RefundRejected, _$identity);
+
+  /// Serializes this RefundRejected to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefundRejected&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'RefundRejected(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $RefundRejectedCopyWith<$Res> {
-  factory $RefundRejectedCopyWith(
-          RefundRejected value, $Res Function(RefundRejected) then) =
-      _$RefundRejectedCopyWithImpl<$Res, RefundRejected>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $RefundRejectedCopyWith<$Res>  {
+  factory $RefundRejectedCopyWith(RefundRejected value, $Res Function(RefundRejected) _then) = _$RefundRejectedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$RefundRejectedCopyWithImpl<$Res, $Val extends RefundRejected>
+class _$RefundRejectedCopyWithImpl<$Res>
     implements $RefundRejectedCopyWith<$Res> {
-  _$RefundRejectedCopyWithImpl(this._value, this._then);
+  _$RefundRejectedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RefundRejected _self;
+  final $Res Function(RefundRejected) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of RefundRejected
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_RefundRejectedCopyWith<$Res>
-    implements $RefundRejectedCopyWith<$Res> {
-  factory _$$_RefundRejectedCopyWith(
-          _$_RefundRejected value, $Res Function(_$_RefundRejected) then) =
-      __$$_RefundRejectedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_RefundRejectedCopyWithImpl<$Res>
-    extends _$RefundRejectedCopyWithImpl<$Res, _$_RefundRejected>
-    implements _$$_RefundRejectedCopyWith<$Res> {
-  __$$_RefundRejectedCopyWithImpl(
-      _$_RefundRejected _value, $Res Function(_$_RefundRejected) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_RefundRejected(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [RefundRejected].
+extension RefundRejectedPatterns on RefundRejected {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _RefundRejected value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _RefundRejected() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _RefundRejected value)  $default,){
+final _that = this;
+switch (_that) {
+case _RefundRejected():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _RefundRejected value)?  $default,){
+final _that = this;
+switch (_that) {
+case _RefundRejected() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _RefundRejected() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _RefundRejected():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _RefundRejected() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundRejected implements _RefundRejected {
-  const _$_RefundRejected({required this.message});
 
-  factory _$_RefundRejected.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundRejectedFromJson(json);
+class _RefundRejected extends RefundRejected {
+  const _RefundRejected({required this.message}): super._();
+  factory _RefundRejected.fromJson(Map<String, dynamic> json) => _$RefundRejectedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'RefundRejected(message: $message)';
-  }
+/// Create a copy of RefundRejected
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefundRejectedCopyWith<_RefundRejected> get copyWith => __$RefundRejectedCopyWithImpl<_RefundRejected>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefundRejected &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefundRejectedCopyWith<_$_RefundRejected> get copyWith =>
-      __$$_RefundRejectedCopyWithImpl<_$_RefundRejected>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_RefundRejectedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$RefundRejectedToJson(this, );
 }
 
-abstract class _RefundRejected implements RefundRejected {
-  const factory _RefundRejected({required final String message}) =
-      _$_RefundRejected;
-
-  factory _RefundRejected.fromJson(Map<String, dynamic> json) =
-      _$_RefundRejected.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_RefundRejectedCopyWith<_$_RefundRejected> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefundRejected&&(identical(other.message, message) || other.message == message));
 }
 
-RefundDeclined _$RefundDeclinedFromJson(Map<String, dynamic> json) {
-  return _RefundDeclined.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'RefundRejected(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefundRejectedCopyWith<$Res> implements $RefundRejectedCopyWith<$Res> {
+  factory _$RefundRejectedCopyWith(_RefundRejected value, $Res Function(_RefundRejected) _then) = __$RefundRejectedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefundRejectedCopyWithImpl<$Res>
+    implements _$RefundRejectedCopyWith<$Res> {
+  __$RefundRejectedCopyWithImpl(this._self, this._then);
+
+  final _RefundRejected _self;
+  final $Res Function(_RefundRejected) _then;
+
+/// Create a copy of RefundRejected
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_RefundRejected(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$RefundDeclined {
-  List<TransactionReceipt> get receipts => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RefundDeclinedCopyWith<RefundDeclined> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<TransactionReceipt> get receipts;
+/// Create a copy of RefundDeclined
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefundDeclinedCopyWith<RefundDeclined> get copyWith => _$RefundDeclinedCopyWithImpl<RefundDeclined>(this as RefundDeclined, _$identity);
+
+  /// Serializes this RefundDeclined to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefundDeclined&&const DeepCollectionEquality().equals(other.receipts, receipts));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(receipts));
+
+@override
+String toString() {
+  return 'RefundDeclined(receipts: $receipts)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $RefundDeclinedCopyWith<$Res> {
-  factory $RefundDeclinedCopyWith(
-          RefundDeclined value, $Res Function(RefundDeclined) then) =
-      _$RefundDeclinedCopyWithImpl<$Res, RefundDeclined>;
-  @useResult
-  $Res call({List<TransactionReceipt> receipts});
-}
+abstract mixin class $RefundDeclinedCopyWith<$Res>  {
+  factory $RefundDeclinedCopyWith(RefundDeclined value, $Res Function(RefundDeclined) _then) = _$RefundDeclinedCopyWithImpl;
+@useResult
+$Res call({
+ List<TransactionReceipt> receipts
+});
 
+
+
+
+}
 /// @nodoc
-class _$RefundDeclinedCopyWithImpl<$Res, $Val extends RefundDeclined>
+class _$RefundDeclinedCopyWithImpl<$Res>
     implements $RefundDeclinedCopyWith<$Res> {
-  _$RefundDeclinedCopyWithImpl(this._value, this._then);
+  _$RefundDeclinedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RefundDeclined _self;
+  final $Res Function(RefundDeclined) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? receipts = null,
-  }) {
-    return _then(_value.copyWith(
-      receipts: null == receipts
-          ? _value.receipts
-          : receipts // ignore: cast_nullable_to_non_nullable
-              as List<TransactionReceipt>,
-    ) as $Val);
-  }
+/// Create a copy of RefundDeclined
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? receipts = null,}) {
+  return _then(_self.copyWith(
+receipts: null == receipts ? _self.receipts : receipts // ignore: cast_nullable_to_non_nullable
+as List<TransactionReceipt>,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_RefundDeclinedCopyWith<$Res>
-    implements $RefundDeclinedCopyWith<$Res> {
-  factory _$$_RefundDeclinedCopyWith(
-          _$_RefundDeclined value, $Res Function(_$_RefundDeclined) then) =
-      __$$_RefundDeclinedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<TransactionReceipt> receipts});
 }
 
-/// @nodoc
-class __$$_RefundDeclinedCopyWithImpl<$Res>
-    extends _$RefundDeclinedCopyWithImpl<$Res, _$_RefundDeclined>
-    implements _$$_RefundDeclinedCopyWith<$Res> {
-  __$$_RefundDeclinedCopyWithImpl(
-      _$_RefundDeclined _value, $Res Function(_$_RefundDeclined) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? receipts = null,
-  }) {
-    return _then(_$_RefundDeclined(
-      receipts: null == receipts
-          ? _value._receipts
-          : receipts // ignore: cast_nullable_to_non_nullable
-              as List<TransactionReceipt>,
-    ));
-  }
+/// Adds pattern-matching-related methods to [RefundDeclined].
+extension RefundDeclinedPatterns on RefundDeclined {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _RefundDeclined value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _RefundDeclined() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _RefundDeclined value)  $default,){
+final _that = this;
+switch (_that) {
+case _RefundDeclined():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _RefundDeclined value)?  $default,){
+final _that = this;
+switch (_that) {
+case _RefundDeclined() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<TransactionReceipt> receipts)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _RefundDeclined() when $default != null:
+return $default(_that.receipts);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<TransactionReceipt> receipts)  $default,) {final _that = this;
+switch (_that) {
+case _RefundDeclined():
+return $default(_that.receipts);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<TransactionReceipt> receipts)?  $default,) {final _that = this;
+switch (_that) {
+case _RefundDeclined() when $default != null:
+return $default(_that.receipts);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundDeclined implements _RefundDeclined {
-  const _$_RefundDeclined({required final List<TransactionReceipt> receipts})
-      : _receipts = receipts;
 
-  factory _$_RefundDeclined.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundDeclinedFromJson(json);
+class _RefundDeclined extends RefundDeclined {
+  const _RefundDeclined({required final  List<TransactionReceipt> receipts}): _receipts = receipts,super._();
+  factory _RefundDeclined.fromJson(Map<String, dynamic> json) => _$RefundDeclinedFromJson(json);
 
-  final List<TransactionReceipt> _receipts;
-  @override
-  List<TransactionReceipt> get receipts {
-    if (_receipts is EqualUnmodifiableListView) return _receipts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_receipts);
-  }
-
-  @override
-  String toString() {
-    return 'RefundDeclined(receipts: $receipts)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefundDeclined &&
-            const DeepCollectionEquality().equals(other._receipts, _receipts));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_receipts));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefundDeclinedCopyWith<_$_RefundDeclined> get copyWith =>
-      __$$_RefundDeclinedCopyWithImpl<_$_RefundDeclined>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_RefundDeclinedToJson(
-      this,
-    );
-  }
+ final  List<TransactionReceipt> _receipts;
+@override List<TransactionReceipt> get receipts {
+  if (_receipts is EqualUnmodifiableListView) return _receipts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_receipts);
 }
 
-abstract class _RefundDeclined implements RefundDeclined {
-  const factory _RefundDeclined(
-      {required final List<TransactionReceipt> receipts}) = _$_RefundDeclined;
 
-  factory _RefundDeclined.fromJson(Map<String, dynamic> json) =
-      _$_RefundDeclined.fromJson;
+/// Create a copy of RefundDeclined
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefundDeclinedCopyWith<_RefundDeclined> get copyWith => __$RefundDeclinedCopyWithImpl<_RefundDeclined>(this, _$identity);
 
-  @override
-  List<TransactionReceipt> get receipts;
-  @override
-  @JsonKey(ignore: true)
-  _$$_RefundDeclinedCopyWith<_$_RefundDeclined> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+Map<String, dynamic> toJson() {
+  return _$RefundDeclinedToJson(this, );
 }
 
-RefundAuthenticationFailed _$RefundAuthenticationFailedFromJson(
-    Map<String, dynamic> json) {
-  return _RefundAuthenticationFailed.fromJson(json);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefundDeclined&&const DeepCollectionEquality().equals(other._receipts, _receipts));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_receipts));
+
+@override
+String toString() {
+  return 'RefundDeclined(receipts: $receipts)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefundDeclinedCopyWith<$Res> implements $RefundDeclinedCopyWith<$Res> {
+  factory _$RefundDeclinedCopyWith(_RefundDeclined value, $Res Function(_RefundDeclined) _then) = __$RefundDeclinedCopyWithImpl;
+@override @useResult
+$Res call({
+ List<TransactionReceipt> receipts
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefundDeclinedCopyWithImpl<$Res>
+    implements _$RefundDeclinedCopyWith<$Res> {
+  __$RefundDeclinedCopyWithImpl(this._self, this._then);
+
+  final _RefundDeclined _self;
+  final $Res Function(_RefundDeclined) _then;
+
+/// Create a copy of RefundDeclined
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? receipts = null,}) {
+  return _then(_RefundDeclined(
+receipts: null == receipts ? _self._receipts : receipts // ignore: cast_nullable_to_non_nullable
+as List<TransactionReceipt>,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$RefundAuthenticationFailed {
-  String get message => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RefundAuthenticationFailedCopyWith<RefundAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+ String get message;
+/// Create a copy of RefundAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefundAuthenticationFailedCopyWith<RefundAuthenticationFailed> get copyWith => _$RefundAuthenticationFailedCopyWithImpl<RefundAuthenticationFailed>(this as RefundAuthenticationFailed, _$identity);
+
+  /// Serializes this RefundAuthenticationFailed to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefundAuthenticationFailed&&(identical(other.message, message) || other.message == message));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'RefundAuthenticationFailed(message: $message)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $RefundAuthenticationFailedCopyWith<$Res> {
-  factory $RefundAuthenticationFailedCopyWith(RefundAuthenticationFailed value,
-          $Res Function(RefundAuthenticationFailed) then) =
-      _$RefundAuthenticationFailedCopyWithImpl<$Res,
-          RefundAuthenticationFailed>;
-  @useResult
-  $Res call({String message});
-}
+abstract mixin class $RefundAuthenticationFailedCopyWith<$Res>  {
+  factory $RefundAuthenticationFailedCopyWith(RefundAuthenticationFailed value, $Res Function(RefundAuthenticationFailed) _then) = _$RefundAuthenticationFailedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
 
+
+
+
+}
 /// @nodoc
-class _$RefundAuthenticationFailedCopyWithImpl<$Res,
-        $Val extends RefundAuthenticationFailed>
+class _$RefundAuthenticationFailedCopyWithImpl<$Res>
     implements $RefundAuthenticationFailedCopyWith<$Res> {
-  _$RefundAuthenticationFailedCopyWithImpl(this._value, this._then);
+  _$RefundAuthenticationFailedCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RefundAuthenticationFailed _self;
+  final $Res Function(RefundAuthenticationFailed) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of RefundAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? message = null,}) {
+  return _then(_self.copyWith(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_RefundAuthenticationFailedCopyWith<$Res>
-    implements $RefundAuthenticationFailedCopyWith<$Res> {
-  factory _$$_RefundAuthenticationFailedCopyWith(
-          _$_RefundAuthenticationFailed value,
-          $Res Function(_$_RefundAuthenticationFailed) then) =
-      __$$_RefundAuthenticationFailedCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String message});
 }
 
-/// @nodoc
-class __$$_RefundAuthenticationFailedCopyWithImpl<$Res>
-    extends _$RefundAuthenticationFailedCopyWithImpl<$Res,
-        _$_RefundAuthenticationFailed>
-    implements _$$_RefundAuthenticationFailedCopyWith<$Res> {
-  __$$_RefundAuthenticationFailedCopyWithImpl(
-      _$_RefundAuthenticationFailed _value,
-      $Res Function(_$_RefundAuthenticationFailed) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$_RefundAuthenticationFailed(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [RefundAuthenticationFailed].
+extension RefundAuthenticationFailedPatterns on RefundAuthenticationFailed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _RefundAuthenticationFailed value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _RefundAuthenticationFailed value)  $default,){
+final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _RefundAuthenticationFailed value)?  $default,){
+final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String message)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String message)  $default,) {final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed():
+return $default(_that.message);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String message)?  $default,) {final _that = this;
+switch (_that) {
+case _RefundAuthenticationFailed() when $default != null:
+return $default(_that.message);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundAuthenticationFailed implements _RefundAuthenticationFailed {
-  const _$_RefundAuthenticationFailed({required this.message});
 
-  factory _$_RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundAuthenticationFailedFromJson(json);
+class _RefundAuthenticationFailed extends RefundAuthenticationFailed {
+  const _RefundAuthenticationFailed({required this.message}): super._();
+  factory _RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$RefundAuthenticationFailedFromJson(json);
 
-  @override
-  final String message;
+@override final  String message;
 
-  @override
-  String toString() {
-    return 'RefundAuthenticationFailed(message: $message)';
-  }
+/// Create a copy of RefundAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefundAuthenticationFailedCopyWith<_RefundAuthenticationFailed> get copyWith => __$RefundAuthenticationFailedCopyWithImpl<_RefundAuthenticationFailed>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefundAuthenticationFailed &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefundAuthenticationFailedCopyWith<_$_RefundAuthenticationFailed>
-      get copyWith => __$$_RefundAuthenticationFailedCopyWithImpl<
-          _$_RefundAuthenticationFailed>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_RefundAuthenticationFailedToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$RefundAuthenticationFailedToJson(this, );
 }
 
-abstract class _RefundAuthenticationFailed
-    implements RefundAuthenticationFailed {
-  const factory _RefundAuthenticationFailed({required final String message}) =
-      _$_RefundAuthenticationFailed;
-
-  factory _RefundAuthenticationFailed.fromJson(Map<String, dynamic> json) =
-      _$_RefundAuthenticationFailed.fromJson;
-
-  @override
-  String get message;
-  @override
-  @JsonKey(ignore: true)
-  _$$_RefundAuthenticationFailedCopyWith<_$_RefundAuthenticationFailed>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefundAuthenticationFailed&&(identical(other.message, message) || other.message == message));
 }
 
-RefundInvalidStatus _$RefundInvalidStatusFromJson(Map<String, dynamic> json) {
-  return _RefundInvalidStatus.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'RefundAuthenticationFailed(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefundAuthenticationFailedCopyWith<$Res> implements $RefundAuthenticationFailedCopyWith<$Res> {
+  factory _$RefundAuthenticationFailedCopyWith(_RefundAuthenticationFailed value, $Res Function(_RefundAuthenticationFailed) _then) = __$RefundAuthenticationFailedCopyWithImpl;
+@override @useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefundAuthenticationFailedCopyWithImpl<$Res>
+    implements _$RefundAuthenticationFailedCopyWith<$Res> {
+  __$RefundAuthenticationFailedCopyWithImpl(this._self, this._then);
+
+  final _RefundAuthenticationFailed _self;
+  final $Res Function(_RefundAuthenticationFailed) _then;
+
+/// Create a copy of RefundAuthenticationFailed
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(_RefundAuthenticationFailed(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$RefundInvalidStatus {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RefundInvalidStatusCopyWith<RefundInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of RefundInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefundInvalidStatusCopyWith<RefundInvalidStatus> get copyWith => _$RefundInvalidStatusCopyWithImpl<RefundInvalidStatus>(this as RefundInvalidStatus, _$identity);
+
+  /// Serializes this RefundInvalidStatus to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefundInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'RefundInvalidStatus(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $RefundInvalidStatusCopyWith<$Res> {
-  factory $RefundInvalidStatusCopyWith(
-          RefundInvalidStatus value, $Res Function(RefundInvalidStatus) then) =
-      _$RefundInvalidStatusCopyWithImpl<$Res, RefundInvalidStatus>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $RefundInvalidStatusCopyWith<$Res>  {
+  factory $RefundInvalidStatusCopyWith(RefundInvalidStatus value, $Res Function(RefundInvalidStatus) _then) = _$RefundInvalidStatusCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$RefundInvalidStatusCopyWithImpl<$Res, $Val extends RefundInvalidStatus>
+class _$RefundInvalidStatusCopyWithImpl<$Res>
     implements $RefundInvalidStatusCopyWith<$Res> {
-  _$RefundInvalidStatusCopyWithImpl(this._value, this._then);
+  _$RefundInvalidStatusCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RefundInvalidStatus _self;
+  final $Res Function(RefundInvalidStatus) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of RefundInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_RefundInvalidStatusCopyWith<$Res>
-    implements $RefundInvalidStatusCopyWith<$Res> {
-  factory _$$_RefundInvalidStatusCopyWith(_$_RefundInvalidStatus value,
-          $Res Function(_$_RefundInvalidStatus) then) =
-      __$$_RefundInvalidStatusCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_RefundInvalidStatusCopyWithImpl<$Res>
-    extends _$RefundInvalidStatusCopyWithImpl<$Res, _$_RefundInvalidStatus>
-    implements _$$_RefundInvalidStatusCopyWith<$Res> {
-  __$$_RefundInvalidStatusCopyWithImpl(_$_RefundInvalidStatus _value,
-      $Res Function(_$_RefundInvalidStatus) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_RefundInvalidStatus(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [RefundInvalidStatus].
+extension RefundInvalidStatusPatterns on RefundInvalidStatus {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _RefundInvalidStatus value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _RefundInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _RefundInvalidStatus value)  $default,){
+final _that = this;
+switch (_that) {
+case _RefundInvalidStatus():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _RefundInvalidStatus value)?  $default,){
+final _that = this;
+switch (_that) {
+case _RefundInvalidStatus() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _RefundInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _RefundInvalidStatus():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _RefundInvalidStatus() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundInvalidStatus implements _RefundInvalidStatus {
-  const _$_RefundInvalidStatus({this.required});
 
-  factory _$_RefundInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundInvalidStatusFromJson(json);
+class _RefundInvalidStatus extends RefundInvalidStatus {
+  const _RefundInvalidStatus({this.required}): super._();
+  factory _RefundInvalidStatus.fromJson(Map<String, dynamic> json) => _$RefundInvalidStatusFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'RefundInvalidStatus(required: $required)';
-  }
+/// Create a copy of RefundInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefundInvalidStatusCopyWith<_RefundInvalidStatus> get copyWith => __$RefundInvalidStatusCopyWithImpl<_RefundInvalidStatus>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefundInvalidStatus &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefundInvalidStatusCopyWith<_$_RefundInvalidStatus> get copyWith =>
-      __$$_RefundInvalidStatusCopyWithImpl<_$_RefundInvalidStatus>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_RefundInvalidStatusToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$RefundInvalidStatusToJson(this, );
 }
 
-abstract class _RefundInvalidStatus implements RefundInvalidStatus {
-  const factory _RefundInvalidStatus({final dynamic required}) =
-      _$_RefundInvalidStatus;
-
-  factory _RefundInvalidStatus.fromJson(Map<String, dynamic> json) =
-      _$_RefundInvalidStatus.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_RefundInvalidStatusCopyWith<_$_RefundInvalidStatus> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefundInvalidStatus&&const DeepCollectionEquality().equals(other.required, required));
 }
 
-RefundGeneralFailure _$RefundGeneralFailureFromJson(Map<String, dynamic> json) {
-  return _RefundGeneralFailure.fromJson(json);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'RefundInvalidStatus(required: $required)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefundInvalidStatusCopyWith<$Res> implements $RefundInvalidStatusCopyWith<$Res> {
+  factory _$RefundInvalidStatusCopyWith(_RefundInvalidStatus value, $Res Function(_RefundInvalidStatus) _then) = __$RefundInvalidStatusCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefundInvalidStatusCopyWithImpl<$Res>
+    implements _$RefundInvalidStatusCopyWith<$Res> {
+  __$RefundInvalidStatusCopyWithImpl(this._self, this._then);
+
+  final _RefundInvalidStatus _self;
+  final $Res Function(_RefundInvalidStatus) _then;
+
+/// Create a copy of RefundInvalidStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_RefundInvalidStatus(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
 
 /// @nodoc
 mixin _$RefundGeneralFailure {
-  dynamic get required => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $RefundGeneralFailureCopyWith<RefundGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+ dynamic get required;
+/// Create a copy of RefundGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$RefundGeneralFailureCopyWith<RefundGeneralFailure> get copyWith => _$RefundGeneralFailureCopyWithImpl<RefundGeneralFailure>(this as RefundGeneralFailure, _$identity);
+
+  /// Serializes this RefundGeneralFailure to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RefundGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'RefundGeneralFailure(required: $required)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $RefundGeneralFailureCopyWith<$Res> {
-  factory $RefundGeneralFailureCopyWith(RefundGeneralFailure value,
-          $Res Function(RefundGeneralFailure) then) =
-      _$RefundGeneralFailureCopyWithImpl<$Res, RefundGeneralFailure>;
-  @useResult
-  $Res call({dynamic required});
-}
+abstract mixin class $RefundGeneralFailureCopyWith<$Res>  {
+  factory $RefundGeneralFailureCopyWith(RefundGeneralFailure value, $Res Function(RefundGeneralFailure) _then) = _$RefundGeneralFailureCopyWithImpl;
+@useResult
+$Res call({
+ dynamic required
+});
 
+
+
+
+}
 /// @nodoc
-class _$RefundGeneralFailureCopyWithImpl<$Res,
-        $Val extends RefundGeneralFailure>
+class _$RefundGeneralFailureCopyWithImpl<$Res>
     implements $RefundGeneralFailureCopyWith<$Res> {
-  _$RefundGeneralFailureCopyWithImpl(this._value, this._then);
+  _$RefundGeneralFailureCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final RefundGeneralFailure _self;
+  final $Res Function(RefundGeneralFailure) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_value.copyWith(
-      required: freezed == required
-          ? _value.required
-          : required // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
+/// Create a copy of RefundGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? required = freezed,}) {
+  return _then(_self.copyWith(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_RefundGeneralFailureCopyWith<$Res>
-    implements $RefundGeneralFailureCopyWith<$Res> {
-  factory _$$_RefundGeneralFailureCopyWith(_$_RefundGeneralFailure value,
-          $Res Function(_$_RefundGeneralFailure) then) =
-      __$$_RefundGeneralFailureCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic required});
 }
 
-/// @nodoc
-class __$$_RefundGeneralFailureCopyWithImpl<$Res>
-    extends _$RefundGeneralFailureCopyWithImpl<$Res, _$_RefundGeneralFailure>
-    implements _$$_RefundGeneralFailureCopyWith<$Res> {
-  __$$_RefundGeneralFailureCopyWithImpl(_$_RefundGeneralFailure _value,
-      $Res Function(_$_RefundGeneralFailure) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? required = freezed,
-  }) {
-    return _then(_$_RefundGeneralFailure(
-      required: freezed == required ? _value.required! : required,
-    ));
-  }
+/// Adds pattern-matching-related methods to [RefundGeneralFailure].
+extension RefundGeneralFailurePatterns on RefundGeneralFailure {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _RefundGeneralFailure value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _RefundGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _RefundGeneralFailure value)  $default,){
+final _that = this;
+switch (_that) {
+case _RefundGeneralFailure():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _RefundGeneralFailure value)?  $default,){
+final _that = this;
+switch (_that) {
+case _RefundGeneralFailure() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( dynamic required)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _RefundGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( dynamic required)  $default,) {final _that = this;
+switch (_that) {
+case _RefundGeneralFailure():
+return $default(_that.required);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( dynamic required)?  $default,) {final _that = this;
+switch (_that) {
+case _RefundGeneralFailure() when $default != null:
+return $default(_that.required);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_RefundGeneralFailure implements _RefundGeneralFailure {
-  const _$_RefundGeneralFailure({this.required});
 
-  factory _$_RefundGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_RefundGeneralFailureFromJson(json);
+class _RefundGeneralFailure extends RefundGeneralFailure {
+  const _RefundGeneralFailure({this.required}): super._();
+  factory _RefundGeneralFailure.fromJson(Map<String, dynamic> json) => _$RefundGeneralFailureFromJson(json);
 
-  @override
-  final dynamic required;
+@override final  dynamic required;
 
-  @override
-  String toString() {
-    return 'RefundGeneralFailure(required: $required)';
-  }
+/// Create a copy of RefundGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$RefundGeneralFailureCopyWith<_RefundGeneralFailure> get copyWith => __$RefundGeneralFailureCopyWithImpl<_RefundGeneralFailure>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_RefundGeneralFailure &&
-            const DeepCollectionEquality().equals(other.required, required));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(required));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_RefundGeneralFailureCopyWith<_$_RefundGeneralFailure> get copyWith =>
-      __$$_RefundGeneralFailureCopyWithImpl<_$_RefundGeneralFailure>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_RefundGeneralFailureToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$RefundGeneralFailureToJson(this, );
 }
 
-abstract class _RefundGeneralFailure implements RefundGeneralFailure {
-  const factory _RefundGeneralFailure({final dynamic required}) =
-      _$_RefundGeneralFailure;
-
-  factory _RefundGeneralFailure.fromJson(Map<String, dynamic> json) =
-      _$_RefundGeneralFailure.fromJson;
-
-  @override
-  dynamic get required;
-  @override
-  @JsonKey(ignore: true)
-  _$$_RefundGeneralFailureCopyWith<_$_RefundGeneralFailure> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RefundGeneralFailure&&const DeepCollectionEquality().equals(other.required, required));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(required));
+
+@override
+String toString() {
+  return 'RefundGeneralFailure(required: $required)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$RefundGeneralFailureCopyWith<$Res> implements $RefundGeneralFailureCopyWith<$Res> {
+  factory _$RefundGeneralFailureCopyWith(_RefundGeneralFailure value, $Res Function(_RefundGeneralFailure) _then) = __$RefundGeneralFailureCopyWithImpl;
+@override @useResult
+$Res call({
+ dynamic required
+});
+
+
+
+
+}
+/// @nodoc
+class __$RefundGeneralFailureCopyWithImpl<$Res>
+    implements _$RefundGeneralFailureCopyWith<$Res> {
+  __$RefundGeneralFailureCopyWithImpl(this._self, this._then);
+
+  final _RefundGeneralFailure _self;
+  final $Res Function(_RefundGeneralFailure) _then;
+
+/// Create a copy of RefundGeneralFailure
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? required = freezed,}) {
+  return _then(_RefundGeneralFailure(
+required: freezed == required ? _self.required : required // ignore: cast_nullable_to_non_nullable
+as dynamic,
+  ));
+}
+
+
+}
+
+// dart format on

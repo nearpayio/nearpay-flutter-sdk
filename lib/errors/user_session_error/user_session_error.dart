@@ -6,7 +6,7 @@ part 'user_session_error.g.dart';
 part 'user_session_error.freezed.dart';
 
 abstract class UserSessionError {
-  UserSessionError() {}
+  const UserSessionError();
 
   factory UserSessionError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,43 +14,35 @@ abstract class UserSessionError {
 }
 
 @Freezed()
-class UserSessionAuthenticationFailed extends UserSessionError
-    with _$UserSessionAuthenticationFailed {
-  const factory UserSessionAuthenticationFailed({required String message}) =
-      _UserSessionAuthenticationFailed;
+abstract class UserSessionAuthenticationFailed extends UserSessionError with _$UserSessionAuthenticationFailed {
+  const factory UserSessionAuthenticationFailed({required String message}) = _UserSessionAuthenticationFailed;
+  const UserSessionAuthenticationFailed._();
 
-  factory UserSessionAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$UserSessionAuthenticationFailedFromJson(json);
+  factory UserSessionAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$UserSessionAuthenticationFailedFromJson(json);
 }
 
 @Freezed()
-class UserSessionFailureMessage extends UserSessionError
-    with _$UserSessionFailureMessage {
-  const factory UserSessionFailureMessage({required String message}) =
-      _UserSessionFailureMessage;
+abstract class UserSessionFailureMessage extends UserSessionError with _$UserSessionFailureMessage {
+  const factory UserSessionFailureMessage({required String message}) = _UserSessionFailureMessage;
+  const UserSessionFailureMessage._();
 
-  factory UserSessionFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$UserSessionFailureMessageFromJson(json);
+  factory UserSessionFailureMessage.fromJson(Map<String, dynamic> json) => _$UserSessionFailureMessageFromJson(json);
 }
 
 @Freezed()
-class UserSessionInvalidStatus extends UserSessionError
-    with _$UserSessionInvalidStatus {
-  const factory UserSessionInvalidStatus({required}) =
-      _UserSessionInvalidStatus;
+abstract class UserSessionInvalidStatus extends UserSessionError with _$UserSessionInvalidStatus {
+  const factory UserSessionInvalidStatus({required}) = _UserSessionInvalidStatus;
+  const UserSessionInvalidStatus._();
 
-  factory UserSessionInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$UserSessionInvalidStatusFromJson(json);
+  factory UserSessionInvalidStatus.fromJson(Map<String, dynamic> json) => _$UserSessionInvalidStatusFromJson(json);
 }
 
 @Freezed()
-class UserSessionGeneralFailure extends UserSessionError
-    with _$UserSessionGeneralFailure {
-  const factory UserSessionGeneralFailure({required}) =
-      _UserSessionGeneralFailure;
+abstract class UserSessionGeneralFailure extends UserSessionError with _$UserSessionGeneralFailure {
+  const factory UserSessionGeneralFailure({required}) = _UserSessionGeneralFailure;
+  const UserSessionGeneralFailure._();
 
-  factory UserSessionGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$UserSessionGeneralFailureFromJson(json);
+  factory UserSessionGeneralFailure.fromJson(Map<String, dynamic> json) => _$UserSessionGeneralFailureFromJson(json);
 }
 
 // @JsonSerializable(explicitToJson: true)

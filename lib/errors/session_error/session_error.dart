@@ -6,7 +6,7 @@ part 'session_error.g.dart';
 part 'session_error.freezed.dart';
 
 abstract class SessionError {
-  SessionError() {}
+  const SessionError();
 
   factory SessionError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,44 +14,41 @@ abstract class SessionError {
 }
 
 @Freezed()
-class SessionAuthenticationFailed extends SessionError
-    with _$SessionAuthenticationFailed {
-  const factory SessionAuthenticationFailed({required String message}) =
-      _SessionAuthenticationFailed;
+abstract class SessionAuthenticationFailed extends SessionError with _$SessionAuthenticationFailed {
+  const factory SessionAuthenticationFailed({required String message}) = _SessionAuthenticationFailed;
+  const SessionAuthenticationFailed._();
 
-  factory SessionAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$SessionAuthenticationFailedFromJson(json);
+  factory SessionAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$SessionAuthenticationFailedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$SessionDeclinedToJson(this);
 }
 
 @Freezed()
-class SessionFailureMessage extends SessionError with _$SessionFailureMessage {
-  const factory SessionFailureMessage({required String message}) =
-      _SessionFailureMessage;
+abstract class SessionFailureMessage extends SessionError with _$SessionFailureMessage {
+  const factory SessionFailureMessage({required String message}) = _SessionFailureMessage;
+  const SessionFailureMessage._();
 
-  factory SessionFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$SessionFailureMessageFromJson(json);
+  factory SessionFailureMessage.fromJson(Map<String, dynamic> json) => _$SessionFailureMessageFromJson(json);
 
   // Map<String, dynamic> toJson() => _$SessionDeclinedToJson(this);
 }
 
 @Freezed()
-class SessionInvalidStatus extends SessionError with _$SessionInvalidStatus {
+abstract class SessionInvalidStatus extends SessionError with _$SessionInvalidStatus {
   const factory SessionInvalidStatus({required}) = _SessionInvalidStatus;
+  const SessionInvalidStatus._();
 
-  factory SessionInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$SessionInvalidStatusFromJson(json);
+  factory SessionInvalidStatus.fromJson(Map<String, dynamic> json) => _$SessionInvalidStatusFromJson(json);
 
   // Map<String, dynamic> toJson() => _$SessionDeclinedToJson(this);
 }
 
 @Freezed()
-class SessionGeneralFailure extends SessionError with _$SessionGeneralFailure {
+abstract class SessionGeneralFailure extends SessionError with _$SessionGeneralFailure {
   const factory SessionGeneralFailure({required}) = _SessionGeneralFailure;
+  const SessionGeneralFailure._();
 
-  factory SessionGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$SessionGeneralFailureFromJson(json);
+  factory SessionGeneralFailure.fromJson(Map<String, dynamic> json) => _$SessionGeneralFailureFromJson(json);
 
   // Map<String, dynamic> toJson() => _$SessionDeclinedToJson(this);
 }

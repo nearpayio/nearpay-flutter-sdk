@@ -6,7 +6,7 @@ part 'reconcile_error.g.dart';
 part 'reconcile_error.freezed.dart';
 
 abstract class ReconcileError {
-  ReconcileError() {}
+  const ReconcileError();
 
   factory ReconcileError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,47 +14,41 @@ abstract class ReconcileError {
 }
 
 @Freezed()
-class ReconcileFailureMessage extends ReconcileError
-    with _$ReconcileFailureMessage {
-  const factory ReconcileFailureMessage({required String message}) =
-      _ReconcileFailureMessage;
+abstract class ReconcileFailureMessage extends ReconcileError with _$ReconcileFailureMessage {
+  const factory ReconcileFailureMessage({required String message}) = _ReconcileFailureMessage;
+  const ReconcileFailureMessage._();
 
-  factory ReconcileFailureMessage.fromJson(Map<String, dynamic> json) =>
-      _$ReconcileFailureMessageFromJson(json);
+  factory ReconcileFailureMessage.fromJson(Map<String, dynamic> json) => _$ReconcileFailureMessageFromJson(json);
 
   // Map<String, dynamic> toJson() => _$ReconcileDeclinedToJson(this);
 }
 
 @Freezed()
-class ReconcileAuthenticationFailed extends ReconcileError
-    with _$ReconcileAuthenticationFailed {
-  const factory ReconcileAuthenticationFailed({required String message}) =
-      _ReconcileAuthenticationFailed;
+abstract class ReconcileAuthenticationFailed extends ReconcileError with _$ReconcileAuthenticationFailed {
+  const factory ReconcileAuthenticationFailed({required String message}) = _ReconcileAuthenticationFailed;
+  const ReconcileAuthenticationFailed._();
 
-  factory ReconcileAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$ReconcileAuthenticationFailedFromJson(json);
+  factory ReconcileAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$ReconcileAuthenticationFailedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$ReconcileDeclinedToJson(this);
 }
 
 @Freezed()
-class ReconcileInvalidStatus extends ReconcileError
-    with _$ReconcileInvalidStatus {
+abstract class ReconcileInvalidStatus extends ReconcileError with _$ReconcileInvalidStatus {
   const factory ReconcileInvalidStatus({required}) = _ReconcileInvalidStatus;
+  const ReconcileInvalidStatus._();
 
-  factory ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$ReconcileInvalidStatusFromJson(json);
+  factory ReconcileInvalidStatus.fromJson(Map<String, dynamic> json) => _$ReconcileInvalidStatusFromJson(json);
 
   // Map<String, dynamic> toJson() => _$ReconcileDeclinedToJson(this);
 }
 
 @Freezed()
-class ReconcileGeneralFailure extends ReconcileError
-    with _$ReconcileGeneralFailure {
+abstract class ReconcileGeneralFailure extends ReconcileError with _$ReconcileGeneralFailure {
   const factory ReconcileGeneralFailure({required}) = _ReconcileGeneralFailure;
+  const ReconcileGeneralFailure._();
 
-  factory ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$ReconcileGeneralFailureFromJson(json);
+  factory ReconcileGeneralFailure.fromJson(Map<String, dynamic> json) => _$ReconcileGeneralFailureFromJson(json);
 
   // Map<String, dynamic> toJson() => _$ReconcileDeclinedToJson(this);
 }

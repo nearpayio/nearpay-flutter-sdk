@@ -6,47 +6,29 @@ part of 'query_error.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$QueryAuthenticationFailedImpl _$$QueryAuthenticationFailedImplFromJson(
-        Map json) =>
-    _$QueryAuthenticationFailedImpl(
-      message: json['message'] as String,
-    );
+_QueryAuthenticationFailed _$QueryAuthenticationFailedFromJson(Map json) =>
+    _QueryAuthenticationFailed(message: json['message'] as String);
 
-Map<String, dynamic> _$$QueryAuthenticationFailedImplToJson(
-        _$QueryAuthenticationFailedImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$QueryAuthenticationFailedToJson(
+  _QueryAuthenticationFailed instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$QueryFailureMessageImpl _$$QueryFailureMessageImplFromJson(Map json) =>
-    _$QueryFailureMessageImpl(
-      message: json['message'] as String,
-    );
+_QueryFailureMessage _$QueryFailureMessageFromJson(Map json) =>
+    _QueryFailureMessage(message: json['message'] as String);
 
-Map<String, dynamic> _$$QueryFailureMessageImplToJson(
-        _$QueryFailureMessageImpl instance) =>
-    <String, dynamic>{
-      'message': instance.message,
-    };
+Map<String, dynamic> _$QueryFailureMessageToJson(
+  _QueryFailureMessage instance,
+) => <String, dynamic>{'message': instance.message};
 
-_$QueryInvalidStatusImpl _$$QueryInvalidStatusImplFromJson(Map json) =>
-    _$QueryInvalidStatusImpl(
-      required: json['required'],
-    );
+_QueryInvalidStatus _$QueryInvalidStatusFromJson(Map json) =>
+    _QueryInvalidStatus(required: json['required']);
 
-Map<String, dynamic> _$$QueryInvalidStatusImplToJson(
-        _$QueryInvalidStatusImpl instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$QueryInvalidStatusToJson(_QueryInvalidStatus instance) =>
+    <String, dynamic>{'required': instance.required};
 
-_$QueryGeneralFailureImpl _$$QueryGeneralFailureImplFromJson(Map json) =>
-    _$QueryGeneralFailureImpl(
-      required: json['required'],
-    );
+_QueryGeneralFailure _$QueryGeneralFailureFromJson(Map json) =>
+    _QueryGeneralFailure(required: json['required']);
 
-Map<String, dynamic> _$$QueryGeneralFailureImplToJson(
-        _$QueryGeneralFailureImpl instance) =>
-    <String, dynamic>{
-      'required': instance.required,
-    };
+Map<String, dynamic> _$QueryGeneralFailureToJson(
+  _QueryGeneralFailure instance,
+) => <String, dynamic>{'required': instance.required};

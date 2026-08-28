@@ -6,7 +6,7 @@ part 'purchase_error.g.dart';
 part 'purchase_error.freezed.dart';
 
 abstract class PurchaseError {
-  PurchaseError() {}
+  const PurchaseError();
 
   factory PurchaseError.fromJson(Map<String, dynamic> json) {
     throw 'abstract class';
@@ -14,57 +14,52 @@ abstract class PurchaseError {
 }
 
 @Freezed()
-class PurchaseRejected extends PurchaseError with _$PurchaseRejected {
+abstract class PurchaseRejected extends PurchaseError with _$PurchaseRejected {
   const factory PurchaseRejected({required String message}) = _PurchaseRejected;
 
   // PurchaseRejected({required this.message});
-
   // String message;
+  const PurchaseRejected._();
 
-  factory PurchaseRejected.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseRejectedFromJson(json);
+  factory PurchaseRejected.fromJson(Map<String, dynamic> json) => _$PurchaseRejectedFromJson(json);
 }
 
 @Freezed()
-class PurchaseDeclined extends PurchaseError with _$PurchaseDeclined {
-  const factory PurchaseDeclined({required List<TransactionReceipt> receipts}) =
-      _PurchaseDeclined;
+abstract class PurchaseDeclined extends PurchaseError with _$PurchaseDeclined {
+  const factory PurchaseDeclined({required List<TransactionReceipt> receipts}) = _PurchaseDeclined;
+  const PurchaseDeclined._();
 
-  factory PurchaseDeclined.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseDeclinedFromJson(json);
+  factory PurchaseDeclined.fromJson(Map<String, dynamic> json) => _$PurchaseDeclinedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$PurchaseDeclinedToJson(this);
 }
 
 @Freezed()
-class PurchaseAuthenticationFailed extends PurchaseError
-    with _$PurchaseAuthenticationFailed {
-  const factory PurchaseAuthenticationFailed({required String message}) =
-      _PurchaseAuthenticationFailed;
+abstract class PurchaseAuthenticationFailed extends PurchaseError with _$PurchaseAuthenticationFailed {
+  const factory PurchaseAuthenticationFailed({required String message}) = _PurchaseAuthenticationFailed;
+  const PurchaseAuthenticationFailed._();
 
-  factory PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseAuthenticationFailedFromJson(json);
+  factory PurchaseAuthenticationFailed.fromJson(Map<String, dynamic> json) => _$PurchaseAuthenticationFailedFromJson(json);
 
   // Map<String, dynamic> toJson() => _$PurchaseDeclinedToJson(this);
 }
 
 @Freezed()
-class PurchaseInvalidStatus extends PurchaseError with _$PurchaseInvalidStatus {
+abstract class PurchaseInvalidStatus extends PurchaseError with _$PurchaseInvalidStatus {
   const factory PurchaseInvalidStatus({required}) = _PurchaseInvalidStatus;
+  const PurchaseInvalidStatus._();
 
-  factory PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseInvalidStatusFromJson(json);
+  factory PurchaseInvalidStatus.fromJson(Map<String, dynamic> json) => _$PurchaseInvalidStatusFromJson(json);
 
   // Map<String, dynamic> toJson() => _$PurchaseDeclinedToJson(this);
 }
 
 @Freezed()
-class PurchaseGeneralFailure extends PurchaseError
-    with _$PurchaseGeneralFailure {
+abstract class PurchaseGeneralFailure extends PurchaseError with _$PurchaseGeneralFailure {
   const factory PurchaseGeneralFailure({required}) = _PurchaseGeneralFailure;
+  const PurchaseGeneralFailure._();
 
-  factory PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) =>
-      _$PurchaseGeneralFailureFromJson(json);
+  factory PurchaseGeneralFailure.fromJson(Map<String, dynamic> json) => _$PurchaseGeneralFailureFromJson(json);
 
   // Map<String, dynamic> toJson() => _$PurchaseDeclinedToJson(this);
 }
