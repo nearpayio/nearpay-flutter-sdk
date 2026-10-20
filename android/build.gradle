@@ -22,7 +22,9 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 33
+    // Bumped from 33: androidx deps of nearpay-sdk-store require compileSdk >= 34
+    // (enforced by AGP checkReleaseAarMetadata on release builds).
+    compileSdkVersion 34
     namespace("io.nearpay.flutter.plugin")
 
     compileOptions {
