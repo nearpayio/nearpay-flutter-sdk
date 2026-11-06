@@ -30,3 +30,9 @@ migrate_working_dir/
 build/
 .vscode/
 example/.fvm
+
+/i_example
+
+__ingore__
+
+flutter-nfc-compatibility-main/

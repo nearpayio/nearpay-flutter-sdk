@@ -1,0 +1,632 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'transaction_banner.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+TransactionBannerList _$TransactionBannerListFromJson(
+    Map<String, dynamic> json) {
+  return _TransactionBannerList.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TransactionBannerList {
+  @JsonKey(name: "count")
+  double get count => throw _privateConstructorUsedError;
+  @JsonKey(name: "transactionBanners", defaultValue: [])
+  List<TransactionBanner> get transactionBanners =>
+      throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TransactionBannerListCopyWith<TransactionBannerList> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TransactionBannerListCopyWith<$Res> {
+  factory $TransactionBannerListCopyWith(TransactionBannerList value,
+          $Res Function(TransactionBannerList) then) =
+      _$TransactionBannerListCopyWithImpl<$Res, TransactionBannerList>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "count") double count,
+      @JsonKey(name: "transactionBanners", defaultValue: [])
+      List<TransactionBanner> transactionBanners});
+}
+
+/// @nodoc
+class _$TransactionBannerListCopyWithImpl<$Res,
+        $Val extends TransactionBannerList>
+    implements $TransactionBannerListCopyWith<$Res> {
+  _$TransactionBannerListCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? transactionBanners = null,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as double,
+      transactionBanners: null == transactionBanners
+          ? _value.transactionBanners
+          : transactionBanners // ignore: cast_nullable_to_non_nullable
+              as List<TransactionBanner>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TransactionBannerListImplCopyWith<$Res>
+    implements $TransactionBannerListCopyWith<$Res> {
+  factory _$$TransactionBannerListImplCopyWith(
+          _$TransactionBannerListImpl value,
+          $Res Function(_$TransactionBannerListImpl) then) =
+      __$$TransactionBannerListImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "count") double count,
+      @JsonKey(name: "transactionBanners", defaultValue: [])
+      List<TransactionBanner> transactionBanners});
+}
+
+/// @nodoc
+class __$$TransactionBannerListImplCopyWithImpl<$Res>
+    extends _$TransactionBannerListCopyWithImpl<$Res,
+        _$TransactionBannerListImpl>
+    implements _$$TransactionBannerListImplCopyWith<$Res> {
+  __$$TransactionBannerListImplCopyWithImpl(_$TransactionBannerListImpl _value,
+      $Res Function(_$TransactionBannerListImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? transactionBanners = null,
+  }) {
+    return _then(_$TransactionBannerListImpl(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as double,
+      transactionBanners: null == transactionBanners
+          ? _value._transactionBanners
+          : transactionBanners // ignore: cast_nullable_to_non_nullable
+              as List<TransactionBanner>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TransactionBannerListImpl implements _TransactionBannerList {
+  const _$TransactionBannerListImpl(
+      {@JsonKey(name: "count") required this.count,
+      @JsonKey(name: "transactionBanners", defaultValue: [])
+      required final List<TransactionBanner> transactionBanners})
+      : _transactionBanners = transactionBanners;
+
+  factory _$TransactionBannerListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionBannerListImplFromJson(json);
+
+  @override
+  @JsonKey(name: "count")
+  final double count;
+  final List<TransactionBanner> _transactionBanners;
+  @override
+  @JsonKey(name: "transactionBanners", defaultValue: [])
+  List<TransactionBanner> get transactionBanners {
+    if (_transactionBanners is EqualUnmodifiableListView)
+      return _transactionBanners;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_transactionBanners);
+  }
+
+  @override
+  String toString() {
+    return 'TransactionBannerList(count: $count, transactionBanners: $transactionBanners)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransactionBannerListImpl &&
+            (identical(other.count, count) || other.count == count) &&
+            const DeepCollectionEquality()
+                .equals(other._transactionBanners, _transactionBanners));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, count,
+      const DeepCollectionEquality().hash(_transactionBanners));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransactionBannerListImplCopyWith<_$TransactionBannerListImpl>
+      get copyWith => __$$TransactionBannerListImplCopyWithImpl<
+          _$TransactionBannerListImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransactionBannerListImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TransactionBannerList implements TransactionBannerList {
+  const factory _TransactionBannerList(
+          {@JsonKey(name: "count") required final double count,
+          @JsonKey(name: "transactionBanners", defaultValue: [])
+          required final List<TransactionBanner> transactionBanners}) =
+      _$TransactionBannerListImpl;
+
+  factory _TransactionBannerList.fromJson(Map<String, dynamic> json) =
+      _$TransactionBannerListImpl.fromJson;
+
+  @override
+  @JsonKey(name: "count")
+  double get count;
+  @override
+  @JsonKey(name: "transactionBanners", defaultValue: [])
+  List<TransactionBanner> get transactionBanners;
+  @override
+  @JsonKey(ignore: true)
+  _$$TransactionBannerListImplCopyWith<_$TransactionBannerListImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+TransactionBanner _$TransactionBannerFromJson(Map<String, dynamic> json) {
+  return _TransactionBanner.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TransactionBanner {
+  @JsonKey(name: "uuid")
+  String get uuid => throw _privateConstructorUsedError;
+  @JsonKey(name: "scheme")
+  String get scheme => throw _privateConstructorUsedError;
+  @JsonKey(name: "pan")
+  String get pan => throw _privateConstructorUsedError;
+  @JsonKey(name: "amount_authorized")
+  String get amountAuthorized => throw _privateConstructorUsedError;
+  @JsonKey(name: "currency")
+  LocalizationField get currency => throw _privateConstructorUsedError;
+  @JsonKey(name: "transaction_type")
+  String get transactionType => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_approved")
+  bool get isApproved => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_reversed")
+  bool get isReversed => throw _privateConstructorUsedError;
+  @JsonKey(name: "start_date")
+  String get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "start_time")
+  String get startTime => throw _privateConstructorUsedError;
+  @JsonKey(name: "customer_reference_number")
+  String? get customer_reference_number => throw _privateConstructorUsedError;
+  @JsonKey(name: "retrieval_reference_number")
+  String? get retrieval_reference_number => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TransactionBannerCopyWith<TransactionBanner> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TransactionBannerCopyWith<$Res> {
+  factory $TransactionBannerCopyWith(
+          TransactionBanner value, $Res Function(TransactionBanner) then) =
+      _$TransactionBannerCopyWithImpl<$Res, TransactionBanner>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "scheme") String scheme,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "amount_authorized") String amountAuthorized,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "transaction_type") String transactionType,
+      @JsonKey(name: "is_approved") bool isApproved,
+      @JsonKey(name: "is_reversed") bool isReversed,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "start_time") String startTime,
+      @JsonKey(name: "customer_reference_number")
+      String? customer_reference_number,
+      @JsonKey(name: "retrieval_reference_number")
+      String? retrieval_reference_number});
+}
+
+/// @nodoc
+class _$TransactionBannerCopyWithImpl<$Res, $Val extends TransactionBanner>
+    implements $TransactionBannerCopyWith<$Res> {
+  _$TransactionBannerCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = null,
+    Object? scheme = null,
+    Object? pan = null,
+    Object? amountAuthorized = null,
+    Object? currency = null,
+    Object? transactionType = null,
+    Object? isApproved = null,
+    Object? isReversed = null,
+    Object? startDate = null,
+    Object? startTime = null,
+    Object? customer_reference_number = freezed,
+    Object? retrieval_reference_number = freezed,
+  }) {
+    return _then(_value.copyWith(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as String,
+      pan: null == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
+              as String,
+      amountAuthorized: null == amountAuthorized
+          ? _value.amountAuthorized
+          : amountAuthorized // ignore: cast_nullable_to_non_nullable
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as LocalizationField,
+      transactionType: null == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReversed: null == isReversed
+          ? _value.isReversed
+          : isReversed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      customer_reference_number: freezed == customer_reference_number
+          ? _value.customer_reference_number
+          : customer_reference_number // ignore: cast_nullable_to_non_nullable
+              as String?,
+      retrieval_reference_number: freezed == retrieval_reference_number
+          ? _value.retrieval_reference_number
+          : retrieval_reference_number // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TransactionBannerImplCopyWith<$Res>
+    implements $TransactionBannerCopyWith<$Res> {
+  factory _$$TransactionBannerImplCopyWith(_$TransactionBannerImpl value,
+          $Res Function(_$TransactionBannerImpl) then) =
+      __$$TransactionBannerImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "uuid") String uuid,
+      @JsonKey(name: "scheme") String scheme,
+      @JsonKey(name: "pan") String pan,
+      @JsonKey(name: "amount_authorized") String amountAuthorized,
+      @JsonKey(name: "currency") LocalizationField currency,
+      @JsonKey(name: "transaction_type") String transactionType,
+      @JsonKey(name: "is_approved") bool isApproved,
+      @JsonKey(name: "is_reversed") bool isReversed,
+      @JsonKey(name: "start_date") String startDate,
+      @JsonKey(name: "start_time") String startTime,
+      @JsonKey(name: "customer_reference_number")
+      String? customer_reference_number,
+      @JsonKey(name: "retrieval_reference_number")
+      String? retrieval_reference_number});
+}
+
+/// @nodoc
+class __$$TransactionBannerImplCopyWithImpl<$Res>
+    extends _$TransactionBannerCopyWithImpl<$Res, _$TransactionBannerImpl>
+    implements _$$TransactionBannerImplCopyWith<$Res> {
+  __$$TransactionBannerImplCopyWithImpl(_$TransactionBannerImpl _value,
+      $Res Function(_$TransactionBannerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uuid = null,
+    Object? scheme = null,
+    Object? pan = null,
+    Object? amountAuthorized = null,
+    Object? currency = null,
+    Object? transactionType = null,
+    Object? isApproved = null,
+    Object? isReversed = null,
+    Object? startDate = null,
+    Object? startTime = null,
+    Object? customer_reference_number = freezed,
+    Object? retrieval_reference_number = freezed,
+  }) {
+    return _then(_$TransactionBannerImpl(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as String,
+      pan: null == pan
+          ? _value.pan
+          : pan // ignore: cast_nullable_to_non_nullable
+              as String,
+      amountAuthorized: null == amountAuthorized
+          ? _value.amountAuthorized
+          : amountAuthorized // ignore: cast_nullable_to_non_nullable
+              as String,
+      currency: null == currency
+          ? _value.currency
+          : currency // ignore: cast_nullable_to_non_nullable
+              as LocalizationField,
+      transactionType: null == transactionType
+          ? _value.transactionType
+          : transactionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      isApproved: null == isApproved
+          ? _value.isApproved
+          : isApproved // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReversed: null == isReversed
+          ? _value.isReversed
+          : isReversed // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      customer_reference_number: freezed == customer_reference_number
+          ? _value.customer_reference_number
+          : customer_reference_number // ignore: cast_nullable_to_non_nullable
+              as String?,
+      retrieval_reference_number: freezed == retrieval_reference_number
+          ? _value.retrieval_reference_number
+          : retrieval_reference_number // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TransactionBannerImpl implements _TransactionBanner {
+  const _$TransactionBannerImpl(
+      {@JsonKey(name: "uuid") required this.uuid,
+      @JsonKey(name: "scheme") required this.scheme,
+      @JsonKey(name: "pan") required this.pan,
+      @JsonKey(name: "amount_authorized") required this.amountAuthorized,
+      @JsonKey(name: "currency") required this.currency,
+      @JsonKey(name: "transaction_type") required this.transactionType,
+      @JsonKey(name: "is_approved") required this.isApproved,
+      @JsonKey(name: "is_reversed") required this.isReversed,
+      @JsonKey(name: "start_date") required this.startDate,
+      @JsonKey(name: "start_time") required this.startTime,
+      @JsonKey(name: "customer_reference_number")
+      this.customer_reference_number,
+      @JsonKey(name: "retrieval_reference_number")
+      this.retrieval_reference_number});
+
+  factory _$TransactionBannerImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransactionBannerImplFromJson(json);
+
+  @override
+  @JsonKey(name: "uuid")
+  final String uuid;
+  @override
+  @JsonKey(name: "scheme")
+  final String scheme;
+  @override
+  @JsonKey(name: "pan")
+  final String pan;
+  @override
+  @JsonKey(name: "amount_authorized")
+  final String amountAuthorized;
+  @override
+  @JsonKey(name: "currency")
+  final LocalizationField currency;
+  @override
+  @JsonKey(name: "transaction_type")
+  final String transactionType;
+  @override
+  @JsonKey(name: "is_approved")
+  final bool isApproved;
+  @override
+  @JsonKey(name: "is_reversed")
+  final bool isReversed;
+  @override
+  @JsonKey(name: "start_date")
+  final String startDate;
+  @override
+  @JsonKey(name: "start_time")
+  final String startTime;
+  @override
+  @JsonKey(name: "customer_reference_number")
+  final String? customer_reference_number;
+  @override
+  @JsonKey(name: "retrieval_reference_number")
+  final String? retrieval_reference_number;
+
+  @override
+  String toString() {
+    return 'TransactionBanner(uuid: $uuid, scheme: $scheme, pan: $pan, amountAuthorized: $amountAuthorized, currency: $currency, transactionType: $transactionType, isApproved: $isApproved, isReversed: $isReversed, startDate: $startDate, startTime: $startTime, customer_reference_number: $customer_reference_number, retrieval_reference_number: $retrieval_reference_number)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransactionBannerImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.scheme, scheme) || other.scheme == scheme) &&
+            (identical(other.pan, pan) || other.pan == pan) &&
+            (identical(other.amountAuthorized, amountAuthorized) ||
+                other.amountAuthorized == amountAuthorized) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
+            (identical(other.transactionType, transactionType) ||
+                other.transactionType == transactionType) &&
+            (identical(other.isApproved, isApproved) ||
+                other.isApproved == isApproved) &&
+            (identical(other.isReversed, isReversed) ||
+                other.isReversed == isReversed) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.customer_reference_number,
+                    customer_reference_number) ||
+                other.customer_reference_number == customer_reference_number) &&
+            (identical(other.retrieval_reference_number,
+                    retrieval_reference_number) ||
+                other.retrieval_reference_number ==
+                    retrieval_reference_number));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      uuid,
+      scheme,
+      pan,
+      amountAuthorized,
+      currency,
+      transactionType,
+      isApproved,
+      isReversed,
+      startDate,
+      startTime,
+      customer_reference_number,
+      retrieval_reference_number);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransactionBannerImplCopyWith<_$TransactionBannerImpl> get copyWith =>
+      __$$TransactionBannerImplCopyWithImpl<_$TransactionBannerImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransactionBannerImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TransactionBanner implements TransactionBanner {
+  const factory _TransactionBanner(
+      {@JsonKey(name: "uuid") required final String uuid,
+      @JsonKey(name: "scheme") required final String scheme,
+      @JsonKey(name: "pan") required final String pan,
+      @JsonKey(name: "amount_authorized")
+      required final String amountAuthorized,
+      @JsonKey(name: "currency") required final LocalizationField currency,
+      @JsonKey(name: "transaction_type") required final String transactionType,
+      @JsonKey(name: "is_approved") required final bool isApproved,
+      @JsonKey(name: "is_reversed") required final bool isReversed,
+      @JsonKey(name: "start_date") required final String startDate,
+      @JsonKey(name: "start_time") required final String startTime,
+      @JsonKey(name: "customer_reference_number")
+      final String? customer_reference_number,
+      @JsonKey(name: "retrieval_reference_number")
+      final String? retrieval_reference_number}) = _$TransactionBannerImpl;
+
+  factory _TransactionBanner.fromJson(Map<String, dynamic> json) =
+      _$TransactionBannerImpl.fromJson;
+
+  @override
+  @JsonKey(name: "uuid")
+  String get uuid;
+  @override
+  @JsonKey(name: "scheme")
+  String get scheme;
+  @override
+  @JsonKey(name: "pan")
+  String get pan;
+  @override
+  @JsonKey(name: "amount_authorized")
+  String get amountAuthorized;
+  @override
+  @JsonKey(name: "currency")
+  LocalizationField get currency;
+  @override
+  @JsonKey(name: "transaction_type")
+  String get transactionType;
+  @override
+  @JsonKey(name: "is_approved")
+  bool get isApproved;
+  @override
+  @JsonKey(name: "is_reversed")
+  bool get isReversed;
+  @override
+  @JsonKey(name: "start_date")
+  String get startDate;
+  @override
+  @JsonKey(name: "start_time")
+  String get startTime;
+  @override
+  @JsonKey(name: "customer_reference_number")
+  String? get customer_reference_number;
+  @override
+  @JsonKey(name: "retrieval_reference_number")
+  String? get retrieval_reference_number;
+  @override
+  @JsonKey(ignore: true)
+  _$$TransactionBannerImplCopyWith<_$TransactionBannerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
