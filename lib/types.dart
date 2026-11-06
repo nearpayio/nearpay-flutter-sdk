@@ -1,1 +1,0 @@
-enum NearpayState { ready, notReady }

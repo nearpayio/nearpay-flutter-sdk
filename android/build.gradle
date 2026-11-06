@@ -21,11 +21,8 @@ rootProject.allprojects {
 
 apply plugin: 'com.android.library'
 
-
-
 android {
     compileSdkVersion 33
-    namespace("io.nearpay.flutter.plugin")
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -37,8 +34,7 @@ android {
     }
 
     dependencies {
-    implementation "io.nearpay:nearpay-sdk-store:2.1.95"
-    implementation 'com.google.code.gson:gson:2.9.0'
+        implementation 'io.nearpay:nearpay-sdk:2.1.94'
+        implementation 'com.google.code.gson:gson:2.9.0'
     }
 }
- 
